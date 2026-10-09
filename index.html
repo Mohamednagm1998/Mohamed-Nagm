@@ -939,13 +939,11 @@
   <div class="ambient-glow"></div>
   <canvas id="petals-canvas"></canvas>
 
-  <audio id="weddingAudio" loop preload="auto">
-    <source src="audio.mp3" type="audio/mp3">
-    <source src="Warm-Memories-Emotional-Inspiring-Piano(chosic.com).mp3" type="audio/mp3">
-  </audio>
+  <!-- مشغل الصوت مع خاصية playsinline لمتصفحات الهواتف -->
+  <audio id="weddingAudio" src="audio.mp3" preload="auto" loop playsinline></audio>
   <input type="file" id="audioFileInput" accept="audio/*" style="display:none" onchange="handleAudioFileUpload(event)">
 
-  <!-- شاشة المظروف الافتتاحية ثلاثية الأبعاد -->
+  <!-- شاشة المظروف الافتتاحية -->
   <div id="envelope-screen">
     <div class="envelope-header">
       <div class="badge-royal">✨ دعوة زفاف ملكية خاصة ✨</div>
@@ -986,7 +984,7 @@
       <div class="top-controls-bar">
         <button type="button" class="btn-chip" onclick="recloseEnvelope()">✉️ إغلاق المظروف</button>
         <button type="button" class="btn-chip" id="petalsToggleBtn" onclick="togglePetals()">🌸 البتلات: مفعّلة</button>
-        <button type="button" class="btn-chip" onclick="triggerAudioUpload()">🎵 اختيار ملف الصوت</button>
+        <button type="button" class="btn-chip" onclick="triggerAudioUpload()">🎵 تغيير ملف الصوت</button>
       </div>
 
       <section class="audio-player-pill">
@@ -1018,12 +1016,12 @@
         <span class="quran-surah">[سورة الروم: الآية 21]</span>
       </div>
 
-      <!-- إطار صورة العروسين الملكي المقوس -->
+      <!-- إطار صورة العروسين (يقبل couple.jpg أو 1000436120.jpg) -->
       <div class="couple-frame-container">
         <div class="couple-photo-card">
           <div class="couple-crown-top" title="زفاف مبارك">👑</div>
           <div class="couple-photo-inner">
-            <img src="couple.jpg" alt="محمد ورغدة" class="couple-photo-img">
+            <img src="couple.jpg" onerror="this.onerror=null; this.src='1000436120.jpg';" alt="محمد ورغدة" class="couple-photo-img">
           </div>
           <div class="couple-monogram-badge">م &amp; ر</div>
         </div>
@@ -1150,6 +1148,15 @@
     let synthAudioContext = null;
     let synthInterval = null;
 
+    // قائمة الأسماء المحتملة لملف الصوت على سيرفر GitHub
+    const audioFilesList = [
+      "audio.mp3",
+      "Audio.mp3",
+      "audio.MP3",
+      "Warm-Memories-Emotional-Inspiring-Piano(chosic.com).mp3"
+    ];
+    let currentAudioIdx = 0;
+
     function startBackupHarpChime() {
       if (synthInterval) return;
       try {
@@ -1192,21 +1199,44 @@
       }
     }
 
-    function playAudioDirectly() {
-      if (!weddingAudio) return;
-      const playPromise = weddingAudio.play();
+    // محاولة تشغيل الصوت مع التنقل بين الملفات إذا لم يتوفر الأول
+    function tryPlayNextAudioFile() {
+      if (currentAudioIdx >= audioFilesList.length) {
+        isPlaying = true;
+        startBackupHarpChime();
+        updateAudioUI(true, 'معزوفة بلورية فاخرة 🎵');
+        return;
+      }
 
+      weddingAudio.src = audioFilesList[currentAudioIdx];
+      weddingAudio.load();
+
+      const playPromise = weddingAudio.play();
       if (playPromise !== undefined) {
         playPromise.then(() => {
           isPlaying = true;
           stopBackupHarpChime();
           updateAudioUI(true, 'جاري التشغيل 🎶');
-        }).catch(err => {
-          isPlaying = true;
-          startBackupHarpChime();
-          updateAudioUI(true, 'معزوفة هارب بلورية 🎵');
+        }).catch(() => {
+          currentAudioIdx++;
+          tryPlayNextAudioFile();
         });
       }
+    }
+
+    weddingAudio.addEventListener('error', () => {
+      currentAudioIdx++;
+      if (isPlaying) {
+        tryPlayNextAudioFile();
+      }
+    });
+
+    function playAudioDirectly() {
+      if (!weddingAudio) return;
+      if (synthAudioContext && synthAudioContext.state === 'suspended') {
+        synthAudioContext.resume();
+      }
+      tryPlayNextAudioFile();
     }
 
     function pauseAudioDirectly() {
@@ -1256,9 +1286,14 @@
       if (file) {
         const fileURL = URL.createObjectURL(file);
         weddingAudio.src = fileURL;
+        weddingAudio.load();
         document.getElementById('currentAudioName').innerText = file.name;
         showToast('تم اختيار المعزوفة بنجاح! 🎵');
-        playAudioDirectly();
+        weddingAudio.play().then(() => {
+          isPlaying = true;
+          stopBackupHarpChime();
+          updateAudioUI(true, 'جاري التشغيل 🎶');
+        });
       }
     }
 
