@@ -30,9 +30,9 @@
       --card-white: #FFFFFF;
       --text-dark: #272019;
       --text-muted: #70685E;
-      --envelope-cream: #F7EFE1;
-      --envelope-shade: #E8DBC3;
-      --envelope-deep: #D7C4A1;
+      --envelope-cream: #FAF5EB;
+      --envelope-shade: #ECDDC4;
+      --envelope-deep: #DDC8A3;
     }
 
     * {
@@ -77,6 +77,7 @@
       z-index: 25;
     }
 
+    /* شاشة المظروف الافتتاحية */
     #envelope-screen {
       position: fixed;
       inset: 0;
@@ -91,7 +92,8 @@
       z-index: 9999;
       perspective: 1200px;
       transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.85s;
-      padding: 20px;
+      padding: 20px 10px;
+      overflow: hidden;
     }
 
     #envelope-screen.opened {
@@ -102,12 +104,13 @@
 
     .envelope-header {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
       animation: gentleHover 3.5s infinite ease-in-out;
+      z-index: 10;
     }
 
     @keyframes gentleHover {
-      0%, 100% { transform: translateY(0); opacity: 0.92; }
+      0%, 100% { transform: translateY(0); opacity: 0.94; }
       50% { transform: translateY(-4px); opacity: 1; }
     }
 
@@ -122,7 +125,7 @@
       border-radius: 40px;
       font-size: 0.85rem;
       font-weight: 700;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .envelope-title {
@@ -136,9 +139,96 @@
     .envelope-sub {
       color: #D3CBC0;
       font-size: 0.95rem;
-      margin-top: 6px;
+      margin-top: 5px;
     }
 
+    /* حاوية المظروف مع باقات الأزهار المحيطة */
+    .envelope-floral-wrap {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    /* باقات الورود والأزهار الأربعة حول المظروف */
+    .floral-cluster {
+      position: absolute;
+      pointer-events: none;
+      z-index: 12;
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.45));
+    }
+
+    .floral-top-left {
+      top: -46px;
+      left: -46px;
+      width: 145px;
+      height: 145px;
+      animation: floralSway 5.5s infinite ease-in-out alternate;
+      transform-origin: top left;
+    }
+
+    .floral-bottom-right {
+      bottom: -46px;
+      right: -46px;
+      width: 150px;
+      height: 150px;
+      animation: floralSway 6.5s infinite ease-in-out alternate-reverse;
+      transform-origin: bottom right;
+    }
+
+    .floral-top-right {
+      top: -38px;
+      right: -36px;
+      width: 110px;
+      height: 110px;
+      animation: floralSway 5s infinite ease-in-out alternate;
+      transform-origin: top right;
+    }
+
+    .floral-bottom-left {
+      bottom: -36px;
+      left: -36px;
+      width: 110px;
+      height: 110px;
+      animation: floralSway 6s infinite ease-in-out alternate-reverse;
+      transform-origin: bottom left;
+    }
+
+    @keyframes floralSway {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(2deg) scale(1.02); }
+      100% { transform: rotate(-1.5deg) scale(0.99); }
+    }
+
+    @media (max-width: 480px) {
+      .floral-top-left {
+        top: -32px;
+        left: -28px;
+        width: 110px;
+        height: 110px;
+      }
+      .floral-bottom-right {
+        bottom: -32px;
+        right: -28px;
+        width: 115px;
+        height: 115px;
+      }
+      .floral-top-right {
+        top: -26px;
+        right: -22px;
+        width: 85px;
+        height: 85px;
+      }
+      .floral-bottom-left {
+        bottom: -26px;
+        left: -22px;
+        width: 85px;
+        height: 85px;
+      }
+    }
+
+    /* مجسم المظروف الملكي المطور */
     .envelope-box {
       position: relative;
       width: 320px;
@@ -146,6 +236,7 @@
       cursor: pointer;
       transform-style: preserve-3d;
       transition: transform 0.4s ease;
+      z-index: 5;
     }
 
     @media (min-width: 480px) {
@@ -163,10 +254,10 @@
       position: relative;
       width: 100%;
       height: 100%;
-      background: var(--envelope-cream);
-      border-radius: 14px;
-      box-shadow: 0 30px 75px rgba(0, 0, 0, 0.85), 0 0 45px rgba(197, 160, 89, 0.35);
-      border: 1.5px solid rgba(197, 160, 89, 0.55);
+      background: radial-gradient(circle at 50% 30%, #FFFDF9 0%, #F5ECDD 60%, #E8DCBE 100%);
+      border-radius: 16px;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.9), 0 0 50px rgba(197, 160, 89, 0.4), inset 0 0 25px rgba(212, 175, 55, 0.15);
+      border: 1.8px solid rgba(197, 160, 89, 0.7);
       overflow: hidden;
     }
 
@@ -215,6 +306,7 @@
       .envelope-fold-bottom { border-width: 0 195px 145px 195px; }
     }
 
+    /* الطية العلوية للمظروف مع حافة مذهبة */
     .envelope-fold-top {
       position: absolute;
       top: 0;
@@ -223,11 +315,11 @@
       height: 0;
       border-style: solid;
       border-width: 125px 160px 0 160px;
-      border-color: #EDE1C7 transparent transparent transparent;
+      border-color: #EDE2C7 transparent transparent transparent;
       transform-origin: top center;
       transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 5;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.22));
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.28));
     }
 
     @media (min-width: 480px) {
@@ -245,30 +337,61 @@
       left: 18px;
       right: 18px;
       bottom: 15px;
-      background: #FFFFFF;
-      border-radius: 10px;
+      background: linear-gradient(135deg, #FFFFFF 0%, #FDFBF7 100%);
+      border-radius: 12px;
       z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      border: 1px solid rgba(197, 160, 89, 0.35);
+      border: 1.5px solid rgba(197, 160, 89, 0.45);
       transition: transform 0.9s 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
     }
 
     .envelope-box.is-opening .envelope-card-inside {
-      transform: translateY(-115px) scale(1.04);
+      transform: translateY(-118px) scale(1.04);
     }
 
+    /* أشرطة الساتان الملكية أسفل الختم الشمعي */
+    .wax-ribbon-tail {
+      position: absolute;
+      top: 50%;
+      width: 14px;
+      height: 48px;
+      background: linear-gradient(180deg, #D4AF37 0%, #A87B1C 60%, #6E4E0B 100%);
+      z-index: 6;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .wax-ribbon-left {
+      left: calc(50% - 10px);
+      transform: rotate(18deg);
+      transform-origin: top center;
+    }
+
+    .wax-ribbon-right {
+      right: calc(50% - 10px);
+      transform: rotate(-18deg);
+      transform-origin: top center;
+    }
+
+    .envelope-box.is-opening .wax-ribbon-tail {
+      opacity: 0;
+      transform: scale(0.2);
+    }
+
+    /* الختم الشمعي المطور مع إطار نافر */
     .wax-seal {
       position: absolute;
       top: 48%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 80px;
-      height: 80px;
-      background: radial-gradient(circle at 35% 35%, #F4D37A 0%, #D4AF37 45%, #996D12 85%, #594008 100%);
+      width: 82px;
+      height: 82px;
+      background: radial-gradient(circle at 35% 35%, #F7D785 0%, #D4AF37 45%, #996D12 85%, #594008 100%);
       border-radius: 50%;
       display: flex;
       flex-direction: column;
@@ -276,8 +399,8 @@
       justify-content: center;
       color: #FFF9E8;
       font-family: 'Amiri', serif;
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6), inset 0 2px 5px rgba(255, 255, 255, 0.7), inset 0 -3px 6px rgba(0, 0, 0, 0.6);
-      border: 2px dashed rgba(255, 243, 196, 0.75);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65), inset 0 2px 6px rgba(255, 255, 255, 0.8), inset 0 -4px 8px rgba(0, 0, 0, 0.65);
+      border: 2px dashed rgba(255, 245, 206, 0.8);
       z-index: 7;
       cursor: pointer;
       transition: all 0.4s ease;
@@ -285,8 +408,8 @@
     }
 
     @keyframes sealPulse {
-      0% { box-shadow: 0 8px 20px rgba(153, 109, 18, 0.5); transform: translate(-50%, -50%) scale(1); }
-      100% { box-shadow: 0 12px 34px rgba(244, 211, 122, 0.85); transform: translate(-50%, -50%) scale(1.06); }
+      0% { box-shadow: 0 8px 22px rgba(153, 109, 18, 0.5); transform: translate(-50%, -50%) scale(1); }
+      100% { box-shadow: 0 14px 38px rgba(244, 211, 122, 0.88); transform: translate(-50%, -50%) scale(1.06); }
     }
 
     .envelope-box.is-opening .wax-seal {
@@ -295,7 +418,7 @@
     }
 
     .btn-open-prompt {
-      margin-top: 26px;
+      margin-top: 24px;
       background: linear-gradient(135deg, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.1) 100%);
       color: var(--gold-light);
       border: 1px solid rgba(212, 175, 55, 0.6);
@@ -309,6 +432,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      z-index: 10;
     }
 
     .btn-open-prompt:hover {
@@ -943,7 +1067,7 @@
   <audio id="weddingAudio" src="audio.mp3" preload="auto" loop playsinline></audio>
   <input type="file" id="audioFileInput" accept="audio/*" style="display:none" onchange="handleAudioFileUpload(event)">
 
-  <!-- شاشة المظروف الافتتاحية -->
+  <!-- شاشة المظروف الافتتاحية المزينة بباقات الأزهار والورود -->
   <div id="envelope-screen">
     <div class="envelope-header">
       <div class="badge-royal">✨ دعوة زفاف ملكية خاصة ✨</div>
@@ -951,25 +1075,230 @@
       <p class="envelope-sub">المس الختم الشمعي لفتح المظروف والاستماع للزفة 🎵💌</p>
     </div>
 
-    <div class="envelope-box" id="envelopeBox" onclick="openEnvelopeAndPlay()">
-      <div class="envelope-shell">
-        <div class="envelope-fold-left"></div>
-        <div class="envelope-fold-right"></div>
-        <div class="envelope-fold-bottom"></div>
+    <!-- حاوية المظروف مع باقات الورود المحيطة -->
+    <div class="envelope-floral-wrap">
 
-        <div class="envelope-card-inside">
-          <div style="font-family: 'Amiri', serif; font-size: 1.6rem; font-weight: 700; color: #8E6823;">محمد & رغدة</div>
-          <div style="font-size: 0.82rem; color: #8C8479; margin-top: 4px;">السبت 16 يناير 2027 • 07:00 م</div>
-          <div style="font-size: 0.75rem; color: #B38E37; margin-top: 5px;">قاعة قصر الشوق - دار الأسلحة والذخيرة</div>
+      <!-- 1. باقة الورود الملكية العلوية (يسار) -->
+      <div class="floral-cluster floral-top-left">
+        <svg viewBox="0 0 170 170" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="roseGradTL" cx="42%" cy="38%" r="62%">
+              <stop offset="0%" stop-color="#FFF0F3"/>
+              <stop offset="42%" stop-color="#F8BFCB"/>
+              <stop offset="78%" stop-color="#DE8195"/>
+              <stop offset="100%" stop-color="#AF3D56"/>
+            </radialGradient>
+            <radialGradient id="roseCoreTL" cx="40%" cy="40%" r="55%">
+              <stop offset="0%" stop-color="#DE8195"/>
+              <stop offset="70%" stop-color="#A52843"/>
+              <stop offset="100%" stop-color="#6E1326"/>
+            </radialGradient>
+            <linearGradient id="leafGradTL" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#A6BE9D"/>
+              <stop offset="60%" stop-color="#687F5F"/>
+              <stop offset="100%" stop-color="#42553B"/>
+            </linearGradient>
+            <linearGradient id="goldSprigTL" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FFF5D6"/>
+              <stop offset="40%" stop-color="#D4AF37"/>
+              <stop offset="85%" stop-color="#9C731C"/>
+              <stop offset="100%" stop-color="#614408"/>
+            </linearGradient>
+            <radialGradient id="jasminePetalTL" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#FFFFFF"/>
+              <stop offset="80%" stop-color="#FDFBF7"/>
+              <stop offset="100%" stop-color="#EFE6D5"/>
+            </radialGradient>
+          </defs>
+
+          <!-- أغصان الأوكالبتوس المذهبة -->
+          <g>
+            <path d="M 95 95 Q 60 50 25 35" stroke="url(#goldSprigTL)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+            <circle cx="25" cy="35" r="4.5" fill="url(#goldSprigTL)"/>
+            <path d="M 45 46 Q 35 36 32 44 Q 40 54 45 46 Z" fill="url(#goldSprigTL)"/>
+            <path d="M 65 62 Q 52 48 48 56 Q 58 68 65 62 Z" fill="url(#goldSprigTL)"/>
+            <path d="M 75 75 Q 68 56 60 62 Q 68 76 75 75 Z" fill="url(#goldSprigTL)"/>
+            <path d="M 70 85 Q 40 75 16 80" stroke="url(#goldSprigTL)" stroke-width="1.8" fill="none"/>
+            <circle cx="16" cy="80" r="3.5" fill="url(#goldSprigTL)"/>
+          </g>
+
+          <!-- أوراق الشجر الخضراء الزيتونية -->
+          <g>
+            <path d="M 85 75 C 90 40 120 28 135 24 C 130 50 115 70 85 75 Z" fill="url(#leafGradTL)"/>
+            <path d="M 85 75 Q 115 45 135 24" stroke="#C2D8BC" stroke-width="1" fill="none"/>
+            <path d="M 75 90 C 45 92 25 110 20 125 C 40 125 65 112 75 90 Z" fill="url(#leafGradTL)"/>
+            <path d="M 80 80 C 60 55 45 35 50 15 C 70 25 80 50 80 80 Z" fill="url(#leafGradTL)"/>
+          </g>
+
+          <!-- وردة جورية مخملية بلون الروز الناعم -->
+          <g transform="translate(100, 100)">
+            <path d="M -36 -12 C -46 -30 -15 -48 10 -42 C 32 -36 45 -18 42 5 C 40 26 15 44 -12 42 C -34 40 -48 20 -44 -4 Z" fill="url(#roseGradTL)" opacity="0.95"/>
+            <path d="M -28 -20 C -15 -38 18 -38 30 -22 C 40 -8 38 15 22 28 C 6 40 -20 35 -30 18 C -38 2 -36 -12 -28 -20 Z" fill="url(#roseGradTL)"/>
+            <path d="M -26 -10 C -32 14 -10 32 12 28 C 30 24 32 2 24 -15 C 15 -28 -12 -28 -26 -10 Z" fill="#FCE5E9"/>
+            <path d="M -18 -18 C -5 -30 18 -25 24 -12 C 30 2 18 20 4 22 C -12 24 -25 8 -18 -18 Z" fill="url(#roseGradTL)"/>
+            <ellipse cx="0" cy="0" rx="14" ry="12" fill="url(#roseCoreTL)"/>
+            <path d="M -8 -4 C -4 -11 6 -11 9 -4 C 11 3 4 8 -2 8 C -8 7 -10 1 -8 -4 Z" fill="#8C1B33"/>
+            <circle cx="0.5" cy="0.5" r="3.2" fill="#FFE3E8"/>
+          </g>
+
+          <!-- زهرة ياسمين عاجية ناصعة -->
+          <g transform="translate(136, 50)">
+            <g fill="url(#jasminePetalTL)" stroke="rgba(212,175,55,0.4)" stroke-width="0.6">
+              <path d="M 0 0 C -4 -13 4 -13 0 -19 C -4 -13 4 -13 0 0" transform="rotate(0)"/>
+              <path d="M 0 0 C -4 -13 4 -13 0 -19 C -4 -13 4 -13 0 0" transform="rotate(72)"/>
+              <path d="M 0 0 C -4 -13 4 -13 0 -19 C -4 -13 4 -13 0 0" transform="rotate(144)"/>
+              <path d="M 0 0 C -4 -13 4 -13 0 -19 C -4 -13 4 -13 0 0" transform="rotate(216)"/>
+              <path d="M 0 0 C -4 -13 4 -13 0 -19 C -4 -13 4 -13 0 0" transform="rotate(288)"/>
+            </g>
+            <circle cx="0" cy="0" r="3" fill="url(#goldSprigTL)"/>
+            <circle cx="0" cy="0" r="1.3" fill="#FFFFFF"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- 2. باقة الورود الملكية السفلية (يمين) -->
+      <div class="floral-cluster floral-bottom-right">
+        <svg viewBox="0 0 170 170" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="roseGradBR" cx="58%" cy="58%" r="62%">
+              <stop offset="0%" stop-color="#FFF0F3"/>
+              <stop offset="42%" stop-color="#F8BFCB"/>
+              <stop offset="78%" stop-color="#DE8195"/>
+              <stop offset="100%" stop-color="#AF3D56"/>
+            </radialGradient>
+            <radialGradient id="roseCoreBR" cx="50%" cy="50%" r="55%">
+              <stop offset="0%" stop-color="#DE8195"/>
+              <stop offset="70%" stop-color="#A52843"/>
+              <stop offset="100%" stop-color="#6E1326"/>
+            </radialGradient>
+            <linearGradient id="leafGradBR" x1="100%" y1="100%" x2="0%" y2="0%">
+              <stop offset="0%" stop-color="#A6BE9D"/>
+              <stop offset="60%" stop-color="#687F5F"/>
+              <stop offset="100%" stop-color="#42553B"/>
+            </linearGradient>
+            <linearGradient id="goldSprigBR" x1="100%" y1="100%" x2="0%" y2="0%">
+              <stop offset="0%" stop-color="#FFF5D6"/>
+              <stop offset="40%" stop-color="#D4AF37"/>
+              <stop offset="85%" stop-color="#9C731C"/>
+              <stop offset="100%" stop-color="#614408"/>
+            </linearGradient>
+          </defs>
+
+          <!-- أغصان مذهبة ممتدة نحو الأسفل واليمين -->
+          <g>
+            <path d="M 75 75 Q 110 120 145 135" stroke="url(#goldSprigBR)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+            <circle cx="145" cy="135" r="4.5" fill="url(#goldSprigBR)"/>
+            <path d="M 125 124 Q 135 134 138 126 Q 130 116 125 124 Z" fill="url(#goldSprigBR)"/>
+            <path d="M 105 108 Q 118 122 122 114 Q 112 102 105 108 Z" fill="url(#goldSprigBR)"/>
+            <path d="M 100 85 Q 130 95 154 90" stroke="url(#goldSprigBR)" stroke-width="1.8" fill="none"/>
+            <circle cx="154" cy="90" r="3.5" fill="url(#goldSprigBR)"/>
+          </g>
+
+          <!-- أوراق خضراء -->
+          <g>
+            <path d="M 85 95 C 80 130 50 142 35 146 C 40 120 55 100 85 95 Z" fill="url(#leafGradBR)"/>
+            <path d="M 85 95 Q 55 125 35 146" stroke="#C2D8BC" stroke-width="1" fill="none"/>
+            <path d="M 95 80 C 125 78 145 60 150 45 C 130 45 105 58 95 80 Z" fill="url(#leafGradBR)"/>
+          </g>
+
+          <!-- وردة جورية مخملية متفتحة -->
+          <g transform="translate(70, 70)">
+            <path d="M 36 12 C 46 30 15 48 -10 42 C -32 36 -45 18 -42 -5 C -40 -26 -15 -44 12 -42 C 34 -40 48 -20 44 4 Z" fill="url(#roseGradBR)" opacity="0.95"/>
+            <path d="M 28 20 C 15 38 -18 38 -30 22 C -40 8 -38 -15 -22 -28 C -6 -40 20 -35 30 -18 C 38 -2 36 12 28 20 Z" fill="url(#roseGradBR)"/>
+            <path d="M 26 10 C 32 -14 10 -32 -12 -28 C -30 -24 -32 -2 -24 15 C -15 28 12 28 26 10 Z" fill="#FCE5E9"/>
+            <ellipse cx="0" cy="0" rx="14" ry="12" fill="url(#roseCoreBR)"/>
+            <path d="M 8 4 C 4 11 -6 11 -9 4 C -11 -3 -4 -8 2 -8 C 8 -7 10 -1 8 4 Z" fill="#8C1B33"/>
+            <circle cx="-0.5" cy="-0.5" r="3.2" fill="#FFE3E8"/>
+          </g>
+
+          <!-- زهرة ياسمين عاجية ناصعة -->
+          <g transform="translate(34, 118)">
+            <g fill="url(#jasminePetalTL)" stroke="rgba(212,175,55,0.4)" stroke-width="0.6">
+              <path d="M 0 0 C -4 -13 4 -13 0 -19 C -4 -13 4 -13 0 0" transform="rotate(35)"/>
+              <path d="M 0 0 C -4 -13 4 -13 0 -19 C -4 -13 4 -13 0 0" transform="rotate(107)"/>
+              <path d="M 0 0 C -4 -13 4 -13 0 -19 C -4 -13 4 -13 0 0" transform="rotate(179)"/>
+              <path d="M 0 0 C -4 -13 4 -13 0 -19 C -4 -13 4 -13 0 0" transform="rotate(251)"/>
+              <path d="M 0 0 C -4 -13 4 -13 0 -19 C -4 -13 4 -13 0 0" transform="rotate(323)"/>
+            </g>
+            <circle cx="0" cy="0" r="3" fill="url(#goldSprigBR)"/>
+            <circle cx="0" cy="0" r="1.3" fill="#FFFFFF"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- 3. لمسة زهور ياسمين رقيقة (علوية يمين) -->
+      <div class="floral-cluster floral-top-right">
+        <svg viewBox="0 0 120 120" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <path d="M 20 100 Q 50 60 95 30" stroke="url(#goldSprigTL)" stroke-width="1.8" fill="none"/>
+            <circle cx="95" cy="30" r="3.5" fill="url(#goldSprigTL)"/>
+            <path d="M 40 80 C 65 65 85 40 80 20 C 65 35 50 60 40 80 Z" fill="url(#leafGradTL)"/>
+          </g>
+          <!-- زهرة ياسمين -->
+          <g transform="translate(68, 52)">
+            <g fill="url(#jasminePetalTL)" stroke="rgba(212,175,55,0.4)" stroke-width="0.5">
+              <path d="M 0 0 C -3 -11 3 -11 0 -16 C -3 -11 3 -11 0 0" transform="rotate(20)"/>
+              <path d="M 0 0 C -3 -11 3 -11 0 -16 C -3 -11 3 -11 0 0" transform="rotate(92)"/>
+              <path d="M 0 0 C -3 -11 3 -11 0 -16 C -3 -11 3 -11 0 0" transform="rotate(164)"/>
+              <path d="M 0 0 C -3 -11 3 -11 0 -16 C -3 -11 3 -11 0 0" transform="rotate(236)"/>
+              <path d="M 0 0 C -3 -11 3 -11 0 -16 C -3 -11 3 -11 0 0" transform="rotate(308)"/>
+            </g>
+            <circle cx="0" cy="0" r="2.8" fill="url(#goldSprigTL)"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- 4. لمسة زهور ياسمين رقيقة (سفلية يسار) -->
+      <div class="floral-cluster floral-bottom-left">
+        <svg viewBox="0 0 120 120" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <path d="M 100 20 Q 70 60 25 90" stroke="url(#goldSprigTL)" stroke-width="1.8" fill="none"/>
+            <circle cx="25" cy="90" r="3.5" fill="url(#goldSprigTL)"/>
+            <path d="M 80 40 C 55 55 35 80 40 100 C 55 85 70 60 80 40 Z" fill="url(#leafGradTL)"/>
+          </g>
+          <!-- زهرة ياسمين -->
+          <g transform="translate(52, 68)">
+            <g fill="url(#jasminePetalTL)" stroke="rgba(212,175,55,0.4)" stroke-width="0.5">
+              <path d="M 0 0 C -3 -11 3 -11 0 -16 C -3 -11 3 -11 0 0" transform="rotate(-15)"/>
+              <path d="M 0 0 C -3 -11 3 -11 0 -16 C -3 -11 3 -11 0 0" transform="rotate(57)"/>
+              <path d="M 0 0 C -3 -11 3 -11 0 -16 C -3 -11 3 -11 0 0" transform="rotate(129)"/>
+              <path d="M 0 0 C -3 -11 3 -11 0 -16 C -3 -11 3 -11 0 0" transform="rotate(201)"/>
+              <path d="M 0 0 C -3 -11 3 -11 0 -16 C -3 -11 3 -11 0 0" transform="rotate(273)"/>
+            </g>
+            <circle cx="0" cy="0" r="2.8" fill="url(#goldSprigTL)"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- مجسم المظروف الملكي -->
+      <div class="envelope-box" id="envelopeBox" onclick="openEnvelopeAndPlay()">
+        <div class="envelope-shell">
+          <div class="envelope-fold-left"></div>
+          <div class="envelope-fold-right"></div>
+          <div class="envelope-fold-bottom"></div>
+
+          <!-- البطاقة الداخلية عند فتح المظروف -->
+          <div class="envelope-card-inside">
+            <div style="font-family: 'Amiri', serif; font-size: 1.6rem; font-weight: 700; color: #8E6823;">محمد & رغدة</div>
+            <div style="font-size: 0.82rem; color: #8C8479; margin-top: 4px;">السبت 16 يناير 2027 • 07:00 م</div>
+            <div style="font-size: 0.75rem; color: #B38E37; margin-top: 5px;">قاعة قصر الشوق - دار الأسلحة والذخيرة</div>
+          </div>
+
+          <!-- الطية العلوية القابلة للفتح -->
+          <div class="envelope-fold-top"></div>
         </div>
 
-        <div class="envelope-fold-top"></div>
+        <!-- أشرطة الساتان الملكية المنسدلة -->
+        <div class="wax-ribbon-tail wax-ribbon-left"></div>
+        <div class="wax-ribbon-tail wax-ribbon-right"></div>
+
+        <!-- الختم الشمعي المذهب (م & ر) -->
+        <div class="wax-seal" title="انقر لفتح الدعوة وسماع الصوت">
+          <span style="font-size: 1.35rem; line-height: 1;">م & ر</span>
+          <span style="font-size: 0.55rem; font-family: 'Cairo', sans-serif; letter-spacing: 0.5px;">2027</span>
+        </div>
       </div>
 
-      <div class="wax-seal" title="انقر لفتح الدعوة وسماع الصوت">
-        <span style="font-size: 1.35rem; line-height: 1;">م & ر</span>
-        <span style="font-size: 0.55rem; font-family: 'Cairo', sans-serif; letter-spacing: 0.5px;">2027</span>
-      </div>
     </div>
 
     <button type="button" class="btn-open-prompt" onclick="openEnvelopeAndPlay()">
@@ -1199,7 +1528,6 @@
       }
     }
 
-    // محاولة تشغيل الصوت مع التنقل بين الملفات إذا لم يتوفر الأول
     function tryPlayNextAudioFile() {
       if (currentAudioIdx >= audioFilesList.length) {
         isPlaying = true;
