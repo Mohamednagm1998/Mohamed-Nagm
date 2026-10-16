@@ -12,7 +12,7 @@
   <meta property="og:url" content="https://mohamednagm1998.github.io/Mohamed-Nagm/">
   <meta property="og:type" content="website">
 
-  <!-- تحميل مسبق فائق السرعة للصوت والصورة في المتصفح -->
+  <!-- تحميل مسبق فائق السرعة للصوت والصورة -->
   <link rel="preload" href="audio.mp3" as="audio" type="audio/mpeg">
   <link rel="preload" href="couple.jpg" as="image">
 
@@ -62,14 +62,13 @@
       position: relative;
       overflow-x: hidden;
       padding: 16px 10px 48px;
-      perspective: 1600px;
     }
 
     .ambient-glow {
       position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate3d(-50%, -50%, 0);
+      transform: translate(-50%, -50%);
       width: 720px;
       height: 720px;
       background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(244, 215, 222, 0.05) 45%, transparent 70%);
@@ -80,7 +79,8 @@
 
     #petals-canvas {
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       pointer-events: none;
@@ -88,11 +88,14 @@
     }
 
     /* ========================================================
-       شاشة المظروف الافتتاحية الملكية الفاتحة 3D
+       شاشة المظروف الافتتاحية الملكية الفاتحة (ثابتة وواضحة 100%)
        ======================================================== */
     #envelope-screen {
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       width: 100%;
       height: 100%;
       background: radial-gradient(circle at 50% 22%, #FFFDF9 0%, #FAF4E8 52%, #EDE0CA 100%);
@@ -101,41 +104,28 @@
       justify-content: center;
       align-items: center;
       z-index: 9999;
-      perspective: 1500px;
-      transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1), transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.85s;
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.8s;
       padding: 20px 10px;
       overflow: hidden;
-      will-change: opacity, transform;
-    }
-
-    #envelope-screen::before {
-      content: "";
-      position: absolute;
-      width: 550px;
-      height: 550px;
-      background: radial-gradient(circle, rgba(248, 218, 224, 0.45) 0%, rgba(255, 248, 230, 0.6) 45%, transparent 75%);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 1;
     }
 
     #envelope-screen.opened {
       opacity: 0;
-      transform: scale3d(1.1, 1.1, 1) translate3d(0, -15px, 0);
       visibility: hidden;
       pointer-events: none;
     }
 
     .envelope-header {
+      position: relative;
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
       animation: gentleHover 3.5s infinite ease-in-out;
       z-index: 10;
     }
 
     @keyframes gentleHover {
-      0%, 100% { transform: translate3d(0, 0, 0); }
-      50% { transform: translate3d(0, -5px, 0); }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
     }
 
     .badge-royal {
@@ -169,90 +159,88 @@
       margin-top: 5px;
     }
 
-    /* حاوية المظروف 3D مع باقات الورود بارزة في العمق */
+    /* حاوية المظروف مع باقات الأزهار المحيطة */
     .envelope-floral-wrap {
       position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-bottom: 8px;
-      z-index: 5;
-      transform-style: preserve-3d;
-      animation: scene3DFloat 5s infinite ease-in-out;
+      margin: 10px auto 14px;
+      z-index: 10;
+      animation: floatEnvelopeWrap 4.5s infinite ease-in-out;
     }
 
-    @keyframes scene3DFloat {
-      0%, 100% { transform: rotateX(5deg) rotateY(-4deg) translate3d(0, 0, 0); }
-      50% { transform: rotateX(-3deg) rotateY(4deg) translate3d(0, -7px, 14px); }
+    @keyframes floatEnvelopeWrap {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
     }
 
     .floral-cluster {
       position: absolute;
       pointer-events: none;
-      z-index: 12;
-      filter: drop-shadow(0 14px 22px rgba(142, 104, 35, 0.25));
-      will-change: transform;
+      z-index: 15;
+      filter: drop-shadow(0 12px 20px rgba(142, 104, 35, 0.25));
     }
 
     .floral-top-left {
-      top: -48px;
-      left: -48px;
-      width: 150px;
-      height: 150px;
-      transform: translateZ(38px);
+      top: -46px;
+      left: -46px;
+      width: 148px;
+      height: 148px;
       animation: floralSwayTL 5.5s infinite ease-in-out alternate;
+      transform-origin: top left;
     }
 
     .floral-bottom-right {
-      bottom: -48px;
-      right: -48px;
-      width: 155px;
-      height: 155px;
-      transform: translateZ(42px);
+      bottom: -46px;
+      right: -46px;
+      width: 152px;
+      height: 152px;
       animation: floralSwayBR 6.5s infinite ease-in-out alternate-reverse;
+      transform-origin: bottom right;
     }
 
     .floral-top-right {
-      top: -38px;
-      right: -36px;
-      width: 110px;
-      height: 110px;
-      transform: translateZ(26px);
+      top: -36px;
+      right: -34px;
+      width: 108px;
+      height: 108px;
+      animation: floralSwayTL 5s infinite ease-in-out alternate;
     }
 
     .floral-bottom-left {
-      bottom: -36px;
-      left: -36px;
-      width: 110px;
-      height: 110px;
-      transform: translateZ(26px);
+      bottom: -34px;
+      left: -34px;
+      width: 108px;
+      height: 108px;
+      animation: floralSwayBR 6s infinite ease-in-out alternate-reverse;
     }
 
     @keyframes floralSwayTL {
-      0% { transform: translateZ(38px) rotate(0deg); }
-      100% { transform: translateZ(44px) rotate(3deg) scale(1.03); }
+      0% { transform: rotate(0deg) scale(1); }
+      100% { transform: rotate(2.5deg) scale(1.03); }
     }
 
     @keyframes floralSwayBR {
-      0% { transform: translateZ(42px) rotate(0deg); }
-      100% { transform: translateZ(48px) rotate(-3deg) scale(1.03); }
+      0% { transform: rotate(0deg) scale(1); }
+      100% { transform: rotate(-2.5deg) scale(1.03); }
     }
 
     @media (max-width: 480px) {
-      .floral-top-left { top: -32px; left: -28px; width: 115px; height: 115px; }
-      .floral-bottom-right { bottom: -32px; right: -28px; width: 120px; height: 120px; }
-      .floral-top-right { top: -26px; right: -22px; width: 88px; height: 88px; }
-      .floral-bottom-left { bottom: -26px; left: -22px; width: 88px; height: 88px; }
+      .floral-top-left { top: -32px; left: -26px; width: 112px; height: 112px; }
+      .floral-bottom-right { bottom: -32px; right: -26px; width: 116px; height: 116px; }
+      .floral-top-right { top: -24px; right: -20px; width: 85px; height: 85px; }
+      .floral-bottom-left { bottom: -24px; left: -20px; width: 85px; height: 85px; }
     }
 
+    /* صندوق المظروف المجسم 3D */
     .envelope-box {
       position: relative;
       width: 320px;
       height: 220px;
       cursor: pointer;
-      transform-style: preserve-3d;
-      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-      z-index: 5;
+      perspective: 1200px;
+      z-index: 10;
       touch-action: manipulation;
     }
 
@@ -269,8 +257,12 @@
       height: 100%;
       background: radial-gradient(circle at 50% 30%, #FFFFFF 0%, #FAF3E6 60%, #EFE1C5 100%);
       border-radius: 16px;
-      box-shadow: 0 35px 75px rgba(142, 104, 35, 0.32), 0 10px 25px rgba(0, 0, 0, 0.1), inset 0 0 25px rgba(212, 175, 55, 0.18);
-      border: 1.8px solid rgba(197, 160, 89, 0.75);
+      box-shadow:
+        0 28px 65px rgba(142, 104, 35, 0.32),
+        0 6px 0 #C5A059,
+        0 12px 24px rgba(0, 0, 0, 0.1),
+        inset 0 0 25px rgba(212, 175, 55, 0.18);
+      border: 2px solid rgba(197, 160, 89, 0.8);
       overflow: hidden;
     }
 
@@ -357,12 +349,12 @@
       align-items: center;
       justify-content: center;
       border: 1.5px solid rgba(197, 160, 89, 0.45);
-      transition: transform 0.75s 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: transform 0.75s 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
       box-shadow: 0 6px 20px rgba(0,0,0,0.06);
     }
 
     .envelope-box.is-opening .envelope-card-inside {
-      transform: translate3d(0, -118px, 30px) scale(1.04);
+      transform: translateY(-115px) scale(1.04);
     }
 
     .wax-ribbon-tail {
@@ -371,7 +363,7 @@
       width: 14px;
       height: 48px;
       background: linear-gradient(180deg, #D4AF37 0%, #A87B1C 60%, #6E4E0B 100%);
-      z-index: 6;
+      z-index: 8;
       clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);
       box-shadow: 0 6px 12px rgba(0,0,0,0.28);
       transition: opacity 0.3s ease, transform 0.3s ease;
@@ -379,13 +371,13 @@
 
     .wax-ribbon-left {
       left: calc(50% - 10px);
-      transform: translateZ(22px) rotate(18deg);
+      transform: rotate(18deg);
       transform-origin: top center;
     }
 
     .wax-ribbon-right {
       right: calc(50% - 10px);
-      transform: translateZ(22px) rotate(-18deg);
+      transform: rotate(-18deg);
       transform-origin: top center;
     }
 
@@ -398,7 +390,7 @@
       position: absolute;
       top: 48%;
       left: 50%;
-      transform: translate3d(-50%, -50%, 34px);
+      transform: translate(-50%, -50%);
       width: 82px;
       height: 82px;
       background: radial-gradient(circle at 35% 35%, #F7D785 0%, #D4AF37 45%, #996D12 85%, #594008 100%);
@@ -409,25 +401,26 @@
       justify-content: center;
       color: #FFF9E8;
       font-family: 'Amiri', serif;
-      box-shadow: 0 16px 32px rgba(142, 104, 35, 0.52), inset 0 2px 6px rgba(255, 255, 255, 0.85), inset 0 -4px 8px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 12px 28px rgba(142, 104, 35, 0.55), inset 0 2px 6px rgba(255, 255, 255, 0.85), inset 0 -4px 8px rgba(0, 0, 0, 0.45);
       border: 2px dashed rgba(255, 245, 206, 0.85);
-      z-index: 7;
+      z-index: 9;
       cursor: pointer;
       transition: all 0.35s ease;
-      animation: sealPulse3D 2.2s infinite alternate;
+      animation: sealPulse 2.2s infinite alternate;
     }
 
-    @keyframes sealPulse3D {
-      0% { box-shadow: 0 12px 24px rgba(153, 109, 18, 0.42); transform: translate3d(-50%, -50%, 34px) scale(1); }
-      100% { box-shadow: 0 18px 38px rgba(212, 175, 55, 0.75); transform: translate3d(-50%, -50%, 44px) scale(1.06); }
+    @keyframes sealPulse {
+      0% { box-shadow: 0 10px 22px rgba(153, 109, 18, 0.42); transform: translate(-50%, -50%) scale(1); }
+      100% { box-shadow: 0 16px 36px rgba(212, 175, 55, 0.78); transform: translate(-50%, -50%) scale(1.06); }
     }
 
     .envelope-box.is-opening .wax-seal {
       opacity: 0;
-      transform: translate3d(-50%, -50%, 0) scale(0.2);
+      transform: translate(-50%, -50%) scale(0.2);
     }
 
     .btn-open-prompt {
+      position: relative;
       margin-top: 24px;
       background: var(--gold-gradient);
       color: #FFFFFF;
@@ -447,7 +440,7 @@
     }
 
     .btn-open-prompt:active {
-      transform: translate3d(0, 2px, 0);
+      transform: translateY(2px);
       box-shadow: 0 5px 15px rgba(142, 104, 35, 0.35), 0 1px 0 #664B0B;
     }
 
@@ -459,7 +452,6 @@
       max-width: 540px;
       z-index: 20;
       position: relative;
-      perspective: 1400px;
     }
 
     .wedding-card {
@@ -471,7 +463,6 @@
       box-shadow: 0 35px 80px rgba(0, 0, 0, 0.75), 0 0 55px rgba(197, 160, 89, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.9);
       border: 2px solid rgba(197, 160, 89, 0.5);
       overflow: hidden;
-      transform-style: preserve-3d;
     }
 
     .card-inner-frame {
@@ -494,26 +485,6 @@
     }
     .card-inner-frame::before { top: 6px; right: 8px; }
     .card-inner-frame::after { bottom: 6px; left: 8px; }
-
-    /* حركات الدخول المتدرجة الناعمة (60fps) بعد فتح المظروف */
-    .reveal-item {
-      opacity: 0;
-      transform: translate3d(0, 24px, 0);
-      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-      will-change: opacity, transform;
-    }
-
-    body.card-active .reveal-item {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-    }
-
-    .delay-1 { transition-delay: 0.06s; }
-    .delay-2 { transition-delay: 0.14s; }
-    .delay-3 { transition-delay: 0.22s; }
-    .delay-4 { transition-delay: 0.30s; }
-    .delay-5 { transition-delay: 0.38s; }
-    .delay-6 { transition-delay: 0.46s; }
 
     .top-controls-bar {
       display: flex;
@@ -543,7 +514,7 @@
     .btn-chip:hover {
       background: #F8F3E5;
       border-color: var(--gold-primary);
-      transform: translate3d(0, -2px, 0);
+      transform: translateY(-2px);
     }
 
     .btn-chip.active {
@@ -696,7 +667,7 @@
     }
 
     /* ========================================================
-       منصة صورة العروسين ثلاثية الأبعاد (3D Multi-Layer Shadowbox)
+       منصة صورة العروسين ثلاثية الأبعاد (3D Multi-Layer Frame)
        ======================================================== */
     .couple-frame-container {
       position: relative;
@@ -705,7 +676,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      perspective: 1100px;
+      perspective: 1000px;
     }
 
     .couple-photo-card {
@@ -717,33 +688,27 @@
       border: 2.2px solid var(--gold-primary);
       border-radius: 140px 140px 26px 26px;
       box-shadow:
-        0 26px 50px rgba(142, 104, 35, 0.34),
+        0 24px 48px rgba(142, 104, 35, 0.34),
         0 6px 0 #C5A059,
         0 10px 20px rgba(0,0,0,0.12);
       transform-style: preserve-3d;
       animation: card3DSway 6s infinite ease-in-out;
       transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-      will-change: transform;
-      cursor: grab;
     }
 
     @keyframes card3DSway {
-      0%, 100% { transform: rotateY(-7deg) rotateX(4deg) translate3d(0, 0, 0); }
-      50% { transform: rotateY(7deg) rotateX(-4deg) translate3d(0, -6px, 12px); }
+      0%, 100% { transform: rotateY(-6deg) rotateX(3deg); }
+      50% { transform: rotateY(6deg) rotateX(-3deg) translateY(-5px); }
     }
 
-    /* الطبقة الخلفية الغائرة 3D */
     .couple-3d-halo {
       position: absolute;
-      inset: -12px;
-      border-radius: 150px 150px 32px 32px;
+      inset: -10px;
+      border-radius: 148px 148px 32px 32px;
       border: 1.8px dashed rgba(212, 175, 55, 0.65);
-      transform: translateZ(-26px);
       pointer-events: none;
-      box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
     }
 
-    /* الطبقة الوسطى البارزة للصورة */
     .couple-photo-inner {
       width: 100%;
       border-radius: 130px 130px 18px 18px;
@@ -751,11 +716,9 @@
       position: relative;
       border: 1.5px solid rgba(197, 160, 89, 0.5);
       background: #FAF6ED;
-      transform: translateZ(20px);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.16);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.15);
     }
 
-    /* انعكاس الضوء الزجاجي 3D فوق الصورة */
     .couple-photo-inner::after {
       content: "";
       position: absolute;
@@ -763,7 +726,7 @@
       left: -60%;
       width: 45%;
       height: 200%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.48), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
       transform: rotate(25deg);
       animation: shineSweep 5.5s infinite ease-in-out;
       pointer-events: none;
@@ -781,12 +744,11 @@
       object-fit: cover;
     }
 
-    /* الطبقة الأمامية البارزة في الهواء 3D (التاج، الورود، والمونوغرام) */
     .couple-crown-top {
       position: absolute;
       top: -19px;
       left: 50%;
-      transform: translate3d(-50%, 0, 52px);
+      transform: translateX(-50%);
       background: var(--gold-gradient);
       color: #FFFFFF;
       width: 42px;
@@ -796,7 +758,7 @@
       align-items: center;
       justify-content: center;
       font-size: 1.3rem;
-      box-shadow: 0 14px 24px rgba(142, 104, 35, 0.5), 0 2px 0 #664B0B;
+      box-shadow: 0 10px 20px rgba(142, 104, 35, 0.5), 0 2px 0 #664B0B;
       border: 2px solid #FFFFFF;
       z-index: 4;
     }
@@ -805,7 +767,7 @@
       position: absolute;
       bottom: -17px;
       left: 50%;
-      transform: translate3d(-50%, 0, 56px);
+      transform: translateX(-50%);
       background: var(--gold-gradient);
       color: #FFFFFF;
       padding: 5px 24px;
@@ -814,7 +776,7 @@
       font-size: 1.3rem;
       font-weight: 700;
       letter-spacing: 0.5px;
-      box-shadow: 0 14px 26px rgba(142, 104, 35, 0.55), 0 3px 0 #664B0B;
+      box-shadow: 0 10px 22px rgba(142, 104, 35, 0.55), 0 3px 0 #664B0B;
       border: 2px solid #FFFFFF;
       z-index: 4;
       white-space: nowrap;
@@ -826,19 +788,19 @@
       height: 40px;
       z-index: 5;
       pointer-events: none;
-      filter: drop-shadow(0 10px 14px rgba(0,0,0,0.28));
+      filter: drop-shadow(0 8px 12px rgba(0,0,0,0.25));
     }
 
     .frame-flower-right {
       bottom: 16px;
       right: -16px;
-      transform: translateZ(46px) rotate(12deg);
+      transform: rotate(12deg);
     }
 
     .frame-flower-left {
       top: 38px;
       left: -16px;
-      transform: translateZ(46px) rotate(-15deg);
+      transform: rotate(-15deg);
     }
 
     /* ========================================================
@@ -860,12 +822,11 @@
       overflow: visible;
       filter: drop-shadow(0 10px 16px rgba(197, 160, 89, 0.4));
       animation: ringsSpin3D 5s infinite ease-in-out;
-      transform-style: preserve-3d;
     }
 
     @keyframes ringsSpin3D {
-      0%, 100% { transform: rotateY(-22deg) rotateX(8deg) translate3d(0, 0, 10px); }
-      50% { transform: rotateY(22deg) rotateX(-8deg) translate3d(0, -5px, 18px); }
+      0%, 100% { transform: rotateY(-20deg) rotateX(6deg) translateY(0); }
+      50% { transform: rotateY(20deg) rotateX(-6deg) translateY(-4px); }
     }
 
     .wedding-title {
@@ -877,7 +838,6 @@
 
     .couple-title-area {
       margin: 6px 0 14px;
-      perspective: 600px;
     }
 
     .names-display {
@@ -905,7 +865,7 @@
     }
 
     /* ========================================================
-       مكعبات العداد التنازلي المجسمة 3D (3D Extruded Cubes)
+       مكعبات العداد التنازلي المجسمة 3D
        ======================================================== */
     .countdown-section {
       background: linear-gradient(145deg, #FFFFFF 0%, #FDFBF5 100%);
@@ -914,7 +874,6 @@
       padding: 18px 12px 20px;
       margin-bottom: 24px;
       box-shadow: 0 14px 30px rgba(197, 160, 89, 0.14), 0 4px 0 rgba(197, 160, 89, 0.25);
-      perspective: 900px;
     }
 
     .countdown-header {
@@ -932,7 +891,6 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 10px;
-      transform-style: preserve-3d;
     }
 
     .count-unit {
@@ -944,16 +902,14 @@
         0 8px 18px rgba(142, 104, 35, 0.14),
         0 4px 0 #D8BE87,
         inset 0 2px 4px rgba(255, 255, 255, 0.95);
-      transform: translateZ(14px);
-      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
     .count-unit:hover {
-      transform: translate3d(0, -4px, 24px);
+      transform: translateY(-4px);
       box-shadow:
         0 14px 24px rgba(142, 104, 35, 0.22),
-        0 6px 0 #C5A059,
-        inset 0 2px 4px rgba(255, 255, 255, 1);
+        0 6px 0 #C5A059;
     }
 
     .count-number {
@@ -970,15 +926,11 @@
       margin-top: 3px;
     }
 
-    /* ========================================================
-       بطاقات التفاصيل والموقع ببروز 3D
-       ======================================================== */
     .details-group {
       display: flex;
       flex-direction: column;
       gap: 13px;
       margin-bottom: 24px;
-      perspective: 900px;
     }
 
     .detail-card {
@@ -991,11 +943,11 @@
       gap: 14px;
       text-align: right;
       box-shadow: 0 8px 18px rgba(142, 104, 35, 0.08), 0 3px 0 rgba(197, 160, 89, 0.22);
-      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
     .detail-card:hover {
-      transform: translate3d(0, -3px, 14px);
+      transform: translateY(-3px);
       box-shadow: 0 12px 24px rgba(197, 160, 89, 0.18), 0 4px 0 rgba(197, 160, 89, 0.35);
     }
 
@@ -1045,7 +997,7 @@
       cursor: pointer;
       position: relative;
       overflow: hidden;
-      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: all 0.3s ease;
     }
 
     .venue-direct-card::before {
@@ -1059,7 +1011,7 @@
     }
 
     .venue-direct-card:hover {
-      transform: translate3d(0, -4px, 16px);
+      transform: translateY(-4px);
       box-shadow: 0 18px 34px rgba(197, 160, 89, 0.36), 0 5px 0 #8E6823;
       background: #FFFDF8;
     }
@@ -1180,7 +1132,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: all 0.25s ease;
       border: none;
     }
 
@@ -1192,12 +1144,8 @@
     }
 
     .btn-rsvp-attend:hover {
-      transform: translate3d(0, -3px, 0);
+      transform: translateY(-3px);
       box-shadow: 0 12px 24px rgba(30, 158, 88, 0.38), 0 4px 0 #0B522B;
-    }
-
-    .btn-rsvp-attend:active {
-      transform: translate3d(0, 1px, 0);
     }
 
     .btn-rsvp-apologize {
@@ -1210,7 +1158,7 @@
     .btn-rsvp-apologize:hover {
       background: #FAF1DF;
       border-color: var(--gold-dark);
-      transform: translate3d(0, -3px, 0);
+      transform: translateY(-3px);
     }
 
     .actions-stack {
@@ -1232,7 +1180,7 @@
       cursor: pointer;
       border: none;
       font-family: 'Cairo', sans-serif;
-      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: all 0.25s ease;
     }
 
     .btn-wedding-gold {
@@ -1242,7 +1190,7 @@
     }
 
     .btn-wedding-gold:hover {
-      transform: translate3d(0, -3px, 0);
+      transform: translateY(-3px);
       box-shadow: 0 12px 26px rgba(197, 160, 89, 0.48), 0 4px 0 #664B0B;
     }
 
@@ -1256,7 +1204,7 @@
     .btn-wedding-cal:hover {
       background: #FAF6EE;
       border-color: var(--gold-primary);
-      transform: translate3d(0, -2px, 0);
+      transform: translateY(-2px);
     }
 
     .utility-btns-row {
@@ -1286,7 +1234,7 @@
     .btn-mini-util:hover {
       background: #FDF9EE;
       border-color: var(--gold-primary);
-      transform: translate3d(0, -2px, 0);
+      transform: translateY(-2px);
     }
 
     .signature-card {
@@ -1312,7 +1260,7 @@
       position: fixed;
       bottom: 24px;
       left: 50%;
-      transform: translate3d(-50%, 90px, 0);
+      transform: translate(-50%, 90px);
       opacity: 0;
       background: #18202A;
       color: #FFFFFF;
@@ -1323,7 +1271,7 @@
       font-weight: 700;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
       z-index: 10000;
-      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: all 0.35s ease;
       pointer-events: none;
       display: flex;
       align-items: center;
@@ -1331,7 +1279,7 @@
     }
 
     #toast-msg.visible {
-      transform: translate3d(-50%, 0, 0);
+      transform: translate(-50%, 0);
       opacity: 1;
     }
   </style>
@@ -1344,9 +1292,10 @@
   <!-- تتبع صامت ومخفي تماماً للزيارات (لا يظهر في الدعوة إطلاقاً) -->
   <img src="https://hits.sh/mohamednagm1998.github.io/Mohamed-Nagm.svg" alt="" style="display:none; width:0; height:0; visibility:hidden; position:absolute;" />
 
-  <!-- مشغل الصوت المباشر بتدفق Streaming فوري دون انتظار تحميل الملف كاملاً -->
+  <!-- مشغل الصوت المباشر بتدفق Streaming فوري -->
   <audio id="weddingAudio" src="audio.mp3" preload="auto" loop playsinline></audio>
 
+  <!-- شاشة المظروف الافتتاحية (واضحة وثابتة 100% في المقدمة) -->
   <div id="envelope-screen">
     <div class="envelope-header">
       <div class="badge-royal">✨ دعوة زفاف ملكية خاصة ✨</div>
@@ -1354,7 +1303,7 @@
       <p class="envelope-sub">المس الختم الشمعي لفتح المظروف والاستماع للزفة 🎵💌</p>
     </div>
 
-    <div class="envelope-floral-wrap" id="envelope3DWrap">
+    <div class="envelope-floral-wrap">
 
       <!-- باقة الورود العلوية (يسار) -->
       <div class="floral-cluster floral-top-left">
@@ -1538,8 +1487,8 @@
         </svg>
       </div>
 
-      <!-- مجسم المظروف الملكي 3D -->
-      <div class="envelope-box" id="envelopeBox" onpointerdown="openEnvelopeAndPlay(event)" onclick="openEnvelopeAndPlay(event)">
+      <!-- مجسم المظروف الملكي -->
+      <div class="envelope-box" id="envelopeBox" onclick="openEnvelopeAndPlay()">
         <div class="envelope-shell">
           <div class="envelope-fold-left"></div>
           <div class="envelope-fold-right"></div>
@@ -1565,7 +1514,7 @@
 
     </div>
 
-    <button type="button" class="btn-open-prompt" onpointerdown="openEnvelopeAndPlay(event)" onclick="openEnvelopeAndPlay(event)">
+    <button type="button" class="btn-open-prompt" onclick="openEnvelopeAndPlay()">
       <span>افتح الدعوة واستمع للزفة ✉️🎶</span>
     </button>
   </div>
@@ -1574,12 +1523,12 @@
     <article class="wedding-card" id="mainWeddingCard">
       <div class="card-inner-frame"></div>
 
-      <div class="top-controls-bar reveal-item delay-1">
+      <div class="top-controls-bar">
         <button type="button" class="btn-chip" onclick="recloseEnvelope()">✉️ إغلاق المظروف</button>
         <button type="button" class="btn-chip" id="petalsToggleBtn" onclick="togglePetals()">🌸 البتلات: مفعّلة</button>
       </div>
 
-      <section class="audio-player-pill reveal-item delay-1">
+      <section class="audio-player-pill">
         <div class="audio-pill-info">
           <div class="audio-disc-icon" id="discIcon">🎵</div>
           <div class="audio-text-group">
@@ -1599,29 +1548,27 @@
         </div>
       </section>
 
-      <div class="bismillah reveal-item delay-2">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+      <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
 
-      <div class="quran-box reveal-item delay-2">
+      <div class="quran-box">
         <p class="quran-verse">
           ﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ ﴾
         </p>
         <span class="quran-surah">[سورة الروم: الآية 21]</span>
       </div>
 
-      <!-- إطار صورة العروسين ثلاثي الأبعاد متعدد الطبقات (3D Shadowbox) -->
-      <div class="couple-frame-container reveal-item delay-3" id="couple3DStage">
+      <!-- إطار صورة العروسين ثلاثي الأبعاد -->
+      <div class="couple-frame-container" id="couple3DStage">
         <div class="couple-photo-card" id="couple3DCard">
           <div class="couple-3d-halo"></div>
           <div class="couple-crown-top" title="زفاف مبارك">👑</div>
 
-          <!-- زهرة 3D بارزة يمين -->
           <svg class="frame-3d-flower frame-flower-right" viewBox="0 0 50 50">
             <circle cx="25" cy="25" r="18" fill="url(#roseGradTL)"/>
             <circle cx="25" cy="25" r="9" fill="url(#roseCoreTL)"/>
             <circle cx="25" cy="25" r="3" fill="#FFF"/>
           </svg>
 
-          <!-- زهرة 3D بارزة يسار -->
           <svg class="frame-3d-flower frame-flower-left" viewBox="0 0 50 50">
             <circle cx="25" cy="25" r="16" fill="url(#roseGradTL)"/>
             <circle cx="25" cy="25" r="8" fill="url(#roseCoreTL)"/>
@@ -1636,7 +1583,7 @@
       </div>
 
       <!-- مجسم خاتمي الزفاف الذهبيين ثلاثي الأبعاد (3D Interlocking Rings) -->
-      <div class="rings-3d-showcase reveal-item delay-3">
+      <div class="rings-3d-showcase">
         <svg class="rings-3d-svg" viewBox="0 0 120 75" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="ring3DGold1" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -1660,17 +1607,17 @@
         </svg>
       </div>
 
-      <div class="wedding-title reveal-item delay-4">يسعدنا ويشرفنا دعوتكم لحضور حفل زفاف</div>
+      <div class="wedding-title">يسعدنا ويشرفنا دعوتكم لحضور حفل زفاف</div>
 
-      <div class="couple-title-area reveal-item delay-4">
+      <div class="couple-title-area">
         <h2 class="names-display">محمد <span class="and-sym">&</span> رغدة</h2>
       </div>
 
-      <p class="invitation-words reveal-item delay-4">
+      <p class="invitation-words">
         بقلوب تفيض فرحاً وسروراً، نتشرف بدعوتكم لمشاركتنا أجمل ليالي العمر وبداية رحلة حياتنا معاً، لتكتمل سعادتنا بتواجدكم العطر بيننا 🤍
       </p>
 
-      <section class="countdown-section reveal-item delay-4">
+      <section class="countdown-section">
         <div class="countdown-header">
           <span>⏳</span>
           <span>الوقت المتبقي على ليلة الزفاف المنتظرة</span>
@@ -1695,7 +1642,7 @@
         </div>
       </section>
 
-      <section class="details-group reveal-item delay-5">
+      <section class="details-group">
         <div class="detail-card">
           <div class="detail-icon-wrap">🗓</div>
           <div class="detail-info">
@@ -1731,7 +1678,7 @@
       </section>
 
       <!-- قسم الرد على الدعوة والتهنئة المربوط برقم الواتساب مباشرة -->
-      <section class="rsvp-royal-box reveal-item delay-5">
+      <section class="rsvp-royal-box">
         <h3 class="rsvp-title">
           <span>💌</span>
           <span>تأكيد الحضور والتهنئة للعروسين</span>
@@ -1756,7 +1703,7 @@
         </div>
       </section>
 
-      <section class="actions-stack reveal-item delay-6">
+      <section class="actions-stack">
         <a href="https://maps.app.goo.gl/geGT5azkam9drc3X9?g_st=ac" 
            target="_blank" 
            rel="noopener noreferrer" 
@@ -1781,7 +1728,7 @@
         </div>
       </section>
 
-      <div class="signature-card reveal-item delay-6">
+      <div class="signature-card">
         <div class="signature-heading">حضوركم يكتمل به سرورنا ويزيد ليلتنا بهجة ✨</div>
         <div class="signature-date">حفل زفاف محمد & رغدة | السبت 16 يناير 2027</div>
       </div>
@@ -1802,12 +1749,11 @@
     // رقم هاتف العريس لاستقبال رسائل التأكيد والتهنئة على واتساب
     const GROOM_WHATSAPP_NUMBER = "201098303210";
 
-    // تحضير مسار التدفق الصوتي فور فتح الصفحة دون إعادة تعيينه
+    // تحضير مسار التدفق الصوتي فور فتح الصفحة
     if (weddingAudio) {
       weddingAudio.load();
     }
 
-    // في حال كان اسم الملف بحروف كبيرة على السيرفر، ينتقل للبديل تلقائياً
     const fallbackAudioSources = ["Audio.mp3", "audio.mp3.mp3", "Warm-Memories-Emotional-Inspiring-Piano(chosic.com).mp3"];
     let fallbackAudioIndex = 0;
     weddingAudio.addEventListener('error', () => {
@@ -1818,7 +1764,7 @@
       }
     });
 
-    // نغمة قيثارة ملكية فورية (0ms) تعمل لحظة لمس الختم الشمعي لمنع أي شعور بالتأخير
+    // نغمة قيثارة ملكية فورية (0ms) تعمل لحظة لمس الختم الشمعي
     function playInstantRoyalChime() {
       if (chimePlayed) return;
       chimePlayed = true;
@@ -1855,9 +1801,7 @@
       }
     }
 
-    // ===============================================================
     // تفاعل ثلاثي الأبعاد (3D Parallax Tilt) لصورة العروسين باللمس أو الماوس
-    // ===============================================================
     const couple3DStage = document.getElementById('couple3DStage');
     const couple3DCard = document.getElementById('couple3DCard');
 
@@ -1866,10 +1810,10 @@
         const rect = couple3DStage.getBoundingClientRect();
         const x = clientX - rect.left - rect.width / 2;
         const y = clientY - rect.top - rect.height / 2;
-        const rotateY = Math.max(-15, Math.min(15, (x / (rect.width / 2)) * 14));
-        const rotateX = Math.max(-12, Math.min(12, -(y / (rect.height / 2)) * 11));
+        const rotateY = Math.max(-14, Math.min(14, (x / (rect.width / 2)) * 12));
+        const rotateX = Math.max(-10, Math.min(10, -(y / (rect.height / 2)) * 10));
         couple3DCard.style.animation = 'none';
-        couple3DCard.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale3d(1.03, 1.03, 1.03)`;
+        couple3DCard.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale(1.02)`;
       };
 
       const reset3DMove = () => {
@@ -1885,9 +1829,6 @@
       couple3DStage.addEventListener('touchend', reset3DMove);
     }
 
-    // ===============================================================
-    // تشغيل فوري للصوت بدون أي تأخير
-    // ===============================================================
     weddingAudio.addEventListener('playing', () => {
       isPlaying = true;
       updateAudioUI(true, 'جاري التشغيل 🎶');
@@ -1949,8 +1890,7 @@
       }
     }
 
-    function openEnvelopeAndPlay(evt) {
-      // 1. استجابة صوتية فورية في 0.00 ثانية لحظة لمس الإصبع
+    function openEnvelopeAndPlay() {
       playInstantRoyalChime();
       if (weddingAudio && weddingAudio.paused) {
         playAudioInstant();
@@ -1966,13 +1906,11 @@
 
       setTimeout(() => {
         if (screen) screen.classList.add('opened');
-        document.body.classList.add('card-active');
-      }, 720);
+      }, 750);
     }
 
     function recloseEnvelope() {
       envelopeOpened = false;
-      document.body.classList.remove('card-active');
       const box = document.getElementById('envelopeBox');
       const screen = document.getElementById('envelope-screen');
       if (box) box.classList.remove('is-opening');
