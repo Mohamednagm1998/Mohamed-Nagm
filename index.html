@@ -12,10 +12,6 @@
   <meta property="og:url" content="https://mohamednagm1998.github.io/Mohamed-Nagm/">
   <meta property="og:type" content="website">
 
-  <!-- تحميل مسبق فائق السرعة للصوت والصورة -->
-  <link rel="preload" href="audio.mp3" as="fetch" crossorigin="anonymous">
-  <link rel="preload" href="couple.jpg" as="image">
-
   <!-- خطوط عربية فاخرة -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1533,7 +1529,7 @@
           <div class="audio-disc-icon" id="discIcon">🎵</div>
           <div class="audio-text-group">
             <span class="audio-song-name" id="currentAudioName">معزوفة الزفاف الملكية</span>
-            <span class="audio-song-status" id="audioStatusText">جاهز للتشغيل الفوري</span>
+            <span class="audio-song-status" id="audioStatusText">محفوظ ويعمل بدون إنترنت ⚡</span>
           </div>
         </div>
         <div class="audio-actions-group">
@@ -1744,111 +1740,72 @@
     const weddingAudio = document.getElementById('weddingAudio');
     let isPlaying = false;
     let envelopeOpened = false;
-    let userRequestedPlay = false;
-    let detectedStartOffset = 0; // نقطة بداية الصوت الفعلي بعد تخطي أي صمت في أول الملف
-    let blobReadyInRAM = false;
-
-    // رقم هاتف العريس لاستقبال رسائل التأكيد والتهنئة على واتساب
     const GROOM_WHATSAPP_NUMBER = "201098303210";
 
-    // =========================================================================
-    // الحل الجذري: تحميل ملف الصوت مرة واحدة وحفظه في ذاكرة الهاتف (CacheStorage + RAM Blob)
-    // مع فحص تلقائي لتخطي أي ثواني صمت في بداية الأغنية
-    // =========================================================================
-    const candidateFiles = [
-      "audio.mp3",
-      "Audio.mp3",
-      "audio.mp3.mp3",
-      "Warm-Memories-Emotional-Inspiring-Piano(chosic.com).mp3"
-    ];
-
-    async function fetchAndCacheAudioPermanently() {
-      const CACHE_NAME = 'wedding-mohamed-raghda-audio-v2';
-
-      for (const fileName of candidateFiles) {
-        try {
-          let response = null;
-
-          // 1. محاولة القراءة الفورية من ذاكرة الهاتف الدائمة (CacheStorage) في 2ms
-          if ('caches' in window) {
-            try {
-              const cache = await caches.open(CACHE_NAME);
-              response = await cache.match(fileName);
-              if (!response) {
-                const netRes = await fetch(fileName, { cache: 'force-cache' });
-                if (netRes && netRes.ok) {
-                  cache.put(fileName, netRes.clone()).catch(() => {});
-                  response = netRes;
-                }
-              }
-            } catch (e) {}
-          }
-
-          // 2. إذا لم يكن الكاش متاحاً، جلبه مباشرة
-          if (!response) {
-            const netRes = await fetch(fileName, { cache: 'force-cache' });
-            if (netRes && netRes.ok) response = netRes;
-          }
-
-          if (response && response.ok) {
-            const arrayBuffer = await response.arrayBuffer();
-            if (arrayBuffer.byteLength < 1000) continue; // تخطي الملفات الفارغة
-
-            // إنشاء رابط دائم في الـ RAM لا ينقطع أبداً حتى لو تُركت الدعوة مفتوحة لساعات
-            const blob = new Blob([arrayBuffer.slice(0)], { type: 'audio/mpeg' });
-            const ramUrl = URL.createObjectURL(blob);
-
-            // فحص أول ثواني في الأغنية لتخطي أي صمت في بداية ملف الـ MP3
-            detectLeadingSilence(arrayBuffer.slice(0));
-
-            const wasPlaying = !weddingAudio.paused;
-            const currentPos = weddingAudio.currentTime;
-
-            weddingAudio.src = ramUrl;
-            blobReadyInRAM = true;
-
-            if (wasPlaying || userRequestedPlay) {
-              weddingAudio.currentTime = currentPos > 0.1 ? currentPos : detectedStartOffset;
-              weddingAudio.play().then(() => {
-                isPlaying = true;
-                updateAudioUI(true, 'جاري التشغيل 🎶');
-              }).catch(() => {});
-            }
-            return;
-          }
-        } catch (e) {}
-      }
+    // 1. تسجيل الـ Service Worker لتعمل الدعوة بالكامل بدون إنترنت (Offline PWA)
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
     }
 
-    // دالة ذكية تفحص موجات ملف الـ MP3 لتحديد أول جزء من الثانية يبدأ فيه الصوت الفعلي
-    function detectLeadingSilence(arrayBuf) {
+    // 2. قاعدة بيانات أوفلاين داخلية (IndexedDB) لحفظ الموسيقى والصورة على الموبايل للأبد بدون إنترنت
+    function openOfflineDB() {
+      return new Promise((resolve, reject) => {
+        const req = indexedDB.open('WeddingOfflineStorageDB', 1);
+        req.onupgradeneeded = (e) => {
+          const db = e.target.result;
+          if (!db.objectStoreNames.contains('media')) {
+            db.createObjectStore('media');
+          }
+        };
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    async function loadOrSaveOfflineMedia(key, url, mimeType) {
       try {
-        const AudioCtx = window.AudioContext || window.webkitAudioContext;
-        if (!AudioCtx) return;
-        const tempCtx = new AudioCtx();
-        tempCtx.decodeAudioData(arrayBuf, (audioBuffer) => {
-          const channelData = audioBuffer.getChannelData(0);
-          const sampleRate = audioBuffer.sampleRate;
-          const maxScanSamples = Math.min(channelData.length, sampleRate * 8); // فحص أول 8 ثوانٍ
-          for (let i = 0; i < maxScanSamples; i += 100) {
-            if (Math.abs(channelData[i]) > 0.015) {
-              const offsetSec = Math.max(0, (i / sampleRate) - 0.05);
-              detectedStartOffset = offsetSec;
-              if (weddingAudio && weddingAudio.paused && weddingAudio.currentTime === 0) {
-                weddingAudio.currentTime = detectedStartOffset;
-              }
-              break;
-            }
-          }
-          tempCtx.close().catch(() => {});
-        }, () => {
-          tempCtx.close().catch(() => {});
+        const db = await openOfflineDB();
+        // قراءة الملف من ذاكرة الموبايل الداخلية إن وُجد (يعمل بدون نت نهائياً)
+        const cachedBlob = await new Promise((res) => {
+          const tx = db.transaction('media', 'readonly');
+          const getReq = tx.objectStore('media').get(key);
+          getReq.onsuccess = () => res(getReq.result);
+          getReq.onerror = () => res(null);
         });
+
+        if (cachedBlob && cachedBlob.size > 1000) {
+          return URL.createObjectURL(cachedBlob);
+        }
+
+        // إذا كانت أول مرة يفتح فيها الضيف، نحمّل الملف ونحفظه للأبد في قاعدة بيانات الموبايل
+        const netRes = await fetch(url, { cache: 'force-cache' });
+        if (netRes.ok) {
+          const arrBuf = await netRes.arrayBuffer();
+          const newBlob = new Blob([arrBuf], { type: mimeType });
+          const tx = db.transaction('media', 'readwrite');
+          tx.objectStore('media').put(newBlob, key);
+          return URL.createObjectURL(newBlob);
+        }
       } catch (e) {}
+      return null;
     }
 
-    // تشغيل التحميل المسبق في الـ RAM فور فتح الصفحة
-    fetchAndCacheAudioPermanently();
+    // استدعاء الصوت والصورة من قاعدة البيانات الأوفلاين فور فتح الصفحة
+    (async function initOfflineAssets() {
+      const offlineAudioUrl = await loadOrSaveOfflineMedia('wedding_audio_v1', 'audio.mp3', 'audio/mpeg');
+      if (offlineAudioUrl && weddingAudio.paused) {
+        weddingAudio.src = offlineAudioUrl;
+        weddingAudio.load();
+      }
+
+      const offlineImgUrl = await loadOrSaveOfflineMedia('wedding_couple_v1', 'couple.jpg', 'image/jpeg');
+      const imgEl = document.getElementById('couplePhotoImg');
+      if (offlineImgUrl && imgEl) {
+        imgEl.src = offlineImgUrl;
+      }
+    })();
 
     weddingAudio.addEventListener('playing', () => {
       isPlaying = true;
@@ -1860,22 +1817,10 @@
       updateAudioUI(false, 'متوقف مؤقتاً ⏸️');
     });
 
-    // عند انتهاء الأغنية وإعادتها، تبدأ أيضاً من أول الصوت الفعلي بدون صمت
-    weddingAudio.addEventListener('ended', () => {
-      weddingAudio.currentTime = detectedStartOffset;
-      weddingAudio.play().catch(() => {});
-    });
-
     function playAudioInstant() {
       if (!weddingAudio) return;
-      userRequestedPlay = true;
       weddingAudio.muted = false;
       weddingAudio.volume = 1.0;
-
-      // تخطي الصمت في بداية المقطع إذا كان يبدأ من الصفر
-      if (weddingAudio.currentTime < detectedStartOffset && detectedStartOffset > 0) {
-        try { weddingAudio.currentTime = detectedStartOffset; } catch (e) {}
-      }
 
       const playPromise = weddingAudio.play();
       if (playPromise !== undefined) {
@@ -1887,7 +1832,6 @@
     }
 
     function pauseAudioDirectly() {
-      userRequestedPlay = false;
       if (weddingAudio) {
         weddingAudio.pause();
       }
@@ -1925,7 +1869,6 @@
     }
 
     function openEnvelopeAndPlay() {
-      // تشغيل الصوت فوراً في اللحظة نفسها بدون أي مقاطعة
       if (weddingAudio && weddingAudio.paused) {
         playAudioInstant();
       }
@@ -1989,7 +1932,6 @@
       couple3DStage.addEventListener('touchend', reset3DMove);
     }
 
-    // إرسال رد الحضور أو الاعتذار مباشرةً لرقم 01098303210 على واتساب
     function sendWhatsAppRSVP(status) {
       const guestName = document.getElementById('guestNameInput').value.trim();
       const guestWish = document.getElementById('guestWishInput').value.trim();
