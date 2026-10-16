@@ -12,8 +12,8 @@
   <meta property="og:url" content="https://mohamednagm1998.github.io/Mohamed-Nagm/">
   <meta property="og:type" content="website">
 
-  <!-- تحميل مسبق فائق السرعة للصوت والصورة -->
-  <link rel="preload" href="audio.mp3" as="fetch" crossorigin="anonymous">
+  <!-- تحميل مسبق مباشر للصوت والصورة -->
+  <link rel="preload" href="audio.mp3" as="audio" type="audio/mpeg">
   <link rel="preload" href="couple.jpg" as="image">
 
   <!-- خطوط عربية فاخرة -->
@@ -1290,8 +1290,13 @@
   <!-- تتبع صامت ومخفي تماماً للزيارات (لا يظهر في الدعوة إطلاقاً) -->
   <img src="https://hits.sh/mohamednagm1998.github.io/Mohamed-Nagm.svg" alt="" style="display:none; width:0; height:0; visibility:hidden; position:absolute;" />
 
-  <!-- مشغل الصوت الاحتياطي المساند لمحرك الـ RAM -->
-  <audio id="weddingAudio" src="audio.mp3" preload="auto" loop playsinline></audio>
+  <!-- المشغل الأساسي المباشر والمضمون 100% على جميع الهواتف -->
+  <audio id="weddingAudio" preload="auto" loop playsinline>
+    <source src="audio.mp3" type="audio/mpeg">
+    <source src="Audio.mp3" type="audio/mpeg">
+    <source src="audio.mp3.mp3" type="audio/mpeg">
+    <source src="Warm-Memories-Emotional-Inspiring-Piano(chosic.com).mp3" type="audio/mpeg">
+  </audio>
 
   <!-- شاشة المظروف الافتتاحية -->
   <div id="envelope-screen">
@@ -1486,7 +1491,7 @@
       </div>
 
       <!-- مجسم المظروف الملكي -->
-      <div class="envelope-box" id="envelopeBox" onpointerdown="openEnvelopeAndPlay()" onclick="openEnvelopeAndPlay()">
+      <div class="envelope-box" id="envelopeBox" ontouchstart="openEnvelopeAndPlay()" onclick="openEnvelopeAndPlay()">
         <div class="envelope-shell">
           <div class="envelope-fold-left"></div>
           <div class="envelope-fold-right"></div>
@@ -1512,7 +1517,7 @@
 
     </div>
 
-    <button type="button" class="btn-open-prompt" onpointerdown="openEnvelopeAndPlay()" onclick="openEnvelopeAndPlay()">
+    <button type="button" class="btn-open-prompt" ontouchstart="openEnvelopeAndPlay()" onclick="openEnvelopeAndPlay()">
       <span>افتح الدعوة واستمع للزفة ✉️🎶</span>
     </button>
   </div>
@@ -1746,151 +1751,55 @@
     // رقم هاتف العريس لاستقبال رسائل التأكيد والتهنئة على واتساب
     const GROOM_WHATSAPP_NUMBER = "201098303210";
 
-    // =========================================================================
-    // محرك الصوت الفوري من الرامات (Zero-Delay Persistent RAM Audio Engine)
-    // يحتفظ بالأغنية مفكوكة التشفير في ذاكرة الجهاز حتى لو تُركت الدعوة مفتوحة لساعات
-    // =========================================================================
-    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-    let audioCtx = AudioContextClass ? new AudioContextClass() : null;
-    let decodedAudioBuffer = null;
-    let rawAudioArrayBuffer = null;
-    let ramSourceNode = null;
-    let ramStartTime = 0;
-    let ramPauseOffset = 0;
-    let usingWebAudioRAM = false;
-    let usingHtml5Fallback = false;
-
-    // تفعيل تشغيل الصوت حتى على وضع الصامت في iOS 17+
-    if (navigator.audioSession) {
-      try { navigator.audioSession.type = 'playback'; } catch (e) {}
+    // 1. تحضير المشغل الأساسي فور فتح الصفحة
+    if (weddingAudio) {
+      weddingAudio.load();
     }
 
-    async function preloadAudioPermanentlyInRAM() {
-      const audioCandidates = [
-        "audio.mp3",
-        "Audio.mp3",
-        "audio.mp3.mp3",
-        "Warm-Memories-Emotional-Inspiring-Piano(chosic.com).mp3"
-      ];
+    // 2. تخزين الملف في الكاش المحلي للمتصفح دون تغيير مسار المشغل الأساسي
+    fetch('audio.mp3', { cache: 'force-cache' }).catch(() => {});
 
-      for (const fileUrl of audioCandidates) {
-        try {
-          const response = await fetch(fileUrl, { cache: "force-cache" });
-          if (!response.ok) continue;
-
-          const arrayBuf = await response.arrayBuffer();
-          rawAudioArrayBuffer = arrayBuf.slice(0);
-
-          // 1. إنشاء رابط Blob محلي داخل رامات الهاتف لعنصر <audio> أيضاً
-          const blob = new Blob([arrayBuf.slice(0)], { type: "audio/mpeg" });
-          const localBlobUrl = URL.createObjectURL(blob);
-          if (weddingAudio && weddingAudio.paused && !usingHtml5Fallback) {
-            weddingAudio.src = localBlobUrl;
-            weddingAudio.load();
-          }
-
-          // 2. فك تشفير الصوت بالكامل في الرامات (PCM Buffer) للتشغيل في 0.00ms
-          if (audioCtx) {
-            audioCtx.decodeAudioData(arrayBuf.slice(0), (buffer) => {
-              decodedAudioBuffer = buffer;
-              const statusEl = document.getElementById('audioStatusText');
-              if (statusEl && !isPlaying) {
-                statusEl.innerText = 'جاهز للتشغيل الفوري ⚡';
-              }
-            }, () => {});
-          }
-          break;
-        } catch (e) {}
+    // 3. إبقاء الصوت جاهزاً في الذاكرة إذا تُركت الدعوة مفتوحة لفترة قبل الفتح
+    setInterval(() => {
+      if (weddingAudio && weddingAudio.paused && weddingAudio.readyState < 2) {
+        weddingAudio.load();
       }
-    }
+    }, 12000);
 
-    // بدء التحميل في الرامات فور فتح الرابط
-    preloadAudioPermanentlyInRAM();
-
-    // تشغيل من الرامات مباشرةً في 0 ثانية بدون أي اتصال بالإنترنت
-    function startWebAudioFromRAM() {
-      if (!audioCtx || !decodedAudioBuffer) return false;
-
-      if (audioCtx.state === 'suspended' || audioCtx.state === 'interrupted') {
-        audioCtx.resume();
-      }
-
-      stopWebAudioNodeOnly();
-
-      ramSourceNode = audioCtx.createBufferSource();
-      ramSourceNode.buffer = decodedAudioBuffer;
-      ramSourceNode.loop = true;
-      ramSourceNode.connect(audioCtx.destination);
-
-      const offset = ramPauseOffset % decodedAudioBuffer.duration;
-      ramSourceNode.start(0, offset);
-      ramStartTime = audioCtx.currentTime - offset;
-
-      usingWebAudioRAM = true;
-      isPlaying = true;
-      updateAudioUI(true, 'جاري التشغيل 🎶');
-      return true;
-    }
-
-    function stopWebAudioNodeOnly() {
-      if (ramSourceNode) {
-        try {
-          ramSourceNode.stop(0);
-          ramSourceNode.disconnect();
-        } catch (e) {}
-        ramSourceNode = null;
-      }
-    }
-
-    function pauseWebAudioRAM() {
-      if (usingWebAudioRAM && audioCtx) {
-        ramPauseOffset = audioCtx.currentTime - ramStartTime;
-        stopWebAudioNodeOnly();
-      }
-      isPlaying = false;
-      updateAudioUI(false, 'متوقف مؤقتاً ⏸️');
-    }
-
-    // إعادة تنشيط محرك الصوت تلقائياً إذا ترك الضيف الصفحة فترة ثم عاد إليها
     document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible' && audioCtx) {
-        if (isPlaying && (audioCtx.state === 'suspended' || audioCtx.state === 'interrupted')) {
-          audioCtx.resume();
+      if (document.visibilityState === 'visible' && weddingAudio) {
+        if (weddingAudio.paused && !envelopeOpened && weddingAudio.readyState < 2) {
+          weddingAudio.load();
         }
       }
     });
 
+    weddingAudio.addEventListener('playing', () => {
+      isPlaying = true;
+      updateAudioUI(true, 'جاري التشغيل 🎶');
+    });
+
+    weddingAudio.addEventListener('pause', () => {
+      isPlaying = false;
+      updateAudioUI(false, 'متوقف مؤقتاً ⏸️');
+    });
+
     function playAudioInstant() {
-      // فتح قفل الصوت في المتصفح في نفس لحظة اللمس
-      if (audioCtx && (audioCtx.state === 'suspended' || audioCtx.state === 'interrupted')) {
-        audioCtx.resume();
-      }
+      if (!weddingAudio) return;
+      weddingAudio.muted = false;
+      weddingAudio.volume = 1.0;
 
-      // أولاً: إذا كانت الأغنية جاهزة في الرامات (الحالة الأساسية حتى بعد ترك الصفحة بالساعات)
-      if (decodedAudioBuffer && !usingHtml5Fallback) {
-        if (startWebAudioFromRAM()) return;
-      }
-
-      // ثانياً: إذا ضغط الضيف في أول نصف ثانية قبل اكتمال فك التشفير، نشغل التدفق المباشر
-      if (weddingAudio) {
-        usingHtml5Fallback = true;
-        weddingAudio.muted = false;
-        weddingAudio.volume = 1.0;
-        const p = weddingAudio.play();
-        if (p !== undefined) {
-          p.then(() => {
-            isPlaying = true;
-            updateAudioUI(true, 'جاري التشغيل 🎶');
-          }).catch(() => {});
-        }
+      const playPromise = weddingAudio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          isPlaying = true;
+          updateAudioUI(true, 'جاري التشغيل 🎶');
+        }).catch(() => {});
       }
     }
 
     function pauseAudioDirectly() {
-      if (usingWebAudioRAM) {
-        pauseWebAudioRAM();
-      }
-      if (weddingAudio && !weddingAudio.paused) {
+      if (weddingAudio) {
         weddingAudio.pause();
       }
       isPlaying = false;
@@ -1898,7 +1807,7 @@
     }
 
     function toggleAudioPlayback() {
-      if (isPlaying) {
+      if (!weddingAudio.paused) {
         pauseAudioDirectly();
         showToast('تم إيقاف الصوت مؤقتاً 🔇');
       } else {
@@ -1906,20 +1815,6 @@
         showToast('جاري تشغيل الصوت 🎵');
       }
     }
-
-    weddingAudio.addEventListener('playing', () => {
-      if (usingHtml5Fallback) {
-        isPlaying = true;
-        updateAudioUI(true, 'جاري التشغيل 🎶');
-      }
-    });
-
-    weddingAudio.addEventListener('pause', () => {
-      if (usingHtml5Fallback && !usingWebAudioRAM) {
-        isPlaying = false;
-        updateAudioUI(false, 'متوقف مؤقتاً ⏸️');
-      }
-    });
 
     function updateAudioUI(playing, statusText) {
       const discIcon = document.getElementById('discIcon');
@@ -1941,7 +1836,7 @@
     }
 
     function openEnvelopeAndPlay() {
-      if (!isPlaying) {
+      if (weddingAudio && weddingAudio.paused) {
         playAudioInstant();
       }
 
