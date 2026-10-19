@@ -29,6 +29,7 @@
       --gold-dark: #8E6823;
       --gold-glow: rgba(197, 160, 89, 0.28);
       --gold-gradient: linear-gradient(135deg, #F9E7BE 0%, #D4AF37 45%, #A87B1C 85%, #664B0B 100%);
+      --gold-foil-text: linear-gradient(110deg, #7A5612 0%, #B88B28 25%, #F7E5B4 50%, #B88B28 75%, #7A5612 100%);
       --champagne-bg: radial-gradient(circle at 50% 18%, #FFFDF9 0%, #F7EFE0 52%, #E6D4B5 100%);
       --cream-paper: #FFFDF9;
       --card-white: #FFFFFF;
@@ -106,7 +107,7 @@
 
     .floating-music-pill {
       pointer-events: auto;
-      background: rgba(255, 253, 249, 0.92);
+      background: rgba(255, 253, 249, 0.94);
       backdrop-filter: blur(10px);
       border: 1.5px solid var(--gold-primary);
       border-radius: 40px;
@@ -186,7 +187,7 @@
     }
 
     .btn-float-mini {
-      background: rgba(255, 253, 249, 0.92);
+      background: rgba(255, 253, 249, 0.94);
       backdrop-filter: blur(10px);
       border: 1.2px solid rgba(197, 160, 89, 0.55);
       color: var(--gold-dark);
@@ -261,13 +262,23 @@
       box-shadow: 0 6px 16px rgba(197, 160, 89, 0.18);
     }
 
+    /* تأثير ورق الذهب المتحرك على الأسماء */
     .envelope-title {
       font-family: 'Amiri', serif;
-      font-size: 2.85rem;
+      font-size: 2.95rem;
       font-weight: 700;
-      color: var(--gold-dark);
-      text-shadow: 0 4px 18px rgba(197, 160, 89, 0.35);
-      line-height: 1.25;
+      background: var(--gold-foil-text);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: goldFoilShine 5s linear infinite;
+      filter: drop-shadow(0 3px 10px rgba(197, 160, 89, 0.25));
+      line-height: 1.3;
+    }
+
+    @keyframes goldFoilShine {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
     }
 
     .envelope-sub {
@@ -624,6 +635,18 @@
     .card-inner-frame::before { top: 6px; right: 8px; }
     .card-inner-frame::after { bottom: 6px; left: 8px; }
 
+    /* حركات الظهور الانسيابي للأقسام عند التمرير */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .scroll-reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .bismillah {
       font-family: 'Amiri', serif;
       font-size: 1.65rem;
@@ -832,19 +855,23 @@
       margin: 6px 0 14px;
     }
 
+    /* تأثير ورق الذهب اللامع على أسماء العروسين داخل البطاقة */
     .names-display {
       font-family: 'Amiri', serif;
-      font-size: 3.35rem;
+      font-size: 3.4rem;
       font-weight: 700;
-      color: var(--gold-dark);
-      line-height: 1.2;
-      text-shadow: 0 4px 0 #EFE2C6, 0 8px 18px rgba(197, 160, 89, 0.3);
+      background: var(--gold-foil-text);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: goldFoilShine 5s linear infinite;
+      line-height: 1.25;
+      filter: drop-shadow(0 3px 0 #EFE2C6) drop-shadow(0 6px 14px rgba(197, 160, 89, 0.25));
     }
 
     .and-sym {
       font-family: 'Cairo', sans-serif;
       font-size: 1.9rem;
-      color: var(--text-muted);
       margin: 0 8px;
     }
 
@@ -909,6 +936,11 @@
       font-weight: 800;
       color: var(--text-dark);
       line-height: 1.15;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .count-number.tick-pulse {
+      transform: scale(1.14);
     }
 
     .count-title {
@@ -1609,9 +1641,9 @@
       <div class="gyro-gold-sheen" id="gyroGoldSheen"></div>
       <div class="card-inner-frame"></div>
 
-      <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+      <div class="bismillah scroll-reveal">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
 
-      <div class="quran-box">
+      <div class="quran-box scroll-reveal">
         <p class="quran-verse">
           ﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ ﴾
         </p>
@@ -1619,7 +1651,7 @@
       </div>
 
       <!-- إطار صورة العروسين ثلاثي الأبعاد -->
-      <div class="couple-frame-container" id="couple3DStage">
+      <div class="couple-frame-container scroll-reveal" id="couple3DStage">
         <div class="couple-photo-card" id="couple3DCard">
           <div class="couple-3d-halo"></div>
           <div class="couple-crown-top" title="زفاف مبارك">👑</div>
@@ -1644,7 +1676,7 @@
       </div>
 
       <!-- مجسم خاتمي الزفاف الذهبيين ثلاثي الأبعاد (3D Interlocking Rings) -->
-      <div class="rings-3d-showcase">
+      <div class="rings-3d-showcase scroll-reveal">
         <svg class="rings-3d-svg" viewBox="0 0 120 75" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="ring3DGold1" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -1668,18 +1700,18 @@
         </svg>
       </div>
 
-      <div class="wedding-title">يسعدنا ويشرفنا دعوتكم لحضور حفل زفاف</div>
+      <div class="wedding-title scroll-reveal">يسعدنا ويشرفنا دعوتكم لحضور حفل زفاف</div>
 
-      <div class="couple-title-area">
+      <div class="couple-title-area scroll-reveal">
         <h2 class="names-display">محمد <span class="and-sym">&</span> رغدة</h2>
       </div>
 
-      <p class="invitation-words">
+      <p class="invitation-words scroll-reveal">
         بقلوب تفيض فرحاً وسروراً، نتشرف بدعوتكم لمشاركتنا أجمل ليالي العمر وبداية رحلة حياتنا معاً، لتكتمل سعادتنا بتواجدكم العطر بيننا 🤍
       </p>
 
       <!-- العداد التنازلي 3D -->
-      <section class="countdown-section">
+      <section class="countdown-section scroll-reveal">
         <div class="countdown-header">
           <span>⏳</span>
           <span>الوقت المتبقي على ليلة الزفاف المنتظرة</span>
@@ -1705,7 +1737,7 @@
       </section>
 
       <!-- الخط الزمني المصغر لفقرات الليلة -->
-      <section class="timeline-section">
+      <section class="timeline-section scroll-reveal">
         <div class="timeline-header">
           <span>✨</span>
           <span>محطات ليلتنا السعيدة</span>
@@ -1729,7 +1761,7 @@
         </div>
       </section>
 
-      <section class="details-group">
+      <section class="details-group scroll-reveal">
         <div class="detail-card">
           <div class="detail-icon-wrap">🗓</div>
           <div class="detail-info">
@@ -1765,7 +1797,7 @@
       </section>
 
       <!-- قسم الرد على الدعوة والتهنئة المربوط برقم الواتساب مباشرة -->
-      <section class="rsvp-box">
+      <section class="rsvp-box scroll-reveal">
         <h3 class="rsvp-title">
           <span>💌</span>
           <span>تأكيد الحضور والتهنئة للعروسين</span>
@@ -1778,19 +1810,19 @@
         </div>
 
         <div class="rsvp-choices-grid">
-          <button type="button" class="btn-rsvp btn-rsvp-attend" onclick="sendWhatsAppRSVP('attend')">
+          <button type="button" class="btn-rsvp btn-rsvp-attend" onclick="sendWhatsAppRSVP('attend', event)">
             <span>🤍</span>
             <span>يسعدني ويشرفني الحضور ومشاركتكم الفرحة</span>
           </button>
 
-          <button type="button" class="btn-rsvp btn-rsvp-apologize" onclick="sendWhatsAppRSVP('apologize')">
+          <button type="button" class="btn-rsvp btn-rsvp-apologize" onclick="sendWhatsAppRSVP('apologize', event)">
             <span>🌸</span>
             <span>أعتذر لظروف خاصة مع خالص التهاني والدعوات</span>
           </button>
         </div>
       </section>
 
-      <section class="actions-stack">
+      <section class="actions-stack scroll-reveal">
         <a href="https://maps.app.goo.gl/geGT5azkam9drc3X9?g_st=ac" 
            target="_blank" 
            rel="noopener noreferrer" 
@@ -1815,7 +1847,7 @@
         </div>
       </section>
 
-      <div class="signature-card">
+      <div class="signature-card scroll-reveal">
         <div class="signature-heading">حضوركم يكتمل به سرورنا ويزيد ليلتنا بهجة ✨</div>
         <div class="signature-date">حفل زفاف محمد & رغدة | السبت 16 يناير 2027</div>
       </div>
@@ -1830,23 +1862,25 @@
   <script>
     const weddingAudio = document.getElementById('weddingAudio');
     let isPlaying = false;
+    let wasPlayingBeforeHide = false;
     let envelopeOpened = false;
+    let detectedStartOffset = 0;
     const GROOM_WHATSAPP_NUMBER = "201098303210";
     const BASE_INVITE_URL = "https://mohamednagm1998.github.io/Mohamed-Nagm/";
 
-    // 1. إلغاء أي Service Worker قديم كان يمنع ظهور تعديلات الصفحة الجديدة
+    // 1. تفعيل حفظ الدعوة الجديدة بالكامل وتحديثها تلقائياً
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then((registrations) => {
-        for (let registration of registrations) {
-          registration.unregister();
-        }
-      }).catch(() => {});
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').then((reg) => {
+          reg.update();
+        }).catch(() => {});
+      });
     }
 
-    // 2. حفظ الصوت والصورة فقط في قاعدة بيانات الموبايل (IndexedDB) للتشغيل الفوري بدون تأخير
+    // 2. حفظ الصوت والصورة في قاعدة بيانات الموبايل (IndexedDB) + تخطي الصمت في أول الأغنية
     function openOfflineDB() {
       return new Promise((resolve, reject) => {
-        const req = indexedDB.open('WeddingMediaStorageDB', 2);
+        const req = indexedDB.open('WeddingMediaStorageDB', 3);
         req.onupgradeneeded = (e) => {
           const db = e.target.result;
           if (!db.objectStoreNames.contains('media')) {
@@ -1858,7 +1892,32 @@
       });
     }
 
-    async function loadOrSaveOfflineMedia(key, url, mimeType) {
+    function detectLeadingSilence(arrayBuf) {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const tempCtx = new AudioCtx();
+        tempCtx.decodeAudioData(arrayBuf, (audioBuffer) => {
+          const channelData = audioBuffer.getChannelData(0);
+          const sampleRate = audioBuffer.sampleRate;
+          const maxScanSamples = Math.min(channelData.length, sampleRate * 8);
+          for (let i = 0; i < maxScanSamples; i += 100) {
+            if (Math.abs(channelData[i]) > 0.015) {
+              detectedStartOffset = Math.max(0, (i / sampleRate) - 0.05);
+              if (weddingAudio && weddingAudio.paused && weddingAudio.currentTime === 0) {
+                weddingAudio.currentTime = detectedStartOffset;
+              }
+              break;
+            }
+          }
+          tempCtx.close().catch(() => {});
+        }, () => {
+          tempCtx.close().catch(() => {});
+        });
+      } catch (e) {}
+    }
+
+    async function loadOrSaveOfflineMedia(key, url, mimeType, isAudio) {
       try {
         const db = await openOfflineDB();
         const cachedBlob = await new Promise((res) => {
@@ -1869,12 +1928,18 @@
         });
 
         if (cachedBlob && cachedBlob.size > 1000) {
+          if (isAudio) {
+            cachedBlob.arrayBuffer().then(buf => detectLeadingSilence(buf)).catch(() => {});
+          }
           return URL.createObjectURL(cachedBlob);
         }
 
         const netRes = await fetch(url, { cache: 'force-cache' });
         if (netRes.ok) {
           const arrBuf = await netRes.arrayBuffer();
+          if (isAudio) {
+            detectLeadingSilence(arrBuf.slice(0));
+          }
           const newBlob = new Blob([arrBuf], { type: mimeType });
           const tx = db.transaction('media', 'readwrite');
           tx.objectStore('media').put(newBlob, key);
@@ -1885,13 +1950,13 @@
     }
 
     (async function initOfflineAssets() {
-      const offlineAudioUrl = await loadOrSaveOfflineMedia('wedding_audio_v2', 'audio.mp3', 'audio/mpeg');
+      const offlineAudioUrl = await loadOrSaveOfflineMedia('wedding_audio_v3', 'audio.mp3', 'audio/mpeg', true);
       if (offlineAudioUrl && weddingAudio.paused) {
         weddingAudio.src = offlineAudioUrl;
         weddingAudio.load();
       }
 
-      const offlineImgUrl = await loadOrSaveOfflineMedia('wedding_couple_v2', 'couple.jpg', 'image/jpeg');
+      const offlineImgUrl = await loadOrSaveOfflineMedia('wedding_couple_v3', 'couple.jpg', 'image/jpeg', false);
       const imgEl = document.getElementById('couplePhotoImg');
       if (offlineImgUrl && imgEl) {
         imgEl.src = offlineImgUrl;
@@ -1908,10 +1973,34 @@
       updateAudioUI(false);
     });
 
+    weddingAudio.addEventListener('ended', () => {
+      weddingAudio.currentTime = detectedStartOffset;
+      weddingAudio.play().catch(() => {});
+    });
+
+    // إيقاف واستئناف ذكي للموسيقى عند الخروج لفتح الخريطة أو واتساب ثم العودة
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        if (weddingAudio && !weddingAudio.paused) {
+          wasPlayingBeforeHide = true;
+          weddingAudio.pause();
+        }
+      } else {
+        if (wasPlayingBeforeHide && envelopeOpened) {
+          wasPlayingBeforeHide = false;
+          playAudioInstant();
+        }
+      }
+    });
+
     function playAudioInstant() {
       if (!weddingAudio) return;
       weddingAudio.muted = false;
       weddingAudio.volume = 1.0;
+
+      if (weddingAudio.currentTime < detectedStartOffset && detectedStartOffset > 0) {
+        try { weddingAudio.currentTime = detectedStartOffset; } catch (e) {}
+      }
 
       const playPromise = weddingAudio.play();
       if (playPromise !== undefined) {
@@ -1923,6 +2012,7 @@
     }
 
     function pauseAudioDirectly() {
+      wasPlayingBeforeHide = false;
       if (weddingAudio) {
         weddingAudio.pause();
       }
@@ -1985,6 +2075,10 @@
       if (envelopeOpened) return;
       envelopeOpened = true;
 
+      if (navigator.vibrate) {
+        try { navigator.vibrate(35); } catch (e) {}
+      }
+
       const sealEl = document.getElementById('waxSealEl');
       if (sealEl) {
         const rect = sealEl.getBoundingClientRect();
@@ -2021,7 +2115,23 @@
       }
     }
 
-    // 4. تأثير الـ 3D ولمعة الذهب مع إمالة الموبايل (Gyroscope + Touch)
+    // 4. مراقب التمرير الانسيابي (IntersectionObserver Scroll Reveal)
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+          }
+        });
+      }, { threshold: 0.12 });
+
+      revealElements.forEach((el) => revealObserver.observe(el));
+    } else {
+      revealElements.forEach((el) => el.classList.add('in-view'));
+    }
+
+    // 5. تأثير الـ 3D ولمعة الذهب مع إمالة الموبايل (Gyroscope + Touch)
     const couple3DStage = document.getElementById('couple3DStage');
     const couple3DCard = document.getElementById('couple3DCard');
     const gyroGoldSheen = document.getElementById('gyroGoldSheen');
@@ -2071,8 +2181,13 @@
       }
     }, { passive: true });
 
-    // 5. إرسال رد الحضور أو الاعتذار لرقم 01098303210 على واتساب
-    function sendWhatsAppRSVP(status) {
+    // 6. إرسال رد الحضور أو الاعتذار لرقم 01098303210 على واتساب مع احتفالية ذرات الذهب
+    function sendWhatsAppRSVP(status, evt) {
+      if (evt && evt.currentTarget) {
+        const rect = evt.currentTarget.getBoundingClientRect();
+        triggerGoldenSparkleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+      }
+
       const guestName = document.getElementById('guestNameInput').value.trim();
       const guestWish = document.getElementById('guestWishInput').value.trim();
 
@@ -2099,7 +2214,9 @@
       }
 
       const encodedMsg = encodeURIComponent(message);
-      window.open(`https://wa.me/${GROOM_WHATSAPP_NUMBER}?text=${encodedMsg}`, '_blank');
+      setTimeout(() => {
+        window.open(`https://wa.me/${GROOM_WHATSAPP_NUMBER}?text=${encodedMsg}`, '_blank');
+      }, 280);
     }
 
     const weddingTargetDate = new Date("2027-01-16T19:00:00+02:00").getTime();
@@ -2117,7 +2234,13 @@
         document.getElementById('c-days').innerText = String(days).padStart(2, '0');
         document.getElementById('c-hours').innerText = String(hours).padStart(2, '0');
         document.getElementById('c-mins').innerText = String(mins).padStart(2, '0');
-        document.getElementById('c-secs').innerText = String(secs).padStart(2, '0');
+
+        const secsEl = document.getElementById('c-secs');
+        if (secsEl) {
+          secsEl.innerText = String(secs).padStart(2, '0');
+          secsEl.classList.add('tick-pulse');
+          setTimeout(() => secsEl.classList.remove('tick-pulse'), 180);
+        }
       } else {
         const countdownEl = document.querySelector('.countdown-section');
         if (countdownEl) {
@@ -2133,7 +2256,7 @@
     setInterval(updateWeddingCountdown, 1000);
     updateWeddingCountdown();
 
-    // 6. رسم البتلات الرقيقة + ذرات الذهب المتناثرة (Canvas 60fps)
+    // 7. رسم البتلات الرقيقة + ذرات الذهب المتناثرة (Canvas 60fps)
     const canvas = document.getElementById('petals-canvas');
     const ctx = canvas.getContext('2d');
     let canvasWidth = canvas.width = window.innerWidth;
