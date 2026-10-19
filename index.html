@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>دعوة زفاف محمد & رغدة الملكية</title>
+  <title>دعوة زفاف محمد & رغدة</title>
 
   <!-- إعدادات معاينة الرابط على واتساب ومنصات التواصل (Open Graph) -->
   <meta property="og:title" content="دعوة زفاف محمد & رغدة 💍✨">
@@ -88,9 +88,9 @@
     }
 
     /* ========================================================
-       الشريط الملكي العائم (الأيقونة الذهبية للصوت والأدوات)
+       الشريط العائم (الأيقونة الذهبية للصوت والأدوات)
        ======================================================== */
-    .floating-royal-bar {
+    .floating-top-bar {
       position: fixed;
       top: 14px;
       left: 50%;
@@ -206,7 +206,7 @@
     }
 
     /* ========================================================
-       شاشة المظروف الافتتاحية الملكية الفاتحة
+       شاشة المظروف الافتتاحية الفاتحة
        ======================================================== */
     #envelope-screen {
       position: fixed;
@@ -246,7 +246,7 @@
       50% { transform: translateY(-5px); }
     }
 
-    .badge-royal {
+    .badge-invite {
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -259,26 +259,6 @@
       font-weight: 700;
       margin-bottom: 8px;
       box-shadow: 0 6px 16px rgba(197, 160, 89, 0.18);
-    }
-
-    /* شارة الضيف المخصص VIP */
-    .vip-guest-banner {
-      display: none;
-      margin: 6px auto 10px;
-      background: linear-gradient(135deg, #FFFDF8 0%, #FAF0D7 100%);
-      border: 1.8px solid var(--gold-primary);
-      color: var(--gold-dark);
-      padding: 6px 20px;
-      border-radius: 30px;
-      font-size: 0.92rem;
-      font-weight: 800;
-      box-shadow: 0 6px 18px rgba(142, 104, 35, 0.2), 0 2px 0 #C5A059;
-    }
-
-    .vip-guest-banner.visible {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
     }
 
     .envelope-title {
@@ -583,7 +563,7 @@
     }
 
     /* ========================================================
-       بطاقة الدعوة الملكية مع لمعة الذهب المتحركة
+       بطاقة الدعوة الرئيسية مع لمعة الذهب المتحركة
        ======================================================== */
     .card-container {
       width: 100%;
@@ -609,7 +589,6 @@
       transition: transform 0.25s ease-out;
     }
 
-    /* لمعة إضاءة الذهب التي تتحرك مع إمالة الموبايل */
     .gyro-gold-sheen {
       position: absolute;
       inset: 0;
@@ -940,9 +919,9 @@
     }
 
     /* ========================================================
-       الخط الزمني المصغر لفقرات الليلة الملكية (Wedding Timeline)
+       الخط الزمني المصغر لفقرات الليلة (Wedding Timeline)
        ======================================================== */
-    .timeline-royal-section {
+    .timeline-section {
       background: linear-gradient(145deg, #FFFFFF 0%, #FDFBF5 100%);
       border: 1.5px solid rgba(197, 160, 89, 0.45);
       border-radius: 22px;
@@ -1124,8 +1103,8 @@
       50% { transform: translateY(-4px); }
     }
 
-    /* قسم الرد على الدعوة الملكي 3D (تأكيد الحضور / الاعتذار) */
-    .rsvp-royal-box {
+    /* قسم الرد على الدعوة 3D (تأكيد الحضور / الاعتذار) */
+    .rsvp-box {
       background: linear-gradient(145deg, #FFFFFF 0%, #FDFBF5 100%);
       border: 1.8px solid rgba(197, 160, 89, 0.55);
       border-radius: 20px;
@@ -1136,7 +1115,7 @@
       overflow: hidden;
     }
 
-    .rsvp-royal-box::before {
+    .rsvp-box::before {
       content: "";
       position: absolute;
       top: 0;
@@ -1293,21 +1272,19 @@
 
     .utility-btns-row {
       display: flex;
-      flex-wrap: wrap;
       gap: 10px;
       margin-top: 4px;
     }
 
     .btn-mini-util {
       flex: 1;
-      min-width: 130px;
       background: #FFFFFF;
       border: 1px solid rgba(197, 160, 89, 0.35);
       color: var(--gold-dark);
       padding: 10px;
       border-radius: 12px;
       font-family: 'Cairo', sans-serif;
-      font-size: 0.84rem;
+      font-size: 0.85rem;
       font-weight: 700;
       cursor: pointer;
       display: flex;
@@ -1322,34 +1299,6 @@
       background: #FDF9EE;
       border-color: var(--gold-primary);
       transform: translateY(-2px);
-    }
-
-    /* نافذة تخصيص الدعوة باسم ضيف (VIP Generator Modal) */
-    .vip-modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(24, 18, 10, 0.6);
-      backdrop-filter: blur(6px);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 10005;
-      padding: 16px;
-    }
-
-    .vip-modal-backdrop.open {
-      display: flex;
-    }
-
-    .vip-modal-card {
-      background: #FFFDF9;
-      border: 2px solid var(--gold-primary);
-      border-radius: 24px;
-      padding: 24px 18px;
-      width: 100%;
-      max-width: 400px;
-      text-align: center;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.35), 0 4px 0 #8E6823;
     }
 
     .signature-card {
@@ -1411,11 +1360,11 @@
   <audio id="weddingAudio" src="audio.mp3" preload="auto" loop playsinline></audio>
 
   <!-- الأيقونة الذهبية العائمة للصوت والأدوات السريعة -->
-  <header class="floating-royal-bar">
+  <header class="floating-top-bar">
     <div class="floating-music-pill" onclick="toggleAudioPlayback()" title="تشغيل / إيقاف الموسيقى">
       <div class="floating-disc" id="discIcon">🎵</div>
       <div class="floating-music-text">
-        <span id="audioBtnLabel">الزفة الملكية</span>
+        <span id="audioBtnLabel">موسيقى الزفاف</span>
         <span class="sound-equalizer" id="equalizerVisual">
           <span class="eq-bar"></span>
           <span class="eq-bar"></span>
@@ -1430,13 +1379,10 @@
     </div>
   </header>
 
-  <!-- شاشة المظروف الافتتاحية الملكية الفاتحة -->
+  <!-- شاشة المظروف الافتتاحية الفاتحة -->
   <div id="envelope-screen">
     <div class="envelope-header">
-      <div class="badge-royal">✨ دعوة زفاف ملكية خاصة ✨</div>
-      <div>
-        <div id="vipEnvelopeBadge" class="vip-guest-banner"></div>
-      </div>
+      <div class="badge-invite">✨ دعوة زفاف خاصة ✨</div>
       <h1 class="envelope-title">محمد & رغدة</h1>
       <p class="envelope-sub">المس الختم الشمعي لفتح المظروف والاستماع للزفة 🎵💌</p>
     </div>
@@ -1625,7 +1571,7 @@
         </svg>
       </div>
 
-      <!-- مجسم المظروف الملكي -->
+      <!-- مجسم المظروف -->
       <div class="envelope-box" id="envelopeBox" onclick="openEnvelopeAndPlay(event)">
         <div class="envelope-shell">
           <div class="envelope-fold-left"></div>
@@ -1657,14 +1603,11 @@
     </button>
   </div>
 
-  <!-- بطاقة الدعوة الملكية الرئيسية -->
+  <!-- بطاقة الدعوة الرئيسية -->
   <main class="card-container">
     <article class="wedding-card" id="mainWeddingCard">
       <div class="gyro-gold-sheen" id="gyroGoldSheen"></div>
       <div class="card-inner-frame"></div>
-
-      <!-- شارة الترحيب بالضيف المخصص داخل البطاقة -->
-      <div id="vipCardBadge" class="vip-guest-banner" style="margin-bottom: 14px;"></div>
 
       <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
 
@@ -1761,11 +1704,11 @@
         </div>
       </section>
 
-      <!-- الخط الزمني المصغر لفقرات الليلة الملكية -->
-      <section class="timeline-royal-section">
+      <!-- الخط الزمني المصغر لفقرات الليلة -->
+      <section class="timeline-section">
         <div class="timeline-header">
           <span>✨</span>
-          <span>محطات ليلتنا الملكية السعيدة</span>
+          <span>محطات ليلتنا السعيدة</span>
         </div>
         <div class="timeline-grid">
           <div class="timeline-step">
@@ -1774,9 +1717,9 @@
             <div class="timeline-title">استقبال الأحباب والترحيب</div>
           </div>
           <div class="timeline-step">
-            <div class="timeline-icon">👑</div>
+            <div class="timeline-icon">💍</div>
             <div class="timeline-time">08:00 م</div>
-            <div class="timeline-title">الزفة الملكية وبداية الفرحة</div>
+            <div class="timeline-title">الزفة وبداية الفرحة</div>
           </div>
           <div class="timeline-step">
             <div class="timeline-icon">🎉</div>
@@ -1822,7 +1765,7 @@
       </section>
 
       <!-- قسم الرد على الدعوة والتهنئة المربوط برقم الواتساب مباشرة -->
-      <section class="rsvp-royal-box">
+      <section class="rsvp-box">
         <h3 class="rsvp-title">
           <span>💌</span>
           <span>تأكيد الحضور والتهنئة للعروسين</span>
@@ -1869,9 +1812,6 @@
           <button type="button" class="btn-mini-util" onclick="shareInviteWhatsApp()">
             <span>📲 مشاركة الدعوة</span>
           </button>
-          <button type="button" class="btn-mini-util" onclick="openVipGeneratorModal()">
-            <span>🏷️ تخصيص الدعوة باسم ضيف</span>
-          </button>
         </div>
       </section>
 
@@ -1881,26 +1821,6 @@
       </div>
     </article>
   </main>
-
-  <!-- نافذة إنشاء دعوة مخصصة باسم ضيف VIP -->
-  <div class="vip-modal-backdrop" id="vipModalBackdrop" onclick="if(event.target===this) closeVipGeneratorModal()">
-    <div class="vip-modal-card">
-      <h3 style="font-family:'Amiri',serif; font-size:1.45rem; color:var(--gold-dark); margin-bottom:6px;">👑 تخصيص الدعوة باسم ضيف</h3>
-      <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:14px;">اكتب اسم الضيف ليظهر اسمه بشكل ملكي على الظرف الخارجي وداخل الدعوة:</p>
-      <input type="text" id="vipCustomNameInput" class="rsvp-input" placeholder="مثال: أ/ أحمد وعائلته الكريمة" style="margin-bottom:12px;">
-      <div style="display:flex; flex-direction:column; gap:8px;">
-        <button type="button" class="btn-rsvp btn-rsvp-attend" onclick="shareCustomVipWhatsApp()">
-          <span>📲 إرسال الدعوة المخصصة عبر واتساب</span>
-        </button>
-        <button type="button" class="btn-rsvp btn-rsvp-apologize" onclick="copyCustomVipLink()">
-          <span>📋 نسخ الرابط المخصص للضيف</span>
-        </button>
-        <button type="button" class="btn-mini-util" onclick="closeVipGeneratorModal()" style="margin-top:4px;">
-          <span>إغلاق</span>
-        </button>
-      </div>
-    </div>
-  </div>
 
   <div id="toast-msg">
     <span>🌸</span>
@@ -1914,92 +1834,19 @@
     const GROOM_WHATSAPP_NUMBER = "201098303210";
     const BASE_INVITE_URL = "https://mohamednagm1998.github.io/Mohamed-Nagm/";
 
-    // ====================================================================
-    // 1. قراءة اسم الضيف VIP من الرابط (?to=... أو ?guest=...)
-    // ====================================================================
-    function checkVipGuestFromUrl() {
-      try {
-        const params = new URLSearchParams(window.location.search);
-        const guestParam = params.get('to') || params.get('guest') || params.get('name');
-        if (guestParam && guestParam.trim() !== '') {
-          const cleanName = guestParam.replace(/_/g, ' ').trim();
-          const envBadge = document.getElementById('vipEnvelopeBadge');
-          const cardBadge = document.getElementById('vipCardBadge');
-          const rsvpInput = document.getElementById('guestNameInput');
-
-          if (envBadge) {
-            envBadge.innerHTML = `<span>👑 دعوة خاصة إلى:</span> <span>${cleanName}</span>`;
-            envBadge.classList.add('visible');
-          }
-          if (cardBadge) {
-            cardBadge.innerHTML = `<span>👑 أهلاً وسهلاً:</span> <span>${cleanName}</span>`;
-            cardBadge.classList.add('visible');
-          }
-          if (rsvpInput && !rsvpInput.value) {
-            rsvpInput.value = cleanName;
-          }
-        }
-      } catch (e) {}
-    }
-    checkVipGuestFromUrl();
-
-    function openVipGeneratorModal() {
-      document.getElementById('vipModalBackdrop').classList.add('open');
-      document.getElementById('vipCustomNameInput').focus();
-    }
-
-    function closeVipGeneratorModal() {
-      document.getElementById('vipModalBackdrop').classList.remove('open');
-    }
-
-    function buildVipLink(guestName) {
-      return `${BASE_INVITE_URL}?to=${encodeURIComponent(guestName.trim())}`;
-    }
-
-    function copyCustomVipLink() {
-      const nameVal = document.getElementById('vipCustomNameInput').value.trim();
-      if (!nameVal) {
-        showToast('يرجى كتابة اسم الضيف أولاً ✍️');
-        return;
-      }
-      const link = buildVipLink(nameVal);
-      copyTextToClipboard(link, `تم نسخ رابط الدعوة الخاص بـ (${nameVal}) 📋`);
-      closeVipGeneratorModal();
-    }
-
-    function shareCustomVipWhatsApp() {
-      const nameVal = document.getElementById('vipCustomNameInput').value.trim();
-      if (!nameVal) {
-        showToast('يرجى كتابة اسم الضيف أولاً ✍️');
-        return;
-      }
-      const link = buildVipLink(nameVal);
-      const msg = encodeURIComponent(
-        `﷽\n` +
-        `👑 *دعوة خاصة إلى: ${nameVal}*\n\n` +
-        `يسعدنا ويشرفنا دعوتكم لحضور حفل زفاف:\n` +
-        `🤵‍♂️ *محمد* & 👰‍♀️ *رغدة*\n\n` +
-        `🗓 *الموعد:* السبت 16 يناير 2027 - الساعة 07:00 مساءً\n` +
-        `📍 *المكان:* قاعة قصر الشوق - دار الأسلحة والذخيرة\n\n` +
-        `💌 *افتح دعوتك الخاصة من هنا:*\n` + link + `\n\n` +
-        `حضوركم يكتمل به سرورنا 🤍✨`
-      );
-      closeVipGeneratorModal();
-      window.open(`https://api.whatsapp.com/send?text=${msg}`, '_blank');
-    }
-
-    // ====================================================================
-    // 2. تسجيل الـ Service Worker و IndexedDB للعمل بدون إنترنت وبسرعة فورية
-    // ====================================================================
+    // 1. إلغاء أي Service Worker قديم كان يمنع ظهور تعديلات الصفحة الجديدة
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch(() => {});
-      });
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      }).catch(() => {});
     }
 
+    // 2. حفظ الصوت والصورة فقط في قاعدة بيانات الموبايل (IndexedDB) للتشغيل الفوري بدون تأخير
     function openOfflineDB() {
       return new Promise((resolve, reject) => {
-        const req = indexedDB.open('WeddingOfflineStorageDB', 1);
+        const req = indexedDB.open('WeddingMediaStorageDB', 2);
         req.onupgradeneeded = (e) => {
           const db = e.target.result;
           if (!db.objectStoreNames.contains('media')) {
@@ -2038,13 +1885,13 @@
     }
 
     (async function initOfflineAssets() {
-      const offlineAudioUrl = await loadOrSaveOfflineMedia('wedding_audio_v1', 'audio.mp3', 'audio/mpeg');
+      const offlineAudioUrl = await loadOrSaveOfflineMedia('wedding_audio_v2', 'audio.mp3', 'audio/mpeg');
       if (offlineAudioUrl && weddingAudio.paused) {
         weddingAudio.src = offlineAudioUrl;
         weddingAudio.load();
       }
 
-      const offlineImgUrl = await loadOrSaveOfflineMedia('wedding_couple_v1', 'couple.jpg', 'image/jpeg');
+      const offlineImgUrl = await loadOrSaveOfflineMedia('wedding_couple_v2', 'couple.jpg', 'image/jpeg');
       const imgEl = document.getElementById('couplePhotoImg');
       if (offlineImgUrl && imgEl) {
         imgEl.src = offlineImgUrl;
@@ -2089,7 +1936,7 @@
         showToast('تم إيقاف الصوت مؤقتاً 🔇');
       } else {
         playAudioInstant();
-        showToast('جاري تشغيل الزفة الملكية 🎵');
+        showToast('جاري تشغيل الموسيقى 🎵');
       }
     }
 
@@ -2105,13 +1952,11 @@
       } else {
         discIcon.classList.remove('playing');
         eqVisual.classList.remove('playing');
-        btnLabel.innerText = 'تشغيل الزفة';
+        btnLabel.innerText = 'تشغيل الموسيقى';
       }
     }
 
-    // ====================================================================
-    // 3. فتح المظروف مع تناثر غبار الذهب الملكي (Golden Sparkle Burst)
-    // ====================================================================
+    // 3. فتح المظروف مع تناثر غبار الذهب (Golden Sparkle Burst)
     let sparklesList = [];
 
     function triggerGoldenSparkleBurst(originX, originY) {
@@ -2140,7 +1985,6 @@
       if (envelopeOpened) return;
       envelopeOpened = true;
 
-      // حساب مركز الختم الشمعي لتفجير غبار الذهب منه
       const sealEl = document.getElementById('waxSealEl');
       if (sealEl) {
         const rect = sealEl.getBoundingClientRect();
@@ -2177,9 +2021,7 @@
       }
     }
 
-    // ====================================================================
     // 4. تأثير الـ 3D ولمعة الذهب مع إمالة الموبايل (Gyroscope + Touch)
-    // ====================================================================
     const couple3DStage = document.getElementById('couple3DStage');
     const couple3DCard = document.getElementById('couple3DCard');
     const gyroGoldSheen = document.getElementById('gyroGoldSheen');
@@ -2215,7 +2057,6 @@
       couple3DStage.addEventListener('touchend', reset3DMove);
     }
 
-    // استجابة تلقائية لإمالة الهاتف (Gyroscope)
     window.addEventListener('deviceorientation', (e) => {
       if (!e.gamma || !e.beta) return;
       const rotY = Math.max(-10, Math.min(10, e.gamma * 0.35));
@@ -2230,9 +2071,7 @@
       }
     }, { passive: true });
 
-    // ====================================================================
     // 5. إرسال رد الحضور أو الاعتذار لرقم 01098303210 على واتساب
-    // ====================================================================
     function sendWhatsAppRSVP(status) {
       const guestName = document.getElementById('guestNameInput').value.trim();
       const guestWish = document.getElementById('guestWishInput').value.trim();
@@ -2294,9 +2133,7 @@
     setInterval(updateWeddingCountdown, 1000);
     updateWeddingCountdown();
 
-    // ====================================================================
     // 6. رسم البتلات الرقيقة + ذرات الذهب المتناثرة (Canvas 60fps)
-    // ====================================================================
     const canvas = document.getElementById('petals-canvas');
     const ctx = canvas.getContext('2d');
     let canvasWidth = canvas.width = window.innerWidth;
@@ -2403,12 +2240,11 @@
         }
       }
 
-      // رسم ذرات الذهب المتناثرة عند فتح الختم الشمعي
       for (let i = sparklesList.length - 1; i >= 0; i--) {
         const sp = sparklesList[i];
         sp.x += sp.vx;
         sp.y += sp.vy;
-        sp.vy += 0.08; // جاذبية ناعمة
+        sp.vy += 0.08;
         sp.alpha -= sp.decay;
 
         if (sp.alpha <= 0) {
