@@ -865,10 +865,11 @@
     }
 
     .ride-apps-sub {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--text-muted);
       font-weight: 600;
       margin-bottom: 14px;
+      line-height: 1.5;
     }
 
     .ride-apps-grid {
@@ -1580,7 +1581,9 @@
           <span>🚕</span>
           <span>الوصول للقاعة عبر تطبيقات التوصيل</span>
         </h3>
-        <p class="ride-apps-sub">اضغط لفتح التطبيق وتحديد موقع القاعة (مع نسخ العنوان تلقائياً في الحافظة)</p>
+        <p class="ride-apps-sub">
+          أوبر يحدد موقع القاعة تلقائياً، وعند الضغط على (إن درايف / دي دي / كريم) يُنسخ اسم القاعة تلقائياً ويفتح التطبيق لتلصقه بضغطة واحدة
+        </p>
 
         <div class="ride-apps-grid">
           <!-- 1. تطبيق أوبر مع رمي اللوكيشن تلقائياً -->
@@ -1589,7 +1592,7 @@
             <span>تطبيق أوبر</span>
           </button>
 
-          <!-- 2. تطبيق كريم مع رمي اللوكيشن تلقائياً -->
+          <!-- 2. تطبيق كريم -->
           <button type="button" class="btn-ride-app btn-careem" onclick="openRideApp('careem')">
             <span class="ride-badge-pill" style="background:#FFF; color:#00B956;">Careem</span>
             <span>تطبيق كريم</span>
@@ -1609,7 +1612,7 @@
         </div>
 
         <button type="button" class="btn-copy-address-bar" onclick="copyVenueAddressForRide()">
-          <span>📋 نسخ اسم القاعة: (قاعة قصر الشوق - دار الأسلحة والذخيرة)</span>
+          <span>📋 نسخ اسم القاعة: (دار الأسلحة والذخيرة - قاعة قصر الشوق)</span>
         </button>
       </section>
 
@@ -1647,7 +1650,7 @@
           <span>🗺️ الانتقال لموقع القاعة (Google Maps)</span>
         </a>
 
-        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%D8%AD%D9%81%D9%84+%D8%B2%D9%81%D8%A7%D9%81+%D9%85%D8%AD%D9%85%D8%AF+%D9%88%D8%B1%D8%BA%D8%AF%D8%A9+%F0%9F%92%8D&dates=20270116T170000Z/20270116T220000Z&details=%D9%86%D8%AA%D8%B4%D8%B1%D9%81+%D8%A8%D8%AD%D8%B6%D9%88%D8%B1%D9%83%D9%85+%D8%AD%D9%81%D9%84+%D8%B2%D9%81%D8%A7%D9%81%D9%86%D8%A7+%D9%81%D9%8A+%D9%82%D8%A7%D8%B9%D8%A9+%D8%A7%D9%84%D8%B4%D9%88%D9%82+-+%D8%AF%D8%A7%D8%B1+%D8%A7%D9%84%D8%A3%D8%B3%D9%84%D8%AD%D8%A9+%D9%88%D8%A7%D9%84%D8%B0%D8%AE%D9%8A%D8%B1%D8%A9&location=https%3A%2F%2Fmaps.app.goo.gl%2FgeGT5azkam9drc3X9%3Fg_st%3Dac" 
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%D8%AD%D9%81%D9%84+%D8%B2%D9%81%D8%A7%D9%81+%D9%85%D8%AD%D9%85%D8%AF+%D9%88%D8%B1%D8%BA%D8%AF%D8%A9+%F0%9F%92%8D&dates=20270116T170000Z/20270116T220000Z&details=%D9%86%D8%AA%D8%B4%D8%B1%D9%81+%D8%A8%D8%AD%D8%B6%D9%88%D8%B1%D9%83%D9%85+%D8%AD%D9%81%D9%84+%D8%B2%D9%81%D8%A7%D9%81%D9%86%D8%A7+%D9%81%D9%8A+%D9%82%D8%A7%D8%B9%D8%A9+%D8%A7%D9%84%D8%B4%D9%88%D9%82+-+%D8%AF%D8%A7%D8%B1+%D8%A7%D9%84%D8%A3%D8%B3%D9%84%D8%AD%D8%A9+%D9%88%D8%A7%D9%84%D8%B0%D8%AE%D9%8A%D8%B1%D8%A9&location=https%3A%2F%2Fmaps.app.goo.gl%2FgeGT5azkam9drc3X9%3Fg_st=ac" 
            target="_blank" 
            rel="noopener noreferrer" 
            class="btn-wedding btn-wedding-cal">
@@ -1690,15 +1693,15 @@
     const VENUE_LAT = 30.0755;
     const VENUE_LNG = 31.3088;
     const VENUE_NAME = "قاعة قصر الشوق - دار الأسلحة والذخيرة";
-    const VENUE_FULL_ADDRESS = "دار الأسلحة والذخيرة، قاعة قصر الشوق، طريق صلاح سالم أمام مسجد الرحمن الرحيم، القاهرة";
+    const VENUE_SHORT_COPY = "دار الأسلحة والذخيرة قاعة قصر الشوق صلاح سالم";
 
-    // 1. تفعيل الـ Service Worker المحدث
+    // 1. إلغاء أي Service Worker قديم عالق لضمان ظهور التعديلات فوراً
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').then((reg) => {
-          reg.update();
-        }).catch(() => {});
-      });
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      }).catch(() => {});
     }
 
     // 2. حفظ الصوت والصورة في قاعدة بيانات الموبايل (IndexedDB) + تخطي الصمت في أول الأغنية
@@ -1870,10 +1873,28 @@
     }
 
     // ====================================================================
-    // 3. فتح تطبيقات التوصيل مع تمرير إحداثيات القاعة تلقائياً + نسخ العنوان
+    // 3. نسخ فوري متزامن + فتح تطبيقات التوصيل مباشرة على الهاتف
     // ====================================================================
+    function syncCopyNow(text) {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-9999px';
+      textArea.style.top = '0';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(textArea);
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).catch(() => {});
+      }
+    }
+
     function copyVenueAddressForRide() {
-      copyTextToClipboard(VENUE_FULL_ADDRESS, 'تم نسخ عنوان القاعة! الصقه في تطبيق التوصيل 🚕');
+      syncCopyNow(VENUE_SHORT_COPY);
+      showToast('تم نسخ اسم القاعة! الصقه في خانة الوجهة بالتطبيق 🚕');
     }
 
     function launchNativeApp(androidIntentUrl, iosSchemeUrl, storeFallbackUrl) {
@@ -1897,47 +1918,59 @@
     }
 
     function openRideApp(appType) {
-      // نسخ اسم وعنوان القاعة تلقائياً في الحافظة كضمان إضافي للضيف
-      copyTextToClipboard(VENUE_FULL_ADDRESS, 'تم تحديد ونسخ موقع القاعة وجاري فتح التطبيق 🚕');
+      // 1. نسخ اسم القاعة بشكل متزامن وفوري في كيبورد الموبايل قبل فتح التطبيق
+      syncCopyNow(VENUE_SHORT_COPY);
 
       const encName = encodeURIComponent(VENUE_NAME);
-      const encAddr = encodeURIComponent(VENUE_FULL_ADDRESS);
+      const encAddr = encodeURIComponent(VENUE_SHORT_COPY);
 
       if (appType === 'uber') {
-        // رابط أوبر الرسمي المرمّز لرمي الدبوس تلقائياً على قاعة قصر الشوق
-        const uberParams = `action=setPickup&pickup=my_location&dropoff%5Blatitude%5D=${VENUE_LAT}&dropoff%5Blongitude%5D=${VENUE_LNG}&dropoff%5Bnickname%5D=${encName}&dropoff%5Bformatted_address%5D=${encAddr}`;
-        const uberUniversal = `https://m.uber.com/ul/?${uberParams}`;
-        const uberAndroidIntent = `intent://riderequest?${uberParams}#Intent;scheme=uber;package=com.ubercab;S.browser_fallback_url=${encodeURIComponent(uberUniversal)};end`;
-        const uberIosScheme = `uber://?${uberParams}`;
-        launchNativeApp(uberAndroidIntent, uberIosScheme, uberUniversal);
+        showToast('جاري فتح أوبر وتحديد موقع قاعة قصر الشوق تلقائياً 🚕');
+        // بروتوكول أوبر الرسمي المباشر الذي يرمي اللوكيشن تلقائياً داخل التطبيق
+        const uberQuery = `?action=setPickup&pickup=my_location&dropoff[latitude]=${VENUE_LAT}&dropoff[longitude]=${VENUE_LNG}&dropoff[nickname]=${encName}&dropoff[formatted_address]=${encAddr}`;
+        const uberUniversal = `https://m.uber.com/ul/${uberQuery}`;
+        const uberDirectScheme = `uber://${uberQuery}`;
+
+        setTimeout(() => {
+          const start = Date.now();
+          window.location.href = uberDirectScheme;
+          setTimeout(() => {
+            if (!document.hidden && (Date.now() - start < 2200)) {
+              window.location.href = uberUniversal;
+            }
+          }, 1400);
+        }, 120);
       }
       else if (appType === 'careem') {
-        // رابط كريم مع تمرير إحداثيات نقطة الوصول
-        const careemParams = `pickup=my_location&dropoff%5Blatitude%5D=${VENUE_LAT}&dropoff%5Blongitude%5D=${VENUE_LNG}&dropoff%5Bnickname%5D=${encName}&dropoff_lat=${VENUE_LAT}&dropoff_lng=${VENUE_LNG}&dropoff_name=${encName}`;
+        showToast('تم نسخ اسم القاعة! اضغط "لصق" في خانة الوجهة داخل كريم 🚕');
         const careemFallback = 'https://play.google.com/store/apps/details?id=com.careem.acma';
         const careemIosStore = 'https://apps.apple.com/eg/app/careem-rides-food-more/id592978487';
-        const careemAndroidIntent = `intent://booking?${careemParams}#Intent;scheme=careem;package=com.careem.acma;S.browser_fallback_url=${encodeURIComponent(careemFallback)};end`;
-        launchNativeApp(careemAndroidIntent, `careem://booking?${careemParams}`, careemIosStore);
+        const careemAndroidIntent = `intent://open#Intent;scheme=careem;package=com.careem.acma;S.browser_fallback_url=${encodeURIComponent(careemFallback)};end`;
+        setTimeout(() => {
+          launchNativeApp(careemAndroidIntent, 'careem://', careemIosStore);
+        }, 180);
       }
       else if (appType === 'indrive') {
-        // رابط إن درايف مع تمرير إحداثيات الوجهة + النسخ التلقائي للحافظة
-        const indriveParams = `pickup=my_location&to_lat=${VENUE_LAT}&to_lng=${VENUE_LNG}&to_name=${encName}&dropoff_lat=${VENUE_LAT}&dropoff_lng=${VENUE_LNG}&destination=${encName}&q=${encName}`;
+        showToast('تم نسخ اسم القاعة! اضغط "لصق" في خانة الوجهة داخل إن درايف 🚕');
         const indriveFallback = 'https://play.google.com/store/apps/details?id=sinet.startup.inDriver';
         const indriveIosStore = 'https://apps.apple.com/eg/app/indrive-save-on-city-rides/id780125801';
-        const indriveAndroidIntent = `intent://ride?${indriveParams}#Intent;scheme=indriver;package=sinet.startup.inDriver;S.browser_fallback_url=${encodeURIComponent(indriveFallback)};end`;
-        launchNativeApp(indriveAndroidIntent, `indriver://ride?${indriveParams}`, indriveIosStore);
+        const indriveAndroidIntent = `intent://open#Intent;scheme=indriver;package=sinet.startup.inDriver;S.browser_fallback_url=${encodeURIComponent(indriveFallback)};end`;
+        setTimeout(() => {
+          launchNativeApp(indriveAndroidIntent, 'indriver://', indriveIosStore);
+        }, 180);
       }
       else if (appType === 'didi') {
-        // رابط دي دي مع تمرير إحداثيات الوجهة + النسخ التلقائي للحافظة
-        const didiParams = `to_lat=${VENUE_LAT}&to_lng=${VENUE_LNG}&to_name=${encName}&to_address=${encAddr}&dlat=${VENUE_LAT}&dlng=${VENUE_LNG}&dname=${encName}&dropoff_latitude=${VENUE_LAT}&dropoff_longitude=${VENUE_LNG}`;
+        showToast('تم نسخ اسم القاعة! اضغط "لصق" في خانة الوجهة داخل دي دي 🚕');
         const didiFallback = 'https://play.google.com/store/apps/details?id=com.didiglobal.passenger';
         const didiIosStore = 'https://apps.apple.com/eg/app/didi-rider-affordable-rides/id1362398401';
-        const didiAndroidIntent = `intent://ride?${didiParams}#Intent;scheme=didipasnger;package=com.didiglobal.passenger;S.browser_fallback_url=${encodeURIComponent(didiFallback)};end`;
-        launchNativeApp(didiAndroidIntent, `didipasnger://ride?${didiParams}`, didiIosStore);
+        const didiAndroidIntent = `intent://open#Intent;scheme=didipasnger;package=com.didiglobal.passenger;S.browser_fallback_url=${encodeURIComponent(didiFallback)};end`;
+        setTimeout(() => {
+          launchNativeApp(didiAndroidIntent, 'didipasnger://', didiIosStore);
+        }, 180);
       }
     }
 
-    // 4. فتح المظروف مع تناثر غبار الذهب الخفيف (خالي من اللاج)
+    // 4. فتح المظروف مع تناثر غبار الذهب الخفيف
     let sparklesList = [];
 
     function triggerGoldenSparkleBurst(originX, originY) {
@@ -2262,26 +2295,9 @@
       }, 2800);
     }
 
-    function copyTextToClipboard(text, successMsg) {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(() => {
-          showToast(successMsg);
-        }).catch(() => {});
-        return;
-      }
-      const dummyInput = document.createElement('input');
-      dummyInput.value = text;
-      document.body.appendChild(dummyInput);
-      dummyInput.select();
-      try {
-        document.execCommand('copy');
-        showToast(successMsg);
-      } catch (e) {}
-      document.body.removeChild(dummyInput);
-    }
-
     function copyInviteLink() {
-      copyTextToClipboard(BASE_INVITE_URL, 'تم نسخ رابط الدعوة بنجاح! 📋');
+      syncCopyNow(BASE_INVITE_URL);
+      showToast('تم نسخ رابط الدعوة بنجاح! 📋');
     }
 
     function shareInviteWhatsApp() {
