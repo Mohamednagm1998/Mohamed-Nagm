@@ -171,10 +171,10 @@
       background: #FFFDF9;
       border: 1.2px solid rgba(197, 160, 89, 0.55);
       color: var(--gold-dark);
-      padding: 7px 12px;
+      padding: 7px 11px;
       border-radius: 30px;
       font-family: 'Cairo', sans-serif;
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       font-weight: 700;
       cursor: pointer;
       box-shadow: 0 4px 12px rgba(142, 104, 35, 0.14), 0 2px 0 rgba(197, 160, 89, 0.3);
@@ -445,6 +445,36 @@
     .wedding-card > *:not(.card-inner-frame) {
       position: relative;
       z-index: 2;
+    }
+
+    /* شريط وضع يوم الفرح الذكي (يظهر تلقائياً يوم 16 يناير 2027) */
+    .wedding-day-smart-banner {
+      display: none;
+      background: linear-gradient(135deg, #FFFDF5 0%, #FAF0D7 100%);
+      border: 2px solid var(--gold-primary);
+      border-radius: 18px;
+      padding: 14px 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 20px rgba(197, 160, 89, 0.22);
+    }
+
+    .wedding-day-smart-banner.active {
+      display: block;
+    }
+
+    .smart-banner-title {
+      font-family: 'Amiri', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--gold-dark);
+      margin-bottom: 8px;
+    }
+
+    .smart-banner-btns {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
     .scroll-reveal {
@@ -761,7 +791,7 @@
     .timeline-title { font-size: 0.78rem; font-weight: 700; color: var(--text-dark); line-height: 1.3; }
 
     /* ========================================================
-       بطاقات التفاصيل والموقع
+       بطاقات التفاصيل والموقع + زر كارت البوابة
        ======================================================== */
     .details-group {
       display: flex;
@@ -838,6 +868,29 @@
       font-size: 0.8rem;
       font-weight: 700;
       border: 1px solid rgba(197, 160, 89, 0.45);
+    }
+
+    .btn-gate-pass {
+      width: 100%;
+      background: linear-gradient(135deg, #272019 0%, #3E3227 100%);
+      color: #F9E7BE;
+      border: 1.8px solid var(--gold-primary);
+      padding: 13px 16px;
+      border-radius: 16px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 8px 20px rgba(39, 32, 25, 0.22), 0 3px 0 #14100C;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-gate-pass:active {
+      transform: translateY(2px);
     }
 
     /* ========================================================
@@ -935,12 +988,35 @@
       letter-spacing: 0.3px;
     }
 
-    .btn-copy-address-bar {
+    .ride-helper-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
       margin-top: 10px;
+    }
+
+    .btn-copy-address-bar {
       width: 100%;
       background: #FAF5E8;
       border: 1.2px dashed var(--gold-primary);
       color: var(--gold-dark);
+      padding: 9px 12px;
+      border-radius: 12px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.79rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-share-pin-only {
+      width: 100%;
+      background: #FFFFFF;
+      border: 1.2px solid rgba(197, 160, 89, 0.45);
+      color: var(--text-dark);
       padding: 9px 12px;
       border-radius: 12px;
       font-family: 'Cairo', sans-serif;
@@ -951,6 +1027,7 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
+      box-shadow: 0 2px 0 rgba(197, 160, 89, 0.2);
     }
 
     /* ========================================================
@@ -1058,7 +1135,7 @@
     .actions-stack {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 11px;
     }
 
     .btn-wedding {
@@ -1066,9 +1143,9 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      padding: 14px 20px;
+      padding: 13px 18px;
       border-radius: 16px;
-      font-size: 0.96rem;
+      font-size: 0.92rem;
       font-weight: 700;
       text-decoration: none;
       cursor: pointer;
@@ -1132,6 +1209,99 @@
       margin-top: 4px;
     }
 
+    /* ========================================================
+       نافذة كارت دخول البوابة السريع (Gate Pass Modal)
+       ======================================================== */
+    .gate-pass-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 15, 10, 0.82);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10005;
+      padding: 16px;
+    }
+
+    .gate-pass-backdrop.open {
+      display: flex;
+    }
+
+    .gate-pass-card {
+      background: linear-gradient(145deg, #1E1914 0%, #2C241B 100%);
+      border: 2.5px solid var(--gold-primary);
+      border-radius: 26px;
+      padding: 26px 20px 22px;
+      width: 100%;
+      max-width: 420px;
+      color: #FFFDF9;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), 0 0 0 4px rgba(197, 160, 89, 0.2);
+      position: relative;
+    }
+
+    .gate-pass-badge {
+      display: inline-block;
+      background: var(--gold-gradient);
+      color: #FFFFFF;
+      padding: 5px 18px;
+      border-radius: 30px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .gate-pass-venue {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: #F9E7BE;
+      margin-bottom: 4px;
+    }
+
+    .gate-pass-hall {
+      font-size: 1.55rem;
+      font-weight: 900;
+      color: #FFFFFF;
+      background: rgba(197, 160, 89, 0.18);
+      border: 1.5px solid var(--gold-primary);
+      border-radius: 14px;
+      padding: 8px 12px;
+      margin: 10px 0;
+    }
+
+    .gate-pass-couple {
+      font-family: 'Amiri', serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: #F6E6C4;
+      margin: 6px 0;
+    }
+
+    .gate-pass-info-list {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(197, 160, 89, 0.35);
+      border-radius: 16px;
+      padding: 12px 14px;
+      margin: 14px 0 18px;
+      text-align: right;
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: #EFE6D5;
+    }
+
+    .btn-close-gate-pass {
+      width: 100%;
+      background: var(--gold-gradient);
+      color: #FFFFFF;
+      border: none;
+      padding: 12px;
+      border-radius: 14px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
     #toast-msg {
       position: fixed;
       bottom: 24px;
@@ -1187,6 +1357,7 @@
     </div>
 
     <div class="floating-quick-actions">
+      <button type="button" class="btn-float-mini" onclick="openGatePassModal()">🪪 كارت البوابة</button>
       <button type="button" class="btn-float-mini" id="petalsToggleBtn" onclick="togglePetals()">🌸 البتلات</button>
       <button type="button" class="btn-float-mini" onclick="recloseEnvelope()">✉️ الظرف</button>
     </div>
@@ -1421,6 +1592,16 @@
     <article class="wedding-card" id="mainWeddingCard">
       <div class="card-inner-frame"></div>
 
+      <!-- شريط وضع يوم الفرح الذكي (يظهر تلقائياً يوم الفرح 16 يناير 2027) -->
+      <div class="wedding-day-smart-banner" id="weddingDaySmartBanner">
+        <div class="smart-banner-title">🎉 الليلة فرحتنا! في انتظاركم الساعة 07:00 مساءً</div>
+        <div class="smart-banner-btns">
+          <a href="https://maps.app.goo.gl/geGT5azkam9drc3X9?g_st=ac" target="_blank" class="btn-float-mini" style="text-decoration:none;">📍 لوكيشن القاعة</a>
+          <button type="button" class="btn-float-mini" onclick="openGatePassModal()">🪪 كارت دخول البوابة</button>
+          <button type="button" class="btn-float-mini" onclick="document.getElementById('rideAppsSection').scrollIntoView({behavior:'smooth'})">🚕 طلب سيارة</button>
+        </div>
+      </div>
+
       <div class="bismillah scroll-reveal">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
 
       <div class="quran-box scroll-reveal">
@@ -1541,7 +1722,7 @@
         </div>
       </section>
 
-      <!-- تفاصيل الموعد والمكان -->
+      <!-- تفاصيل الموعد والمكان + كارت دخول البوابة -->
       <section class="details-group scroll-reveal">
         <div class="detail-card">
           <div class="detail-icon-wrap">🗓</div>
@@ -1573,47 +1754,55 @@
             </div>
           </div>
         </a>
+
+        <!-- زر كارت دخول البوابة والركنة السريع -->
+        <button type="button" class="btn-gate-pass" onclick="openGatePassModal()">
+          <span>🪪</span>
+          <span>إظهار بطاقة دخول البوابة وإرشادات الركنة (Parking)</span>
+        </button>
       </section>
 
       <!-- قسم تطبيقات التوصيل الذكي (Uber • Careem • inDrive • DiDi) -->
-      <section class="ride-apps-section scroll-reveal">
+      <section class="ride-apps-section scroll-reveal" id="rideAppsSection">
         <h3 class="ride-apps-header">
           <span>🚕</span>
           <span>الوصول للقاعة عبر تطبيقات التوصيل</span>
         </h3>
         <p class="ride-apps-sub">
-          أوبر يحدد موقع القاعة تلقائياً، وعند الضغط على (إن درايف / دي دي / كريم) يُنسخ اسم القاعة تلقائياً ويفتح التطبيق لتلصقه بضغطة واحدة
+          أوبر يحدد موقع القاعة تلقائياً، وعند الضغط على (إن درايف / دي دي / كريم) يُنسخ العنوان الدقيق تلقائياً ويفتح التطبيق لتلصقه بضغطة واحدة
         </p>
 
         <div class="ride-apps-grid">
-          <!-- 1. تطبيق أوبر مع رمي اللوكيشن تلقائياً -->
           <button type="button" class="btn-ride-app btn-uber" onclick="openRideApp('uber')">
             <span class="ride-badge-pill" style="background:#FFF; color:#000;">Uber</span>
             <span>تطبيق أوبر</span>
           </button>
 
-          <!-- 2. تطبيق كريم -->
           <button type="button" class="btn-ride-app btn-careem" onclick="openRideApp('careem')">
             <span class="ride-badge-pill" style="background:#FFF; color:#00B956;">Careem</span>
             <span>تطبيق كريم</span>
           </button>
 
-          <!-- 3. تطبيق إن درايف -->
           <button type="button" class="btn-ride-app btn-indrive" onclick="openRideApp('indrive')">
             <span class="ride-badge-pill" style="background:#96E825; color:#141414;">inDrive</span>
             <span>تطبيق إن درايف</span>
           </button>
 
-          <!-- 4. تطبيق دي دي -->
           <button type="button" class="btn-ride-app btn-didi" onclick="openRideApp('didi')">
             <span class="ride-badge-pill" style="background:#FFF; color:#FF6600;">DiDi</span>
             <span>تطبيق دي دي</span>
           </button>
         </div>
 
-        <button type="button" class="btn-copy-address-bar" onclick="copyVenueAddressForRide()">
-          <span>📋 نسخ اسم القاعة: (دار الأسلحة والذخيرة - قاعة قصر الشوق)</span>
-        </button>
+        <div class="ride-helper-btns">
+          <button type="button" class="btn-copy-address-bar" onclick="copyVenueAddressForRide()">
+            <span>📋 نسخ عنوان البحث الدقيق: (دار الأسلحة والذخيرة، صلاح سالم، أمام مسجد الرحمن الرحيم)</span>
+          </button>
+
+          <button type="button" class="btn-share-pin-only" onclick="shareVenuePinWhatsApp()">
+            <span>📤 إرسال اللوكيشن فقط على واتساب (لسائق أو مرافق في الطريق)</span>
+          </button>
+        </div>
       </section>
 
       <!-- قسم الرد على الدعوة والتهنئة المربوط برقم الواتساب مباشرة -->
@@ -1650,12 +1839,10 @@
           <span>🗺️ الانتقال لموقع القاعة (Google Maps)</span>
         </a>
 
-        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%D8%AD%D9%81%D9%84+%D8%B2%D9%81%D8%A7%D9%81+%D9%85%D8%AD%D9%85%D8%AF+%D9%88%D8%B1%D8%BA%D8%AF%D8%A9+%F0%9F%92%8D&dates=20270116T170000Z/20270116T220000Z&details=%D9%86%D8%AA%D8%B4%D8%B1%D9%81+%D8%A8%D8%AD%D8%B6%D9%88%D8%B1%D9%83%D9%85+%D8%AD%D9%81%D9%84+%D8%B2%D9%81%D8%A7%D9%81%D9%86%D8%A7+%D9%81%D9%8A+%D9%82%D8%A7%D8%B9%D8%A9+%D8%A7%D9%84%D8%B4%D9%88%D9%82+-+%D8%AF%D8%A7%D8%B1+%D8%A7%D9%84%D8%A3%D8%B3%D9%84%D8%AD%D8%A9+%D9%88%D8%A7%D9%84%D8%B0%D8%AE%D9%8A%D8%B1%D8%A9&location=https%3A%2F%2Fmaps.app.goo.gl%2FgeGT5azkam9drc3X9%3Fg_st=ac" 
-           target="_blank" 
-           rel="noopener noreferrer" 
-           class="btn-wedding btn-wedding-cal">
-          <span>📅 إضافة الموعد إلى تقويم Google Calendar</span>
-        </a>
+        <!-- زر منبه الموبايل الذكي المباشر (.ics) -->
+        <button type="button" class="btn-wedding btn-wedding-cal" onclick="downloadSmartAlarmICS()">
+          <span>⏰ ضبط منبه وتذكير تلقائي على الموبايل (بدون تسجيل دخول)</span>
+        </button>
 
         <div class="utility-btns-row">
           <button type="button" class="btn-mini-util" onclick="copyInviteLink()">
@@ -1674,6 +1861,27 @@
     </article>
   </main>
 
+  <!-- نافذة بطاقة دخول البوابة السريعة (Gate Pass Modal) -->
+  <div class="gate-pass-backdrop" id="gatePassModal" onclick="if(event.target===this) closeGatePassModal()">
+    <div class="gate-pass-card">
+      <div class="gate-pass-badge">🪪 بطاقة دخول مدعو — Gate Pass</div>
+      <div class="gate-pass-venue">دار الأسلحة والذخيرة</div>
+      <div class="gate-pass-hall">قاعة قصر الشوق</div>
+      <div style="font-size:0.85rem; color:#D4AF37; font-weight:700;">حفل زفاف</div>
+      <div class="gate-pass-couple">محمد & رغدة</div>
+
+      <div class="gate-pass-info-list">
+        <div>🗓 <strong>التاريخ:</strong> السبت 16 يناير 2027 — 07:00 مساءً</div>
+        <div>📍 <strong>البوابة:</strong> طريق صلاح سالم — أمام مسجد الرحمن الرحيم</div>
+        <div>🚗 <strong>ركنة السيارات (Parking):</strong> متوفر ساحة انتظار سيارات خاصة بالمدعوين داخل الدار أمام القاعة</div>
+      </div>
+
+      <button type="button" class="btn-close-gate-pass" onclick="closeGatePassModal()">
+        إغلاق البطاقة ✕
+      </button>
+    </div>
+  </div>
+
   <div id="toast-msg">
     <span>🌸</span>
     <span id="toast-text-content">تمت العملية بنجاح!</span>
@@ -1685,15 +1893,17 @@
     let wasPlayingBeforeHide = false;
     let envelopeOpened = false;
     let detectedStartOffset = 0;
+    let screenWakeLock = null;
 
     const GROOM_WHATSAPP_NUMBER = "201098303210";
     const BASE_INVITE_URL = "https://mohamednagm1998.github.io/Mohamed-Nagm/";
+    const GOOGLE_MAPS_LINK = "https://maps.app.goo.gl/geGT5azkam9drc3X9?g_st=ac";
 
-    // الإحداثيات الدقيقة لقاعة قصر الشوق - دار الأسلحة والذخيرة (صلاح سالم أمام مسجد الرحمن الرحيم)
+    // الإحداثيات والصيغة القياسية الدقيقة لمحركات بحث أوبر وإن درايف ودي دي وكريم
     const VENUE_LAT = 30.0755;
     const VENUE_LNG = 31.3088;
     const VENUE_NAME = "قاعة قصر الشوق - دار الأسلحة والذخيرة";
-    const VENUE_SHORT_COPY = "دار الأسلحة والذخيرة قاعة قصر الشوق صلاح سالم";
+    const VENUE_EXACT_SEARCH = "دار الأسلحة والذخيرة، صلاح سالم، أمام مسجد الرحمن الرحيم";
 
     // 1. إلغاء أي Service Worker قديم عالق لضمان ظهور التعديلات فوراً
     if ('serviceWorker' in navigator) {
@@ -1704,7 +1914,16 @@
       }).catch(() => {});
     }
 
-    // 2. حفظ الصوت والصورة في قاعدة بيانات الموبايل (IndexedDB) + تخطي الصمت في أول الأغنية
+    // 2. ميزة منع انطفاء شاشة الموبايل أثناء فتح الدعوة أو كارت البوابة (Screen Wake Lock API)
+    async function requestKeepScreenAwake() {
+      if ('wakeLock' in navigator) {
+        try {
+          screenWakeLock = await navigator.wakeLock.request('screen');
+        } catch (e) {}
+      }
+    }
+
+    // 3. حفظ الصوت والصورة في قاعدة بيانات الموبايل (IndexedDB) + تخطي الصمت في أول الأغنية
     function openOfflineDB() {
       return new Promise((resolve, reject) => {
         const req = indexedDB.open('WeddingMediaStorageDB', 3);
@@ -1812,6 +2031,7 @@
           weddingAudio.pause();
         }
       } else {
+        requestKeepScreenAwake();
         if (wasPlayingBeforeHide && envelopeOpened) {
           wasPlayingBeforeHide = false;
           playAudioInstant();
@@ -1873,7 +2093,72 @@
     }
 
     // ====================================================================
-    // 3. نسخ فوري متزامن + فتح تطبيقات التوصيل مباشرة على الهاتف
+    // 4. كارت دخول البوابة + منبه الموبايل الذكي (.ics) + مشاركة اللوكيشن للسائق
+    // ====================================================================
+    function openGatePassModal() {
+      requestKeepScreenAwake();
+      document.getElementById('gatePassModal').classList.add('open');
+    }
+
+    function closeGatePassModal() {
+      document.getElementById('gatePassModal').classList.remove('open');
+    }
+
+    // توليد ملف منبه وتذكير أصلي (.ics) يفتح تقويم الموبايل مباشرة بدون تسجيل دخول
+    function downloadSmartAlarmICS() {
+      const icsContent = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//Mohamed & Raghda Wedding//AR",
+        "CALSCALE:GREGORIAN",
+        "METHOD:PUBLISH",
+        "BEGIN:VEVENT",
+        "UID:mohamed-raghda-wedding-2027@wedding.invite",
+        "SUMMARY:💍 حفل زفاف محمد & رغدة",
+        "DESCRIPTION:نتشرف بحضوركم حفل زفاف محمد ورغدة في قاعة قصر الشوق - دار الأسلحة والذخيرة بطريق صلاح سالم (أمام مسجد الرحمن الرحيم). رابط الخريطة: " + GOOGLE_MAPS_LINK,
+        "LOCATION:قاعة قصر الشوق - دار الأسلحة والذخيرة، طريق صلاح سالم أمام مسجد الرحمن الرحيم، القاهرة",
+        "DTSTART:20270116T170000Z",
+        "DTEND:20270116T220000Z",
+        "STATUS:CONFIRMED",
+        "BEGIN:VALARM",
+        "TRIGGER:-P1D",
+        "ACTION:DISPLAY",
+        "DESCRIPTION:تذكير: غداً حفل زفاف محمد & رغدة الساعة 7:00 مساءً بقاعة قصر الشوق 💍",
+        "END:VALARM",
+        "BEGIN:VALARM",
+        "TRIGGER:-PT3H",
+        "ACTION:DISPLAY",
+        "DESCRIPTION:تذكير: اليوم حفل زفاف محمد & رغدة الساعة 7:00 مساءً بقاعة قصر الشوق - دار الأسلحة والذخيرة 🎉",
+        "END:VALARM",
+        "END:VEVENT",
+        "END:VCALENDAR"
+      ].join("\r\n");
+
+      const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "wedding-mohamed-raghda.ics";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+      showToast("جاري فتح تقويم الهاتف لضبط التذكير والمنبه ⏰");
+    }
+
+    // إرسال اللوكيشن ووصف البوابة فقط لسائق أو مرافق عبر واتساب
+    function shareVenuePinWhatsApp() {
+      const pinMsg = encodeURIComponent(
+        `📍 *لوكيشن قاعة قصر الشوق - دار الأسلحة والذخيرة*\n` +
+        `(حفل زفاف محمد & رغدة)\n\n` +
+        `📌 *العنوان:* طريق صلاح سالم - أمام مسجد الرحمن الرحيم - القاهرة\n` +
+        `🗺 *رابط خريطة Google Maps المباشر:*\n` + GOOGLE_MAPS_LINK
+      );
+      window.open(`https://api.whatsapp.com/send?text=${pinMsg}`, '_blank');
+    }
+
+    // ====================================================================
+    // 5. نسخ فوري متزامن + فتح تطبيقات التوصيل مباشرة على الهاتف
     // ====================================================================
     function syncCopyNow(text) {
       const textArea = document.createElement('textarea');
@@ -1893,8 +2178,8 @@
     }
 
     function copyVenueAddressForRide() {
-      syncCopyNow(VENUE_SHORT_COPY);
-      showToast('تم نسخ اسم القاعة! الصقه في خانة الوجهة بالتطبيق 🚕');
+      syncCopyNow(VENUE_EXACT_SEARCH);
+      showToast('تم نسخ العنوان الدقيق! الصقه في خانة الوجهة بالتطبيق 🚕');
     }
 
     function launchNativeApp(androidIntentUrl, iosSchemeUrl, storeFallbackUrl) {
@@ -1918,15 +2203,13 @@
     }
 
     function openRideApp(appType) {
-      // 1. نسخ اسم القاعة بشكل متزامن وفوري في كيبورد الموبايل قبل فتح التطبيق
-      syncCopyNow(VENUE_SHORT_COPY);
+      syncCopyNow(VENUE_EXACT_SEARCH);
 
       const encName = encodeURIComponent(VENUE_NAME);
-      const encAddr = encodeURIComponent(VENUE_SHORT_COPY);
+      const encAddr = encodeURIComponent(VENUE_EXACT_SEARCH);
 
       if (appType === 'uber') {
         showToast('جاري فتح أوبر وتحديد موقع قاعة قصر الشوق تلقائياً 🚕');
-        // بروتوكول أوبر الرسمي المباشر الذي يرمي اللوكيشن تلقائياً داخل التطبيق
         const uberQuery = `?action=setPickup&pickup=my_location&dropoff[latitude]=${VENUE_LAT}&dropoff[longitude]=${VENUE_LNG}&dropoff[nickname]=${encName}&dropoff[formatted_address]=${encAddr}`;
         const uberUniversal = `https://m.uber.com/ul/${uberQuery}`;
         const uberDirectScheme = `uber://${uberQuery}`;
@@ -1942,7 +2225,7 @@
         }, 120);
       }
       else if (appType === 'careem') {
-        showToast('تم نسخ اسم القاعة! اضغط "لصق" في خانة الوجهة داخل كريم 🚕');
+        showToast('تم نسخ عنوان القاعة! اضغط "لصق" في خانة الوجهة داخل كريم 🚕');
         const careemFallback = 'https://play.google.com/store/apps/details?id=com.careem.acma';
         const careemIosStore = 'https://apps.apple.com/eg/app/careem-rides-food-more/id592978487';
         const careemAndroidIntent = `intent://open#Intent;scheme=careem;package=com.careem.acma;S.browser_fallback_url=${encodeURIComponent(careemFallback)};end`;
@@ -1951,7 +2234,7 @@
         }, 180);
       }
       else if (appType === 'indrive') {
-        showToast('تم نسخ اسم القاعة! اضغط "لصق" في خانة الوجهة داخل إن درايف 🚕');
+        showToast('تم نسخ عنوان القاعة! اضغط "لصق" في خانة الوجهة داخل إن درايف 🚕');
         const indriveFallback = 'https://play.google.com/store/apps/details?id=sinet.startup.inDriver';
         const indriveIosStore = 'https://apps.apple.com/eg/app/indrive-save-on-city-rides/id780125801';
         const indriveAndroidIntent = `intent://open#Intent;scheme=indriver;package=sinet.startup.inDriver;S.browser_fallback_url=${encodeURIComponent(indriveFallback)};end`;
@@ -1960,7 +2243,7 @@
         }, 180);
       }
       else if (appType === 'didi') {
-        showToast('تم نسخ اسم القاعة! اضغط "لصق" في خانة الوجهة داخل دي دي 🚕');
+        showToast('تم نسخ عنوان القاعة! اضغط "لصق" في خانة الوجهة داخل دي دي 🚕');
         const didiFallback = 'https://play.google.com/store/apps/details?id=com.didiglobal.passenger';
         const didiIosStore = 'https://apps.apple.com/eg/app/didi-rider-affordable-rides/id1362398401';
         const didiAndroidIntent = `intent://open#Intent;scheme=didipasnger;package=com.didiglobal.passenger;S.browser_fallback_url=${encodeURIComponent(didiFallback)};end`;
@@ -1970,7 +2253,7 @@
       }
     }
 
-    // 4. فتح المظروف مع تناثر غبار الذهب الخفيف
+    // 6. فتح المظروف مع تناثر غبار الذهب الخفيف + تفعيل بقاء الشاشة مضيئة
     let sparklesList = [];
 
     function triggerGoldenSparkleBurst(originX, originY) {
@@ -1992,6 +2275,8 @@
     }
 
     function openEnvelopeAndPlay(evt) {
+      requestKeepScreenAwake();
+
       if (weddingAudio && weddingAudio.paused) {
         playAudioInstant();
       }
@@ -2033,7 +2318,7 @@
       }
     }
 
-    // 5. مراقب التمرير الانسيابي (IntersectionObserver Scroll Reveal)
+    // 7. مراقب التمرير الانسيابي (IntersectionObserver Scroll Reveal)
     const revealElements = document.querySelectorAll('.scroll-reveal');
     if ('IntersectionObserver' in window) {
       const revealObserver = new IntersectionObserver((entries) => {
@@ -2050,7 +2335,7 @@
       revealElements.forEach((el) => el.classList.add('in-view'));
     }
 
-    // 6. تأثير 3D سلس بـ requestAnimationFrame لمنع أي لاج
+    // 8. تأثير 3D سلس بـ requestAnimationFrame لمنع أي لاج
     const couple3DStage = document.getElementById('couple3DStage');
     const couple3DCard = document.getElementById('couple3DCard');
     let tiltTicking = false;
@@ -2091,7 +2376,7 @@
       });
     }
 
-    // 7. إرسال رد الحضور أو الاعتذار لرقم 01098303210 على واتساب
+    // 9. إرسال رد الحضور أو الاعتذار لرقم 01098303210 على واتساب
     function sendWhatsAppRSVP(status, evt) {
       if (evt && evt.currentTarget) {
         const rect = evt.currentTarget.getBoundingClientRect();
@@ -2129,11 +2414,20 @@
       }, 240);
     }
 
+    // 10. العداد التنازلي + تفعيل وضع يوم الفرح الذكي تلقائياً يوم 16 يناير 2027
     const weddingTargetDate = new Date("2027-01-16T19:00:00+02:00").getTime();
 
     function updateWeddingCountdown() {
-      const currentTime = new Date().getTime();
+      const now = new Date();
+      const currentTime = now.getTime();
       const diff = weddingTargetDate - currentTime;
+
+      // فحص ما إذا كان اليوم هو يوم الفرح (16 يناير 2027) لتفعيل الشريط الذكي العلوي
+      const isWeddingDay = (now.getFullYear() === 2027 && now.getMonth() === 0 && now.getDate() === 16);
+      const smartBanner = document.getElementById('weddingDaySmartBanner');
+      if (smartBanner && (isWeddingDay || (diff <= 43200000 && diff > -28800000))) {
+        smartBanner.classList.add('active');
+      }
 
       if (diff > 0) {
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -2155,8 +2449,8 @@
         const countdownEl = document.querySelector('.countdown-section');
         if (countdownEl) {
           countdownEl.innerHTML = `
-            <div style="color: var(--gold-dark); font-weight: 800; font-size: 1.2rem; padding: 12px;">
-              🎉 اليوم هو موعد حفل الزفاف المبارك! أهلاً وسهلاً بكم 🎉
+            <div style="color: var(--gold-dark); font-weight: 800; font-size: 1.15rem; padding: 10px;">
+              🎉 الليلة حفل الزفاف المبارك! تنورونا في قاعة قصر الشوق الساعة 07:00 مساءً 🎉
             </div>
           `;
         }
@@ -2166,7 +2460,7 @@
     setInterval(updateWeddingCountdown, 1000);
     updateWeddingCountdown();
 
-    // 8. رسم البتلات الرقيقة فائقة الخفة (60fps بدون استهلاك المعالج)
+    // 11. رسم البتلات الرقيقة فائقة الخفة (60fps بدون استهلاك المعالج)
     const canvas = document.getElementById('petals-canvas');
     const ctx = canvas.getContext('2d');
     let canvasWidth = canvas.width = window.innerWidth;
