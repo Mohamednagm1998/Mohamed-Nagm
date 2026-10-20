@@ -72,7 +72,9 @@
       z-index: 10001;
     }
 
-    /* الشريط العائم للصوت والأدوات */
+    /* ========================================================
+       الشريط العائم الخفيف والسريع للصوت والأدوات
+       ======================================================== */
     .floating-top-bar {
       position: fixed;
       top: 14px;
@@ -178,7 +180,9 @@
       box-shadow: 0 4px 12px rgba(142, 104, 35, 0.14), 0 2px 0 rgba(197, 160, 89, 0.3);
     }
 
-    /* شاشة المظروف الافتتاحية */
+    /* ========================================================
+       شاشة المظروف الافتتاحية الفاتحة
+       ======================================================== */
     #envelope-screen {
       position: fixed;
       inset: 0;
@@ -515,10 +519,19 @@
       transition: transform 0.12s ease-out;
     }
 
+    .couple-3d-halo {
+      position: absolute;
+      inset: -9px;
+      border-radius: 148px 148px 32px 32px;
+      border: 1.5px dashed rgba(212, 175, 55, 0.6);
+      pointer-events: none;
+    }
+
     .couple-photo-inner {
       width: 100%;
       border-radius: 130px 130px 18px 18px;
       overflow: hidden;
+      position: relative;
       border: 1.5px solid rgba(197, 160, 89, 0.5);
       background: #FAF6ED;
     }
@@ -639,17 +652,19 @@
       margin: 0 auto 24px;
     }
 
-    /* العداد التنازلي والمحطات */
-    .info-card-box {
+    /* ========================================================
+       مكعبات العداد التنازلي المجسمة 3D
+       ======================================================== */
+    .countdown-section {
       background: #FFFFFF;
       border: 1.5px solid rgba(197, 160, 89, 0.42);
       border-radius: 22px;
-      padding: 18px 12px;
+      padding: 18px 12px 20px;
       margin-bottom: 24px;
       box-shadow: 0 10px 24px rgba(197, 160, 89, 0.1), 0 3px 0 rgba(197, 160, 89, 0.22);
     }
 
-    .info-header {
+    .countdown-header {
       font-size: 0.95rem;
       font-weight: 700;
       color: var(--gold-dark);
@@ -663,18 +678,19 @@
     .countdown-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
+      gap: 10px;
     }
 
     .count-unit {
-      background: #FAF6ED;
-      border-radius: 12px;
-      padding: 10px 4px;
-      border: 1px solid rgba(197, 160, 89, 0.2);
+      background: linear-gradient(160deg, #FFFFFF 0%, #FAF3E3 100%);
+      border-radius: 16px;
+      padding: 12px 4px;
+      border: 1.5px solid rgba(197, 160, 89, 0.4);
+      box-shadow: 0 4px 0 #D8BE87;
     }
 
     .count-number {
-      font-size: 1.6rem;
+      font-size: 1.65rem;
       font-weight: 800;
       color: var(--text-dark);
       line-height: 1.15;
@@ -692,6 +708,29 @@
       margin-top: 3px;
     }
 
+    /* ========================================================
+       الخط الزمني المصغر لفقرات الليلة
+       ======================================================== */
+    .timeline-section {
+      background: #FFFFFF;
+      border: 1.5px solid rgba(197, 160, 89, 0.42);
+      border-radius: 22px;
+      padding: 18px 12px 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 24px rgba(197, 160, 89, 0.1), 0 3px 0 rgba(197, 160, 89, 0.22);
+    }
+
+    .timeline-header {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--gold-dark);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
     .timeline-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -699,32 +738,36 @@
     }
 
     .timeline-step {
-      background: #FAF6ED;
-      border: 1px solid rgba(197, 160, 89, 0.2);
-      border-radius: 14px;
+      background: linear-gradient(160deg, #FFFFFF 0%, #FAF3E3 100%);
+      border: 1.2px solid rgba(197, 160, 89, 0.4);
+      border-radius: 16px;
       padding: 12px 6px;
+      box-shadow: 0 3px 0 #D8BE87;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    .timeline-icon { font-size: 1.3rem; margin-bottom: 4px; }
+    .timeline-icon { font-size: 1.35rem; margin-bottom: 4px; }
     .timeline-time {
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       font-weight: 800;
-      color: #FFFFFF;
-      background: var(--gold-dark);
+      color: var(--gold-dark);
+      background: rgba(212, 175, 55, 0.16);
       padding: 2px 8px;
       border-radius: 10px;
       margin-bottom: 4px;
     }
-    .timeline-title { font-size: 0.75rem; font-weight: 700; color: var(--text-dark); line-height: 1.3; }
+    .timeline-title { font-size: 0.78rem; font-weight: 700; color: var(--text-dark); line-height: 1.3; }
 
+    /* ========================================================
+       بطاقات التفاصيل والموقع
+       ======================================================== */
     .details-group {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
 
     .detail-card {
@@ -767,7 +810,7 @@
       align-items: center;
       gap: 14px;
       text-align: right;
-      box-shadow: 0 12px 26px rgba(197, 160, 89, 0.24), 0 4px 0 #B58E3E;
+      box-shadow: 0 8px 20px rgba(197, 160, 89, 0.18), 0 4px 0 #B58E3E;
       cursor: pointer;
       position: relative;
       overflow: hidden;
@@ -776,7 +819,10 @@
     .venue-direct-card::before {
       content: "";
       position: absolute;
-      top: 0; right: 0; width: 6px; height: 100%;
+      top: 0;
+      right: 0;
+      width: 6px;
+      height: 100%;
       background: var(--gold-gradient);
     }
 
@@ -795,7 +841,7 @@
     }
 
     /* ========================================================
-       قسم تطبيقات التوصيل والملاحة الذكي (مُحَدَّث: Uber, Careem, inDrive, DiDi, Waze)
+       قسم تطبيقات التوصيل الذكي (Uber • Careem • inDrive • DiDi)
        ======================================================== */
     .ride-apps-section {
       background: linear-gradient(145deg, #FFFFFF 0%, #FDFBF5 100%);
@@ -828,41 +874,64 @@
     .ride-apps-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 9px;
+      gap: 10px;
     }
 
     .btn-ride-app {
-      padding: 11px 8px;
+      padding: 11px 10px;
       border-radius: 14px;
       font-family: 'Cairo', sans-serif;
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       font-weight: 800;
       text-decoration: none;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 8px;
       border: none;
       transition: transform 0.2s ease;
     }
 
-    .btn-ride-app:active { transform: translateY(2px); }
+    .btn-ride-app:active {
+      transform: translateY(2px);
+    }
 
-    .btn-uber { background: #141414; color: #FFFFFF; border: 1.5px solid #C5A059; box-shadow: 0 3px 0 #000; }
-    .btn-careem { background: #00B956; color: #FFFFFF; box-shadow: 0 3px 0 #00823B; }
-    .btn-indrive { background: #FFFFFF; color: #1A1A1A; border: 1.5px solid #96E825; box-shadow: 0 3px 0 #7BC416; }
-    .btn-didi { background: #FF6600; color: #FFFFFF; box-shadow: 0 3px 0 #CC5200; }
-    .btn-waze { background: #FFFFFF; color: #1A1A1A; border: 1.5px solid #33CCFF; box-shadow: 0 3px 0 #1BA3D1; }
+    .btn-uber {
+      background: #141414;
+      color: #FFFFFF;
+      border: 1.5px solid #C5A059;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18), 0 3px 0 #000000;
+    }
+
+    .btn-careem {
+      background: #00B956;
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(0, 185, 86, 0.22), 0 3px 0 #00823B;
+    }
+
+    .btn-indrive {
+      background: #FFFFFF;
+      color: #1A1A1A;
+      border: 1.5px solid #96E825;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 3px 0 #7BC416;
+    }
+
+    .btn-didi {
+      background: #FF6600;
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(255, 102, 0, 0.22), 0 3px 0 #CC5200;
+    }
 
     .ride-badge-pill {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 2px 6px;
+      padding: 2px 7px;
       border-radius: 6px;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       font-weight: 900;
+      letter-spacing: 0.3px;
     }
 
     .btn-copy-address-bar {
@@ -883,74 +952,218 @@
       gap: 6px;
     }
 
-    /* الـ RSVP */
+    /* ========================================================
+       قسم الرد على الدعوة (تأكيد الحضور / الاعتذار)
+       ======================================================== */
     .rsvp-box {
       background: linear-gradient(145deg, #FFFFFF 0%, #FDFBF5 100%);
       border: 1.8px solid rgba(197, 160, 89, 0.55);
       border-radius: 20px;
       padding: 20px 16px;
       margin-bottom: 20px;
-      box-shadow: 0 14px 30px rgba(197, 160, 89, 0.16), 0 4px 0 rgba(197, 160, 89, 0.28);
+      box-shadow: 0 12px 26px rgba(197, 160, 89, 0.14), 0 4px 0 rgba(197, 160, 89, 0.25);
       position: relative;
       overflow: hidden;
     }
 
     .rsvp-box::before {
       content: "";
-      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
       background: var(--gold-gradient);
     }
 
     .rsvp-title {
-      font-family: 'Amiri', serif; font-size: 1.4rem; font-weight: 700;
-      color: var(--gold-dark); margin-bottom: 4px; display: flex; align-items: center; justify-content: center; gap: 8px;
+      font-family: 'Amiri', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold-dark);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
-    .rsvp-subtitle { font-size: 0.84rem; color: var(--text-muted); margin-bottom: 14px; font-weight: 600; }
-    .rsvp-input-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+
+    .rsvp-subtitle {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+
+    .rsvp-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
     .rsvp-input {
-      width: 100%; padding: 11px 14px; border-radius: 12px;
-      border: 1.2px solid rgba(197, 160, 89, 0.45); background: #FAF8F3;
-      font-family: 'Cairo', sans-serif; font-size: 0.9rem; color: var(--text-dark); outline: none; text-align: right;
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: 12px;
+      border: 1.2px solid rgba(197, 160, 89, 0.45);
+      background: #FAF8F3;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      outline: none;
+      text-align: right;
     }
-    .rsvp-input:focus { background: #FFFFFF; border-color: var(--gold-dark); }
-    .rsvp-choices-grid { display: flex; flex-direction: column; gap: 11px; }
-    
+
+    .rsvp-input:focus {
+      background: #FFFFFF;
+      border-color: var(--gold-dark);
+    }
+
+    .rsvp-choices-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
     .btn-rsvp {
-      width: 100%; padding: 13px 16px; border-radius: 14px;
-      font-family: 'Cairo', sans-serif; font-size: 0.94rem; font-weight: 700;
-      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; border: none;
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 14px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.94rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: none;
     }
-    .btn-rsvp-attend { background: linear-gradient(135deg, #1E9E58 0%, #127A43 100%); color: #FFFFFF; box-shadow: 0 6px 16px rgba(30, 158, 88, 0.25), 0 3px 0 #0B522B; }
-    .btn-rsvp-apologize { background: linear-gradient(135deg, #FFFDF9 0%, #F7EFE0 100%); color: #7A581B; border: 1.5px solid var(--gold-primary); box-shadow: 0 4px 12px rgba(197, 160, 89, 0.14), 0 3px 0 #C5A059; }
 
-    .actions-stack { display: flex; flex-direction: column; gap: 12px; }
+    .btn-rsvp-attend {
+      background: linear-gradient(135deg, #1E9E58 0%, #127A43 100%);
+      color: #FFFFFF;
+      box-shadow: 0 6px 16px rgba(30, 158, 88, 0.25), 0 3px 0 #0B522B;
+    }
+
+    .btn-rsvp-apologize {
+      background: linear-gradient(135deg, #FFFDF9 0%, #F7EFE0 100%);
+      color: #7A581B;
+      border: 1.5px solid var(--gold-primary);
+      box-shadow: 0 4px 12px rgba(197, 160, 89, 0.14), 0 3px 0 #C5A059;
+    }
+
+    .actions-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
     .btn-wedding {
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-      padding: 14px 20px; border-radius: 16px; font-size: 0.96rem; font-weight: 700; text-decoration: none; cursor: pointer; border: none; font-family: 'Cairo', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 16px;
+      font-size: 0.96rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      font-family: 'Cairo', sans-serif;
     }
-    .btn-wedding-gold { background: var(--gold-gradient); color: #FFFFFF; box-shadow: 0 6px 18px rgba(197, 160, 89, 0.3), 0 3px 0 #664B0B; }
-    .btn-wedding-cal { background: #FFFFFF; color: var(--text-dark); border: 1.5px solid rgba(197, 160, 89, 0.45); box-shadow: 0 4px 10px rgba(0,0,0,0.03), 0 3px 0 rgba(197, 160, 89, 0.22); }
 
-    .utility-btns-row { display: flex; gap: 10px; margin-top: 4px; }
+    .btn-wedding-gold {
+      background: var(--gold-gradient);
+      color: #FFFFFF;
+      box-shadow: 0 6px 18px rgba(197, 160, 89, 0.3), 0 3px 0 #664B0B;
+    }
+
+    .btn-wedding-cal {
+      background: #FFFFFF;
+      color: var(--text-dark);
+      border: 1.5px solid rgba(197, 160, 89, 0.45);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03), 0 3px 0 rgba(197, 160, 89, 0.22);
+    }
+
+    .utility-btns-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
     .btn-mini-util {
-      flex: 1; background: #FFFFFF; border: 1px solid rgba(197, 160, 89, 0.35);
-      color: var(--gold-dark); padding: 10px; border-radius: 12px; font-family: 'Cairo', sans-serif; font-size: 0.85rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 2px 0 rgba(197, 160, 89, 0.2);
+      flex: 1;
+      background: #FFFFFF;
+      border: 1px solid rgba(197, 160, 89, 0.35);
+      color: var(--gold-dark);
+      padding: 10px;
+      border-radius: 12px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 2px 0 rgba(197, 160, 89, 0.2);
     }
 
-    .signature-card { margin-top: 26px; padding-top: 18px; border-top: 1px dashed rgba(197, 160, 89, 0.35); }
-    .signature-heading { font-family: 'Amiri', serif; font-size: 1.35rem; font-weight: 700; color: var(--gold-dark); }
-    .signature-date { font-size: 0.82rem; color: #999084; margin-top: 4px; }
+    .signature-card {
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px dashed rgba(197, 160, 89, 0.35);
+    }
+
+    .signature-heading {
+      font-family: 'Amiri', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--gold-dark);
+    }
+
+    .signature-date {
+      font-size: 0.82rem;
+      color: #999084;
+      margin-top: 4px;
+    }
 
     #toast-msg {
-      position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 90px); opacity: 0;
-      background: #272019; color: #FFFFFF; border: 1.5px solid var(--gold-primary); padding: 12px 22px;
-      border-radius: 30px; font-size: 0.86rem; font-weight: 700; box-shadow: 0 10px 28px rgba(0,0,0,0.35);
-      z-index: 10010; transition: all 0.3s ease; pointer-events: none; display: flex; align-items: center; gap: 8px; max-width: 92vw; text-align: center;
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translate(-50%, 90px);
+      opacity: 0;
+      background: #272019;
+      color: #FFFFFF;
+      border: 1.5px solid var(--gold-primary);
+      padding: 12px 22px;
+      border-radius: 30px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+      z-index: 10010;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      max-width: 92vw;
+      text-align: center;
     }
-    #toast-msg.visible { transform: translate(-50%, 0); opacity: 1; }
+
+    #toast-msg.visible {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
+
+  <canvas id="petals-canvas"></canvas>
 
   <!-- تتبع صامت ومخفي تماماً للزيارات -->
   <img src="https://hits.sh/mohamednagm1998.github.io/Mohamed-Nagm.svg" alt="" style="display:none; width:0; height:0; visibility:hidden; position:absolute;" />
@@ -978,7 +1191,7 @@
     </div>
   </header>
 
-  <!-- شاشة المظروف الافتتاحية -->
+  <!-- شاشة المظروف الافتتاحية الفاتحة -->
   <div id="envelope-screen">
     <div class="envelope-header">
       <div class="badge-invite">✨ دعوة زفاف خاصة ✨</div>
@@ -987,84 +1200,276 @@
     </div>
 
     <div class="envelope-floral-wrap">
-      <!-- الزهور المحيطة بالمظروف -->
+
+      <!-- باقة الورود العلوية (يسار) -->
       <div class="floral-cluster floral-top-left">
         <svg viewBox="0 0 170 170" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <radialGradient id="roseGradTL" cx="42%" cy="38%" r="62%"><stop offset="0%" stop-color="#FFF0F3"/><stop offset="42%" stop-color="#F8BFCB"/><stop offset="78%" stop-color="#DE8195"/><stop offset="100%" stop-color="#AF3D56"/></radialGradient>
-            <radialGradient id="roseCoreTL" cx="40%" cy="40%" r="55%"><stop offset="0%" stop-color="#DE8195"/><stop offset="70%" stop-color="#A52843"/><stop offset="100%" stop-color="#6E1326"/></radialGradient>
-            <linearGradient id="leafGradTL" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#A6BE9D"/><stop offset="60%" stop-color="#687F5F"/><stop offset="100%" stop-color="#42553B"/></linearGradient>
-            <linearGradient id="goldSprigTL" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFF5D6"/><stop offset="40%" stop-color="#D4AF37"/><stop offset="85%" stop-color="#9C731C"/><stop offset="100%" stop-color="#614408"/></linearGradient>
+            <radialGradient id="roseGradTL" cx="42%" cy="38%" r="62%">
+              <stop offset="0%" stop-color="#FFF0F3"/>
+              <stop offset="42%" stop-color="#F8BFCB"/>
+              <stop offset="78%" stop-color="#DE8195"/>
+              <stop offset="100%" stop-color="#AF3D56"/>
+            </radialGradient>
+            <radialGradient id="roseCoreTL" cx="40%" cy="40%" r="55%">
+              <stop offset="0%" stop-color="#DE8195"/>
+              <stop offset="70%" stop-color="#A52843"/>
+              <stop offset="100%" stop-color="#6E1326"/>
+            </radialGradient>
+            <linearGradient id="leafGradTL" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#A6BE9D"/>
+              <stop offset="60%" stop-color="#687F5F"/>
+              <stop offset="100%" stop-color="#42553B"/>
+            </linearGradient>
+            <linearGradient id="goldSprigTL" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FFF5D6"/>
+              <stop offset="40%" stop-color="#D4AF37"/>
+              <stop offset="85%" stop-color="#9C731C"/>
+              <stop offset="100%" stop-color="#614408"/>
+            </linearGradient>
+            <radialGradient id="jasminePetalTL" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#FFFFFF"/>
+              <stop offset="80%" stop-color="#FDFBF7"/>
+              <stop offset="100%" stop-color="#EFE6D5"/>
+            </radialGradient>
           </defs>
-          <g><path d="M 95 95 Q 60 50 25 35" stroke="url(#goldSprigTL)" stroke-width="2.2" fill="none"/><circle cx="25" cy="35" r="4.5" fill="url(#goldSprigTL)"/><path d="M 45 46 Q 35 36 32 44 Q 40 54 45 46 Z" fill="url(#goldSprigTL)"/><path d="M 65 62 Q 52 48 48 56 Q 58 68 65 62 Z" fill="url(#goldSprigTL)"/><path d="M 75 75 Q 68 56 60 62 Q 68 76 75 75 Z" fill="url(#goldSprigTL)"/><path d="M 70 85 Q 40 75 16 80" stroke="url(#goldSprigTL)" stroke-width="1.8" fill="none"/><circle cx="16" cy="80" r="3.5" fill="url(#goldSprigTL)"/></g>
-          <g><path d="M 85 75 C 90 40 120 28 135 24 C 130 50 115 70 85 75 Z" fill="url(#leafGradTL)"/><path d="M 85 75 Q 115 45 135 24" stroke="#C2D8BC" stroke-width="1" fill="none"/><path d="M 75 90 C 45 92 25 110 20 125 C 40 125 65 112 75 90 Z" fill="url(#leafGradTL)"/></g>
-        </svg>
-      </div>
-      <div class="floral-cluster floral-bottom-right">
-        <svg viewBox="0 0 170 170" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="roseGradBR" cx="58%" cy="58%" r="62%"><stop offset="0%" stop-color="#FFF0F3"/><stop offset="42%" stop-color="#F8BFCB"/><stop offset="78%" stop-color="#DE8195"/><stop offset="100%" stop-color="#AF3D56"/></radialGradient>
-            <linearGradient id="leafGradBR" x1="100%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#A6BE9D"/><stop offset="60%" stop-color="#687F5F"/><stop offset="100%" stop-color="#42553B"/></linearGradient>
-            <linearGradient id="goldSprigBR" x1="100%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#FFF5D6"/><stop offset="40%" stop-color="#D4AF37"/><stop offset="85%" stop-color="#9C731C"/><stop offset="100%" stop-color="#614408"/></linearGradient>
-          </defs>
-          <g><path d="M 75 75 Q 110 120 145 135" stroke="url(#goldSprigBR)" stroke-width="2.2" fill="none"/><circle cx="145" cy="135" r="4.5" fill="url(#goldSprigBR)"/><path d="M 125 124 Q 135 134 138 126 Q 130 116 125 124 Z" fill="url(#goldSprigBR)"/><path d="M 105 108 Q 118 122 122 114 Q 112 102 105 108 Z" fill="url(#goldSprigBR)"/><path d="M 100 85 Q 130 95 154 90" stroke="url(#goldSprigBR)" stroke-width="1.8" fill="none"/><circle cx="154" cy="90" r="3.5" fill="url(#goldSprigBR)"/></g>
-          <g><path d="M 85 95 C 80 130 50 142 35 146 C 40 120 55 100 85 95 Z" fill="url(#leafGradBR)"/><path d="M 85 95 Q 55 125 35 146" stroke="#C2D8BC" stroke-width="1" fill="none"/></g>
+
+          <g>
+            <path d="M 95 95 Q 60 50 25 35" stroke="url(#goldSprigTL)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+            <circle cx="25" cy="35" r="4.5" fill="url(#goldSprigTL)"/>
+            <path d="M 45 46 Q 35 36 32 44 Q 40 54 45 46 Z" fill="url(#goldSprigTL)"/>
+            <path d="M 65 62 Q 52 48 48 56 Q 58 68 65 62 Z" fill="url(#goldSprigTL)"/>
+            <path d="M 75 75 Q 68 56 60 62 Q 68 76 75 75 Z" fill="url(#goldSprigTL)"/>
+            <path d="M 70 85 Q 40 75 16 80" stroke="url(#goldSprigTL)" stroke-width="1.8" fill="none"/>
+            <circle cx="16" cy="80" r="3.5" fill="url(#goldSprigTL)"/>
+          </g>
+
+          <g>
+            <path d="M 85 75 C 90 40 120 28 135 24 C 130 50 115 70 85 75 Z" fill="url(#leafGradTL)"/>
+            <path d="M 85 75 Q 115 45 135 24" stroke="#C2D8BC" stroke-width="1" fill="none"/>
+            <path d="M 75 90 C 45 92 25 110 20 125 C 40 125 65 112 75 90 Z" fill="url(#leafGradTL)"/>
+            <path d="M 80 80 C 60 55 45 35 50 15 C 70 25 80 50 80 80 Z" fill="url(#leafGradTL)"/>
+          </g>
+
+          <g transform="translate(100, 100)">
+            <path d="M -36 -12 C -46 -30 -15 -48 10 -42 C 32 -36 45 -18 42 5 C 40 26 15 44 -12 42 C -34 40 -48 20 -44 -4 Z" fill="url(#roseGradTL)" opacity="0.95"/>
+            <path d="M -28 -20 C -15 -38 18 -38 30 -22 C 40 -8 38 15 22 28 C 6 40 -20 35 -30 18 C -38 2 -36 -12 -28 -20 Z" fill="url(#roseGradTL)"/>
+            <path d="M -26 -10 C -32 14 -10 32 12 28 C 30 24 32 2 24 -15 C 15 -28 -12 -28 -26 -10 Z" fill="#FCE5E9"/>
+            <path d="M -18 -18 C -5 -30 18 -25 24 -12 C 30 2 18 20 4 22 C -12 24 -25 8 -18 -18 Z" fill="url(#roseGradTL)"/>
+            <ellipse cx="0" cy="0" rx="14" ry="12" fill="url(#roseCoreTL)"/>
+            <path d="M -8 -4 C -4 -11 6 -11 9 -4 C 11 3 4 8 -2 8 C -8 7 -10 1 -8 -4 Z" fill="#8C1B33"/>
+            <circle cx="0.5" cy="0.5" r="3.2" fill="#FFE3E8"/>
+          </g>
+
+          <g transform="translate(136, 50)">
+            <g fill="url(#jasminePetalTL)" stroke="rgba(212,175,55,0.4)" stroke-width="0.6">
+              <path d="M 0 0 C -4 -13 4 -13 0 -19 C -4 -13 4 -13 0 0" transform="rotate(0)"/>
+              <path d="M 0 0 C -4 -13 4 -13 0 -19 C -4 -13 4 -13 0 0" transform="rotate(72)"/>
+              <path d="M 0 0 C -4 -13 4 -13 0 -19 C -4 -13 4 -13 0 0" transform="rotate(144)"/>
+              <path d="M 0 0 C -4 -13 4 -13 0 -19 C -4 -13 4 -13 0 0" transform="rotate(216)"/>
+              <path d="M 0 0 C -4 -13 4 -13 0 -19 C -4 -13 4 -13 0 0" transform="rotate(288)"/>
+            </g>
+            <circle cx="0" cy="0" r="3" fill="url(#goldSprigTL)"/>
+            <circle cx="0" cy="0" r="1.3" fill="#FFFFFF"/>
+          </g>
         </svg>
       </div>
 
-      <!-- المظروف -->
+      <!-- باقة الورود السفلية (يمين) -->
+      <div class="floral-cluster floral-bottom-right">
+        <svg viewBox="0 0 170 170" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="roseGradBR" cx="58%" cy="58%" r="62%">
+              <stop offset="0%" stop-color="#FFF0F3"/>
+              <stop offset="42%" stop-color="#F8BFCB"/>
+              <stop offset="78%" stop-color="#DE8195"/>
+              <stop offset="100%" stop-color="#AF3D56"/>
+            </radialGradient>
+            <radialGradient id="roseCoreBR" cx="50%" cy="50%" r="55%">
+              <stop offset="0%" stop-color="#DE8195"/>
+              <stop offset="70%" stop-color="#A52843"/>
+              <stop offset="100%" stop-color="#6E1326"/>
+            </radialGradient>
+            <linearGradient id="leafGradBR" x1="100%" y1="100%" x2="0%" y2="0%">
+              <stop offset="0%" stop-color="#A6BE9D"/>
+              <stop offset="60%" stop-color="#687F5F"/>
+              <stop offset="100%" stop-color="#42553B"/>
+            </linearGradient>
+            <linearGradient id="goldSprigBR" x1="100%" y1="100%" x2="0%" y2="0%">
+              <stop offset="0%" stop-color="#FFF5D6"/>
+              <stop offset="40%" stop-color="#D4AF37"/>
+              <stop offset="85%" stop-color="#9C731C"/>
+              <stop offset="100%" stop-color="#614408"/>
+            </linearGradient>
+          </defs>
+
+          <g>
+            <path d="M 75 75 Q 110 120 145 135" stroke="url(#goldSprigBR)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+            <circle cx="145" cy="135" r="4.5" fill="url(#goldSprigBR)"/>
+            <path d="M 125 124 Q 135 134 138 126 Q 130 116 125 124 Z" fill="url(#goldSprigBR)"/>
+            <path d="M 105 108 Q 118 122 122 114 Q 112 102 105 108 Z" fill="url(#goldSprigBR)"/>
+            <path d="M 100 85 Q 130 95 154 90" stroke="url(#goldSprigBR)" stroke-width="1.8" fill="none"/>
+            <circle cx="154" cy="90" r="3.5" fill="url(#goldSprigBR)"/>
+          </g>
+
+          <g>
+            <path d="M 85 95 C 80 130 50 142 35 146 C 40 120 55 100 85 95 Z" fill="url(#leafGradBR)"/>
+            <path d="M 85 95 Q 55 125 35 146" stroke="#C2D8BC" stroke-width="1" fill="none"/>
+            <path d="M 95 80 C 125 78 145 60 150 45 C 130 45 105 58 95 80 Z" fill="url(#leafGradBR)"/>
+          </g>
+
+          <g transform="translate(70, 70)">
+            <path d="M 36 12 C 46 30 15 48 -10 42 C -32 36 -45 18 -42 -5 C -40 -26 -15 -44 12 -42 C 34 -40 48 -20 44 4 Z" fill="url(#roseGradBR)" opacity="0.95"/>
+            <path d="M 28 20 C 15 38 -18 38 -30 22 C -40 8 -38 -15 -22 -28 C -6 -40 20 -35 30 -18 C 38 -2 36 12 28 20 Z" fill="url(#roseGradBR)"/>
+            <path d="M 26 10 C 32 -14 10 -32 -12 -28 C -30 -24 -32 -2 -24 15 C -15 28 12 28 26 10 Z" fill="#FCE5E9"/>
+            <ellipse cx="0" cy="0" rx="14" ry="12" fill="url(#roseCoreBR)"/>
+            <path d="M 8 4 C 4 11 -6 11 -9 4 C -11 -3 -4 -8 2 -8 C 8 -7 10 -1 8 4 Z" fill="#8C1B33"/>
+            <circle cx="-0.5" cy="-0.5" r="3.2" fill="#FFE3E8"/>
+          </g>
+
+          <g transform="translate(34, 118)">
+            <g fill="url(#jasminePetalTL)" stroke="rgba(212,175,55,0.4)" stroke-width="0.6">
+              <path d="M 0 0 C -4 -13 4 -13 0 -19 C -4 -13 4 -13 0 0" transform="rotate(35)"/>
+              <path d="M 0 0 C -4 -13 4 -13 0 -19 C -4 -13 4 -13 0 0" transform="rotate(107)"/>
+              <path d="M 0 0 C -4 -13 4 -13 0 -19 C -4 -13 4 -13 0 0" transform="rotate(179)"/>
+              <path d="M 0 0 C -4 -13 4 -13 0 -19 C -4 -13 4 -13 0 0" transform="rotate(251)"/>
+              <path d="M 0 0 C -4 -13 4 -13 0 -19 C -4 -13 4 -13 0 0" transform="rotate(323)"/>
+            </g>
+            <circle cx="0" cy="0" r="3" fill="url(#goldSprigBR)"/>
+            <circle cx="0" cy="0" r="1.3" fill="#FFFFFF"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- لمسة زهور ياسمين (علوية يمين) -->
+      <div class="floral-cluster floral-top-right">
+        <svg viewBox="0 0 120 120" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <path d="M 20 100 Q 50 60 95 30" stroke="url(#goldSprigTL)" stroke-width="1.8" fill="none"/>
+            <circle cx="95" cy="30" r="3.5" fill="url(#goldSprigTL)"/>
+            <path d="M 40 80 C 65 65 85 40 80 20 C 65 35 50 60 40 80 Z" fill="url(#leafGradTL)"/>
+          </g>
+          <g transform="translate(68, 52)">
+            <g fill="url(#jasminePetalTL)" stroke="rgba(212,175,55,0.4)" stroke-width="0.5">
+              <path d="M 0 0 C -3 -11 3 -11 0 -16 C -3 -11 3 -11 0 0" transform="rotate(20)"/>
+              <path d="M 0 0 C -3 -11 3 -11 0 -16 C -3 -11 3 -11 0 0" transform="rotate(92)"/>
+              <path d="M 0 0 C -3 -11 3 -11 0 -16 C -3 -11 3 -11 0 0" transform="rotate(164)"/>
+              <path d="M 0 0 C -3 -11 3 -11 0 -16 C -3 -11 3 -11 0 0" transform="rotate(236)"/>
+              <path d="M 0 0 C -3 -11 3 -11 0 -16 C -3 -11 3 -11 0 0" transform="rotate(308)"/>
+            </g>
+            <circle cx="0" cy="0" r="2.8" fill="url(#goldSprigTL)"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- لمسة زهور ياسمين (سفلية يسار) -->
+      <div class="floral-cluster floral-bottom-left">
+        <svg viewBox="0 0 120 120" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <path d="M 100 20 Q 70 60 25 90" stroke="url(#goldSprigTL)" stroke-width="1.8" fill="none"/>
+            <circle cx="25" cy="90" r="3.5" fill="url(#goldSprigTL)"/>
+            <path d="M 80 40 C 55 55 35 80 40 100 C 55 85 70 60 80 40 Z" fill="url(#leafGradTL)"/>
+          </g>
+          <g transform="translate(52, 68)">
+            <g fill="url(#jasminePetalTL)" stroke="rgba(212,175,55,0.4)" stroke-width="0.5">
+              <path d="M 0 0 C -3 -11 3 -11 0 -16 C -3 -11 3 -11 0 0" transform="rotate(-15)"/>
+              <path d="M 0 0 C -3 -11 3 -11 0 -16 C -3 -11 3 -11 0 0" transform="rotate(57)"/>
+              <path d="M 0 0 C -3 -11 3 -11 0 -16 C -3 -11 3 -11 0 0" transform="rotate(129)"/>
+              <path d="M 0 0 C -3 -11 3 -11 0 -16 C -3 -11 3 -11 0 0" transform="rotate(201)"/>
+              <path d="M 0 0 C -3 -11 3 -11 0 -16 C -3 -11 3 -11 0 0" transform="rotate(273)"/>
+            </g>
+            <circle cx="0" cy="0" r="2.8" fill="url(#goldSprigTL)"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- مجسم المظروف -->
       <div class="envelope-box" id="envelopeBox" onclick="openEnvelopeAndPlay(event)">
         <div class="envelope-shell">
           <div class="envelope-fold-left"></div>
           <div class="envelope-fold-right"></div>
           <div class="envelope-fold-bottom"></div>
+
           <div class="envelope-card-inside">
             <div style="font-family: 'Amiri', serif; font-size: 1.6rem; font-weight: 700; color: #8E6823;">محمد & رغدة</div>
             <div style="font-size: 0.82rem; color: #8C8479; margin-top: 4px;">السبت 16 يناير 2027 • 07:00 م</div>
+            <div style="font-size: 0.75rem; color: #B38E37; margin-top: 5px;">قاعة قصر الشوق - دار الأسلحة والذخيرة</div>
           </div>
+
           <div class="envelope-fold-top"></div>
         </div>
+
         <div class="wax-ribbon-tail wax-ribbon-left"></div>
         <div class="wax-ribbon-tail wax-ribbon-right"></div>
-        <div class="wax-seal" id="waxSealEl">
+
+        <div class="wax-seal" id="waxSealEl" title="انقر لفتح الدعوة وسماع الصوت">
           <span style="font-size: 1.35rem; line-height: 1;">م & ر</span>
+          <span style="font-size: 0.55rem; font-family: 'Cairo', sans-serif; letter-spacing: 0.5px;">2027</span>
         </div>
       </div>
+
     </div>
 
     <button type="button" class="btn-open-prompt" onclick="openEnvelopeAndPlay(event)">
-      <span>افتح الدعوة ✉️🎶</span>
+      <span>افتح الدعوة واستمع للزفة ✉️🎶</span>
     </button>
   </div>
 
   <!-- بطاقة الدعوة الرئيسية -->
   <main class="card-container">
-    <article class="wedding-card">
+    <article class="wedding-card" id="mainWeddingCard">
       <div class="card-inner-frame"></div>
 
       <div class="bismillah scroll-reveal">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+
       <div class="quran-box scroll-reveal">
-        <p class="quran-verse">﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ ﴾</p>
+        <p class="quran-verse">
+          ﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ ﴾
+        </p>
+        <span class="quran-surah">[سورة الروم: الآية 21]</span>
       </div>
 
-      <!-- صورة العروسين 3D -->
+      <!-- إطار صورة العروسين ثلاثي الأبعاد -->
       <div class="couple-frame-container scroll-reveal" id="couple3DStage">
         <div class="couple-photo-card" id="couple3DCard">
           <div class="couple-3d-halo"></div>
-          <div class="couple-crown-top">👑</div>
+          <div class="couple-crown-top" title="زفاف مبارك">👑</div>
+
+          <svg class="frame-3d-flower frame-flower-right" viewBox="0 0 50 50">
+            <circle cx="25" cy="25" r="18" fill="url(#roseGradTL)"/>
+            <circle cx="25" cy="25" r="9" fill="url(#roseCoreTL)"/>
+            <circle cx="25" cy="25" r="3" fill="#FFF"/>
+          </svg>
+
+          <svg class="frame-3d-flower frame-flower-left" viewBox="0 0 50 50">
+            <circle cx="25" cy="25" r="16" fill="url(#roseGradTL)"/>
+            <circle cx="25" cy="25" r="8" fill="url(#roseCoreTL)"/>
+            <circle cx="25" cy="25" r="2.5" fill="#FFF"/>
+          </svg>
+
           <div class="couple-photo-inner">
-            <img src="couple.jpg" onerror="this.onerror=null; this.src='1000436120.jpg';" alt="محمد ورغدة" class="couple-photo-img">
+            <img id="couplePhotoImg" src="couple.jpg" onerror="handleImageFallback(this)" alt="محمد ورغدة" class="couple-photo-img">
           </div>
           <div class="couple-monogram-badge">م &amp; ر</div>
         </div>
       </div>
 
-      <!-- الخواتم -->
+      <!-- مجسم خاتمي الزفاف الذهبيين 3D -->
       <div class="rings-3d-showcase scroll-reveal">
         <svg class="rings-3d-svg" viewBox="0 0 120 75" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <linearGradient id="ring3DGold1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFF6D6"/><stop offset="35%" stop-color="#E5C158"/><stop offset="70%" stop-color="#B38728"/><stop offset="100%" stop-color="#6E4E0B"/></linearGradient>
-            <linearGradient id="ring3DGold2" x1="100%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#FFF2C2"/><stop offset="45%" stop-color="#D4AF37"/><stop offset="85%" stop-color="#8E6823"/><stop offset="100%" stop-color="#593E08"/></linearGradient>
+            <linearGradient id="ring3DGold1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FFF6D6"/>
+              <stop offset="35%" stop-color="#E5C158"/>
+              <stop offset="70%" stop-color="#B38728"/>
+              <stop offset="100%" stop-color="#6E4E0B"/>
+            </linearGradient>
+            <linearGradient id="ring3DGold2" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#FFF2C2"/>
+              <stop offset="45%" stop-color="#D4AF37"/>
+              <stop offset="85%" stop-color="#8E6823"/>
+              <stop offset="100%" stop-color="#593E08"/>
+            </linearGradient>
           </defs>
           <ellipse cx="46" cy="44" rx="22" ry="20" fill="none" stroke="url(#ring3DGold1)" stroke-width="5.5"/>
           <ellipse cx="74" cy="44" rx="22" ry="20" fill="none" stroke="url(#ring3DGold2)" stroke-width="5.5"/>
@@ -1075,78 +1480,131 @@
       </div>
 
       <div class="wedding-title scroll-reveal">يسعدنا ويشرفنا دعوتكم لحضور حفل زفاف</div>
+
       <div class="couple-title-area scroll-reveal">
         <h2 class="names-display">محمد <span class="and-sym">&</span> رغدة</h2>
       </div>
-      <p class="invitation-words scroll-reveal">بقلوب تفيض فرحاً وسروراً، نتشرف بدعوتكم لمشاركتنا أجمل ليالي العمر وبداية رحلة حياتنا معاً 🤍</p>
 
-      <!-- العداد التنازلي -->
-      <section class="info-card-box scroll-reveal">
-        <div class="info-header"><span>⏳</span><span>الوقت المتبقي على ليلة الزفاف</span></div>
+      <p class="invitation-words scroll-reveal">
+        بقلوب تفيض فرحاً وسروراً، نتشرف بدعوتكم لمشاركتنا أجمل ليالي العمر وبداية رحلة حياتنا معاً، لتكتمل سعادتنا بتواجدكم العطر بيننا 🤍
+      </p>
+
+      <!-- العداد التنازلي 3D -->
+      <section class="countdown-section scroll-reveal">
+        <div class="countdown-header">
+          <span>⏳</span>
+          <span>الوقت المتبقي على ليلة الزفاف المنتظرة</span>
+        </div>
         <div class="countdown-grid">
-          <div class="count-unit"><div class="count-number" id="c-days">00</div><div class="count-title">يوم</div></div>
-          <div class="count-unit"><div class="count-number" id="c-hours">00</div><div class="count-title">ساعة</div></div>
-          <div class="count-unit"><div class="count-number" id="c-mins">00</div><div class="count-title">دقيقة</div></div>
-          <div class="count-unit"><div class="count-number" id="c-secs" style="color: var(--gold-dark);">00</div><div class="count-title">ثانية</div></div>
+          <div class="count-unit">
+            <div class="count-number" id="c-days">00</div>
+            <div class="count-title">يوم</div>
+          </div>
+          <div class="count-unit">
+            <div class="count-number" id="c-hours">00</div>
+            <div class="count-title">ساعة</div>
+          </div>
+          <div class="count-unit">
+            <div class="count-number" id="c-mins">00</div>
+            <div class="count-title">دقيقة</div>
+          </div>
+          <div class="count-unit">
+            <div class="count-number" id="c-secs" style="color: var(--gold-dark);">00</div>
+            <div class="count-title">ثانية</div>
+          </div>
         </div>
       </section>
 
-      <!-- الخط الزمني -->
-      <section class="info-card-box scroll-reveal">
-        <div class="info-header"><span>✨</span><span>محطات ليلتنا السعيدة</span></div>
+      <!-- الخط الزمني المصغر لفقرات الليلة -->
+      <section class="timeline-section scroll-reveal">
+        <div class="timeline-header">
+          <span>✨</span>
+          <span>محطات ليلتنا السعيدة</span>
+        </div>
         <div class="timeline-grid">
-          <div class="timeline-step"><div class="timeline-icon">🥂</div><div class="timeline-time">07:00 م</div><div class="timeline-title">استقبال الأحباب</div></div>
-          <div class="timeline-step"><div class="timeline-icon">💍</div><div class="timeline-time">08:00 م</div><div class="timeline-title">الزفة والفرحة</div></div>
-          <div class="timeline-step"><div class="timeline-icon">🎉</div><div class="timeline-time">09:30 م</div><div class="timeline-title">الاحتفال والعشاء</div></div>
+          <div class="timeline-step">
+            <div class="timeline-icon">🥂</div>
+            <div class="timeline-time">07:00 م</div>
+            <div class="timeline-title">استقبال الأحباب والترحيب</div>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-icon">💍</div>
+            <div class="timeline-time">08:00 م</div>
+            <div class="timeline-title">الزفة وبداية الفرحة</div>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-icon">🎉</div>
+            <div class="timeline-time">09:30 م</div>
+            <div class="timeline-title">الاحتفال ومشاركة البهجة</div>
+          </div>
         </div>
       </section>
 
+      <!-- تفاصيل الموعد والمكان -->
       <section class="details-group scroll-reveal">
         <div class="detail-card">
           <div class="detail-icon-wrap">🗓</div>
-          <div class="detail-info"><div class="detail-label">التاريخ</div><div class="detail-text-bold">السبت، 16 يناير 2027</div></div>
+          <div class="detail-info">
+            <div class="detail-label">تاريخ الحفل الميمون</div>
+            <div class="detail-text-bold">السبت، 16 يناير 2027 (16/01/2027)</div>
+          </div>
         </div>
-        <a href="https://maps.app.goo.gl/geGT5azkam9drc3X9?g_st=ac" target="_blank" rel="noopener noreferrer" class="detail-card venue-direct-card">
-          <div class="detail-icon-wrap" style="background: #FFF;">📍</div>
+
+        <div class="detail-card">
+          <div class="detail-icon-wrap">🕖</div>
+          <div class="detail-info">
+            <div class="detail-label">موعد بدء الحفل</div>
+            <div class="detail-text-bold">الساعة 07:00 مساءً</div>
+          </div>
+        </div>
+
+        <a href="https://maps.app.goo.gl/geGT5azkam9drc3X9?g_st=ac" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="venue-direct-card" 
+           title="انقر لفتح موقع القاعة على خرائط جوجل مباشرة">
+          <div class="detail-icon-wrap" style="background: #FDF1D5; border-color: var(--gold-primary);">📍</div>
           <div class="detail-info">
             <div class="detail-label" style="color: var(--gold-dark); font-weight: 700;">مكان الحفل (طريق صلاح سالم - أمام مسجد الرحمن الرحيم)</div>
-            <div class="detail-text-bold">قاعة قصر الشوق - دار الأسلحة والذخيرة</div>
-            <div class="venue-cta-badge">📌 افتح الخريطة مباشرة</div>
+            <div class="detail-text-bold" style="color: #1A1A1A;">قاعة قصر الشوق - دار الأسلحة والذخيرة</div>
+            <div class="venue-cta-badge">
+              <span>📌 انقر هنا لفتح اللوكيشن على خرائط Google</span>
+            </div>
           </div>
         </a>
       </section>
 
-      <!-- قسم تطبيقات التوصيل والملاحة الذكي (Uber, Careem, inDrive, DiDi, Waze) -->
+      <!-- قسم تطبيقات التوصيل الذكي (Uber • Careem • inDrive • DiDi) -->
       <section class="ride-apps-section scroll-reveal">
         <h3 class="ride-apps-header">
           <span>🚕</span>
           <span>الوصول للقاعة عبر تطبيقات التوصيل</span>
         </h3>
-        <p class="ride-apps-sub">اختر تطبيقك المفضل لطلب سيارة مباشرةً إلى بوابة القاعة</p>
+        <p class="ride-apps-sub">اضغط على تطبيقك المفضل ليفتح التطبيق مباشرةً مع نسخ عنوان القاعة تلقائياً</p>
 
         <div class="ride-apps-grid">
-          <!-- 1. أوبر -->
+          <!-- 1. تطبيق أوبر مباشرة -->
           <button type="button" class="btn-ride-app btn-uber" onclick="openRideApp('uber')">
             <span class="ride-badge-pill" style="background:#FFF; color:#000;">Uber</span>
-            <span>اطلب أوبر</span>
+            <span>تطبيق أوبر</span>
           </button>
 
-          <!-- 2. كريم -->
+          <!-- 2. تطبيق كريم مباشرة -->
           <button type="button" class="btn-ride-app btn-careem" onclick="openRideApp('careem')">
             <span class="ride-badge-pill" style="background:#FFF; color:#00B956;">Careem</span>
-            <span>اطلب كريم</span>
+            <span>تطبيق كريم</span>
           </button>
 
-          <!-- 3. إن درايف -->
+          <!-- 3. تطبيق إن درايف مباشرة -->
           <button type="button" class="btn-ride-app btn-indrive" onclick="openRideApp('indrive')">
             <span class="ride-badge-pill" style="background:#96E825; color:#141414;">inDrive</span>
-            <span>إن درايف</span>
+            <span>تطبيق إن درايف</span>
           </button>
 
-          <!-- 4. دي دي -->
+          <!-- 4. تطبيق دي دي مباشرة -->
           <button type="button" class="btn-ride-app btn-didi" onclick="openRideApp('didi')">
             <span class="ride-badge-pill" style="background:#FFF; color:#FF6600;">DiDi</span>
-            <span>اطلب DiDi</span>
+            <span>تطبيق دي دي</span>
           </button>
         </div>
 
@@ -1155,279 +1613,682 @@
         </button>
       </section>
 
-      <!-- RSVP -->
+      <!-- قسم الرد على الدعوة والتهنئة المربوط برقم الواتساب مباشرة -->
       <section class="rsvp-box scroll-reveal">
-        <h3 class="rsvp-title"><span>💌</span><span>تأكيد الحضور والتهنئة</span></h3>
-        <p class="rsvp-subtitle">يسعدنا معرفة ردك ومشاركتنا تهنئتك عبر واتساب</p>
+        <h3 class="rsvp-title">
+          <span>💌</span>
+          <span>تأكيد الحضور والتهنئة للعروسين</span>
+        </h3>
+        <p class="rsvp-subtitle">يسعدنا معرفة ردكم الكريم ومشاركتنا دعواتكم الطيبة عبر واتساب</p>
+
         <div class="rsvp-input-group">
-          <input type="text" id="guestNameInput" class="rsvp-input" placeholder="الاسم الكريم (اختياري)...">
-          <input type="text" id="guestWishInput" class="rsvp-input" placeholder="تهنئة للعروسين (اختياري)...">
+          <input type="text" id="guestNameInput" class="rsvp-input" placeholder="✍️ الاسم الكريم (اختياري)...">
+          <input type="text" id="guestWishInput" class="rsvp-input" placeholder="✨ كلمة تهنئة أو دعوة جميلة للعروسين (اختياري)...">
         </div>
+
         <div class="rsvp-choices-grid">
-          <button type="button" class="btn-rsvp btn-rsvp-attend" onclick="sendWhatsAppRSVP('attend', event)">🤍 تأكيد الحضور</button>
-          <button type="button" class="btn-rsvp btn-rsvp-apologize" onclick="sendWhatsAppRSVP('apologize', event)">🌸 أعتذر لظروف خاصة</button>
+          <button type="button" class="btn-rsvp btn-rsvp-attend" onclick="sendWhatsAppRSVP('attend', event)">
+            <span>🤍</span>
+            <span>يسعدني ويشرفني الحضور ومشاركتكم الفرحة</span>
+          </button>
+
+          <button type="button" class="btn-rsvp btn-rsvp-apologize" onclick="sendWhatsAppRSVP('apologize', event)">
+            <span>🌸</span>
+            <span>أعتذر لظروف خاصة مع خالص التهاني والدعوات</span>
+          </button>
         </div>
       </section>
 
       <section class="actions-stack scroll-reveal">
-        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%D8%AD%D9%81%D9%84+%D8%B2%D9%81%D8%A7%D9%81+%D9%85%D8%AD%D9%85%D8%AF+%D9%88%D8%B1%D8%BA%D8%AF%D8%A9+%F0%9F%92%8D&dates=20270116T170000Z/20270116T220000Z" target="_blank" rel="noopener noreferrer" class="btn-wedding btn-wedding-cal">📅 إضافة لتقويم Google</a>
+        <a href="https://maps.app.goo.gl/geGT5azkam9drc3X9?g_st=ac" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="btn-wedding btn-wedding-gold">
+          <span>🗺️ الانتقال لموقع القاعة (Google Maps)</span>
+        </a>
+
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%D8%AD%D9%81%D9%84+%D8%B2%D9%81%D8%A7%D9%81+%D9%85%D8%AD%D9%85%D8%AF+%D9%88%D8%B1%D8%BA%D8%AF%D8%A9+%F0%9F%92%8D&dates=20270116T170000Z/20270116T220000Z&details=%D9%86%D8%AA%D8%B4%D8%B1%D9%81+%D8%A8%D8%AD%D8%B6%D9%88%D8%B1%D9%83%D9%85+%D8%AD%D9%81%D9%84+%D8%B2%D9%81%D8%A7%D9%81%D9%86%D8%A7+%D9%81%D9%8A+%D9%82%D8%A7%D8%B9%D8%A9+%D8%A7%D9%84%D8%B4%D9%88%D9%82+-+%D8%AF%D8%A7%D8%B1+%D8%A7%D9%84%D8%A3%D8%B3%D9%84%D8%AD%D8%A9+%D9%88%D8%A7%D9%84%D8%B0%D8%AE%D9%8A%D8%B1%D8%A9&location=https%3A%2F%2Fmaps.app.goo.gl%2FgeGT5azkam9drc3X9%3Fg_st%3Dac" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="btn-wedding btn-wedding-cal">
+          <span>📅 إضافة الموعد إلى تقويم Google Calendar</span>
+        </a>
+
         <div class="utility-btns-row">
-          <button type="button" class="btn-mini-util" onclick="copyInviteLink()">📋 نسخ الرابط</button>
-          <button type="button" class="btn-mini-util" onclick="shareInviteWhatsApp()">📲 مشاركة الدعوة</button>
+          <button type="button" class="btn-mini-util" onclick="copyInviteLink()">
+            <span>📋 نسخ رابط الدعوة</span>
+          </button>
+          <button type="button" class="btn-mini-util" onclick="shareInviteWhatsApp()">
+            <span>📲 مشاركة الدعوة</span>
+          </button>
         </div>
       </section>
 
       <div class="signature-card scroll-reveal">
-        <div class="signature-heading">حضوركم يكتمل به سرورنا ✨</div>
-        <div class="signature-date">حفل زفاف محمد & رغدة | 2027</div>
+        <div class="signature-heading">حضوركم يكتمل به سرورنا ويزيد ليلتنا بهجة ✨</div>
+        <div class="signature-date">حفل زفاف محمد & رغدة | السبت 16 يناير 2027</div>
       </div>
     </article>
   </main>
 
-  <div id="toast-msg"><span id="toast-text-content">تمت العملية بنجاح!</span></div>
+  <div id="toast-msg">
+    <span>🌸</span>
+    <span id="toast-text-content">تمت العملية بنجاح!</span>
+  </div>
 
   <script>
     const weddingAudio = document.getElementById('weddingAudio');
     let isPlaying = false;
+    let wasPlayingBeforeHide = false;
     let envelopeOpened = false;
+    let detectedStartOffset = 0;
+
     const GROOM_WHATSAPP_NUMBER = "201098303210";
     const BASE_INVITE_URL = "https://mohamednagm1998.github.io/Mohamed-Nagm/";
 
+    // إحداثيات وعنوان قاعة قصر الشوق - دار الأسلحة والذخيرة
     const VENUE_LAT = 30.0614;
     const VENUE_LNG = 31.2831;
     const VENUE_NAME = "قاعة قصر الشوق - دار الأسلحة والذخيرة";
     const VENUE_FULL_ADDRESS = "دار الأسلحة والذخيرة، قاعة قصر الشوق، طريق صلاح سالم أمام مسجد الرحمن الرحيم، القاهرة";
 
+    // 1. تفعيل الـ Service Worker المحدث
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then(function(registrations) {
-        for(let registration of registrations) { registration.unregister(); }
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').then((reg) => {
+          reg.update();
+        }).catch(() => {});
       });
     }
 
-    async function loadAudioFast() {
+    // 2. حفظ الصوت والصورة في قاعدة بيانات الموبايل (IndexedDB) + تخطي الصمت في أول الأغنية
+    function openOfflineDB() {
+      return new Promise((resolve, reject) => {
+        const req = indexedDB.open('WeddingMediaStorageDB', 3);
+        req.onupgradeneeded = (e) => {
+          const db = e.target.result;
+          if (!db.objectStoreNames.contains('media')) {
+            db.createObjectStore('media');
+          }
+        };
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    function detectLeadingSilence(arrayBuf) {
       try {
-        const res = await fetch('audio.mp3', { cache: 'force-cache' });
-        if(res.ok && weddingAudio.paused) {
-          const blob = await res.blob();
-          weddingAudio.src = URL.createObjectURL(blob);
-          weddingAudio.load();
-        }
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const tempCtx = new AudioCtx();
+        tempCtx.decodeAudioData(arrayBuf, (audioBuffer) => {
+          const channelData = audioBuffer.getChannelData(0);
+          const sampleRate = audioBuffer.sampleRate;
+          const maxScanSamples = Math.min(channelData.length, sampleRate * 8);
+          for (let i = 0; i < maxScanSamples; i += 100) {
+            if (Math.abs(channelData[i]) > 0.015) {
+              detectedStartOffset = Math.max(0, (i / sampleRate) - 0.05);
+              if (weddingAudio && weddingAudio.paused && weddingAudio.currentTime === 0) {
+                weddingAudio.currentTime = detectedStartOffset;
+              }
+              break;
+            }
+          }
+          tempCtx.close().catch(() => {});
+        }, () => {
+          tempCtx.close().catch(() => {});
+        });
       } catch (e) {}
     }
-    loadAudioFast();
 
-    weddingAudio.addEventListener('playing', () => { isPlaying = true; updateAudioUI(true); });
-    weddingAudio.addEventListener('pause', () => { isPlaying = false; updateAudioUI(false); });
+    async function loadOrSaveOfflineMedia(key, url, mimeType, isAudio) {
+      try {
+        const db = await openOfflineDB();
+        const cachedBlob = await new Promise((res) => {
+          const tx = db.transaction('media', 'readonly');
+          const getReq = tx.objectStore('media').get(key);
+          getReq.onsuccess = () => res(getReq.result);
+          getReq.onerror = () => res(null);
+        });
 
-    let wasPlayingBeforeHide = false;
+        if (cachedBlob && cachedBlob.size > 1000) {
+          if (isAudio) {
+            cachedBlob.arrayBuffer().then(buf => detectLeadingSilence(buf)).catch(() => {});
+          }
+          return URL.createObjectURL(cachedBlob);
+        }
+
+        const netRes = await fetch(url, { cache: 'force-cache' });
+        if (netRes.ok) {
+          const arrBuf = await netRes.arrayBuffer();
+          if (isAudio) {
+            detectLeadingSilence(arrBuf.slice(0));
+          }
+          const newBlob = new Blob([arrBuf], { type: mimeType });
+          const tx = db.transaction('media', 'readwrite');
+          tx.objectStore('media').put(newBlob, key);
+          return URL.createObjectURL(newBlob);
+        }
+      } catch (e) {}
+      return null;
+    }
+
+    (async function initOfflineAssets() {
+      const offlineAudioUrl = await loadOrSaveOfflineMedia('wedding_audio_v3', 'audio.mp3', 'audio/mpeg', true);
+      if (offlineAudioUrl && weddingAudio.paused) {
+        weddingAudio.src = offlineAudioUrl;
+        weddingAudio.load();
+      }
+
+      const offlineImgUrl = await loadOrSaveOfflineMedia('wedding_couple_v3', 'couple.jpg', 'image/jpeg', false);
+      const imgEl = document.getElementById('couplePhotoImg');
+      if (offlineImgUrl && imgEl) {
+        imgEl.src = offlineImgUrl;
+      }
+    })();
+
+    weddingAudio.addEventListener('playing', () => {
+      isPlaying = true;
+      updateAudioUI(true);
+    });
+
+    weddingAudio.addEventListener('pause', () => {
+      isPlaying = false;
+      updateAudioUI(false);
+    });
+
+    weddingAudio.addEventListener('ended', () => {
+      weddingAudio.currentTime = detectedStartOffset;
+      weddingAudio.play().catch(() => {});
+    });
+
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
-        if (!weddingAudio.paused) { wasPlayingBeforeHide = true; weddingAudio.pause(); }
+        if (weddingAudio && !weddingAudio.paused) {
+          wasPlayingBeforeHide = true;
+          weddingAudio.pause();
+        }
       } else {
-        if (wasPlayingBeforeHide && envelopeOpened) { wasPlayingBeforeHide = false; weddingAudio.play().catch(()=>{}); }
+        if (wasPlayingBeforeHide && envelopeOpened) {
+          wasPlayingBeforeHide = false;
+          playAudioInstant();
+        }
       }
     });
 
+    function playAudioInstant() {
+      if (!weddingAudio) return;
+      weddingAudio.muted = false;
+      weddingAudio.volume = 1.0;
+
+      if (weddingAudio.currentTime < detectedStartOffset && detectedStartOffset > 0) {
+        try { weddingAudio.currentTime = detectedStartOffset; } catch (e) {}
+      }
+
+      const playPromise = weddingAudio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          isPlaying = true;
+          updateAudioUI(true);
+        }).catch(() => {});
+      }
+    }
+
+    function pauseAudioDirectly() {
+      wasPlayingBeforeHide = false;
+      if (weddingAudio) {
+        weddingAudio.pause();
+      }
+      isPlaying = false;
+      updateAudioUI(false);
+    }
+
     function toggleAudioPlayback() {
-      if (!weddingAudio.paused) { weddingAudio.pause(); showToast('تم الإيقاف 🔇'); }
-      else { weddingAudio.play().catch(()=>{}); showToast('جاري التشغيل 🎵'); }
+      if (!weddingAudio.paused) {
+        pauseAudioDirectly();
+        showToast('تم إيقاف الصوت مؤقتاً 🔇');
+      } else {
+        playAudioInstant();
+        showToast('جاري تشغيل الموسيقى 🎵');
+      }
     }
 
     function updateAudioUI(playing) {
       const discIcon = document.getElementById('discIcon');
       const eqVisual = document.getElementById('equalizerVisual');
-      if (playing) { discIcon.classList.add('playing'); eqVisual.classList.add('playing'); } 
-      else { discIcon.classList.remove('playing'); eqVisual.classList.remove('playing'); }
+      const btnLabel = document.getElementById('audioBtnLabel');
+
+      if (playing) {
+        discIcon.classList.add('playing');
+        eqVisual.classList.add('playing');
+        btnLabel.innerText = 'تعمل الآن';
+      } else {
+        discIcon.classList.remove('playing');
+        eqVisual.classList.remove('playing');
+        btnLabel.innerText = 'تشغيل الموسيقى';
+      }
     }
 
-    // تطبيقات التوصيل والملاحة الذكية
+    // ====================================================================
+    // 3. فتح تطبيقات التوصيل الأصلية مباشرة على الهاتف (Android Intent & iOS Deep Links)
+    // ====================================================================
     function copyVenueAddressForRide() {
       copyTextToClipboard(VENUE_FULL_ADDRESS, 'تم نسخ عنوان القاعة! الصقه في تطبيق التوصيل 🚕');
     }
 
-    function openRideApp(appType) {
-      copyTextToClipboard(VENUE_FULL_ADDRESS, 'تم نسخ عنوان القاعة وجاري فتح التطبيق 🚕');
+    function launchNativeApp(androidIntentUrl, iosSchemeUrl, storeFallbackUrl) {
+      const ua = navigator.userAgent || '';
+      const isAndroid = /android/i.test(ua);
+      const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
 
-      if (appType === 'uber') {
-        const uberUrl = `https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[latitude]=${VENUE_LAT}&dropoff[longitude]=${VENUE_LNG}&dropoff[nickname]=${encodeURIComponent(VENUE_NAME)}&dropoff[formatted_address]=${encodeURIComponent(VENUE_FULL_ADDRESS)}`;
-        window.open(uberUrl, '_blank');
-      } else if (appType === 'careem') {
-        window.open('https://app.careem.com/', '_blank');
-      } else if (appType === 'indrive') {
-        window.location.href = 'indriver://';
+      if (isAndroid) {
+        // على أندرويد: استخدام Intent الرسمي لفتح التطبيق المثبت مباشرةً
+        window.location.href = androidIntentUrl;
+      } else if (isIOS) {
+        // على آيفون: فتح مسار التطبيق المباشر مع تحويل للمتجر إذا لم يكن مثبتاً
+        const start = Date.now();
+        window.location.href = iosSchemeUrl;
         setTimeout(() => {
-          showToast('تم نسخ اسم القاعة: الصقه في خانة الوجهة داخل إن درايف 🚕');
-        }, 600);
-      } else if (appType === 'didi') {
-        window.open('https://www.didiglobal.com/', '_blank');
+          if (!document.hidden && (Date.now() - start < 2000)) {
+            window.location.href = storeFallbackUrl;
+          }
+        }, 1400);
+      } else {
+        window.open(storeFallbackUrl, '_blank');
       }
     }
 
+    function openRideApp(appType) {
+      // نسخ عنوان القاعة في الحافظة أولاً لتسهيل لصقه داخل التطبيق
+      copyTextToClipboard(VENUE_FULL_ADDRESS, 'تم نسخ عنوان القاعة وجاري فتح التطبيق 🚕');
+
+      if (appType === 'uber') {
+        const uberQuery = `?action=setPickup&pickup=my_location&dropoff[latitude]=${VENUE_LAT}&dropoff[longitude]=${VENUE_LNG}&dropoff[nickname]=${encodeURIComponent(VENUE_NAME)}&dropoff[formatted_address]=${encodeURIComponent(VENUE_FULL_ADDRESS)}`;
+        const uberFallback = `https://m.uber.com/ul/${uberQuery}`;
+        const uberAndroidIntent = `intent://${uberQuery}#Intent;scheme=uber;package=com.ubercab;S.browser_fallback_url=${encodeURIComponent(uberFallback)};end`;
+        const uberIosScheme = `uber://${uberQuery}`;
+        launchNativeApp(uberAndroidIntent, uberIosScheme, uberFallback);
+      }
+      else if (appType === 'careem') {
+        const careemFallback = 'https://play.google.com/store/apps/details?id=com.careem.acma';
+        const careemIosStore = 'https://apps.apple.com/eg/app/careem-rides-food-more/id592978487';
+        const careemAndroidIntent = `intent://open#Intent;scheme=careem;package=com.careem.acma;S.browser_fallback_url=${encodeURIComponent(careemFallback)};end`;
+        launchNativeApp(careemAndroidIntent, 'careem://', careemIosStore);
+      }
+      else if (appType === 'indrive') {
+        const indriveFallback = 'https://play.google.com/store/apps/details?id=sinet.startup.inDriver';
+        const indriveIosStore = 'https://apps.apple.com/eg/app/indrive-save-on-city-rides/id780125801';
+        const indriveAndroidIntent = `intent://open#Intent;scheme=indriver;package=sinet.startup.inDriver;S.browser_fallback_url=${encodeURIComponent(indriveFallback)};end`;
+        launchNativeApp(indriveAndroidIntent, 'indriver://', indriveIosStore);
+      }
+      else if (appType === 'didi') {
+        const didiFallback = 'https://play.google.com/store/apps/details?id=com.didiglobal.passenger';
+        const didiIosStore = 'https://apps.apple.com/eg/app/didi-rider-affordable-rides/id1362398401';
+        const didiAndroidIntent = `intent://open#Intent;scheme=didipasnger;package=com.didiglobal.passenger;S.browser_fallback_url=${encodeURIComponent(didiFallback)};end`;
+        launchNativeApp(didiAndroidIntent, 'didipasnger://', didiIosStore);
+      }
+    }
+
+    // 4. فتح المظروف مع تناثر غبار الذهب الخفيف (خالي من اللاج)
     let sparklesList = [];
+
     function triggerGoldenSparkleBurst(originX, originY) {
-      const colors = ['#F4D37A', '#D4AF37', '#FFF'];
-      for (let i = 0; i < 25; i++) {
-        const angle = (Math.PI * 2 * i) / 25;
-        const speed = Math.random() * 4 + 2;
+      const colors = ['#FFF8D6', '#F4D37A', '#D4AF37', '#FFFFFF'];
+      for (let i = 0; i < 28; i++) {
+        const angle = (Math.PI * 2 * i) / 28;
+        const speed = Math.random() * 4.5 + 2;
         sparklesList.push({
-          x: originX, y: originY,
-          vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed - 1,
-          radius: Math.random() * 2.5 + 1.5, alpha: 1, color: colors[Math.floor(Math.random() * colors.length)]
+          x: originX,
+          y: originY,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed - 1,
+          radius: Math.random() * 2.8 + 1.5,
+          alpha: 1,
+          decay: 0.022,
+          color: colors[Math.floor(Math.random() * colors.length)]
         });
       }
     }
 
     function openEnvelopeAndPlay(evt) {
+      if (weddingAudio && weddingAudio.paused) {
+        playAudioInstant();
+      }
+
       if (envelopeOpened) return;
       envelopeOpened = true;
-      if (weddingAudio && weddingAudio.paused) weddingAudio.play().catch(()=>{});
 
       const sealEl = document.getElementById('waxSealEl');
       if (sealEl) {
         const rect = sealEl.getBoundingClientRect();
         triggerGoldenSparkleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
       }
-      
+
       const box = document.getElementById('envelopeBox');
       const screen = document.getElementById('envelope-screen');
+
       if (box) box.classList.add('is-opening');
-      setTimeout(() => { if (screen) screen.classList.add('opened'); }, 600);
+
+      setTimeout(() => {
+        if (screen) screen.classList.add('opened');
+      }, 650);
     }
 
     function recloseEnvelope() {
       envelopeOpened = false;
-      document.getElementById('envelopeBox').classList.remove('is-opening');
-      document.getElementById('envelope-screen').classList.remove('opened');
+      const box = document.getElementById('envelopeBox');
+      const screen = document.getElementById('envelope-screen');
+      if (box) box.classList.remove('is-opening');
+      if (screen) screen.classList.remove('opened');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    function handleImageFallback(img) {
+      const fallbacks = ["1000436120.jpg", "couple.jpg.jpg", "couple.jpeg", "couple.png", "Couple.jpg"];
+      const currentAttempt = parseInt(img.dataset.attempt || "0", 10);
+      if (currentAttempt < fallbacks.length) {
+        img.dataset.attempt = currentAttempt + 1;
+        img.src = fallbacks[currentAttempt];
+      }
+    }
+
+    // 5. مراقب التمرير الانسيابي (IntersectionObserver Scroll Reveal)
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      revealElements.forEach((el) => revealObserver.observe(el));
+    } else {
+      revealElements.forEach((el) => el.classList.add('in-view'));
+    }
+
+    // 6. تأثير 3D سلس بـ requestAnimationFrame لمنع أي لاج
     const couple3DStage = document.getElementById('couple3DStage');
     const couple3DCard = document.getElementById('couple3DCard');
-    let ticking = false;
+    let tiltTicking = false;
 
     if (couple3DStage && couple3DCard) {
-      const update3D = (clientX, clientY) => {
+      const updateTilt3D = (clientX, clientY) => {
         const rect = couple3DStage.getBoundingClientRect();
         const x = clientX - rect.left - rect.width / 2;
         const y = clientY - rect.top - rect.height / 2;
-        const rotateY = Math.max(-10, Math.min(10, (x / (rect.width / 2)) * 10));
-        const rotateX = Math.max(-10, Math.min(10, -(y / (rect.height / 2)) * 10));
+        const rotateY = Math.max(-12, Math.min(12, (x / (rect.width / 2)) * 10));
+        const rotateX = Math.max(-10, Math.min(10, -(y / (rect.height / 2)) * 9));
         couple3DCard.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale(1.02)`;
-        ticking = false;
+        tiltTicking = false;
       };
 
+      couple3DStage.addEventListener('mousemove', (e) => {
+        if (!tiltTicking) {
+          requestAnimationFrame(() => updateTilt3D(e.clientX, e.clientY));
+          tiltTicking = true;
+        }
+      });
+
+      couple3DStage.addEventListener('mouseleave', () => {
+        couple3DCard.style.transform = '';
+      });
+
       couple3DStage.addEventListener('touchmove', (e) => {
-        if (!ticking && e.touches[0]) {
-          window.requestAnimationFrame(() => update3D(e.touches[0].clientX, e.touches[0].clientY));
-          ticking = true;
+        if (!tiltTicking && e.touches[0]) {
+          const touchX = e.touches[0].clientX;
+          const touchY = e.touches[0].clientY;
+          requestAnimationFrame(() => updateTilt3D(touchX, touchY));
+          tiltTicking = true;
         }
       }, { passive: true });
-      
-      couple3DStage.addEventListener('touchend', () => { couple3DCard.style.transform = ''; });
+
+      couple3DStage.addEventListener('touchend', () => {
+        couple3DCard.style.transform = '';
+      });
     }
 
-    const revealElements = document.querySelectorAll('.scroll-reveal');
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('in-view'); });
-      }, { threshold: 0.1 });
-      revealElements.forEach(el => observer.observe(el));
-    } else {
-      revealElements.forEach(el => el.classList.add('in-view'));
-    }
-
+    // 7. إرسال رد الحضور أو الاعتذار لرقم 01098303210 على واتساب
     function sendWhatsAppRSVP(status, evt) {
       if (evt && evt.currentTarget) {
         const rect = evt.currentTarget.getBoundingClientRect();
         triggerGoldenSparkleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
       }
+
       const guestName = document.getElementById('guestNameInput').value.trim();
       const guestWish = document.getElementById('guestWishInput').value.trim();
-      let message = status === 'attend' 
-        ? `✨ *ألف مبروك للعروسين محمد & رغدة*\n\nيسعدني *تأكيد حضوري* لحفل الزفاف يوم السبت 16/01/2027 🤍`
-        : `🌸 *ألف مبروك للعروسين محمد & رغدة*\n\n*أعتذر لظروف خاصة* تمنعني من الحضور، خالص التهاني والدعوات 🤍`;
-      if (guestWish) message += `\n💌 "${guestWish}"`;
-      if (guestName) message += `\n✍️ ${guestName}`;
-      setTimeout(() => { window.open(`https://wa.me/${GROOM_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank'); }, 200);
+
+      let message = '';
+
+      if (status === 'attend') {
+        message =
+          `✨ *ألف مبروك للعروسين محمد & رغدة* 🤵‍♂️👰‍♀️💍\n\n` +
+          `يسعدني ويشرفني *تأكيد حضوري* لمشاركتكم فرحة العمر في حفل زفافكم السعيد يوم السبت (16/01/2027) بقاعة قصر الشوق إن شاء الله 🤍🎉\n\n` +
+          `بارك الله لكما وبارك عليكما وجمع بينكما في خير ✨`;
+      } else {
+        message =
+          `🌸 *ألف مبروك للعروسين محمد & رغدة* 🤵‍♂️👰‍♀️💍\n\n` +
+          `كنت أتمنى من قلبي التواجد معكم ومشاركتكم هذه الليلة الجميلة، ولكن *أعتذر بكل ود لظروف خاصة* تمنعني من الحضور 🤍\n\n` +
+          `خالص الدعوات القلبية لكما بحياة زوجية سعيدة ومباركة، بارك الله لكما وجمع بينكما في خير ✨`;
+      }
+
+      if (guestWish) {
+        message += `\n\n💌 *تهنئة خاصة:* "${guestWish}"`;
+      }
+
+      if (guestName) {
+        message += `\n\n✍️ *المرسل:* ${guestName}`;
+      }
+
+      const encodedMsg = encodeURIComponent(message);
+      setTimeout(() => {
+        window.open(`https://wa.me/${GROOM_WHATSAPP_NUMBER}?text=${encodedMsg}`, '_blank');
+      }, 240);
     }
 
-    const weddingDate = new Date("2027-01-16T19:00:00+02:00").getTime();
-    setInterval(() => {
-      const diff = weddingDate - new Date().getTime();
-      if (diff > 0) {
-        document.getElementById('c-days').innerText = String(Math.floor(diff / 86400000)).padStart(2, '0');
-        document.getElementById('c-hours').innerText = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
-        document.getElementById('c-mins').innerText = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-        const secEl = document.getElementById('c-secs');
-        secEl.innerText = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-        secEl.classList.add('tick-pulse');
-        setTimeout(() => secEl.classList.remove('tick-pulse'), 150);
-      }
-    }, 1000);
+    const weddingTargetDate = new Date("2027-01-16T19:00:00+02:00").getTime();
 
+    function updateWeddingCountdown() {
+      const currentTime = new Date().getTime();
+      const diff = weddingTargetDate - currentTime;
+
+      if (diff > 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('c-days').innerText = String(days).padStart(2, '0');
+        document.getElementById('c-hours').innerText = String(hours).padStart(2, '0');
+        document.getElementById('c-mins').innerText = String(mins).padStart(2, '0');
+
+        const secsEl = document.getElementById('c-secs');
+        if (secsEl) {
+          secsEl.innerText = String(secs).padStart(2, '0');
+          secsEl.classList.add('tick-pulse');
+          setTimeout(() => secsEl.classList.remove('tick-pulse'), 150);
+        }
+      } else {
+        const countdownEl = document.querySelector('.countdown-section');
+        if (countdownEl) {
+          countdownEl.innerHTML = `
+            <div style="color: var(--gold-dark); font-weight: 800; font-size: 1.2rem; padding: 12px;">
+              🎉 اليوم هو موعد حفل الزفاف المبارك! أهلاً وسهلاً بكم 🎉
+            </div>
+          `;
+        }
+      }
+    }
+
+    setInterval(updateWeddingCountdown, 1000);
+    updateWeddingCountdown();
+
+    // 8. رسم البتلات الرقيقة فائقة الخفة (60fps بدون استهلاك المعالج)
     const canvas = document.getElementById('petals-canvas');
     const ctx = canvas.getContext('2d');
-    let w = canvas.width = window.innerWidth;
-    let h = canvas.height = window.innerHeight;
+    let canvasWidth = canvas.width = window.innerWidth;
+    let canvasHeight = canvas.height = window.innerHeight;
+
     let petalsActive = true;
-    let pList = Array.from({length: 11}, () => initPetal({}));
+    let petalsList = [];
+    const TOTAL_PETALS = 11;
 
-    window.addEventListener('resize', () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; });
+    window.addEventListener('resize', () => {
+      canvasWidth = canvas.width = window.innerWidth;
+      canvasHeight = canvas.height = window.innerHeight;
+    });
 
-    function initPetal(p) {
-      p.x = Math.random() * w; p.y = -20 - Math.random() * 40; p.s = Math.random() * 4 + 8;
-      p.vx = (Math.random() - 0.5) * 0.4; p.vy = Math.random() * 0.35 + 0.4;
-      p.rZ = Math.random() * 6; p.vRz = (Math.random() - 0.5) * 0.014;
-      p.rY = Math.random() * 6; p.vRy = Math.random() * 0.018 + 0.01;
-      p.swA = Math.random() * 6; p.c = `rgba(244, 215, 222, ${Math.random()*0.4 + 0.3})`;
-      return p;
+    const petalColors = [
+      'rgba(248, 198, 210, 0.42)',
+      'rgba(245, 232, 200, 0.45)',
+      'rgba(255, 240, 245, 0.48)'
+    ];
+
+    class LightPetal {
+      constructor(customX, customY) {
+        this.init(customX, customY);
+      }
+
+      init(customX, customY) {
+        this.x = (customX !== undefined) ? customX : Math.random() * canvasWidth;
+        this.y = (customY !== undefined) ? customY : -20 - Math.random() * 40;
+        this.size = Math.random() * 4 + 8;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = Math.random() * 0.35 + 0.4;
+        this.rotZ = Math.random() * Math.PI * 2;
+        this.rotSpeedZ = (Math.random() - 0.5) * 0.014;
+        this.rotY = Math.random() * Math.PI * 2;
+        this.rotSpeedY = Math.random() * 0.018 + 0.01;
+        this.swayAngle = Math.random() * Math.PI * 2;
+        this.color = petalColors[Math.floor(Math.random() * petalColors.length)];
+      }
+
+      update() {
+        this.rotZ += this.rotSpeedZ;
+        this.rotY += this.rotSpeedY;
+        this.swayAngle += 0.012;
+        this.x += this.vx + Math.sin(this.swayAngle) * 0.45;
+        this.y += this.vy;
+        if (this.y > canvasHeight + 25 || this.x < -25 || this.x > canvasWidth + 25) {
+          this.init();
+        }
+      }
+
+      render(targetCtx) {
+        targetCtx.save();
+        targetCtx.translate(this.x, this.y);
+        targetCtx.rotate(this.rotZ);
+        targetCtx.scale(Math.cos(this.rotY), 1);
+
+        const s = this.size;
+        targetCtx.beginPath();
+        targetCtx.moveTo(0, -s * 0.6);
+        targetCtx.bezierCurveTo(s * 0.7, -s * 0.3, s * 0.7, s * 0.3, 0, s * 0.6);
+        targetCtx.bezierCurveTo(-s * 0.7, s * 0.3, -s * 0.7, -s * 0.3, 0, -s * 0.6);
+        targetCtx.fillStyle = this.color;
+        targetCtx.fill();
+        targetCtx.restore();
+      }
     }
 
-    function renderLoop() {
-      ctx.clearRect(0, 0, w, h);
+    for (let i = 0; i < TOTAL_PETALS; i++) {
+      petalsList.push(new LightPetal(Math.random() * canvasWidth, Math.random() * canvasHeight));
+    }
+
+    function renderPetalsLoop() {
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
       if (petalsActive) {
-        pList.forEach(p => {
-          p.rZ += p.vRz; p.rY += p.vRy; p.swA += 0.01; p.x += p.vx + Math.sin(p.swA)*0.45; p.y += p.vy;
-          if (p.y > h + 25 || p.x < -25 || p.x > w + 25) initPetal(p);
-          ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rZ); ctx.scale(Math.cos(p.rY), 1);
-          ctx.beginPath(); ctx.moveTo(0, -p.s); ctx.quadraticCurveTo(p.s, 0, 0, p.s); ctx.quadraticCurveTo(-p.s, 0, 0, -p.s);
-          ctx.fillStyle = p.c; ctx.fill(); ctx.restore();
-        });
+        for (let i = 0; i < petalsList.length; i++) {
+          petalsList[i].update();
+          petalsList[i].render(ctx);
+        }
       }
+
       for (let i = sparklesList.length - 1; i >= 0; i--) {
-        const sp = sparklesList[i]; sp.x += sp.vx; sp.y += sp.vy; sp.vy += 0.06; sp.alpha -= 0.03;
-        if (sp.alpha <= 0) { sparklesList.splice(i, 1); continue; }
-        ctx.globalAlpha = sp.alpha; ctx.fillStyle = sp.color;
-        ctx.beginPath(); ctx.arc(sp.x, sp.y, sp.radius, 0, 6); ctx.fill();
+        const sp = sparklesList[i];
+        sp.x += sp.vx;
+        sp.y += sp.vy;
+        sp.vy += 0.06;
+        sp.alpha -= sp.decay;
+
+        if (sp.alpha <= 0) {
+          sparklesList.splice(i, 1);
+          continue;
+        }
+
+        ctx.globalAlpha = sp.alpha;
+        ctx.fillStyle = sp.color;
+        ctx.beginPath();
+        ctx.arc(sp.x, sp.y, sp.radius, 0, Math.PI * 2);
+        ctx.fill();
       }
       ctx.globalAlpha = 1;
-      requestAnimationFrame(renderLoop);
+
+      requestAnimationFrame(renderPetalsLoop);
     }
-    renderLoop();
+    renderPetalsLoop();
 
     function togglePetals() {
       petalsActive = !petalsActive;
-      document.getElementById('petalsToggleBtn').innerText = petalsActive ? '🌸 البتلات' : '🌸 متوقفة';
+      const btn = document.getElementById('petalsToggleBtn');
+      if (petalsActive) {
+        btn.innerText = '🌸 البتلات';
+        showToast('تم تشغيل البتلات الرقيقة 🌸');
+      } else {
+        btn.innerText = '🌸 متوقفة';
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        showToast('تم إيقاف تساقط البتلات');
+      }
     }
 
     function showToast(text) {
-      const t = document.getElementById('toast-msg');
-      document.getElementById('toast-text-content').innerText = text;
-      t.classList.add('visible');
-      setTimeout(() => t.classList.remove('visible'), 2500);
+      const toast = document.getElementById('toast-msg');
+      const label = document.getElementById('toast-text-content');
+      label.innerText = text;
+      toast.classList.add('visible');
+      setTimeout(() => {
+        toast.classList.remove('visible');
+      }, 2800);
     }
 
     function copyTextToClipboard(text, successMsg) {
-      const el = document.createElement('textarea'); el.value = text; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el);
-      showToast(successMsg);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(successMsg);
+        }).catch(() => {});
+        return;
+      }
+      const dummyInput = document.createElement('input');
+      dummyInput.value = text;
+      document.body.appendChild(dummyInput);
+      dummyInput.select();
+      try {
+        document.execCommand('copy');
+        showToast(successMsg);
+      } catch (e) {}
+      document.body.removeChild(dummyInput);
     }
 
     function copyInviteLink() {
-      copyTextToClipboard(BASE_INVITE_URL, 'تم نسخ رابط الدعوة 📋');
+      copyTextToClipboard(BASE_INVITE_URL, 'تم نسخ رابط الدعوة بنجاح! 📋');
     }
 
     function shareInviteWhatsApp() {
-      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent("دعوة زفاف محمد ورغدة 🤍\n" + BASE_INVITE_URL)}`, '_blank');
+      const msg = encodeURIComponent(
+        `﷽\n` +
+        `﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ﴾\n\n` +
+        `يسعدنا ويشرفنا دعوتكم لحضور حفل زفاف:\n` +
+        `🤵‍♂️ *محمد* & 👰‍♀️ *رغدة*\n\n` +
+        `🗓 *الموعد:* السبت 16 يناير 2027 - الساعة 07:00 مساءً\n` +
+        `📍 *المكان:* قاعة قصر الشوق - دار الأسلحة والذخيرة\n` +
+        `🗺 *موقع القاعة على خرائط Google:* https://maps.app.goo.gl/geGT5azkam9drc3X9?g_st=ac\n\n` +
+        `رابط الدعوة الإلكترونية:\n` + BASE_INVITE_URL + `\n\n` +
+        `حضوركم يكتمل به سرورنا 🤍✨`
+      );
+      window.open(`https://api.whatsapp.com/send?text=${msg}`, '_blank');
     }
   </script>
 </body>
