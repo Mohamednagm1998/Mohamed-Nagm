@@ -249,7 +249,6 @@
       margin-bottom: 8px;
     }
 
-    /* لمعة ورق الذهب على اسم العروسين بدون فلاتر ثقيلة */
     .envelope-title {
       font-family: 'Amiri', serif;
       font-size: 2.95rem;
@@ -286,7 +285,6 @@
       will-change: transform;
     }
 
-    /* نزول هادئ وبطيء للظرف أثناء صعود بطاقة الدعوة منه */
     #envelope-screen.opening-active .envelope-floral-wrap {
       transform: translate3d(0, 68px, 0);
     }
@@ -380,7 +378,6 @@
       pointer-events: none;
     }
 
-    /* حركة صعود بطاقة الدعوة من جيب الظرف ببطء ونعومة */
     .envelope-box.is-opening .envelope-card-inside {
       transform: translate3d(0, -142px, 0) scale3d(1.04, 1.04, 1);
     }
@@ -420,7 +417,7 @@
       .envelope-fold-bottom { border-width: 0 195px 145px 195px; }
     }
 
-    /* 4. غطاء الظرف العلوي (يفتح ببطء ونعومة) */
+    /* 4. غطاء الظرف العلوي */
     .envelope-fold-top {
       position: absolute;
       top: 0;
@@ -447,7 +444,7 @@
       z-index: 2;
     }
 
-    /* 5. الشريط والختم الشمعي النابض (GPU Scale Pulse) */
+    /* 5. الشريط والختم الشمعي النابض */
     .wax-ribbon-tail {
       position: absolute; top: 50%; width: 14px; height: 48px;
       background: linear-gradient(180deg, #D4AF37 0%, #A87B1C 60%, #6E4E0B 100%);
@@ -615,7 +612,7 @@
     }
 
     /* ========================================================
-       منصة صورة العروسين ثلاثية الأبعاد (حركة 3D + شعاع اللمعة على الـ GPU)
+       منصة صورة العروسين ثلاثية الأبعاد
        ======================================================== */
     .couple-frame-container {
       position: relative;
@@ -666,7 +663,6 @@
       transform: translateZ(0);
     }
 
-    /* شعاع اللمعة المتحرك عبر الصورة (باستخدام translate3d لمنع اللاج تماماً) */
     .couple-photo-inner::after {
       content: "";
       position: absolute;
@@ -778,7 +774,6 @@
       margin: 6px 0 14px;
     }
 
-    /* لمعة ورق الذهب على اسم العروسين داخل البطاقة */
     .names-display {
       font-family: 'Amiri', serif;
       font-size: 3.4rem;
@@ -1275,12 +1270,6 @@
       font-family: 'Cairo', sans-serif;
     }
 
-    .btn-wedding-gold {
-      background: var(--gold-gradient);
-      color: #FFFFFF;
-      box-shadow: 0 3px 0 #664B0B;
-    }
-
     .btn-wedding-cal {
       background: #FFFFFF;
       color: var(--text-dark);
@@ -1485,7 +1474,7 @@
     </div>
   </header>
 
-  <!-- شاشة المظروف الافتتاحية (بدون الزر السفلي، مع أنيميشن فتح الظرف وخروج الدعوة السلس) -->
+  <!-- شاشة المظروف الافتتاحية (مع أنيميشن فتح الظرف وخروج الدعوة السلس) -->
   <div id="envelope-screen">
     <div class="envelope-header">
       <div class="badge-invite">✨ دعوة زفاف خاصة ✨</div>
@@ -1849,7 +1838,7 @@
         </div>
       </section>
 
-      <!-- تفاصيل الموعد والمكان + كارت دخول البوابة -->
+      <!-- تفاصيل الموعد والمكان (بطاقة اللوكيشن الموحدة) + كارت دخول البوابة -->
       <section class="details-group scroll-reveal">
         <div class="detail-card">
           <div class="detail-icon-wrap">🗓</div>
@@ -1877,7 +1866,7 @@
             <div class="detail-label" style="color: var(--gold-dark); font-weight: 700;">مكان الحفل (طريق صلاح سالم - أمام مسجد الرحمن الرحيم)</div>
             <div class="detail-text-bold" style="color: #1A1A1A;">قاعة قصر الشوق - دار الاسلحة و الذخيرة</div>
             <div class="venue-cta-badge">
-              <span>📌 انقر هنا لفتح اللوكيشن على خرائط Google</span>
+              <span>🗺️ اضغط هنا لفتح اللوكيشن على خرائط Google Maps</span>
             </div>
           </div>
         </a>
@@ -1958,15 +1947,8 @@
         </div>
       </section>
 
+      <!-- تم حذف زر Google Maps المكرر من هنا لتخفيف الصفحة -->
       <section class="actions-stack scroll-reveal">
-        <a href="https://maps.app.goo.gl/geGT5azkam9drc3X9?g_st=ac" 
-           target="_blank" 
-           rel="noopener noreferrer" 
-           class="btn-wedding btn-wedding-gold">
-          <span>🗺️ الانتقال لموقع القاعة (Google Maps)</span>
-        </a>
-
-        <!-- زر منبه الموبايل الذكي المباشر (.ics) -->
         <button type="button" class="btn-wedding btn-wedding-cal" onclick="downloadSmartAlarmICS()">
           <span>⏰ ضبط منبه وتذكير تلقائي على الموبايل (بدون تسجيل دخول)</span>
         </button>
@@ -2383,12 +2365,10 @@
       }
       if (box) box.classList.add('is-opening');
 
-      // الانتظار بهدوء حتى يفتح الغطاء وتخرج البطاقة ببطء ثم الانتقال للدعوة الرئيسية
       setTimeout(() => {
         if (screen) screen.classList.add('opened');
         if (mainCard) mainCard.classList.add('card-ready');
 
-        // إيقاف شاشة الظرف تماماً من الذاكرة بعد اختفائها لمنع أي لاج أثناء الـ Scroll
         hideEnvelopeTimeout = setTimeout(() => {
           if (envelopeOpened && screen) {
             screen.classList.add('hidden-completely');
@@ -2650,7 +2630,6 @@
         }
       }
 
-      // رسم ذرات الذهب المتوهجة بنظام الدائرتين (توهج خارجي + قلب مضيء) بدون shadowBlur
       for (let i = sparklesList.length - 1; i >= 0; i--) {
         const sp = sparklesList[i];
         sp.x += sp.vx;
