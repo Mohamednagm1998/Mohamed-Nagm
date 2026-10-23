@@ -28,6 +28,7 @@
       --gold-bright: #E2BC72;
       --gold-dark: #8E6823;
       --gold-gradient: linear-gradient(135deg, #F9E7BE 0%, #D4AF37 45%, #A87B1C 85%, #664B0B 100%);
+      --gold-foil-text: linear-gradient(110deg, #7A5612 0%, #C59B38 25%, #FFF2CC 50%, #C59B38 75%, #7A5612 100%);
       --cream-paper: #FFFDF9;
       --card-white: #FFFFFF;
       --text-dark: #272019;
@@ -69,6 +70,7 @@
       height: 100%;
       pointer-events: none;
       z-index: 10001;
+      transform: translateZ(0);
     }
 
     /* ========================================================
@@ -103,7 +105,7 @@
     }
 
     .floating-music-pill:active {
-      transform: scale(0.96);
+      transform: scale3d(0.96, 0.96, 1);
     }
 
     .floating-disc {
@@ -149,16 +151,18 @@
       width: 2.5px;
       background: var(--gold-dark);
       border-radius: 2px;
-      height: 3px;
+      height: 12px;
+      transform: scaleY(0.25);
+      transform-origin: bottom;
     }
 
-    .playing .eq-bar:nth-child(1) { animation: eqJump 0.7s infinite ease-in-out alternate; }
-    .playing .eq-bar:nth-child(2) { animation: eqJump 1s infinite ease-in-out alternate 0.2s; }
-    .playing .eq-bar:nth-child(3) { animation: eqJump 0.6s infinite ease-in-out alternate 0.35s; }
+    .playing .eq-bar:nth-child(1) { animation: eqJumpGPU 0.7s infinite ease-in-out alternate; }
+    .playing .eq-bar:nth-child(2) { animation: eqJumpGPU 1s infinite ease-in-out alternate 0.2s; }
+    .playing .eq-bar:nth-child(3) { animation: eqJumpGPU 0.6s infinite ease-in-out alternate 0.35s; }
 
-    @keyframes eqJump {
-      0% { height: 3px; }
-      100% { height: 12px; }
+    @keyframes eqJumpGPU {
+      0% { transform: scaleY(0.25); }
+      100% { transform: scaleY(1); }
     }
 
     .floating-quick-actions {
@@ -194,7 +198,7 @@
       justify-content: center;
       align-items: center;
       z-index: 9999;
-      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.9s;
+      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1);
       padding: 20px 10px;
       overflow: hidden;
       will-change: opacity;
@@ -203,8 +207,11 @@
 
     #envelope-screen.opened {
       opacity: 0;
-      visibility: hidden;
       pointer-events: none;
+    }
+
+    #envelope-screen.hidden-completely {
+      display: none !important;
     }
 
     .envelope-header {
@@ -212,11 +219,18 @@
       text-align: center;
       margin-bottom: 38px;
       z-index: 10;
+      animation: gentleHoverGPU 3.8s infinite ease-in-out;
       transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
       will-change: transform, opacity;
     }
 
+    @keyframes gentleHoverGPU {
+      0%, 100% { transform: translate3d(0, 0, 0); }
+      50% { transform: translate3d(0, -5px, 0); }
+    }
+
     #envelope-screen.opening-active .envelope-header {
+      animation: none;
       opacity: 0;
       transform: translate3d(0, -24px, 0);
     }
@@ -235,13 +249,22 @@
       margin-bottom: 8px;
     }
 
+    /* لمعة ورق الذهب على اسم العروسين بدون فلاتر ثقيلة */
     .envelope-title {
       font-family: 'Amiri', serif;
       font-size: 2.95rem;
       font-weight: 700;
-      color: var(--gold-dark);
-      text-shadow: 0 2px 0 #F6E6C4;
+      background: var(--gold-foil-text);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: goldFoilShine 6s linear infinite;
       line-height: 1.3;
+    }
+
+    @keyframes goldFoilShine {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
     }
 
     .envelope-sub {
@@ -259,7 +282,7 @@
       margin: 10px auto;
       z-index: 10;
       transform: translate3d(0, 0, 0);
-      transition: transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
       will-change: transform;
     }
 
@@ -275,10 +298,21 @@
       transform: translateZ(0);
     }
 
-    .floral-top-left { top: -46px; left: -46px; width: 148px; height: 148px; }
-    .floral-bottom-right { bottom: -46px; right: -46px; width: 152px; height: 152px; }
+    .floral-top-left {
+      top: -46px; left: -46px; width: 148px; height: 148px;
+      animation: floralSwayGPU 5.5s infinite ease-in-out alternate;
+    }
+    .floral-bottom-right {
+      bottom: -46px; right: -46px; width: 152px; height: 152px;
+      animation: floralSwayGPU 6.5s infinite ease-in-out alternate-reverse;
+    }
     .floral-top-right { top: -36px; right: -34px; width: 108px; height: 108px; }
     .floral-bottom-left { bottom: -34px; left: -34px; width: 108px; height: 108px; }
+
+    @keyframes floralSwayGPU {
+      0% { transform: rotate3d(0, 0, 1, -2deg); }
+      100% { transform: rotate3d(0, 0, 1, 2deg); }
+    }
 
     @media (max-width: 480px) {
       .floral-top-left { top: -32px; left: -26px; width: 112px; height: 112px; }
@@ -386,7 +420,7 @@
       .envelope-fold-bottom { border-width: 0 195px 145px 195px; }
     }
 
-    /* 4. غطاء الظرف العلوي (يفتح ببطء ونعومة بدون أي فلاتر تسبب لاج) */
+    /* 4. غطاء الظرف العلوي (يفتح ببطء ونعومة) */
     .envelope-fold-top {
       position: absolute;
       top: 0;
@@ -413,7 +447,7 @@
       z-index: 2;
     }
 
-    /* 5. الشريط والختم الشمعي */
+    /* 5. الشريط والختم الشمعي النابض (GPU Scale Pulse) */
     .wax-ribbon-tail {
       position: absolute; top: 50%; width: 14px; height: 48px;
       background: linear-gradient(180deg, #D4AF37 0%, #A87B1C 60%, #6E4E0B 100%);
@@ -428,7 +462,6 @@
 
     .wax-seal {
       position: absolute; top: 48%; left: 50%;
-      transform: translate3d(-50%, -50%, 0) scale3d(1, 1, 1);
       width: 84px; height: 84px;
       background: radial-gradient(circle at 35% 35%, #F7D785 0%, #D4AF37 45%, #996D12 85%, #594008 100%);
       border-radius: 50%;
@@ -437,13 +470,20 @@
       box-shadow: 0 10px 24px rgba(142, 104, 35, 0.45), inset 0 2px 5px rgba(255, 255, 255, 0.8);
       border: 2px dashed rgba(255, 245, 206, 0.85);
       z-index: 10; cursor: pointer;
+      animation: sealPulseGPU 2s infinite ease-in-out alternate;
       transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
       will-change: transform, opacity;
     }
 
+    @keyframes sealPulseGPU {
+      0% { transform: translate3d(-50%, -50%, 0) scale3d(1, 1, 1); }
+      100% { transform: translate3d(-50%, -50%, 0) scale3d(1.06, 1.06, 1); }
+    }
+
     .envelope-box.is-opening .wax-seal {
+      animation: none;
       opacity: 0;
-      transform: translate3d(-50%, -50%, 0) scale3d(0.3, 0.3, 1);
+      transform: translate3d(-50%, -50%, 0) scale3d(0.25, 0.25, 1);
     }
 
     /* ========================================================
@@ -532,7 +572,7 @@
 
     .scroll-reveal {
       opacity: 0;
-      transform: translate3d(0, 16px, 0);
+      transform: translate3d(0, 18px, 0);
       transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
 
@@ -575,7 +615,7 @@
     }
 
     /* ========================================================
-       منصة صورة العروسين ثلاثية الأبعاد
+       منصة صورة العروسين ثلاثية الأبعاد (حركة 3D + شعاع اللمعة على الـ GPU)
        ======================================================== */
     .couple-frame-container {
       position: relative;
@@ -584,7 +624,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      perspective: 900px;
+      perspective: 950px;
     }
 
     .couple-photo-card {
@@ -595,9 +635,17 @@
       background: linear-gradient(145deg, #FFFDF8 0%, #F4E9D2 100%);
       border: 2.2px solid var(--gold-primary);
       border-radius: 140px 140px 26px 26px;
-      box-shadow: 0 16px 32px rgba(142, 104, 35, 0.22), 0 5px 0 #C5A059;
+      box-shadow: 0 18px 36px rgba(142, 104, 35, 0.24), 0 5px 0 #C5A059;
       transform-style: preserve-3d;
+      animation: card3DSwayGPU 6.5s infinite ease-in-out;
       transition: transform 0.15s ease-out;
+      will-change: transform;
+      backface-visibility: hidden;
+    }
+
+    @keyframes card3DSwayGPU {
+      0%, 100% { transform: rotateY(-5deg) rotateX(2.5deg) translate3d(0, 0, 0); }
+      50% { transform: rotateY(5deg) rotateX(-2.5deg) translate3d(0, -4px, 0); }
     }
 
     .couple-3d-halo {
@@ -615,6 +663,27 @@
       position: relative;
       border: 1.5px solid rgba(197, 160, 89, 0.5);
       background: #FAF6ED;
+      transform: translateZ(0);
+    }
+
+    /* شعاع اللمعة المتحرك عبر الصورة (باستخدام translate3d لمنع اللاج تماماً) */
+    .couple-photo-inner::after {
+      content: "";
+      position: absolute;
+      top: -40%;
+      left: 0;
+      width: 55%;
+      height: 180%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42), transparent);
+      transform: translate3d(-220%, 0, 0) rotate(25deg);
+      animation: shineSweepGPU 6s infinite ease-in-out;
+      pointer-events: none;
+      will-change: transform;
+    }
+
+    @keyframes shineSweepGPU {
+      0%, 60% { transform: translate3d(-220%, 0, 0) rotate(25deg); }
+      100% { transform: translate3d(320%, 0, 0) rotate(25deg); }
     }
 
     .couple-photo-img {
@@ -628,7 +697,7 @@
       position: absolute;
       top: -19px;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate3d(-50%, 0, 12px);
       background: var(--gold-gradient);
       color: #FFFFFF;
       width: 42px;
@@ -647,7 +716,7 @@
       position: absolute;
       bottom: -17px;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate3d(-50%, 0, 12px);
       background: var(--gold-gradient);
       color: #FFFFFF;
       padding: 5px 24px;
@@ -673,12 +742,13 @@
     .frame-flower-left { top: 38px; left: -16px; transform: rotate(-15deg); }
 
     /* ========================================================
-       مجسم الخواتم
+       مجسم الخواتم ثلاثي الأبعاد المتحرك بنعومة
        ======================================================== */
     .rings-3d-showcase {
       margin: 8px auto 12px;
       width: 84px;
       height: 58px;
+      perspective: 600px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -688,6 +758,13 @@
       width: 100%;
       height: 100%;
       overflow: visible;
+      animation: ringsSpin3DGPU 5s infinite ease-in-out;
+      will-change: transform;
+    }
+
+    @keyframes ringsSpin3DGPU {
+      0%, 100% { transform: rotateY(-16deg) translate3d(0, 0, 0); }
+      50% { transform: rotateY(16deg) translate3d(0, -4px, 0); }
     }
 
     .wedding-title {
@@ -701,19 +778,22 @@
       margin: 6px 0 14px;
     }
 
+    /* لمعة ورق الذهب على اسم العروسين داخل البطاقة */
     .names-display {
       font-family: 'Amiri', serif;
       font-size: 3.4rem;
       font-weight: 700;
-      color: var(--gold-dark);
-      text-shadow: 0 2px 0 #EFE2C6;
+      background: var(--gold-foil-text);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: goldFoilShine 6s linear infinite;
       line-height: 1.25;
     }
 
     .and-sym {
       font-family: 'Cairo', sans-serif;
       font-size: 1.9rem;
-      color: var(--text-muted);
       margin: 0 8px;
     }
 
@@ -767,6 +847,12 @@
       font-weight: 800;
       color: var(--text-dark);
       line-height: 1.15;
+      transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+      will-change: transform;
+    }
+
+    .count-number.tick-pulse {
+      transform: scale3d(1.13, 1.13, 1);
     }
 
     .count-title {
@@ -1399,7 +1485,7 @@
     </div>
   </header>
 
-  <!-- شاشة المظروف الافتتاحية الفاتحة (تم إزالة الزر السفلي منها) -->
+  <!-- شاشة المظروف الافتتاحية (بدون الزر السفلي، مع أنيميشن فتح الظرف وخروج الدعوة السلس) -->
   <div id="envelope-screen">
     <div class="envelope-header">
       <div class="badge-invite">✨ دعوة زفاف خاصة ✨</div>
@@ -1615,7 +1701,7 @@
         <!-- الطبقة 4: الغطاء العلوي المتحرك -->
         <div class="envelope-fold-top"></div>
 
-        <!-- الطبقة 5: الشريط والختم الشمعي -->
+        <!-- الطبقة 5: الشريط والختم الشمعي النابض -->
         <div class="wax-ribbon-tail wax-ribbon-left"></div>
         <div class="wax-ribbon-tail wax-ribbon-right"></div>
 
@@ -1652,7 +1738,7 @@
         <span class="quran-surah">[سورة الروم: الآية 21]</span>
       </div>
 
-      <!-- إطار صورة العروسين ثلاثي الأبعاد -->
+      <!-- إطار صورة العروسين ثلاثي الأبعاد مع شعاع اللمعة المتحرك -->
       <div class="couple-frame-container scroll-reveal" id="couple3DStage">
         <div class="couple-photo-card" id="couple3DCard">
           <div class="couple-3d-halo"></div>
@@ -1677,7 +1763,7 @@
         </div>
       </div>
 
-      <!-- مجسم خاتمي الزفاف الذهبيين 3D -->
+      <!-- مجسم خاتمي الزفاف الذهبيين 3D المتحرك -->
       <div class="rings-3d-showcase scroll-reveal">
         <svg class="rings-3d-svg" viewBox="0 0 120 75" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -1712,7 +1798,7 @@
         بقلوب تفيض فرحاً وسروراً، نتشرف بدعوتكم لمشاركتنا أجمل ليالي العمر وبداية رحلة حياتنا معاً، لتكتمل سعادتنا بتواجدكم العطر بيننا 🤍
       </p>
 
-      <!-- العداد التنازلي 3D -->
+      <!-- العداد التنازلي 3D مع نبض الثواني -->
       <section class="countdown-section scroll-reveal">
         <div class="countdown-header">
           <span>⏳</span>
@@ -1860,12 +1946,12 @@
         </div>
 
         <div class="rsvp-choices-grid">
-          <button type="button" class="btn-rsvp btn-rsvp-attend" onclick="sendWhatsAppRSVP('attend')">
+          <button type="button" class="btn-rsvp btn-rsvp-attend" onclick="sendWhatsAppRSVP('attend', event)">
             <span>🤍</span>
             <span>يسعدني ويشرفني الحضور ومشاركتكم الفرحة</span>
           </button>
 
-          <button type="button" class="btn-rsvp btn-rsvp-apologize" onclick="sendWhatsAppRSVP('apologize')">
+          <button type="button" class="btn-rsvp btn-rsvp-apologize" onclick="sendWhatsAppRSVP('apologize', event)">
             <span>🌸</span>
             <span>أعتذر لظروف خاصة مع خالص التهاني والدعوات</span>
           </button>
@@ -1934,6 +2020,7 @@
     let wasPlayingBeforeHide = false;
     let envelopeOpened = false;
     let screenWakeLock = null;
+    let hideEnvelopeTimeout = null;
 
     const GROOM_WHATSAPP_NUMBER = "201098303210";
     const BASE_INVITE_URL = "https://mohamednagm1998.github.io/Mohamed-Nagm/";
@@ -2248,8 +2335,28 @@
     }
 
     // ====================================================================
-    // 6. أنيميشن فتح الظرف الهادئ والسلس وخروج بطاقة الدعوة منه بدون أي لاج
+    // 6. ذرات الذهب المضيئة (بدون shadowBlur لمنع اللاج) + أنيميشن فتح الظرف السلس
     // ====================================================================
+    let sparklesList = [];
+
+    function triggerGoldenSparkleBurst(originX, originY) {
+      const colors = ['#FFF8D6', '#F4D37A', '#D4AF37', '#FFE5EC', '#FFFFFF'];
+      for (let i = 0; i < 26; i++) {
+        const angle = (Math.PI * 2 * i) / 26 + (Math.random() - 0.5) * 0.25;
+        const speed = Math.random() * 4.2 + 1.8;
+        sparklesList.push({
+          x: originX,
+          y: originY,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed - 1.1,
+          radius: Math.random() * 2.4 + 1.4,
+          alpha: 1,
+          decay: Math.random() * 0.016 + 0.014,
+          color: colors[i % colors.length]
+        });
+      }
+    }
+
     function openEnvelopeAndPlay(evt) {
       if (envelopeOpened) return;
       envelopeOpened = true;
@@ -2260,31 +2367,52 @@
         playAudioInstant();
       }
 
+      const sealEl = document.getElementById('waxSealEl');
+      if (sealEl) {
+        const rect = sealEl.getBoundingClientRect();
+        triggerGoldenSparkleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+      }
+
       const box = document.getElementById('envelopeBox');
       const screen = document.getElementById('envelope-screen');
       const mainCard = document.getElementById('mainWeddingCard');
 
-      if (screen) screen.classList.add('opening-active');
+      if (screen) {
+        screen.classList.remove('hidden-completely');
+        screen.classList.add('opening-active');
+      }
       if (box) box.classList.add('is-opening');
 
       // الانتظار بهدوء حتى يفتح الغطاء وتخرج البطاقة ببطء ثم الانتقال للدعوة الرئيسية
       setTimeout(() => {
         if (screen) screen.classList.add('opened');
         if (mainCard) mainCard.classList.add('card-ready');
+
+        // إيقاف شاشة الظرف تماماً من الذاكرة بعد اختفائها لمنع أي لاج أثناء الـ Scroll
+        hideEnvelopeTimeout = setTimeout(() => {
+          if (envelopeOpened && screen) {
+            screen.classList.add('hidden-completely');
+          }
+        }, 900);
       }, 2350);
     }
 
     function recloseEnvelope() {
       envelopeOpened = false;
+      if (hideEnvelopeTimeout) clearTimeout(hideEnvelopeTimeout);
+
       const box = document.getElementById('envelopeBox');
       const screen = document.getElementById('envelope-screen');
       const mainCard = document.getElementById('mainWeddingCard');
 
-      if (box) box.classList.remove('is-opening');
       if (screen) {
+        screen.classList.remove('hidden-completely');
+        // إجبار المتصفح على تفعيل العرض قبل إزالة الكلاس
+        void screen.offsetWidth;
         screen.classList.remove('opened');
         screen.classList.remove('opening-active');
       }
+      if (box) box.classList.remove('is-opening');
       if (mainCard) mainCard.classList.remove('card-ready');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -2325,10 +2453,16 @@
         const rect = couple3DStage.getBoundingClientRect();
         const x = clientX - rect.left - rect.width / 2;
         const y = clientY - rect.top - rect.height / 2;
-        const rotateY = Math.max(-10, Math.min(10, (x / (rect.width / 2)) * 8));
+        const rotateY = Math.max(-10, Math.min(10, (x / (rect.width / 2)) * 9));
         const rotateX = Math.max(-8, Math.min(8, -(y / (rect.height / 2)) * 8));
-        couple3DCard.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+        couple3DCard.style.animation = 'none';
+        couple3DCard.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale3d(1.02, 1.02, 1)`;
         tiltTicking = false;
+      };
+
+      const resetTilt3D = () => {
+        couple3DCard.style.transform = '';
+        couple3DCard.style.animation = 'card3DSwayGPU 6.5s infinite ease-in-out';
       };
 
       couple3DStage.addEventListener('mousemove', (e) => {
@@ -2338,9 +2472,7 @@
         }
       });
 
-      couple3DStage.addEventListener('mouseleave', () => {
-        couple3DCard.style.transform = '';
-      });
+      couple3DStage.addEventListener('mouseleave', resetTilt3D);
 
       couple3DStage.addEventListener('touchmove', (e) => {
         if (!tiltTicking && e.touches[0]) {
@@ -2351,13 +2483,16 @@
         }
       }, { passive: true });
 
-      couple3DStage.addEventListener('touchend', () => {
-        couple3DCard.style.transform = '';
-      });
+      couple3DStage.addEventListener('touchend', resetTilt3D);
     }
 
-    // 9. إرسال رد الحضور أو الاعتذار لرقم 01098303210 على واتساب
-    function sendWhatsAppRSVP(status) {
+    // 9. إرسال رد الحضور أو الاعتذار لرقم 01098303210 على واتساب مع احتفالية ذرات الذهب
+    function sendWhatsAppRSVP(status, evt) {
+      if (evt && evt.currentTarget) {
+        const rect = evt.currentTarget.getBoundingClientRect();
+        triggerGoldenSparkleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+      }
+
       const guestName = document.getElementById('guestNameInput').value.trim();
       const guestWish = document.getElementById('guestWishInput').value.trim();
 
@@ -2384,10 +2519,12 @@
       }
 
       const encodedMsg = encodeURIComponent(message);
-      window.open(`https://wa.me/${GROOM_WHATSAPP_NUMBER}?text=${encodedMsg}`, '_blank');
+      setTimeout(() => {
+        window.open(`https://wa.me/${GROOM_WHATSAPP_NUMBER}?text=${encodedMsg}`, '_blank');
+      }, 240);
     }
 
-    // 10. العداد التنازلي + تفعيل وضع يوم الفرح الذكي تلقائياً يوم 16 يناير 2027
+    // 10. العداد التنازلي مع نبض الثواني + وضع يوم الفرح الذكي تلقائياً يوم 16 يناير 2027
     const weddingTargetDate = new Date("2027-01-16T19:00:00+02:00").getTime();
 
     function updateWeddingCountdown() {
@@ -2410,7 +2547,13 @@
         document.getElementById('c-days').innerText = String(days).padStart(2, '0');
         document.getElementById('c-hours').innerText = String(hours).padStart(2, '0');
         document.getElementById('c-mins').innerText = String(mins).padStart(2, '0');
-        document.getElementById('c-secs').innerText = String(secs).padStart(2, '0');
+
+        const secsEl = document.getElementById('c-secs');
+        if (secsEl) {
+          secsEl.innerText = String(secs).padStart(2, '0');
+          secsEl.classList.add('tick-pulse');
+          setTimeout(() => secsEl.classList.remove('tick-pulse'), 160);
+        }
       } else {
         const countdownEl = document.querySelector('.countdown-section');
         if (countdownEl) {
@@ -2426,7 +2569,7 @@
     setInterval(updateWeddingCountdown, 1000);
     updateWeddingCountdown();
 
-    // 11. رسم البتلات الرقيقة فائقة الخفة (9 بتلات فقط لأداء 60fps فائق النعومة)
+    // 11. رسم البتلات الرقيقة + ذرات الذهب المتوهجة بدون shadowBlur لأداء 60fps فائق النعومة
     const canvas = document.getElementById('petals-canvas');
     const ctx = canvas.getContext('2d');
     let canvasWidth = canvas.width = window.innerWidth;
@@ -2434,7 +2577,7 @@
 
     let petalsActive = true;
     let petalsList = [];
-    const TOTAL_PETALS = 9;
+    const TOTAL_PETALS = 10;
 
     window.addEventListener('resize', () => {
       canvasWidth = canvas.width = window.innerWidth;
@@ -2442,9 +2585,9 @@
     });
 
     const petalColors = [
-      'rgba(248, 198, 210, 0.38)',
-      'rgba(245, 232, 200, 0.40)',
-      'rgba(255, 240, 245, 0.44)'
+      'rgba(248, 198, 210, 0.40)',
+      'rgba(245, 232, 200, 0.42)',
+      'rgba(255, 240, 245, 0.46)'
     ];
 
     class LightPetal {
@@ -2507,6 +2650,35 @@
           petalsList[i].render(ctx);
         }
       }
+
+      // رسم ذرات الذهب المتوهجة بنظام الدائرتين (توهج خارجي + قلب مضيء) بدون shadowBlur
+      for (let i = sparklesList.length - 1; i >= 0; i--) {
+        const sp = sparklesList[i];
+        sp.x += sp.vx;
+        sp.y += sp.vy;
+        sp.vy += 0.06;
+        sp.alpha -= sp.decay;
+
+        if (sp.alpha <= 0) {
+          sparklesList.splice(i, 1);
+          continue;
+        }
+
+        // هالة التوهج الخارجية الخفيفة
+        ctx.globalAlpha = sp.alpha * 0.28;
+        ctx.fillStyle = '#D4AF37';
+        ctx.beginPath();
+        ctx.arc(sp.x, sp.y, sp.radius * 2.2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // قلب الذرة الذهبية اللامع
+        ctx.globalAlpha = sp.alpha;
+        ctx.fillStyle = sp.color;
+        ctx.beginPath();
+        ctx.arc(sp.x, sp.y, sp.radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
 
       requestAnimationFrame(renderPetalsLoop);
     }
