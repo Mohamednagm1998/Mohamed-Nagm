@@ -7,7 +7,7 @@
 
   <!-- إعدادات معاينة الرابط على واتساب ومنصات التواصل (Open Graph) -->
   <meta property="og:title" content="دعوة زفاف محمد & رغدة 💍✨">
-  <meta property="og:description" content="نتشرف بدعوتكم لحضور حفل زفافنا | السبت 16 يناير 2027 - قاعة قصر الشوق دار الأسلحة والذخيرة">
+  <meta property="og:description" content="نتشرف بدعوتكم لحضور حفل زفافنا | السبت 16 يناير 2027 - قاعة قصر الشوق - دار الاسلحة و الزخيرة">
   <meta property="og:image" content="https://mohamednagm1998.github.io/Mohamed-Nagm/couple.jpg">
   <meta property="og:url" content="https://mohamednagm1998.github.io/Mohamed-Nagm/">
   <meta property="og:type" content="website">
@@ -181,7 +181,7 @@
     }
 
     /* ========================================================
-       شاشة المظروف الافتتاحية الفاتحة
+       شاشة المظروف الافتتاحية + أنيميشن خروج الدعوة من الظرف
        ======================================================== */
     #envelope-screen {
       position: fixed;
@@ -209,8 +209,14 @@
     .envelope-header {
       position: relative;
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 34px;
       z-index: 10;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    #envelope-screen.opening-active .envelope-header {
+      opacity: 0;
+      transform: translateY(-20px);
     }
 
     .badge-invite {
@@ -258,6 +264,12 @@
       align-items: center;
       margin: 10px auto 14px;
       z-index: 10;
+      transition: transform 0.6s ease;
+    }
+
+    /* عندما تخرج البطاقة للأعلى، ينزل الظرف قليلاً لأسفل ليظهر خروج الكارت بوضوح كامل */
+    #envelope-screen.opening-active .envelope-floral-wrap {
+      transform: translateY(55px);
     }
 
     .floral-cluster {
@@ -283,7 +295,7 @@
       width: 320px;
       height: 220px;
       cursor: pointer;
-      perspective: 1200px;
+      perspective: 1400px;
       z-index: 10;
       touch-action: manipulation;
       user-select: none;
@@ -293,33 +305,101 @@
       .envelope-box { width: 390px; height: 255px; }
     }
 
-    .envelope-shell {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 50% 30%, #FFFFFF 0%, #FAF3E6 60%, #EFE1C5 100%);
+    /* 1. ظهر الظرف الخلفي */
+    .envelope-back {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 30%, #FDF8EE 0%, #EFE1C5 100%);
       border-radius: 16px;
-      box-shadow: 0 20px 45px rgba(142, 104, 35, 0.25), 0 5px 0 #C5A059;
-      border: 2px solid rgba(197, 160, 89, 0.8);
+      box-shadow: 0 22px 48px rgba(142, 104, 35, 0.28), 0 5px 0 #C5A059;
+      border: 2px solid rgba(197, 160, 89, 0.85);
+      z-index: 1;
+    }
+
+    /* 2. بطاقة الدعوة التي تخرج من داخل الظرف (بدون قص overflow) */
+    .envelope-card-inside {
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      right: 16px;
+      bottom: 14px;
+      background: linear-gradient(160deg, #FFFFFF 0%, #FFFDF7 100%);
+      border-radius: 14px;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 12px;
+      border: 2px solid var(--gold-primary);
+      box-shadow: 0 8px 25px rgba(39, 32, 25, 0.14);
+      transform: translateY(0) scale(0.96);
+      will-change: transform;
+    }
+
+    .envelope-card-inside::before {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border: 1px dashed rgba(197, 160, 89, 0.5);
+      border-radius: 10px;
+      pointer-events: none;
+    }
+
+    /* أنيميشن خروج البطاقة من الظرف وتكبيرها */
+    .envelope-box.is-opening .envelope-card-inside {
+      animation: cardSlideOutAndExpand 1.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation-delay: 0.38s;
+    }
+
+    @keyframes cardSlideOutAndExpand {
+      0% {
+        transform: translateY(0) scale(0.96);
+        z-index: 3;
+      }
+      55% {
+        transform: translateY(-145px) scale(1.05);
+        z-index: 12;
+        box-shadow: 0 22px 45px rgba(142, 104, 35, 0.35);
+      }
+      82% {
+        transform: translateY(-135px) scale(1.08);
+        z-index: 12;
+      }
+      100% {
+        transform: translateY(-60px) scale(1.45);
+        z-index: 20;
+        box-shadow: 0 30px 65px rgba(142, 104, 35, 0.45);
+      }
+    }
+
+    /* 3. جيب الظرف الأمامي (يغطي نصف البطاقة السفلي أثناء الخروج) */
+    .envelope-pocket-front {
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
       overflow: hidden;
+      z-index: 6;
+      pointer-events: none;
     }
 
     .envelope-fold-left {
       position: absolute; bottom: 0; left: 0; width: 0; height: 0;
       border-style: solid; border-width: 110px 0 110px 160px;
-      border-color: transparent transparent transparent var(--envelope-shade); z-index: 2;
+      border-color: transparent transparent transparent var(--envelope-shade);
     }
 
     .envelope-fold-right {
       position: absolute; bottom: 0; right: 0; width: 0; height: 0;
       border-style: solid; border-width: 110px 160px 110px 0;
-      border-color: transparent var(--envelope-shade) transparent transparent; z-index: 2;
+      border-color: transparent var(--envelope-shade) transparent transparent;
     }
 
     .envelope-fold-bottom {
       position: absolute; bottom: 0; left: 0; width: 0; height: 0;
-      border-style: solid; border-width: 0 160px 120px 160px;
-      border-color: transparent transparent var(--envelope-deep) transparent; z-index: 3;
+      border-style: solid; border-width: 0 160px 122px 160px;
+      border-color: transparent transparent var(--envelope-deep) transparent;
+      filter: drop-shadow(0 -3px 6px rgba(142, 104, 35, 0.12));
     }
 
     @media (min-width: 480px) {
@@ -328,13 +408,20 @@
       .envelope-fold-bottom { border-width: 0 195px 145px 195px; }
     }
 
+    /* 4. غطاء الظرف العلوي (يفتح للأعلى 180 درجة) */
     .envelope-fold-top {
-      position: absolute; top: 0; left: 0; width: 0; height: 0;
-      border-style: solid; border-width: 125px 160px 0 160px;
-      border-color: #ECE0C7 transparent transparent transparent;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 125px 160px 0 160px;
+      border-color: #EADBC0 transparent transparent transparent;
       transform-origin: top center;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 5;
+      transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1), z-index 0s 0.28s;
+      z-index: 8;
+      filter: drop-shadow(0 5px 10px rgba(142, 104, 35, 0.18));
     }
 
     @media (min-width: 480px) {
@@ -343,31 +430,20 @@
 
     .envelope-box.is-opening .envelope-fold-top {
       transform: rotateX(180deg);
-      z-index: 1;
+      z-index: 2;
     }
 
-    .envelope-card-inside {
-      position: absolute; top: 15px; left: 18px; right: 18px; bottom: 15px;
-      background: #FFFFFF; border-radius: 12px; z-index: 2;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      border: 1.5px solid rgba(197, 160, 89, 0.45);
-      transition: transform 0.65s 0.1s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .envelope-box.is-opening .envelope-card-inside {
-      transform: translateY(-110px);
-    }
-
+    /* 5. الشريط والختم الشمعي */
     .wax-ribbon-tail {
       position: absolute; top: 50%; width: 14px; height: 48px;
       background: linear-gradient(180deg, #D4AF37 0%, #A87B1C 60%, #6E4E0B 100%);
-      z-index: 8; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);
-      transition: opacity 0.25s ease;
+      z-index: 9; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);
+      transition: opacity 0.25s ease, transform 0.25s ease;
     }
 
     .wax-ribbon-left { left: calc(50% - 10px); transform: rotate(18deg); transform-origin: top center; }
     .wax-ribbon-right { right: calc(50% - 10px); transform: rotate(-18deg); transform-origin: top center; }
-    .envelope-box.is-opening .wax-ribbon-tail { opacity: 0; }
+    .envelope-box.is-opening .wax-ribbon-tail { opacity: 0; transform: scale(0.2); }
 
     .wax-seal {
       position: absolute; top: 48%; left: 50%; transform: translate(-50%, -50%);
@@ -378,7 +454,7 @@
       color: #FFF9E8; font-family: 'Amiri', serif;
       box-shadow: 0 10px 24px rgba(142, 104, 35, 0.5), inset 0 2px 5px rgba(255, 255, 255, 0.8);
       border: 2px dashed rgba(255, 245, 206, 0.85);
-      z-index: 9; cursor: pointer;
+      z-index: 10; cursor: pointer;
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
 
@@ -396,10 +472,12 @@
       box-shadow: 0 8px 20px rgba(142, 104, 35, 0.32), 0 3px 0 #664B0B;
       display: flex; align-items: center; gap: 10px;
       z-index: 10; touch-action: manipulation;
+      transition: opacity 0.3s ease;
     }
 
-    .btn-open-prompt:active {
-      transform: translateY(2px);
+    #envelope-screen.opening-active .btn-open-prompt {
+      opacity: 0;
+      pointer-events: none;
     }
 
     /* ========================================================
@@ -421,6 +499,14 @@
       box-shadow: 0 22px 55px rgba(142, 104, 35, 0.2), 0 5px 0 #C5A059;
       border: 2px solid rgba(197, 160, 89, 0.6);
       overflow: hidden;
+      transform: scale(0.94);
+      opacity: 0.4;
+      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.7s ease;
+    }
+
+    .wedding-card.card-ready {
+      transform: scale(1);
+      opacity: 1;
     }
 
     .card-inner-frame {
@@ -1003,7 +1089,7 @@
       padding: 9px 12px;
       border-radius: 12px;
       font-family: 'Cairo', sans-serif;
-      font-size: 0.79rem;
+      font-size: 0.82rem;
       font-weight: 700;
       cursor: pointer;
       display: flex;
@@ -1368,7 +1454,7 @@
     <div class="envelope-header">
       <div class="badge-invite">✨ دعوة زفاف خاصة ✨</div>
       <h1 class="envelope-title">محمد & رغدة</h1>
-      <p class="envelope-sub">المس الختم الشمعي لفتح المظروف والاستماع للزفة 🎵💌</p>
+      <p class="envelope-sub">المس الختم الشمعي لفتح الظرف وخروج الدعوة 🎵💌</p>
     </div>
 
     <div class="envelope-floral-wrap">
@@ -1555,22 +1641,31 @@
         </svg>
       </div>
 
-      <!-- مجسم المظروف -->
+      <!-- مجسم المظروف ثلاثي الطبقات مع خروج البطاقة منه -->
       <div class="envelope-box" id="envelopeBox" onclick="openEnvelopeAndPlay(event)">
-        <div class="envelope-shell">
+        <!-- الطبقة 1: ظهر الظرف -->
+        <div class="envelope-back"></div>
+
+        <!-- الطبقة 2: بطاقة الدعوة التي تخرج للأعلى من داخل الظرف -->
+        <div class="envelope-card-inside">
+          <div style="font-family: 'Amiri', serif; font-size: 0.9rem; color: #8E6823; margin-bottom: 2px;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+          <div style="font-size: 0.72rem; color: #70685E; font-weight: 700;">نتشرف بدعوتكم لحضور زفاف</div>
+          <div style="font-family: 'Amiri', serif; font-size: 1.7rem; font-weight: 700; color: #8E6823; line-height: 1.2; margin: 2px 0;">محمد & رغدة</div>
+          <div style="font-size: 0.8rem; color: #272019; font-weight: 700; margin-top: 2px;">السبت 16 يناير 2027 • 07:00 م</div>
+          <div style="font-size: 0.74rem; color: #8E6823; font-weight: 700; margin-top: 3px;">قاعة قصر الشوق - دار الاسلحة و الزخيرة</div>
+        </div>
+
+        <!-- الطبقة 3: جيب الظرف الأمامي -->
+        <div class="envelope-pocket-front">
           <div class="envelope-fold-left"></div>
           <div class="envelope-fold-right"></div>
           <div class="envelope-fold-bottom"></div>
-
-          <div class="envelope-card-inside">
-            <div style="font-family: 'Amiri', serif; font-size: 1.6rem; font-weight: 700; color: #8E6823;">محمد & رغدة</div>
-            <div style="font-size: 0.82rem; color: #8C8479; margin-top: 4px;">السبت 16 يناير 2027 • 07:00 م</div>
-            <div style="font-size: 0.75rem; color: #B38E37; margin-top: 5px;">قاعة قصر الشوق - دار الأسلحة والذخيرة</div>
-          </div>
-
-          <div class="envelope-fold-top"></div>
         </div>
 
+        <!-- الطبقة 4: الغطاء العلوي المتحرك -->
+        <div class="envelope-fold-top"></div>
+
+        <!-- الطبقة 5: الشريط والختم الشمعي -->
         <div class="wax-ribbon-tail wax-ribbon-left"></div>
         <div class="wax-ribbon-tail wax-ribbon-right"></div>
 
@@ -1583,7 +1678,7 @@
     </div>
 
     <button type="button" class="btn-open-prompt" onclick="openEnvelopeAndPlay(event)">
-      <span>افتح الدعوة واستمع للزفة ✉️🎶</span>
+      <span>افتح الظرف واستخرج الدعوة ✉️🎶</span>
     </button>
   </div>
 
@@ -1748,7 +1843,7 @@
           <div class="detail-icon-wrap" style="background: #FDF1D5; border-color: var(--gold-primary);">📍</div>
           <div class="detail-info">
             <div class="detail-label" style="color: var(--gold-dark); font-weight: 700;">مكان الحفل (طريق صلاح سالم - أمام مسجد الرحمن الرحيم)</div>
-            <div class="detail-text-bold" style="color: #1A1A1A;">قاعة قصر الشوق - دار الأسلحة والذخيرة</div>
+            <div class="detail-text-bold" style="color: #1A1A1A;">قاعة قصر الشوق - دار الاسلحة و الزخيرة</div>
             <div class="venue-cta-badge">
               <span>📌 انقر هنا لفتح اللوكيشن على خرائط Google</span>
             </div>
@@ -1769,7 +1864,7 @@
           <span>الوصول للقاعة عبر تطبيقات التوصيل</span>
         </h3>
         <p class="ride-apps-sub">
-          أوبر يحدد موقع القاعة تلقائياً، وعند الضغط على (إن درايف / دي دي / كريم) يُنسخ العنوان الدقيق تلقائياً ويفتح التطبيق لتلصقه بضغطة واحدة
+          عند الضغط على أي تطبيق، يتم تلقائياً نسخ <strong>(دار الاسلحة و الزخيرة)</strong> ويفتح التطبيق لتلصقه في خانة الوجهة بضغطة واحدة
         </p>
 
         <div class="ride-apps-grid">
@@ -1796,7 +1891,7 @@
 
         <div class="ride-helper-btns">
           <button type="button" class="btn-copy-address-bar" onclick="copyVenueAddressForRide()">
-            <span>📋 نسخ عنوان البحث الدقيق: (دار الأسلحة والذخيرة، صلاح سالم، أمام مسجد الرحمن الرحيم)</span>
+            <span>📋 نسخ: (دار الاسلحة و الزخيرة)</span>
           </button>
 
           <button type="button" class="btn-share-pin-only" onclick="shareVenuePinWhatsApp()">
@@ -1865,7 +1960,7 @@
   <div class="gate-pass-backdrop" id="gatePassModal" onclick="if(event.target===this) closeGatePassModal()">
     <div class="gate-pass-card">
       <div class="gate-pass-badge">🪪 بطاقة دخول مدعو — Gate Pass</div>
-      <div class="gate-pass-venue">دار الأسلحة والذخيرة</div>
+      <div class="gate-pass-venue">دار الاسلحة و الزخيرة</div>
       <div class="gate-pass-hall">قاعة قصر الشوق</div>
       <div style="font-size:0.85rem; color:#D4AF37; font-weight:700;">حفل زفاف</div>
       <div class="gate-pass-couple">محمد & رغدة</div>
@@ -1899,11 +1994,10 @@
     const BASE_INVITE_URL = "https://mohamednagm1998.github.io/Mohamed-Nagm/";
     const GOOGLE_MAPS_LINK = "https://maps.app.goo.gl/geGT5azkam9drc3X9?g_st=ac";
 
-    // الإحداثيات والصيغة القياسية الدقيقة لمحركات بحث أوبر وإن درايف ودي دي وكريم
+    // الإحداثيات والنص المطلوب نسخه بالضبط لتطبيقات التوصيل
     const VENUE_LAT = 30.0755;
     const VENUE_LNG = 31.3088;
-    const VENUE_NAME = "قاعة قصر الشوق - دار الأسلحة والذخيرة";
-    const VENUE_EXACT_SEARCH = "دار الأسلحة والذخيرة، صلاح سالم، أمام مسجد الرحمن الرحيم";
+    const VENUE_COPY_TEXT = "دار الاسلحة و الزخيرة";
 
     // 1. إلغاء أي Service Worker قديم عالق لضمان ظهور التعديلات فوراً
     if ('serviceWorker' in navigator) {
@@ -1914,7 +2008,7 @@
       }).catch(() => {});
     }
 
-    // 2. ميزة منع انطفاء شاشة الموبايل أثناء فتح الدعوة أو كارت البوابة (Screen Wake Lock API)
+    // 2. ميزة منع انطفاء شاشة الموبايل أثناء فتح الدعوة أو كارت البوابة
     async function requestKeepScreenAwake() {
       if ('wakeLock' in navigator) {
         try {
@@ -2104,7 +2198,6 @@
       document.getElementById('gatePassModal').classList.remove('open');
     }
 
-    // توليد ملف منبه وتذكير أصلي (.ics) يفتح تقويم الموبايل مباشرة بدون تسجيل دخول
     function downloadSmartAlarmICS() {
       const icsContent = [
         "BEGIN:VCALENDAR",
@@ -2115,8 +2208,8 @@
         "BEGIN:VEVENT",
         "UID:mohamed-raghda-wedding-2027@wedding.invite",
         "SUMMARY:💍 حفل زفاف محمد & رغدة",
-        "DESCRIPTION:نتشرف بحضوركم حفل زفاف محمد ورغدة في قاعة قصر الشوق - دار الأسلحة والذخيرة بطريق صلاح سالم (أمام مسجد الرحمن الرحيم). رابط الخريطة: " + GOOGLE_MAPS_LINK,
-        "LOCATION:قاعة قصر الشوق - دار الأسلحة والذخيرة، طريق صلاح سالم أمام مسجد الرحمن الرحيم، القاهرة",
+        "DESCRIPTION:نتشرف بحضوركم حفل زفاف محمد ورغدة في قاعة قصر الشوق - دار الاسلحة و الزخيرة بطريق صلاح سالم. رابط الخريطة: " + GOOGLE_MAPS_LINK,
+        "LOCATION:قاعة قصر الشوق - دار الاسلحة و الزخيرة، طريق صلاح سالم أمام مسجد الرحمن الرحيم، القاهرة",
         "DTSTART:20270116T170000Z",
         "DTEND:20270116T220000Z",
         "STATUS:CONFIRMED",
@@ -2128,7 +2221,7 @@
         "BEGIN:VALARM",
         "TRIGGER:-PT3H",
         "ACTION:DISPLAY",
-        "DESCRIPTION:تذكير: اليوم حفل زفاف محمد & رغدة الساعة 7:00 مساءً بقاعة قصر الشوق - دار الأسلحة والذخيرة 🎉",
+        "DESCRIPTION:تذكير: اليوم حفل زفاف محمد & رغدة الساعة 7:00 مساءً بقاعة قصر الشوق - دار الاسلحة و الزخيرة 🎉",
         "END:VALARM",
         "END:VEVENT",
         "END:VCALENDAR"
@@ -2146,10 +2239,9 @@
       showToast("جاري فتح تقويم الهاتف لضبط التذكير والمنبه ⏰");
     }
 
-    // إرسال اللوكيشن ووصف البوابة فقط لسائق أو مرافق عبر واتساب
     function shareVenuePinWhatsApp() {
       const pinMsg = encodeURIComponent(
-        `📍 *لوكيشن قاعة قصر الشوق - دار الأسلحة والذخيرة*\n` +
+        `📍 *لوكيشن قاعة قصر الشوق - دار الاسلحة و الزخيرة*\n` +
         `(حفل زفاف محمد & رغدة)\n\n` +
         `📌 *العنوان:* طريق صلاح سالم - أمام مسجد الرحمن الرحيم - القاهرة\n` +
         `🗺 *رابط خريطة Google Maps المباشر:*\n` + GOOGLE_MAPS_LINK
@@ -2158,7 +2250,7 @@
     }
 
     // ====================================================================
-    // 5. نسخ فوري متزامن + فتح تطبيقات التوصيل مباشرة على الهاتف
+    // 5. نسخ «دار الاسلحة و الزخيرة» فقط + فتح تطبيقات التوصيل مباشرة
     // ====================================================================
     function syncCopyNow(text) {
       const textArea = document.createElement('textarea');
@@ -2178,8 +2270,8 @@
     }
 
     function copyVenueAddressForRide() {
-      syncCopyNow(VENUE_EXACT_SEARCH);
-      showToast('تم نسخ العنوان الدقيق! الصقه في خانة الوجهة بالتطبيق 🚕');
+      syncCopyNow(VENUE_COPY_TEXT);
+      showToast('تم نسخ (دار الاسلحة و الزخيرة) بنجاح! 🚕');
     }
 
     function launchNativeApp(androidIntentUrl, iosSchemeUrl, storeFallbackUrl) {
@@ -2203,14 +2295,14 @@
     }
 
     function openRideApp(appType) {
-      syncCopyNow(VENUE_EXACT_SEARCH);
+      // نسخ "دار الاسلحة و الزخيرة" فقط في الحافظة قبل فتح التطبيق
+      syncCopyNow(VENUE_COPY_TEXT);
 
-      const encName = encodeURIComponent(VENUE_NAME);
-      const encAddr = encodeURIComponent(VENUE_EXACT_SEARCH);
+      const encPlace = encodeURIComponent(VENUE_COPY_TEXT);
 
       if (appType === 'uber') {
-        showToast('جاري فتح أوبر وتحديد موقع قاعة قصر الشوق تلقائياً 🚕');
-        const uberQuery = `?action=setPickup&pickup=my_location&dropoff[latitude]=${VENUE_LAT}&dropoff[longitude]=${VENUE_LNG}&dropoff[nickname]=${encName}&dropoff[formatted_address]=${encAddr}`;
+        showToast('تم نسخ (دار الاسلحة و الزخيرة) وجاري فتح أوبر 🚕');
+        const uberQuery = `?action=setPickup&pickup=my_location&dropoff[latitude]=${VENUE_LAT}&dropoff[longitude]=${VENUE_LNG}&dropoff[nickname]=${encPlace}&dropoff[formatted_address]=${encPlace}`;
         const uberUniversal = `https://m.uber.com/ul/${uberQuery}`;
         const uberDirectScheme = `uber://${uberQuery}`;
 
@@ -2225,7 +2317,7 @@
         }, 120);
       }
       else if (appType === 'careem') {
-        showToast('تم نسخ عنوان القاعة! اضغط "لصق" في خانة الوجهة داخل كريم 🚕');
+        showToast('تم نسخ (دار الاسلحة و الزخيرة)! الصقها في خانة الوجهة داخل كريم 🚕');
         const careemFallback = 'https://play.google.com/store/apps/details?id=com.careem.acma';
         const careemIosStore = 'https://apps.apple.com/eg/app/careem-rides-food-more/id592978487';
         const careemAndroidIntent = `intent://open#Intent;scheme=careem;package=com.careem.acma;S.browser_fallback_url=${encodeURIComponent(careemFallback)};end`;
@@ -2234,7 +2326,7 @@
         }, 180);
       }
       else if (appType === 'indrive') {
-        showToast('تم نسخ عنوان القاعة! اضغط "لصق" في خانة الوجهة داخل إن درايف 🚕');
+        showToast('تم نسخ (دار الاسلحة و الزخيرة)! الصقها في خانة الوجهة داخل إن درايف 🚕');
         const indriveFallback = 'https://play.google.com/store/apps/details?id=sinet.startup.inDriver';
         const indriveIosStore = 'https://apps.apple.com/eg/app/indrive-save-on-city-rides/id780125801';
         const indriveAndroidIntent = `intent://open#Intent;scheme=indriver;package=sinet.startup.inDriver;S.browser_fallback_url=${encodeURIComponent(indriveFallback)};end`;
@@ -2243,7 +2335,7 @@
         }, 180);
       }
       else if (appType === 'didi') {
-        showToast('تم نسخ عنوان القاعة! اضغط "لصق" في خانة الوجهة داخل دي دي 🚕');
+        showToast('تم نسخ (دار الاسلحة و الزخيرة)! الصقها في خانة الوجهة داخل دي دي 🚕');
         const didiFallback = 'https://play.google.com/store/apps/details?id=com.didiglobal.passenger';
         const didiIosStore = 'https://apps.apple.com/eg/app/didi-rider-affordable-rides/id1362398401';
         const didiAndroidIntent = `intent://open#Intent;scheme=didipasnger;package=com.didiglobal.passenger;S.browser_fallback_url=${encodeURIComponent(didiFallback)};end`;
@@ -2253,7 +2345,9 @@
       }
     }
 
-    // 6. فتح المظروف مع تناثر غبار الذهب الخفيف + تفعيل بقاء الشاشة مضيئة
+    // ====================================================================
+    // 6. أنيميشن فتح الظرف المتكامل وخروج بطاقة الدعوة منه للأعلى
+    // ====================================================================
     let sparklesList = [];
 
     function triggerGoldenSparkleBurst(originX, originY) {
@@ -2292,20 +2386,30 @@
 
       const box = document.getElementById('envelopeBox');
       const screen = document.getElementById('envelope-screen');
+      const mainCard = document.getElementById('mainWeddingCard');
 
+      if (screen) screen.classList.add('opening-active');
       if (box) box.classList.add('is-opening');
 
+      // الانتظار حتى يفتح الغطاء وتخرج بطاقة الدعوة من الظرف بالكامل ثم الانتقال للدعوة الرئيسية
       setTimeout(() => {
         if (screen) screen.classList.add('opened');
-      }, 650);
+        if (mainCard) mainCard.classList.add('card-ready');
+      }, 1750);
     }
 
     function recloseEnvelope() {
       envelopeOpened = false;
       const box = document.getElementById('envelopeBox');
       const screen = document.getElementById('envelope-screen');
+      const mainCard = document.getElementById('mainWeddingCard');
+
       if (box) box.classList.remove('is-opening');
-      if (screen) screen.classList.remove('opened');
+      if (screen) {
+        screen.classList.remove('opened');
+        screen.classList.remove('opening-active');
+      }
+      if (mainCard) mainCard.classList.remove('card-ready');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -2422,7 +2526,6 @@
       const currentTime = now.getTime();
       const diff = weddingTargetDate - currentTime;
 
-      // فحص ما إذا كان اليوم هو يوم الفرح (16 يناير 2027) لتفعيل الشريط الذكي العلوي
       const isWeddingDay = (now.getFullYear() === 2027 && now.getMonth() === 0 && now.getDate() === 16);
       const smartBanner = document.getElementById('weddingDaySmartBanner');
       if (smartBanner && (isWeddingDay || (diff <= 43200000 && diff > -28800000))) {
@@ -2601,7 +2704,7 @@
         `يسعدنا ويشرفنا دعوتكم لحضور حفل زفاف:\n` +
         `🤵‍♂️ *محمد* & 👰‍♀️ *رغدة*\n\n` +
         `🗓 *الموعد:* السبت 16 يناير 2027 - الساعة 07:00 مساءً\n` +
-        `📍 *المكان:* قاعة قصر الشوق - دار الأسلحة والذخيرة\n` +
+        `📍 *المكان:* قاعة قصر الشوق - دار الاسلحة و الزخيرة\n` +
         `🗺 *موقع القاعة على خرائط Google:* https://maps.app.goo.gl/geGT5azkam9drc3X9?g_st=ac\n\n` +
         `رابط الدعوة الإلكترونية:\n` + BASE_INVITE_URL + `\n\n` +
         `حضوركم يكتمل به سرورنا 🤍✨`
