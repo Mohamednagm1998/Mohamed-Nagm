@@ -38,19 +38,17 @@
       --bg-gradient: radial-gradient(circle at 50% 18%, #FFFDF9 0%, #F7EFE0 55%, #E6D4B5 100%);
     }
 
-    /* الوضع الداكن المحسّن بوضوح عالي جداً للنصوص */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --gold-primary: #E2BC72;
-        --gold-light: #FFF1D0;
-        --gold-bright: #F5D382;
-        --gold-dark: #D4AF37;
-        --cream-paper: #120F0D;
-        --card-white: #1C1713;
-        --text-dark: #FFFFFF;
-        --text-muted: #E2D8CC;
-        --bg-gradient: radial-gradient(circle at 50% 18%, #1A1511 0%, #0F0C0A 55%, #050403 100%);
-      }
+    /* ألوان الوضع الداكن الماسي (Dark Mode الواضح جداً) */
+    body.dark-mode {
+      --gold-primary: #E2BC72;
+      --gold-light: #FFF1D0;
+      --gold-bright: #F5D382;
+      --gold-dark: #D4AF37;
+      --cream-paper: #14100D;
+      --card-white: #1F1914;
+      --text-dark: #FFFFFF;
+      --text-muted: #E2D8CC;
+      --bg-gradient: radial-gradient(circle at 50% 18%, #241D17 0%, #120F0D 55%, #080605 100%);
     }
 
     * {
@@ -76,6 +74,7 @@
       position: relative;
       overflow-x: hidden;
       padding: 72px 10px 48px;
+      transition: background 0.4s ease, color 0.4s ease;
     }
 
     #petals-canvas {
@@ -90,7 +89,7 @@
     }
 
     /* ========================================================
-       الشريط العائم الخفيف والسريع للصوت والأدوات
+       الشريط العائم العلوي (الصوت، البتلات، الوضع الداكن، الظرف)
        ======================================================== */
     .floating-top-bar {
       position: fixed;
@@ -184,17 +183,17 @@
     .floating-quick-actions {
       pointer-events: auto;
       display: flex;
-      gap: 6px;
+      gap: 5px;
     }
 
     .btn-float-mini {
       background: var(--card-white);
       border: 1.2px solid rgba(197, 160, 89, 0.55);
       color: var(--text-dark);
-      padding: 7px 11px;
+      padding: 7px 10px;
       border-radius: 30px;
       font-family: 'Cairo', sans-serif;
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       font-weight: 700;
       cursor: pointer;
       box-shadow: 0 3px 10px rgba(142, 104, 35, 0.12), 0 2px 0 rgba(197, 160, 89, 0.3);
@@ -1452,8 +1451,8 @@
     </div>
 
     <div class="floating-quick-actions">
-      <button type="button" class="btn-float-mini" onclick="openGatePassModal()">🪪 كارت البوابة</button>
-      <button type="button" class="btn-float-mini" id="petalsToggleBtn" onclick="togglePetals()">🌸 البتلات</button>
+      <button type="button" class="btn-float-mini" onclick="openGatePassModal()">🪪 البوابة</button>
+      <button type="button" class="btn-float-mini" onclick="toggleDarkMode()">🌓 المظهر</button>
       <button type="button" class="btn-float-mini" onclick="recloseEnvelope()">✉️ الظرف</button>
     </div>
   </header>
@@ -1558,7 +1557,7 @@
           <g transform="translate(70, 70)">
             <path d="M 36 12 C 46 30 15 48 -10 42 C -32 36 -45 18 -42 -5 C -40 -26 -15 -44 12 -42 C 34 -40 48 -20 44 4 Z" fill="url(#roseGradBR)" opacity="0.95"/>
             <path d="M 28 20 C 15 38 -18 38 -30 22 C -40 8 -38 -15 -22 -28 C -6 -40 20 -35 30 -18 C 38 -2 36 12 28 20 Z" fill="url(#roseGradBR)"/>
-            <path d="M 26 10 C 32 -14 10 -32 -12 -28 C -30 -24 -32 -2 -24 15 C -15 28 12 28 26 10 Z" fill="url(#FCE5E9)"/>
+            <path d="M 26 10 C 32 -14 10 -32 -12 -28 C -30 -24 -32 -2 -24 15 C -15 28 12 28 26 10 Z" fill="#FCE5E9"/>
             <ellipse cx="0" cy="0" rx="14" ry="12" fill="url(#roseCoreBR)"/>
             <path d="M 8 4 C 4 11 -6 11 -9 4 C -11 -3 -4 -8 2 -8 C 8 -7 10 -1 8 4 Z" fill="#8C1B33"/>
             <circle cx="-0.5" cy="-0.5" r="3.2" fill="#FFE3E8"/>
@@ -1661,7 +1660,7 @@
     <article class="wedding-card" id="mainWeddingCard">
       <div class="card-inner-frame"></div>
 
-      <!-- شريط وضع يوم الفرح الذكي (يظهر تلقائياً يوم الفرح 16 يناير 2027) -->
+      <!-- شريط وضع يوم الفرح الذكي (يظهر تلقائياً يوم 16 يناير 2027) -->
       <div class="wedding-day-smart-banner" id="weddingDaySmartBanner">
         <div class="smart-banner-title">🎉 الليلة فرحتنا! في انتظاركم الساعة 07:00 مساءً</div>
         <div class="smart-banner-btns">
@@ -1954,38 +1953,41 @@
     const BASE_INVITE_URL = "https://mohamednagm1998.github.io/Mohamed-Nagm/";
     const GOOGLE_MAPS_LINK = "https://maps.app.goo.gl/geGT5azkam9drc3X9?g_st=ac";
 
-    // الإحداثيات والنص المطلوب نسخه بالضبط لتطبيقات التوصيل (بالذخيرة بحرف الذال)
     const VENUE_LAT = 30.0755;
     const VENUE_LNG = 31.3088;
     const VENUE_COPY_TEXT = "دار الاسلحة و الذخيرة";
 
-    // 1. إلغاء أي Service Worker قديم عالق لضمان ظهور التعديلات فوراً
+    // 1. تفعيل زر تبديل الوضع الداكن/الفاتح اليدوي مع حفظ الاختيار
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      localStorage.setItem('wedding_dark_mode', isDark ? 'enabled' : 'disabled');
+      showToast(isDark ? 'تم تفعيل الوضع الداكن الفخم 🌓' : 'تم تفعيل الوضع الفاتح المضيء ☀️');
+    }
+
+    // التحقق من تفضيل المبدئي للمستخدم
+    if (localStorage.getItem('wedding_dark_mode') === 'enabled' || (!localStorage.getItem('wedding_dark_mode') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.body.classList.add('dark-mode');
+    }
+
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then((registrations) => {
-        for (let registration of registrations) {
-          registration.unregister();
-        }
+        for (let registration of registrations) { registration.unregister(); }
       }).catch(() => {});
     }
 
-    // 2. ميزة منع انطفاء شاشة الموبايل أثناء فتح الدعوة أو كارت البوابة
     async function requestKeepScreenAwake() {
       if ('wakeLock' in navigator) {
-        try {
-          screenWakeLock = await navigator.wakeLock.request('screen');
-        } catch (e) {}
+        try { screenWakeLock = await navigator.wakeLock.request('screen'); } catch (e) {}
       }
     }
 
-    // 3. حفظ الصوت والصورة في قاعدة بيانات الموبايل (IndexedDB) بدون أي ضغط على المعالج
     function openOfflineDB() {
       return new Promise((resolve, reject) => {
         const req = indexedDB.open('WeddingMediaStorageDB', 3);
         req.onupgradeneeded = (e) => {
           const db = e.target.result;
-          if (!db.objectStoreNames.contains('media')) {
-            db.createObjectStore('media');
-          }
+          if (!db.objectStoreNames.contains('media')) { db.createObjectStore('media'); }
         };
         req.onsuccess = () => resolve(req.result);
         req.onerror = () => reject(req.error);
@@ -2032,28 +2034,15 @@
       }
     })();
 
-    weddingAudio.addEventListener('playing', () => {
-      isPlaying = true;
-      updateAudioUI(true);
-    });
-
-    weddingAudio.addEventListener('pause', () => {
-      isPlaying = false;
-      updateAudioUI(false);
-    });
+    weddingAudio.addEventListener('playing', () => { isPlaying = true; updateAudioUI(true); });
+    weddingAudio.addEventListener('pause', () => { isPlaying = false; updateAudioUI(false); });
 
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
-        if (weddingAudio && !weddingAudio.paused) {
-          wasPlayingBeforeHide = true;
-          weddingAudio.pause();
-        }
+        if (weddingAudio && !weddingAudio.paused) { wasPlayingBeforeHide = true; weddingAudio.pause(); }
       } else {
         requestKeepScreenAwake();
-        if (wasPlayingBeforeHide && envelopeOpened) {
-          wasPlayingBeforeHide = false;
-          playAudioInstant();
-        }
+        if (wasPlayingBeforeHide && envelopeOpened) { wasPlayingBeforeHide = false; playAudioInstant(); }
       }
     });
 
@@ -2061,33 +2050,22 @@
       if (!weddingAudio) return;
       weddingAudio.muted = false;
       weddingAudio.volume = 1.0;
-
       const playPromise = weddingAudio.play();
       if (playPromise !== undefined) {
-        playPromise.then(() => {
-          isPlaying = true;
-          updateAudioUI(true);
-        }).catch(() => {});
+        playPromise.then(() => { isPlaying = true; updateAudioUI(true); }).catch(() => {});
       }
     }
 
     function pauseAudioDirectly() {
       wasPlayingBeforeHide = false;
-      if (weddingAudio) {
-        weddingAudio.pause();
-      }
+      if (weddingAudio) { weddingAudio.pause(); }
       isPlaying = false;
       updateAudioUI(false);
     }
 
     function toggleAudioPlayback() {
-      if (!weddingAudio.paused) {
-        pauseAudioDirectly();
-        showToast('تم إيقاف الصوت مؤقتاً 🔇');
-      } else {
-        playAudioInstant();
-        showToast('جاري تشغيل الموسيقى 🎵');
-      }
+      if (!weddingAudio.paused) { pauseAudioDirectly(); showToast('تم إيقاف الصوت مؤقتاً 🔇'); }
+      else { playAudioInstant(); showToast('جاري تشغيل الموسيقى 🎵'); }
     }
 
     function updateAudioUI(playing) {
@@ -2106,9 +2084,6 @@
       }
     }
 
-    // ====================================================================
-    // 4. كارت دخول البوابة + مشاركة اللوكيشن للسائق
-    // ====================================================================
     function openGatePassModal() {
       requestKeepScreenAwake();
       document.getElementById('gatePassModal').classList.add('open');
@@ -2128,9 +2103,6 @@
       window.open(`https://api.whatsapp.com/send?text=${pinMsg}`, '_blank');
     }
 
-    // ====================================================================
-    // 5. نسخ «دار الاسلحة و الذخيرة» فقط + فتح تطبيقات التوصيل مباشرة
-    // ====================================================================
     function syncCopyNow(text) {
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).catch(() => {});
@@ -2221,9 +2193,6 @@
       }
     }
 
-    // ====================================================================
-    // 6. ذرات الذهب المضيئة (بدون shadowBlur لمنع اللاج) + أنيميشن فتح الظرف السلس
-    // ====================================================================
     let sparklesList = [];
 
     function triggerGoldenSparkleBurst(originX, originY) {
@@ -2310,7 +2279,6 @@
       }
     }
 
-    // 7. مراقب التمرير الانسيابي (IntersectionObserver Scroll Reveal)
     const revealElements = document.querySelectorAll('.scroll-reveal');
     if ('IntersectionObserver' in window) {
       const revealObserver = new IntersectionObserver((entries) => {
@@ -2327,7 +2295,6 @@
       revealElements.forEach((el) => el.classList.add('in-view'));
     }
 
-    // 8. تأثير 3D سلس بـ requestAnimationFrame لمنع أي لاج
     const couple3DStage = document.getElementById('couple3DStage');
     const couple3DCard = document.getElementById('couple3DCard');
     let tiltTicking = false;
@@ -2370,7 +2337,6 @@
       couple3DStage.addEventListener('touchend', resetTilt3D);
     }
 
-    // 9. إرسال رد الحضور أو الاعتذار لرقم 01098303210 على واتساب مع احتفالية ذرات الذهب
     function sendWhatsAppRSVP(status, evt) {
       if (evt && evt.currentTarget) {
         const rect = evt.currentTarget.getBoundingClientRect();
@@ -2408,7 +2374,6 @@
       }, 240);
     }
 
-    // 10. العداد التنازلي مع نبض الثواني + وضع يوم الفرح الذكي تلقائياً يوم 16 يناير 2027
     const weddingTargetDate = new Date("2027-01-16T19:00:00+02:00").getTime();
 
     function updateWeddingCountdown() {
@@ -2453,7 +2418,6 @@
     setInterval(updateWeddingCountdown, 1000);
     updateWeddingCountdown();
 
-    // 11. رسم البتلات الرقيقة + ذرات الذهب المتوهجة بدون shadowBlur لأداء 60fps فائق النعومة
     const canvas = document.getElementById('petals-canvas');
     const ctx = canvas.getContext('2d');
     let canvasWidth = canvas.width = window.innerWidth;
