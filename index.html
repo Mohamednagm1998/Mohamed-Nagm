@@ -38,14 +38,18 @@
       --bg-gradient: radial-gradient(circle at 50% 18%, #FFFDF9 0%, #F7EFE0 55%, #E6D4B5 100%);
     }
 
-    /* الوضع الداكن الماسي التلقائي بالليل أو الإضاءة الهادئة */
+    /* الوضع الداكن المحسّن بوضوح عالي جداً للنصوص */
     @media (prefers-color-scheme: dark) {
       :root {
-        --cream-paper: #1A1612;
-        --card-white: #221C16;
-        --text-dark: #F7EFE0;
-        --text-muted: #B8AF9F;
-        --bg-gradient: radial-gradient(circle at 50% 18%, #241E17 0%, #17130F 55%, #0D0B09 100%);
+        --gold-primary: #E2BC72;
+        --gold-light: #FFF1D0;
+        --gold-bright: #F5D382;
+        --gold-dark: #D4AF37;
+        --cream-paper: #120F0D;
+        --card-white: #1C1713;
+        --text-dark: #FFFFFF;
+        --text-muted: #E2D8CC;
+        --bg-gradient: radial-gradient(circle at 50% 18%, #1A1511 0%, #0F0C0A 55%, #050403 100%);
       }
     }
 
@@ -146,7 +150,7 @@
     .floating-music-text {
       font-size: 0.78rem;
       font-weight: 800;
-      color: var(--gold-dark);
+      color: var(--text-dark);
       display: flex;
       align-items: center;
       gap: 6px;
@@ -161,7 +165,7 @@
 
     .eq-bar {
       width: 2.5px;
-      background: var(--gold-dark);
+      background: var(--gold-primary);
       border-radius: 2px;
       height: 12px;
       transform: scaleY(0.25);
@@ -186,7 +190,7 @@
     .btn-float-mini {
       background: var(--card-white);
       border: 1.2px solid rgba(197, 160, 89, 0.55);
-      color: var(--gold-dark);
+      color: var(--text-dark);
       padding: 7px 11px;
       border-radius: 30px;
       font-family: 'Cairo', sans-serif;
@@ -204,7 +208,7 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at 50% 22%, #FFFDF9 0%, #FAF4E8 55%, #EDE0CA 100%);
+      background: var(--bg-gradient);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -253,7 +257,7 @@
       gap: 6px;
       background: rgba(212, 175, 55, 0.16);
       border: 1.5px solid rgba(197, 160, 89, 0.55);
-      color: var(--gold-dark);
+      color: var(--text-dark);
       padding: 6px 18px;
       border-radius: 40px;
       font-size: 0.85rem;
@@ -279,7 +283,7 @@
     }
 
     .envelope-sub {
-      color: #6C5F51;
+      color: var(--text-muted);
       font-size: 0.95rem;
       font-weight: 600;
       margin-top: 6px;
@@ -350,9 +354,9 @@
     .envelope-back {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 30%, #FDF8EE 0%, #EFE1C5 100%);
+      background: radial-gradient(circle at 50% 30%, #30261D 0%, #17120E 100%);
       border-radius: 16px;
-      box-shadow: 0 18px 40px rgba(142, 104, 35, 0.24), 0 5px 0 #C5A059;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4), 0 5px 0 #C5A059;
       border: 2px solid rgba(197, 160, 89, 0.85);
       z-index: 1;
     }
@@ -363,7 +367,7 @@
       left: 16px;
       right: 16px;
       bottom: 14px;
-      background: linear-gradient(160deg, #FFFFFF 0%, #FFFDF7 100%);
+      background: var(--card-white);
       border-radius: 14px;
       z-index: 3;
       display: flex;
@@ -372,7 +376,7 @@
       justify-content: center;
       padding: 14px 12px;
       border: 2px solid var(--gold-primary);
-      box-shadow: 0 10px 28px rgba(39, 32, 25, 0.15);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
       transform: translate3d(0, 0, 0) scale3d(0.96, 0.96, 1);
       transition: transform 1.65s cubic-bezier(0.22, 1, 0.36, 1) 0.55s;
       will-change: transform;
@@ -405,19 +409,19 @@
     .envelope-fold-left {
       position: absolute; bottom: 0; left: 0; width: 0; height: 0;
       border-style: solid; border-width: 110px 0 110px 160px;
-      border-color: transparent transparent transparent var(--envelope-shade);
+      border-color: transparent transparent transparent #2A221B;
     }
 
     .envelope-fold-right {
       position: absolute; bottom: 0; right: 0; width: 0; height: 0;
       border-style: solid; border-width: 110px 160px 110px 0;
-      border-color: transparent var(--envelope-shade) transparent transparent;
+      border-color: transparent #2A221B transparent transparent;
     }
 
     .envelope-fold-bottom {
       position: absolute; bottom: 0; left: 0; width: 0; height: 0;
       border-style: solid; border-width: 0 160px 122px 160px;
-      border-color: transparent transparent var(--envelope-deep) transparent;
+      border-color: transparent transparent #1F1914 transparent;
     }
 
     @media (min-width: 480px) {
@@ -434,7 +438,7 @@
       height: 0;
       border-style: solid;
       border-width: 125px 160px 0 160px;
-      border-color: #EADBC0 transparent transparent transparent;
+      border-color: #382E24 transparent transparent transparent;
       transform-origin: top center;
       transform: rotateX(0deg);
       transition: transform 0.95s cubic-bezier(0.33, 1, 0.68, 1) 0.12s, z-index 0s 0.52s;
@@ -471,7 +475,7 @@
       border-radius: 50%;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       color: #FFF9E8; font-family: 'Amiri', serif;
-      box-shadow: 0 10px 24px rgba(142, 104, 35, 0.45), inset 0 2px 5px rgba(255, 255, 255, 0.8);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5), inset 0 2px 5px rgba(255, 255, 255, 0.8);
       border: 2px dashed rgba(255, 245, 206, 0.85);
       z-index: 10; cursor: pointer;
       animation: sealPulseGPU 2s infinite ease-in-out alternate;
@@ -501,12 +505,12 @@
     }
 
     .wedding-card {
-      background: var(--cream-paper);
+      background: var(--card-white);
       border-radius: 30px;
       padding: 36px 22px 32px;
       text-align: center;
       position: relative;
-      box-shadow: 0 20px 50px rgba(142, 104, 35, 0.18), 0 5px 0 #C5A059;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), 0 5px 0 #C5A059;
       border: 2px solid rgba(197, 160, 89, 0.6);
       overflow: hidden;
       transform: translate3d(0, 18px, 0) scale3d(0.96, 0.96, 1);
@@ -544,15 +548,15 @@
       z-index: 2;
     }
 
-    /* شريط وضع يوم الفرح الذكي (يظهر تلقائياً يوم 16 يناير 2027) */
+    /* شريط وضع يوم الفرح الذكي */
     .wedding-day-smart-banner {
       display: none;
-      background: linear-gradient(135deg, #FFFDF5 0%, #FAF0D7 100%);
+      background: linear-gradient(135deg, #2D241B 0%, #1F1914 100%);
       border: 2px solid var(--gold-primary);
       border-radius: 18px;
       padding: 14px 12px;
       margin-bottom: 20px;
-      box-shadow: 0 8px 20px rgba(197, 160, 89, 0.22);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
 
     .wedding-day-smart-banner.active {
@@ -563,7 +567,7 @@
       font-family: 'Amiri', serif;
       font-size: 1.3rem;
       font-weight: 700;
-      color: var(--gold-dark);
+      color: var(--gold-light);
       margin-bottom: 8px;
     }
 
@@ -589,13 +593,13 @@
       font-family: 'Amiri', serif;
       font-size: 1.65rem;
       font-weight: 700;
-      color: var(--gold-dark);
+      color: var(--gold-primary);
       margin-bottom: 14px;
     }
 
     .quran-box {
       background: var(--card-white);
-      border: 1px solid rgba(197, 160, 89, 0.3);
+      border: 1px solid rgba(197, 160, 89, 0.35);
       border-right: 4px solid var(--gold-primary);
       border-left: 4px solid var(--gold-primary);
       border-radius: 16px;
@@ -614,7 +618,7 @@
       display: block;
       margin-top: 8px;
       font-size: 0.85rem;
-      color: var(--gold-dark);
+      color: var(--gold-primary);
       font-weight: 700;
     }
 
@@ -636,10 +640,10 @@
       width: 262px;
       max-width: 85%;
       padding: 9px;
-      background: linear-gradient(145deg, #FFFDF8 0%, #F4E9D2 100%);
+      background: linear-gradient(145deg, #2D241B 0%, #17130F 100%);
       border: 2.2px solid var(--gold-primary);
       border-radius: 140px 140px 26px 26px;
-      box-shadow: 0 18px 36px rgba(142, 104, 35, 0.24), 0 5px 0 #C5A059;
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.4), 0 5px 0 #C5A059;
       transform-style: preserve-3d;
       animation: card3DSwayGPU 6.5s infinite ease-in-out;
       transition: transform 0.15s ease-out;
@@ -666,7 +670,7 @@
       overflow: hidden;
       position: relative;
       border: 1.5px solid rgba(197, 160, 89, 0.5);
-      background: #FAF6ED;
+      background: #110E0C;
       transform: translateZ(0);
     }
 
@@ -710,7 +714,7 @@
       align-items: center;
       justify-content: center;
       font-size: 1.3rem;
-      box-shadow: 0 6px 14px rgba(142, 104, 35, 0.35), 0 2px 0 #664B0B;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4), 0 2px 0 #664B0B;
       border: 2px solid #FFFFFF;
       z-index: 4;
     }
@@ -727,7 +731,7 @@
       font-family: 'Amiri', serif;
       font-size: 1.3rem;
       font-weight: 700;
-      box-shadow: 0 6px 16px rgba(142, 104, 35, 0.4), 0 3px 0 #664B0B;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), 0 3px 0 #664B0B;
       border: 2px solid #FFFFFF;
       z-index: 4;
       white-space: nowrap;
@@ -809,7 +813,7 @@
     }
 
     /* ========================================================
-       مكعبات العداد التنازلي المجسمة 3D مع التفاعل المباشر
+       مكعبات العداد التنازلي المجسمة 3D
        ======================================================== */
     .countdown-section {
       background: var(--card-white);
@@ -817,13 +821,13 @@
       border-radius: 22px;
       padding: 18px 12px 20px;
       margin-bottom: 24px;
-      box-shadow: 0 8px 20px rgba(197, 160, 89, 0.08), 0 3px 0 rgba(197, 160, 89, 0.22);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), 0 3px 0 rgba(197, 160, 89, 0.22);
     }
 
     .countdown-header {
       font-size: 0.95rem;
       font-weight: 700;
-      color: var(--gold-dark);
+      color: var(--gold-primary);
       margin-bottom: 14px;
       display: flex;
       align-items: center;
@@ -838,11 +842,11 @@
     }
 
     .count-unit {
-      background: linear-gradient(160deg, var(--card-white) 0%, #FAF3E3 100%);
+      background: linear-gradient(160deg, var(--card-white) 0%, #2A221B 100%);
       border-radius: 16px;
       padding: 12px 4px;
       border: 1.5px solid rgba(197, 160, 89, 0.4);
-      box-shadow: 0 4px 0 #D8BE87;
+      box-shadow: 0 4px 0 #8E6823;
     }
 
     .count-number {
@@ -874,13 +878,13 @@
       border-radius: 22px;
       padding: 18px 12px 20px;
       margin-bottom: 24px;
-      box-shadow: 0 8px 20px rgba(197, 160, 89, 0.08), 0 3px 0 rgba(197, 160, 89, 0.22);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), 0 3px 0 rgba(197, 160, 89, 0.22);
     }
 
     .timeline-header {
       font-size: 0.95rem;
       font-weight: 700;
-      color: var(--gold-dark);
+      color: var(--gold-primary);
       margin-bottom: 14px;
       display: flex;
       align-items: center;
@@ -895,11 +899,11 @@
     }
 
     .timeline-step {
-      background: linear-gradient(160deg, var(--card-white) 0%, #FAF3E3 100%);
+      background: linear-gradient(160deg, var(--card-white) 0%, #2A221B 100%);
       border: 1.2px solid rgba(197, 160, 89, 0.4);
       border-radius: 16px;
       padding: 12px 6px;
-      box-shadow: 0 3px 0 #D8BE87;
+      box-shadow: 0 3px 0 #8E6823;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -909,8 +913,8 @@
     .timeline-time {
       font-size: 0.78rem;
       font-weight: 800;
-      color: var(--gold-dark);
-      background: rgba(212, 175, 55, 0.16);
+      color: var(--gold-light);
+      background: rgba(212, 175, 55, 0.25);
       padding: 2px 8px;
       border-radius: 10px;
       margin-bottom: 4px;
@@ -944,12 +948,12 @@
       height: 46px;
       min-width: 46px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #FFFDF9 0%, #F7EBD2 100%);
+      background: linear-gradient(135deg, #30261D 0%, #17120E 100%);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.25rem;
-      color: var(--gold-dark);
+      color: var(--gold-light);
       border: 1.2px solid rgba(197, 160, 89, 0.45);
     }
 
@@ -959,7 +963,7 @@
 
     .venue-direct-card {
       text-decoration: none;
-      background: linear-gradient(145deg, var(--card-white) 0%, #FDF9EE 100%);
+      background: linear-gradient(145deg, var(--card-white) 0%, #2A221B 100%);
       border: 2px solid var(--gold-primary);
       border-radius: 18px;
       padding: 16px;
@@ -967,7 +971,7 @@
       align-items: center;
       gap: 14px;
       text-align: right;
-      box-shadow: 0 8px 20px rgba(197, 160, 89, 0.16), 0 4px 0 #B58E3E;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 4px 0 #8E6823;
       cursor: pointer;
       position: relative;
       overflow: hidden;
@@ -988,8 +992,8 @@
       align-items: center;
       gap: 4px;
       margin-top: 6px;
-      background: #FAF2DD;
-      color: var(--gold-dark);
+      background: rgba(197, 160, 89, 0.2);
+      color: var(--gold-light);
       padding: 4px 10px;
       border-radius: 12px;
       font-size: 0.8rem;
@@ -999,7 +1003,7 @@
 
     .btn-gate-pass {
       width: 100%;
-      background: linear-gradient(135deg, #272019 0%, #3E3227 100%);
+      background: linear-gradient(135deg, #1E1813 0%, #0F0C0A 100%);
       color: #F9E7BE;
       border: 1.8px solid var(--gold-primary);
       padding: 13px 16px;
@@ -1012,7 +1016,7 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      box-shadow: 0 6px 16px rgba(39, 32, 25, 0.2), 0 3px 0 #14100C;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), 0 3px 0 #8E6823;
     }
 
     .btn-gate-pass:active {
@@ -1023,19 +1027,19 @@
        قسم تطبيقات التوصيل الذكي (Uber • Careem • inDrive • DiDi)
        ======================================================== */
     .ride-apps-section {
-      background: linear-gradient(145deg, var(--card-white) 0%, #FDFBF5 100%);
+      background: linear-gradient(145deg, var(--card-white) 0%, #241D17 100%);
       border: 1.8px solid rgba(197, 160, 89, 0.55);
       border-radius: 22px;
       padding: 18px 14px 20px;
       margin-bottom: 22px;
-      box-shadow: 0 10px 24px rgba(197, 160, 89, 0.12), 0 4px 0 rgba(197, 160, 89, 0.25);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25), 0 4px 0 rgba(197, 160, 89, 0.25);
     }
 
     .ride-apps-header {
       font-family: 'Amiri', serif;
       font-size: 1.35rem;
       font-weight: 700;
-      color: var(--gold-dark);
+      color: var(--gold-primary);
       margin-bottom: 4px;
       display: flex;
       align-items: center;
@@ -1090,10 +1094,10 @@
     }
 
     .btn-indrive {
-      background: var(--card-white);
-      color: var(--text-dark);
+      background: #2D241B;
+      color: #FFFFFF;
       border: 1.5px solid #96E825;
-      box-shadow: 0 3px 0 #7BC416;
+      box-shadow: 0 3px 0 #4A7312;
     }
 
     .btn-didi {
@@ -1122,9 +1126,9 @@
 
     .btn-copy-address-bar {
       width: 100%;
-      background: #FAF5E8;
+      background: rgba(197, 160, 89, 0.15);
       border: 1.2px dashed var(--gold-primary);
-      color: var(--gold-dark);
+      color: var(--gold-light);
       padding: 9px 12px;
       border-radius: 12px;
       font-family: 'Cairo', sans-serif;
@@ -1159,12 +1163,12 @@
        قسم الرد على الدعوة (تأكيد الحضور / الاعتذار)
        ======================================================== */
     .rsvp-box {
-      background: linear-gradient(145deg, var(--card-white) 0%, #FDFBF5 100%);
+      background: linear-gradient(145deg, var(--card-white) 0%, #241D17 100%);
       border: 1.8px solid rgba(197, 160, 89, 0.55);
       border-radius: 20px;
       padding: 20px 16px;
       margin-bottom: 20px;
-      box-shadow: 0 10px 24px rgba(197, 160, 89, 0.12), 0 4px 0 rgba(197, 160, 89, 0.25);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25), 0 4px 0 rgba(197, 160, 89, 0.25);
       position: relative;
       overflow: hidden;
     }
@@ -1183,7 +1187,7 @@
       font-family: 'Amiri', serif;
       font-size: 1.4rem;
       font-weight: 700;
-      color: var(--gold-dark);
+      color: var(--gold-primary);
       margin-bottom: 4px;
       display: flex;
       align-items: center;
@@ -1210,17 +1214,17 @@
       padding: 11px 14px;
       border-radius: 12px;
       border: 1.2px solid rgba(197, 160, 89, 0.45);
-      background: #FAF8F3;
+      background: #120F0D;
       font-family: 'Cairo', sans-serif;
       font-size: 0.9rem;
-      color: var(--text-dark);
+      color: #FFFFFF;
       outline: none;
       text-align: right;
     }
 
     .rsvp-input:focus {
-      background: var(--card-white);
-      border-color: var(--gold-dark);
+      background: #1C1713;
+      border-color: var(--gold-primary);
     }
 
     .rsvp-choices-grid {
@@ -1251,10 +1255,10 @@
     }
 
     .btn-rsvp-apologize {
-      background: linear-gradient(135deg, var(--card-white) 0%, #F7EFE0 100%);
-      color: #7A581B;
+      background: linear-gradient(135deg, var(--card-white) 0%, #2A221B 100%);
+      color: var(--gold-light);
       border: 1.5px solid var(--gold-primary);
-      box-shadow: 0 3px 0 #C5A059;
+      box-shadow: 0 3px 0 #8E6823;
     }
 
     .utility-btns-row {
@@ -1267,7 +1271,7 @@
       flex: 1;
       background: var(--card-white);
       border: 1px solid rgba(197, 160, 89, 0.35);
-      color: var(--gold-dark);
+      color: var(--gold-primary);
       padding: 11px 10px;
       border-radius: 14px;
       font-family: 'Cairo', sans-serif;
@@ -1291,12 +1295,12 @@
       font-family: 'Amiri', serif;
       font-size: 1.35rem;
       font-weight: 700;
-      color: var(--gold-dark);
+      color: var(--gold-primary);
     }
 
     .signature-date {
       font-size: 0.82rem;
-      color: #999084;
+      color: var(--text-muted);
       margin-top: 4px;
     }
 
@@ -1306,7 +1310,7 @@
     .gate-pass-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(20, 15, 10, 0.82);
+      background: rgba(10, 8, 6, 0.88);
       display: none;
       justify-content: center;
       align-items: center;
@@ -1319,15 +1323,15 @@
     }
 
     .gate-pass-card {
-      background: linear-gradient(145deg, #1E1914 0%, #2C241B 100%);
+      background: linear-gradient(145deg, #1E1914 0%, #120F0D 100%);
       border: 2.5px solid var(--gold-primary);
       border-radius: 26px;
       padding: 26px 20px 22px;
       width: 100%;
       max-width: 420px;
-      color: #FFFDF9;
+      color: #FFFFFF;
       text-align: center;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), 0 0 0 4px rgba(197, 160, 89, 0.2);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 0 4px rgba(197, 160, 89, 0.2);
       position: relative;
     }
 
@@ -1345,7 +1349,7 @@
     .gate-pass-venue {
       font-size: 1.35rem;
       font-weight: 900;
-      color: #F9E7BE;
+      color: var(--gold-light);
       margin-bottom: 4px;
     }
 
@@ -1353,7 +1357,7 @@
       font-size: 1.55rem;
       font-weight: 900;
       color: #FFFFFF;
-      background: rgba(197, 160, 89, 0.18);
+      background: rgba(197, 160, 89, 0.25);
       border: 1.5px solid var(--gold-primary);
       border-radius: 14px;
       padding: 8px 12px;
@@ -1364,20 +1368,20 @@
       font-family: 'Amiri', serif;
       font-size: 2.1rem;
       font-weight: 700;
-      color: #F6E6C4;
+      color: var(--gold-light);
       margin: 6px 0;
     }
 
     .gate-pass-info-list {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(197, 160, 89, 0.35);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(197, 160, 89, 0.4);
       border-radius: 16px;
       padding: 12px 14px;
       margin: 14px 0 18px;
       text-align: right;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       line-height: 1.8;
-      color: #EFE6D5;
+      color: #FFFFFF;
     }
 
     .btn-close-gate-pass {
@@ -1399,14 +1403,14 @@
       left: 50%;
       transform: translate3d(-50%, 90px, 0);
       opacity: 0;
-      background: #272019;
+      background: #1C1713;
       color: #FFFFFF;
       border: 1.5px solid var(--gold-primary);
       padding: 12px 22px;
       border-radius: 30px;
       font-size: 0.86rem;
       font-weight: 700;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
       z-index: 10010;
       transition: transform 0.3s ease, opacity 0.3s ease;
       pointer-events: none;
@@ -1554,7 +1558,7 @@
           <g transform="translate(70, 70)">
             <path d="M 36 12 C 46 30 15 48 -10 42 C -32 36 -45 18 -42 -5 C -40 -26 -15 -44 12 -42 C 34 -40 48 -20 44 4 Z" fill="url(#roseGradBR)" opacity="0.95"/>
             <path d="M 28 20 C 15 38 -18 38 -30 22 C -40 8 -38 -15 -22 -28 C -6 -40 20 -35 30 -18 C 38 -2 36 12 28 20 Z" fill="url(#roseGradBR)"/>
-            <path d="M 26 10 C 32 -14 10 -32 -12 -28 C -30 -24 -32 -2 -24 15 C -15 28 12 28 26 10 Z" fill="#FCE5E9"/>
+            <path d="M 26 10 C 32 -14 10 -32 -12 -28 C -30 -24 -32 -2 -24 15 C -15 28 12 28 26 10 Z" fill="url(#FCE5E9)"/>
             <ellipse cx="0" cy="0" rx="14" ry="12" fill="url(#roseCoreBR)"/>
             <path d="M 8 4 C 4 11 -6 11 -9 4 C -11 -3 -4 -8 2 -8 C 8 -7 10 -1 8 4 Z" fill="#8C1B33"/>
             <circle cx="-0.5" cy="-0.5" r="3.2" fill="#FFE3E8"/>
@@ -1756,7 +1760,7 @@
             <div class="count-title">دقيقة</div>
           </div>
           <div class="count-unit">
-            <div class="count-number" id="c-secs" style="color: var(--gold-dark);">00</div>
+            <div class="count-number" id="c-secs" style="color: var(--gold-light);">00</div>
             <div class="count-title">ثانية</div>
           </div>
         </div>
@@ -1787,7 +1791,7 @@
         </div>
       </section>
 
-      <!-- تفاصيل الموعد والمكان (تمت إزالة التكرار لتخفيف الصفحة) + كارت دخول البوابة -->
+      <!-- تفاصيل الموعد والمكان + كارت دخول البوابة -->
       <section class="details-group scroll-reveal">
         <div class="detail-card">
           <div class="detail-icon-wrap">🗓</div>
@@ -1810,10 +1814,10 @@
            rel="noopener noreferrer" 
            class="venue-direct-card" 
            title="انقر لفتح موقع القاعة على خرائط جوجل مباشرة">
-          <div class="detail-icon-wrap" style="background: #FDF1D5; border-color: var(--gold-primary);">📍</div>
+          <div class="detail-icon-wrap" style="background: #30261D; border-color: var(--gold-primary);">📍</div>
           <div class="detail-info">
-            <div class="detail-label" style="color: var(--gold-dark); font-weight: 700;">مكان الحفل (طريق صلاح سالم - أمام مسجد الرحمن الرحيم)</div>
-            <div class="detail-text-bold" style="color: #1A1A1A;">قاعة قصر الشوق - دار الاسلحة و الذخيرة</div>
+            <div class="detail-label" style="color: var(--gold-light); font-weight: 700;">مكان الحفل (طريق صلاح سالم - أمام مسجد الرحمن الرحيم)</div>
+            <div class="detail-text-bold" style="color: var(--text-dark);">قاعة قصر الشوق - دار الاسلحة و الذخيرة</div>
             <div class="venue-cta-badge">
               <span>🗺️ اضغط هنا لفتح اللوكيشن على خرائط Google Maps</span>
             </div>
@@ -2438,7 +2442,7 @@
         const countdownEl = document.querySelector('.countdown-section');
         if (countdownEl) {
           countdownEl.innerHTML = `
-            <div style="color: var(--gold-dark); font-weight: 800; font-size: 1.15rem; padding: 10px;">
+            <div style="color: var(--gold-primary); font-weight: 800; font-size: 1.15rem; padding: 10px;">
               🎉 الليلة حفل الزفاف المبارك! تنورونا في قاعة قصر الشوق الساعة 07:00 مساءً 🎉
             </div>
           `;
