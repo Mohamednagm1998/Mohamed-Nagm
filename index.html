@@ -28,7 +28,6 @@
       --gold-bright: #E2BC72;
       --gold-dark: #8E6823;
       --gold-gradient: linear-gradient(135deg, #F9E7BE 0%, #D4AF37 45%, #A87B1C 85%, #664B0B 100%);
-      --gold-foil-text: linear-gradient(110deg, #7A5612 0%, #B88B28 25%, #F7E5B4 50%, #B88B28 75%, #7A5612 100%);
       --cream-paper: #FFFDF9;
       --card-white: #FFFFFF;
       --text-dark: #272019;
@@ -51,7 +50,7 @@
 
     body {
       font-family: 'Cairo', sans-serif;
-      background: radial-gradient(circle at 50% 18%, #FFFDF9 0%, #F7EFE0 52%, #E6D4B5 100%);
+      background: radial-gradient(circle at 50% 18%, #FFFDF9 0%, #F7EFE0 55%, #E6D4B5 100%);
       color: var(--text-dark);
       min-height: 100vh;
       display: flex;
@@ -79,7 +78,7 @@
       position: fixed;
       top: 14px;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate3d(-50%, 0, 0);
       width: calc(100% - 24px);
       max-width: 540px;
       display: flex;
@@ -99,7 +98,7 @@
       align-items: center;
       gap: 9px;
       cursor: pointer;
-      box-shadow: 0 6px 16px rgba(142, 104, 35, 0.18), 0 2px 0 #C5A059;
+      box-shadow: 0 4px 12px rgba(142, 104, 35, 0.15), 0 2px 0 #C5A059;
       transition: transform 0.2s ease;
     }
 
@@ -117,8 +116,9 @@
       align-items: center;
       justify-content: center;
       font-size: 0.95rem;
-      animation: spinDisc 7s linear infinite;
+      animation: spinDisc 8s linear infinite;
       animation-play-state: paused;
+      will-change: transform;
     }
 
     .floating-disc.playing {
@@ -177,27 +177,28 @@
       font-size: 0.74rem;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(142, 104, 35, 0.14), 0 2px 0 rgba(197, 160, 89, 0.3);
+      box-shadow: 0 3px 10px rgba(142, 104, 35, 0.12), 0 2px 0 rgba(197, 160, 89, 0.3);
     }
 
     /* ========================================================
-       شاشة المظروف الافتتاحية + أنيميشن خروج الدعوة من الظرف
+       شاشة المظروف الافتتاحية + أنيميشن بطيء وفائق السلاسة (Zero-Lag GPU)
        ======================================================== */
     #envelope-screen {
       position: fixed;
       inset: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at 50% 22%, #FFFDF9 0%, #FAF4E8 52%, #EDE0CA 100%);
+      background: radial-gradient(circle at 50% 22%, #FFFDF9 0%, #FAF4E8 55%, #EDE0CA 100%);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       z-index: 9999;
-      transition: opacity 0.65s ease, visibility 0.65s;
+      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.9s;
       padding: 20px 10px;
       overflow: hidden;
       will-change: opacity;
+      backface-visibility: hidden;
     }
 
     #envelope-screen.opened {
@@ -209,14 +210,15 @@
     .envelope-header {
       position: relative;
       text-align: center;
-      margin-bottom: 34px;
+      margin-bottom: 38px;
       z-index: 10;
-      transition: opacity 0.4s ease, transform 0.4s ease;
+      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform, opacity;
     }
 
     #envelope-screen.opening-active .envelope-header {
       opacity: 0;
-      transform: translateY(-20px);
+      transform: translate3d(0, -24px, 0);
     }
 
     .badge-invite {
@@ -237,24 +239,16 @@
       font-family: 'Amiri', serif;
       font-size: 2.95rem;
       font-weight: 700;
-      background: var(--gold-foil-text);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: goldFoilShine 5s linear infinite;
+      color: var(--gold-dark);
+      text-shadow: 0 2px 0 #F6E6C4;
       line-height: 1.3;
-    }
-
-    @keyframes goldFoilShine {
-      0% { background-position: 0% center; }
-      100% { background-position: 200% center; }
     }
 
     .envelope-sub {
       color: #6C5F51;
       font-size: 0.95rem;
       font-weight: 600;
-      margin-top: 5px;
+      margin-top: 6px;
     }
 
     .envelope-floral-wrap {
@@ -262,20 +256,23 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 10px auto 14px;
+      margin: 10px auto;
       z-index: 10;
-      transition: transform 0.6s ease;
+      transform: translate3d(0, 0, 0);
+      transition: transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
     }
 
-    /* عندما تخرج البطاقة للأعلى، ينزل الظرف قليلاً لأسفل ليظهر خروج الكارت بوضوح كامل */
+    /* نزول هادئ وبطيء للظرف أثناء صعود بطاقة الدعوة منه */
     #envelope-screen.opening-active .envelope-floral-wrap {
-      transform: translateY(55px);
+      transform: translate3d(0, 68px, 0);
     }
 
     .floral-cluster {
       position: absolute;
       pointer-events: none;
       z-index: 15;
+      transform: translateZ(0);
     }
 
     .floral-top-left { top: -46px; left: -46px; width: 148px; height: 148px; }
@@ -295,10 +292,11 @@
       width: 320px;
       height: 220px;
       cursor: pointer;
-      perspective: 1400px;
+      perspective: 1200px;
       z-index: 10;
       touch-action: manipulation;
       user-select: none;
+      transform: translateZ(0);
     }
 
     @media (min-width: 480px) {
@@ -311,12 +309,12 @@
       inset: 0;
       background: radial-gradient(circle at 50% 30%, #FDF8EE 0%, #EFE1C5 100%);
       border-radius: 16px;
-      box-shadow: 0 22px 48px rgba(142, 104, 35, 0.28), 0 5px 0 #C5A059;
+      box-shadow: 0 18px 40px rgba(142, 104, 35, 0.24), 0 5px 0 #C5A059;
       border: 2px solid rgba(197, 160, 89, 0.85);
       z-index: 1;
     }
 
-    /* 2. بطاقة الدعوة التي تخرج من داخل الظرف (بدون قص overflow) */
+    /* 2. بطاقة الدعوة التي تخرج من داخل الظرف ببطء وسلاسة فائقة */
     .envelope-card-inside {
       position: absolute;
       top: 14px;
@@ -332,9 +330,11 @@
       justify-content: center;
       padding: 14px 12px;
       border: 2px solid var(--gold-primary);
-      box-shadow: 0 8px 25px rgba(39, 32, 25, 0.14);
-      transform: translateY(0) scale(0.96);
+      box-shadow: 0 10px 28px rgba(39, 32, 25, 0.15);
+      transform: translate3d(0, 0, 0) scale3d(0.96, 0.96, 1);
+      transition: transform 1.65s cubic-bezier(0.22, 1, 0.36, 1) 0.55s;
       will-change: transform;
+      backface-visibility: hidden;
     }
 
     .envelope-card-inside::before {
@@ -346,34 +346,12 @@
       pointer-events: none;
     }
 
-    /* أنيميشن خروج البطاقة من الظرف وتكبيرها */
+    /* حركة صعود بطاقة الدعوة من جيب الظرف ببطء ونعومة */
     .envelope-box.is-opening .envelope-card-inside {
-      animation: cardSlideOutAndExpand 1.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-      animation-delay: 0.38s;
+      transform: translate3d(0, -142px, 0) scale3d(1.04, 1.04, 1);
     }
 
-    @keyframes cardSlideOutAndExpand {
-      0% {
-        transform: translateY(0) scale(0.96);
-        z-index: 3;
-      }
-      55% {
-        transform: translateY(-145px) scale(1.05);
-        z-index: 12;
-        box-shadow: 0 22px 45px rgba(142, 104, 35, 0.35);
-      }
-      82% {
-        transform: translateY(-135px) scale(1.08);
-        z-index: 12;
-      }
-      100% {
-        transform: translateY(-60px) scale(1.45);
-        z-index: 20;
-        box-shadow: 0 30px 65px rgba(142, 104, 35, 0.45);
-      }
-    }
-
-    /* 3. جيب الظرف الأمامي (يغطي نصف البطاقة السفلي أثناء الخروج) */
+    /* 3. جيب الظرف الأمامي */
     .envelope-pocket-front {
       position: absolute;
       inset: 0;
@@ -381,6 +359,7 @@
       overflow: hidden;
       z-index: 6;
       pointer-events: none;
+      transform: translateZ(0);
     }
 
     .envelope-fold-left {
@@ -399,7 +378,6 @@
       position: absolute; bottom: 0; left: 0; width: 0; height: 0;
       border-style: solid; border-width: 0 160px 122px 160px;
       border-color: transparent transparent var(--envelope-deep) transparent;
-      filter: drop-shadow(0 -3px 6px rgba(142, 104, 35, 0.12));
     }
 
     @media (min-width: 480px) {
@@ -408,7 +386,7 @@
       .envelope-fold-bottom { border-width: 0 195px 145px 195px; }
     }
 
-    /* 4. غطاء الظرف العلوي (يفتح للأعلى 180 درجة) */
+    /* 4. غطاء الظرف العلوي (يفتح ببطء ونعومة بدون أي فلاتر تسبب لاج) */
     .envelope-fold-top {
       position: absolute;
       top: 0;
@@ -419,9 +397,11 @@
       border-width: 125px 160px 0 160px;
       border-color: #EADBC0 transparent transparent transparent;
       transform-origin: top center;
-      transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1), z-index 0s 0.28s;
+      transform: rotateX(0deg);
+      transition: transform 0.95s cubic-bezier(0.33, 1, 0.68, 1) 0.12s, z-index 0s 0.52s;
       z-index: 8;
-      filter: drop-shadow(0 5px 10px rgba(142, 104, 35, 0.18));
+      will-change: transform;
+      backface-visibility: hidden;
     }
 
     @media (min-width: 480px) {
@@ -438,46 +418,32 @@
       position: absolute; top: 50%; width: 14px; height: 48px;
       background: linear-gradient(180deg, #D4AF37 0%, #A87B1C 60%, #6E4E0B 100%);
       z-index: 9; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);
-      transition: opacity 0.25s ease, transform 0.25s ease;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      will-change: transform, opacity;
     }
 
     .wax-ribbon-left { left: calc(50% - 10px); transform: rotate(18deg); transform-origin: top center; }
     .wax-ribbon-right { right: calc(50% - 10px); transform: rotate(-18deg); transform-origin: top center; }
-    .envelope-box.is-opening .wax-ribbon-tail { opacity: 0; transform: scale(0.2); }
+    .envelope-box.is-opening .wax-ribbon-tail { opacity: 0; transform: scale3d(0.3, 0.3, 1); }
 
     .wax-seal {
-      position: absolute; top: 48%; left: 50%; transform: translate(-50%, -50%);
-      width: 82px; height: 82px;
+      position: absolute; top: 48%; left: 50%;
+      transform: translate3d(-50%, -50%, 0) scale3d(1, 1, 1);
+      width: 84px; height: 84px;
       background: radial-gradient(circle at 35% 35%, #F7D785 0%, #D4AF37 45%, #996D12 85%, #594008 100%);
       border-radius: 50%;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       color: #FFF9E8; font-family: 'Amiri', serif;
-      box-shadow: 0 10px 24px rgba(142, 104, 35, 0.5), inset 0 2px 5px rgba(255, 255, 255, 0.8);
+      box-shadow: 0 10px 24px rgba(142, 104, 35, 0.45), inset 0 2px 5px rgba(255, 255, 255, 0.8);
       border: 2px dashed rgba(255, 245, 206, 0.85);
       z-index: 10; cursor: pointer;
-      transition: transform 0.3s ease, opacity 0.3s ease;
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+      will-change: transform, opacity;
     }
 
     .envelope-box.is-opening .wax-seal {
       opacity: 0;
-      transform: translate(-50%, -50%) scale(0.2);
-    }
-
-    .btn-open-prompt {
-      position: relative; margin-top: 24px;
-      background: var(--gold-gradient); color: #FFFFFF;
-      border: 1.5px solid rgba(255, 255, 255, 0.75);
-      padding: 13px 30px; border-radius: 35px;
-      font-weight: 700; font-size: 0.98rem; cursor: pointer;
-      box-shadow: 0 8px 20px rgba(142, 104, 35, 0.32), 0 3px 0 #664B0B;
-      display: flex; align-items: center; gap: 10px;
-      z-index: 10; touch-action: manipulation;
-      transition: opacity 0.3s ease;
-    }
-
-    #envelope-screen.opening-active .btn-open-prompt {
-      opacity: 0;
-      pointer-events: none;
+      transform: translate3d(-50%, -50%, 0) scale3d(0.3, 0.3, 1);
     }
 
     /* ========================================================
@@ -496,16 +462,17 @@
       padding: 36px 22px 32px;
       text-align: center;
       position: relative;
-      box-shadow: 0 22px 55px rgba(142, 104, 35, 0.2), 0 5px 0 #C5A059;
+      box-shadow: 0 20px 50px rgba(142, 104, 35, 0.18), 0 5px 0 #C5A059;
       border: 2px solid rgba(197, 160, 89, 0.6);
       overflow: hidden;
-      transform: scale(0.94);
-      opacity: 0.4;
-      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.7s ease;
+      transform: translate3d(0, 18px, 0) scale3d(0.96, 0.96, 1);
+      opacity: 0;
+      transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
+      will-change: transform, opacity;
     }
 
     .wedding-card.card-ready {
-      transform: scale(1);
+      transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
       opacity: 1;
     }
 
@@ -565,14 +532,13 @@
 
     .scroll-reveal {
       opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.55s ease-out, transform 0.55s ease-out;
-      will-change: opacity, transform;
+      transform: translate3d(0, 16px, 0);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
 
     .scroll-reveal.in-view {
       opacity: 1;
-      transform: translateY(0);
+      transform: translate3d(0, 0, 0);
     }
 
     .bismillah {
@@ -629,10 +595,9 @@
       background: linear-gradient(145deg, #FFFDF8 0%, #F4E9D2 100%);
       border: 2.2px solid var(--gold-primary);
       border-radius: 140px 140px 26px 26px;
-      box-shadow: 0 18px 36px rgba(142, 104, 35, 0.25), 0 5px 0 #C5A059;
+      box-shadow: 0 16px 32px rgba(142, 104, 35, 0.22), 0 5px 0 #C5A059;
       transform-style: preserve-3d;
-      will-change: transform;
-      transition: transform 0.12s ease-out;
+      transition: transform 0.15s ease-out;
     }
 
     .couple-3d-halo {
@@ -673,7 +638,7 @@
       align-items: center;
       justify-content: center;
       font-size: 1.3rem;
-      box-shadow: 0 6px 14px rgba(142, 104, 35, 0.4), 0 2px 0 #664B0B;
+      box-shadow: 0 6px 14px rgba(142, 104, 35, 0.35), 0 2px 0 #664B0B;
       border: 2px solid #FFFFFF;
       z-index: 4;
     }
@@ -690,7 +655,7 @@
       font-family: 'Amiri', serif;
       font-size: 1.3rem;
       font-weight: 700;
-      box-shadow: 0 6px 16px rgba(142, 104, 35, 0.45), 0 3px 0 #664B0B;
+      box-shadow: 0 6px 16px rgba(142, 104, 35, 0.4), 0 3px 0 #664B0B;
       border: 2px solid #FFFFFF;
       z-index: 4;
       white-space: nowrap;
@@ -717,12 +682,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      animation: ringsFloat 4s infinite ease-in-out;
-    }
-
-    @keyframes ringsFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
     }
 
     .rings-3d-svg {
@@ -746,17 +705,15 @@
       font-family: 'Amiri', serif;
       font-size: 3.4rem;
       font-weight: 700;
-      background: var(--gold-foil-text);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: goldFoilShine 5s linear infinite;
+      color: var(--gold-dark);
+      text-shadow: 0 2px 0 #EFE2C6;
       line-height: 1.25;
     }
 
     .and-sym {
       font-family: 'Cairo', sans-serif;
       font-size: 1.9rem;
+      color: var(--text-muted);
       margin: 0 8px;
     }
 
@@ -777,7 +734,7 @@
       border-radius: 22px;
       padding: 18px 12px 20px;
       margin-bottom: 24px;
-      box-shadow: 0 10px 24px rgba(197, 160, 89, 0.1), 0 3px 0 rgba(197, 160, 89, 0.22);
+      box-shadow: 0 8px 20px rgba(197, 160, 89, 0.08), 0 3px 0 rgba(197, 160, 89, 0.22);
     }
 
     .countdown-header {
@@ -810,11 +767,6 @@
       font-weight: 800;
       color: var(--text-dark);
       line-height: 1.15;
-      transition: transform 0.15s ease;
-    }
-
-    .count-number.tick-pulse {
-      transform: scale(1.12);
     }
 
     .count-title {
@@ -833,7 +785,7 @@
       border-radius: 22px;
       padding: 18px 12px 20px;
       margin-bottom: 24px;
-      box-shadow: 0 10px 24px rgba(197, 160, 89, 0.1), 0 3px 0 rgba(197, 160, 89, 0.22);
+      box-shadow: 0 8px 20px rgba(197, 160, 89, 0.08), 0 3px 0 rgba(197, 160, 89, 0.22);
     }
 
     .timeline-header {
@@ -926,7 +878,7 @@
       align-items: center;
       gap: 14px;
       text-align: right;
-      box-shadow: 0 8px 20px rgba(197, 160, 89, 0.18), 0 4px 0 #B58E3E;
+      box-shadow: 0 8px 20px rgba(197, 160, 89, 0.16), 0 4px 0 #B58E3E;
       cursor: pointer;
       position: relative;
       overflow: hidden;
@@ -971,8 +923,7 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      box-shadow: 0 8px 20px rgba(39, 32, 25, 0.22), 0 3px 0 #14100C;
-      transition: transform 0.2s ease;
+      box-shadow: 0 6px 16px rgba(39, 32, 25, 0.2), 0 3px 0 #14100C;
     }
 
     .btn-gate-pass:active {
@@ -988,7 +939,7 @@
       border-radius: 22px;
       padding: 18px 14px 20px;
       margin-bottom: 22px;
-      box-shadow: 0 12px 26px rgba(197, 160, 89, 0.14), 0 4px 0 rgba(197, 160, 89, 0.25);
+      box-shadow: 0 10px 24px rgba(197, 160, 89, 0.12), 0 4px 0 rgba(197, 160, 89, 0.25);
     }
 
     .ride-apps-header {
@@ -1030,7 +981,6 @@
       justify-content: center;
       gap: 8px;
       border: none;
-      transition: transform 0.2s ease;
     }
 
     .btn-ride-app:active {
@@ -1041,26 +991,26 @@
       background: #141414;
       color: #FFFFFF;
       border: 1.5px solid #C5A059;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18), 0 3px 0 #000000;
+      box-shadow: 0 3px 0 #000000;
     }
 
     .btn-careem {
       background: #00B956;
       color: #FFFFFF;
-      box-shadow: 0 4px 12px rgba(0, 185, 86, 0.22), 0 3px 0 #00823B;
+      box-shadow: 0 3px 0 #00823B;
     }
 
     .btn-indrive {
       background: #FFFFFF;
       color: #1A1A1A;
       border: 1.5px solid #96E825;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 3px 0 #7BC416;
+      box-shadow: 0 3px 0 #7BC416;
     }
 
     .btn-didi {
       background: #FF6600;
       color: #FFFFFF;
-      box-shadow: 0 4px 12px rgba(255, 102, 0, 0.22), 0 3px 0 #CC5200;
+      box-shadow: 0 3px 0 #CC5200;
     }
 
     .ride-badge-pill {
@@ -1125,7 +1075,7 @@
       border-radius: 20px;
       padding: 20px 16px;
       margin-bottom: 20px;
-      box-shadow: 0 12px 26px rgba(197, 160, 89, 0.14), 0 4px 0 rgba(197, 160, 89, 0.25);
+      box-shadow: 0 10px 24px rgba(197, 160, 89, 0.12), 0 4px 0 rgba(197, 160, 89, 0.25);
       position: relative;
       overflow: hidden;
     }
@@ -1208,14 +1158,14 @@
     .btn-rsvp-attend {
       background: linear-gradient(135deg, #1E9E58 0%, #127A43 100%);
       color: #FFFFFF;
-      box-shadow: 0 6px 16px rgba(30, 158, 88, 0.25), 0 3px 0 #0B522B;
+      box-shadow: 0 3px 0 #0B522B;
     }
 
     .btn-rsvp-apologize {
       background: linear-gradient(135deg, #FFFDF9 0%, #F7EFE0 100%);
       color: #7A581B;
       border: 1.5px solid var(--gold-primary);
-      box-shadow: 0 4px 12px rgba(197, 160, 89, 0.14), 0 3px 0 #C5A059;
+      box-shadow: 0 3px 0 #C5A059;
     }
 
     .actions-stack {
@@ -1242,14 +1192,14 @@
     .btn-wedding-gold {
       background: var(--gold-gradient);
       color: #FFFFFF;
-      box-shadow: 0 6px 18px rgba(197, 160, 89, 0.3), 0 3px 0 #664B0B;
+      box-shadow: 0 3px 0 #664B0B;
     }
 
     .btn-wedding-cal {
       background: #FFFFFF;
       color: var(--text-dark);
       border: 1.5px solid rgba(197, 160, 89, 0.45);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.03), 0 3px 0 rgba(197, 160, 89, 0.22);
+      box-shadow: 0 3px 0 rgba(197, 160, 89, 0.22);
     }
 
     .utility-btns-row {
@@ -1392,7 +1342,7 @@
       position: fixed;
       bottom: 24px;
       left: 50%;
-      transform: translate(-50%, 90px);
+      transform: translate3d(-50%, 90px, 0);
       opacity: 0;
       background: #272019;
       color: #FFFFFF;
@@ -1403,7 +1353,7 @@
       font-weight: 700;
       box-shadow: 0 10px 28px rgba(0,0,0,0.35);
       z-index: 10010;
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease, opacity 0.3s ease;
       pointer-events: none;
       display: flex;
       align-items: center;
@@ -1413,7 +1363,7 @@
     }
 
     #toast-msg.visible {
-      transform: translate(-50%, 0);
+      transform: translate3d(-50%, 0, 0);
       opacity: 1;
     }
   </style>
@@ -1449,7 +1399,7 @@
     </div>
   </header>
 
-  <!-- شاشة المظروف الافتتاحية الفاتحة -->
+  <!-- شاشة المظروف الافتتاحية الفاتحة (تم إزالة الزر السفلي منها) -->
   <div id="envelope-screen">
     <div class="envelope-header">
       <div class="badge-invite">✨ دعوة زفاف خاصة ✨</div>
@@ -1641,7 +1591,7 @@
         </svg>
       </div>
 
-      <!-- مجسم المظروف ثلاثي الطبقات مع خروج البطاقة منه -->
+      <!-- مجسم المظروف ثلاثي الطبقات مع خروج البطاقة منه ببطء وسلاسة -->
       <div class="envelope-box" id="envelopeBox" onclick="openEnvelopeAndPlay(event)">
         <!-- الطبقة 1: ظهر الظرف -->
         <div class="envelope-back"></div>
@@ -1676,10 +1626,6 @@
       </div>
 
     </div>
-
-    <button type="button" class="btn-open-prompt" onclick="openEnvelopeAndPlay(event)">
-      <span>افتح الظرف واستخرج الدعوة ✉️🎶</span>
-    </button>
   </div>
 
   <!-- بطاقة الدعوة الرئيسية -->
@@ -1914,12 +1860,12 @@
         </div>
 
         <div class="rsvp-choices-grid">
-          <button type="button" class="btn-rsvp btn-rsvp-attend" onclick="sendWhatsAppRSVP('attend', event)">
+          <button type="button" class="btn-rsvp btn-rsvp-attend" onclick="sendWhatsAppRSVP('attend')">
             <span>🤍</span>
             <span>يسعدني ويشرفني الحضور ومشاركتكم الفرحة</span>
           </button>
 
-          <button type="button" class="btn-rsvp btn-rsvp-apologize" onclick="sendWhatsAppRSVP('apologize', event)">
+          <button type="button" class="btn-rsvp btn-rsvp-apologize" onclick="sendWhatsAppRSVP('apologize')">
             <span>🌸</span>
             <span>أعتذر لظروف خاصة مع خالص التهاني والدعوات</span>
           </button>
@@ -1987,7 +1933,6 @@
     let isPlaying = false;
     let wasPlayingBeforeHide = false;
     let envelopeOpened = false;
-    let detectedStartOffset = 0;
     let screenWakeLock = null;
 
     const GROOM_WHATSAPP_NUMBER = "201098303210";
@@ -2017,7 +1962,7 @@
       }
     }
 
-    // 3. حفظ الصوت والصورة في قاعدة بيانات الموبايل (IndexedDB) + تخطي الصمت في أول الأغنية
+    // 3. حفظ الصوت والصورة في قاعدة بيانات الموبايل (IndexedDB) بدون أي ضغط على المعالج
     function openOfflineDB() {
       return new Promise((resolve, reject) => {
         const req = indexedDB.open('WeddingMediaStorageDB', 3);
@@ -2032,32 +1977,7 @@
       });
     }
 
-    function detectLeadingSilence(arrayBuf) {
-      try {
-        const AudioCtx = window.AudioContext || window.webkitAudioContext;
-        if (!AudioCtx) return;
-        const tempCtx = new AudioCtx();
-        tempCtx.decodeAudioData(arrayBuf, (audioBuffer) => {
-          const channelData = audioBuffer.getChannelData(0);
-          const sampleRate = audioBuffer.sampleRate;
-          const maxScanSamples = Math.min(channelData.length, sampleRate * 8);
-          for (let i = 0; i < maxScanSamples; i += 100) {
-            if (Math.abs(channelData[i]) > 0.015) {
-              detectedStartOffset = Math.max(0, (i / sampleRate) - 0.05);
-              if (weddingAudio && weddingAudio.paused && weddingAudio.currentTime === 0) {
-                weddingAudio.currentTime = detectedStartOffset;
-              }
-              break;
-            }
-          }
-          tempCtx.close().catch(() => {});
-        }, () => {
-          tempCtx.close().catch(() => {});
-        });
-      } catch (e) {}
-    }
-
-    async function loadOrSaveOfflineMedia(key, url, mimeType, isAudio) {
+    async function loadOrSaveOfflineMedia(key, url, mimeType) {
       try {
         const db = await openOfflineDB();
         const cachedBlob = await new Promise((res) => {
@@ -2068,18 +1988,12 @@
         });
 
         if (cachedBlob && cachedBlob.size > 1000) {
-          if (isAudio) {
-            cachedBlob.arrayBuffer().then(buf => detectLeadingSilence(buf)).catch(() => {});
-          }
           return URL.createObjectURL(cachedBlob);
         }
 
         const netRes = await fetch(url, { cache: 'force-cache' });
         if (netRes.ok) {
           const arrBuf = await netRes.arrayBuffer();
-          if (isAudio) {
-            detectLeadingSilence(arrBuf.slice(0));
-          }
           const newBlob = new Blob([arrBuf], { type: mimeType });
           const tx = db.transaction('media', 'readwrite');
           tx.objectStore('media').put(newBlob, key);
@@ -2090,13 +2004,13 @@
     }
 
     (async function initOfflineAssets() {
-      const offlineAudioUrl = await loadOrSaveOfflineMedia('wedding_audio_v3', 'audio.mp3', 'audio/mpeg', true);
+      const offlineAudioUrl = await loadOrSaveOfflineMedia('wedding_audio_v3', 'audio.mp3', 'audio/mpeg');
       if (offlineAudioUrl && weddingAudio.paused) {
         weddingAudio.src = offlineAudioUrl;
         weddingAudio.load();
       }
 
-      const offlineImgUrl = await loadOrSaveOfflineMedia('wedding_couple_v3', 'couple.jpg', 'image/jpeg', false);
+      const offlineImgUrl = await loadOrSaveOfflineMedia('wedding_couple_v3', 'couple.jpg', 'image/jpeg');
       const imgEl = document.getElementById('couplePhotoImg');
       if (offlineImgUrl && imgEl) {
         imgEl.src = offlineImgUrl;
@@ -2111,11 +2025,6 @@
     weddingAudio.addEventListener('pause', () => {
       isPlaying = false;
       updateAudioUI(false);
-    });
-
-    weddingAudio.addEventListener('ended', () => {
-      weddingAudio.currentTime = detectedStartOffset;
-      weddingAudio.play().catch(() => {});
     });
 
     document.addEventListener('visibilitychange', () => {
@@ -2137,10 +2046,6 @@
       if (!weddingAudio) return;
       weddingAudio.muted = false;
       weddingAudio.volume = 1.0;
-
-      if (weddingAudio.currentTime < detectedStartOffset && detectedStartOffset > 0) {
-        try { weddingAudio.currentTime = detectedStartOffset; } catch (e) {}
-      }
 
       const playPromise = weddingAudio.play();
       if (playPromise !== undefined) {
@@ -2253,6 +2158,9 @@
     // 5. نسخ «دار الاسلحة و الزخيرة» فقط + فتح تطبيقات التوصيل مباشرة
     // ====================================================================
     function syncCopyNow(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).catch(() => {});
+      }
       const textArea = document.createElement('textarea');
       textArea.value = text;
       textArea.style.position = 'fixed';
@@ -2263,10 +2171,6 @@
       textArea.select();
       try { document.execCommand('copy'); } catch (e) {}
       document.body.removeChild(textArea);
-
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).catch(() => {});
-      }
     }
 
     function copyVenueAddressForRide() {
@@ -2295,9 +2199,7 @@
     }
 
     function openRideApp(appType) {
-      // نسخ "دار الاسلحة و الزخيرة" فقط في الحافظة قبل فتح التطبيق
       syncCopyNow(VENUE_COPY_TEXT);
-
       const encPlace = encodeURIComponent(VENUE_COPY_TEXT);
 
       if (appType === 'uber') {
@@ -2346,42 +2248,16 @@
     }
 
     // ====================================================================
-    // 6. أنيميشن فتح الظرف المتكامل وخروج بطاقة الدعوة منه للأعلى
+    // 6. أنيميشن فتح الظرف الهادئ والسلس وخروج بطاقة الدعوة منه بدون أي لاج
     // ====================================================================
-    let sparklesList = [];
-
-    function triggerGoldenSparkleBurst(originX, originY) {
-      const colors = ['#FFF8D6', '#F4D37A', '#D4AF37', '#FFFFFF'];
-      for (let i = 0; i < 28; i++) {
-        const angle = (Math.PI * 2 * i) / 28;
-        const speed = Math.random() * 4.5 + 2;
-        sparklesList.push({
-          x: originX,
-          y: originY,
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed - 1,
-          radius: Math.random() * 2.8 + 1.5,
-          alpha: 1,
-          decay: 0.022,
-          color: colors[Math.floor(Math.random() * colors.length)]
-        });
-      }
-    }
-
     function openEnvelopeAndPlay(evt) {
+      if (envelopeOpened) return;
+      envelopeOpened = true;
+
       requestKeepScreenAwake();
 
       if (weddingAudio && weddingAudio.paused) {
         playAudioInstant();
-      }
-
-      if (envelopeOpened) return;
-      envelopeOpened = true;
-
-      const sealEl = document.getElementById('waxSealEl');
-      if (sealEl) {
-        const rect = sealEl.getBoundingClientRect();
-        triggerGoldenSparkleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
       }
 
       const box = document.getElementById('envelopeBox');
@@ -2391,11 +2267,11 @@
       if (screen) screen.classList.add('opening-active');
       if (box) box.classList.add('is-opening');
 
-      // الانتظار حتى يفتح الغطاء وتخرج بطاقة الدعوة من الظرف بالكامل ثم الانتقال للدعوة الرئيسية
+      // الانتظار بهدوء حتى يفتح الغطاء وتخرج البطاقة ببطء ثم الانتقال للدعوة الرئيسية
       setTimeout(() => {
         if (screen) screen.classList.add('opened');
         if (mainCard) mainCard.classList.add('card-ready');
-      }, 1750);
+      }, 2350);
     }
 
     function recloseEnvelope() {
@@ -2449,9 +2325,9 @@
         const rect = couple3DStage.getBoundingClientRect();
         const x = clientX - rect.left - rect.width / 2;
         const y = clientY - rect.top - rect.height / 2;
-        const rotateY = Math.max(-12, Math.min(12, (x / (rect.width / 2)) * 10));
-        const rotateX = Math.max(-10, Math.min(10, -(y / (rect.height / 2)) * 9));
-        couple3DCard.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale(1.02)`;
+        const rotateY = Math.max(-10, Math.min(10, (x / (rect.width / 2)) * 8));
+        const rotateX = Math.max(-8, Math.min(8, -(y / (rect.height / 2)) * 8));
+        couple3DCard.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
         tiltTicking = false;
       };
 
@@ -2481,12 +2357,7 @@
     }
 
     // 9. إرسال رد الحضور أو الاعتذار لرقم 01098303210 على واتساب
-    function sendWhatsAppRSVP(status, evt) {
-      if (evt && evt.currentTarget) {
-        const rect = evt.currentTarget.getBoundingClientRect();
-        triggerGoldenSparkleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
-      }
-
+    function sendWhatsAppRSVP(status) {
       const guestName = document.getElementById('guestNameInput').value.trim();
       const guestWish = document.getElementById('guestWishInput').value.trim();
 
@@ -2513,9 +2384,7 @@
       }
 
       const encodedMsg = encodeURIComponent(message);
-      setTimeout(() => {
-        window.open(`https://wa.me/${GROOM_WHATSAPP_NUMBER}?text=${encodedMsg}`, '_blank');
-      }, 240);
+      window.open(`https://wa.me/${GROOM_WHATSAPP_NUMBER}?text=${encodedMsg}`, '_blank');
     }
 
     // 10. العداد التنازلي + تفعيل وضع يوم الفرح الذكي تلقائياً يوم 16 يناير 2027
@@ -2541,13 +2410,7 @@
         document.getElementById('c-days').innerText = String(days).padStart(2, '0');
         document.getElementById('c-hours').innerText = String(hours).padStart(2, '0');
         document.getElementById('c-mins').innerText = String(mins).padStart(2, '0');
-
-        const secsEl = document.getElementById('c-secs');
-        if (secsEl) {
-          secsEl.innerText = String(secs).padStart(2, '0');
-          secsEl.classList.add('tick-pulse');
-          setTimeout(() => secsEl.classList.remove('tick-pulse'), 150);
-        }
+        document.getElementById('c-secs').innerText = String(secs).padStart(2, '0');
       } else {
         const countdownEl = document.querySelector('.countdown-section');
         if (countdownEl) {
@@ -2563,7 +2426,7 @@
     setInterval(updateWeddingCountdown, 1000);
     updateWeddingCountdown();
 
-    // 11. رسم البتلات الرقيقة فائقة الخفة (60fps بدون استهلاك المعالج)
+    // 11. رسم البتلات الرقيقة فائقة الخفة (9 بتلات فقط لأداء 60fps فائق النعومة)
     const canvas = document.getElementById('petals-canvas');
     const ctx = canvas.getContext('2d');
     let canvasWidth = canvas.width = window.innerWidth;
@@ -2571,7 +2434,7 @@
 
     let petalsActive = true;
     let petalsList = [];
-    const TOTAL_PETALS = 11;
+    const TOTAL_PETALS = 9;
 
     window.addEventListener('resize', () => {
       canvasWidth = canvas.width = window.innerWidth;
@@ -2579,9 +2442,9 @@
     });
 
     const petalColors = [
-      'rgba(248, 198, 210, 0.42)',
-      'rgba(245, 232, 200, 0.45)',
-      'rgba(255, 240, 245, 0.48)'
+      'rgba(248, 198, 210, 0.38)',
+      'rgba(245, 232, 200, 0.40)',
+      'rgba(255, 240, 245, 0.44)'
     ];
 
     class LightPetal {
@@ -2593,12 +2456,12 @@
         this.x = (customX !== undefined) ? customX : Math.random() * canvasWidth;
         this.y = (customY !== undefined) ? customY : -20 - Math.random() * 40;
         this.size = Math.random() * 4 + 8;
-        this.vx = (Math.random() - 0.5) * 0.4;
-        this.vy = Math.random() * 0.35 + 0.4;
+        this.vx = (Math.random() - 0.5) * 0.35;
+        this.vy = Math.random() * 0.3 + 0.38;
         this.rotZ = Math.random() * Math.PI * 2;
-        this.rotSpeedZ = (Math.random() - 0.5) * 0.014;
+        this.rotSpeedZ = (Math.random() - 0.5) * 0.012;
         this.rotY = Math.random() * Math.PI * 2;
-        this.rotSpeedY = Math.random() * 0.018 + 0.01;
+        this.rotSpeedY = Math.random() * 0.015 + 0.008;
         this.swayAngle = Math.random() * Math.PI * 2;
         this.color = petalColors[Math.floor(Math.random() * petalColors.length)];
       }
@@ -2606,8 +2469,8 @@
       update() {
         this.rotZ += this.rotSpeedZ;
         this.rotY += this.rotSpeedY;
-        this.swayAngle += 0.012;
-        this.x += this.vx + Math.sin(this.swayAngle) * 0.45;
+        this.swayAngle += 0.01;
+        this.x += this.vx + Math.sin(this.swayAngle) * 0.4;
         this.y += this.vy;
         if (this.y > canvasHeight + 25 || this.x < -25 || this.x > canvasWidth + 25) {
           this.init();
@@ -2644,26 +2507,6 @@
           petalsList[i].render(ctx);
         }
       }
-
-      for (let i = sparklesList.length - 1; i >= 0; i--) {
-        const sp = sparklesList[i];
-        sp.x += sp.vx;
-        sp.y += sp.vy;
-        sp.vy += 0.06;
-        sp.alpha -= sp.decay;
-
-        if (sp.alpha <= 0) {
-          sparklesList.splice(i, 1);
-          continue;
-        }
-
-        ctx.globalAlpha = sp.alpha;
-        ctx.fillStyle = sp.color;
-        ctx.beginPath();
-        ctx.arc(sp.x, sp.y, sp.radius, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      ctx.globalAlpha = 1;
 
       requestAnimationFrame(renderPetalsLoop);
     }
