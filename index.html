@@ -1155,7 +1155,7 @@
       border: 1.8px solid rgba(197, 160, 89, 0.55);
       border-radius: 20px;
       padding: 20px 16px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       box-shadow: 0 10px 24px rgba(197, 160, 89, 0.12), 0 4px 0 rgba(197, 160, 89, 0.25);
       position: relative;
       overflow: hidden;
@@ -1249,38 +1249,9 @@
       box-shadow: 0 3px 0 #C5A059;
     }
 
-    .actions-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 11px;
-    }
-
-    .btn-wedding {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 13px 18px;
-      border-radius: 16px;
-      font-size: 0.92rem;
-      font-weight: 700;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      font-family: 'Cairo', sans-serif;
-    }
-
-    .btn-wedding-cal {
-      background: #FFFFFF;
-      color: var(--text-dark);
-      border: 1.5px solid rgba(197, 160, 89, 0.45);
-      box-shadow: 0 3px 0 rgba(197, 160, 89, 0.22);
-    }
-
     .utility-btns-row {
       display: flex;
       gap: 10px;
-      margin-top: 4px;
     }
 
     .btn-mini-util {
@@ -1288,21 +1259,21 @@
       background: #FFFFFF;
       border: 1px solid rgba(197, 160, 89, 0.35);
       color: var(--gold-dark);
-      padding: 10px;
-      border-radius: 12px;
+      padding: 11px 10px;
+      border-radius: 14px;
       font-family: 'Cairo', sans-serif;
-      font-size: 0.85rem;
+      font-size: 0.86rem;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-      box-shadow: 0 2px 0 rgba(197, 160, 89, 0.2);
+      box-shadow: 0 2px 0 rgba(197, 160, 89, 0.22);
     }
 
     .signature-card {
-      margin-top: 26px;
+      margin-top: 24px;
       padding-top: 18px;
       border-top: 1px dashed rgba(197, 160, 89, 0.35);
     }
@@ -1947,21 +1918,15 @@
         </div>
       </section>
 
-      <!-- تم حذف زر Google Maps المكرر من هنا لتخفيف الصفحة -->
-      <section class="actions-stack scroll-reveal">
-        <button type="button" class="btn-wedding btn-wedding-cal" onclick="downloadSmartAlarmICS()">
-          <span>⏰ ضبط منبه وتذكير تلقائي على الموبايل (بدون تسجيل دخول)</span>
+      <!-- أزرار نسخ ومشاركة الدعوة (تمت إزالة زر المنبه) -->
+      <div class="utility-btns-row scroll-reveal">
+        <button type="button" class="btn-mini-util" onclick="copyInviteLink()">
+          <span>📋 نسخ رابط الدعوة</span>
         </button>
-
-        <div class="utility-btns-row">
-          <button type="button" class="btn-mini-util" onclick="copyInviteLink()">
-            <span>📋 نسخ رابط الدعوة</span>
-          </button>
-          <button type="button" class="btn-mini-util" onclick="shareInviteWhatsApp()">
-            <span>📲 مشاركة الدعوة</span>
-          </button>
-        </div>
-      </section>
+        <button type="button" class="btn-mini-util" onclick="shareInviteWhatsApp()">
+          <span>📲 مشاركة الدعوة</span>
+        </button>
+      </div>
 
       <div class="signature-card scroll-reveal">
         <div class="signature-heading">حضوركم يكتمل به سرورنا ويزيد ليلتنا بهجة ✨</div>
@@ -2161,7 +2126,7 @@
     }
 
     // ====================================================================
-    // 4. كارت دخول البوابة + منبه الموبايل الذكي (.ics) + مشاركة اللوكيشن للسائق
+    // 4. كارت دخول البوابة + مشاركة اللوكيشن للسائق
     // ====================================================================
     function openGatePassModal() {
       requestKeepScreenAwake();
@@ -2170,47 +2135,6 @@
 
     function closeGatePassModal() {
       document.getElementById('gatePassModal').classList.remove('open');
-    }
-
-    function downloadSmartAlarmICS() {
-      const icsContent = [
-        "BEGIN:VCALENDAR",
-        "VERSION:2.0",
-        "PRODID:-//Mohamed & Raghda Wedding//AR",
-        "CALSCALE:GREGORIAN",
-        "METHOD:PUBLISH",
-        "BEGIN:VEVENT",
-        "UID:mohamed-raghda-wedding-2027@wedding.invite",
-        "SUMMARY:💍 حفل زفاف محمد & رغدة",
-        "DESCRIPTION:نتشرف بحضوركم حفل زفاف محمد ورغدة في قاعة قصر الشوق - دار الاسلحة و الذخيرة بطريق صلاح سالم. رابط الخريطة: " + GOOGLE_MAPS_LINK,
-        "LOCATION:قاعة قصر الشوق - دار الاسلحة و الذخيرة، طريق صلاح سالم أمام مسجد الرحمن الرحيم، القاهرة",
-        "DTSTART:20270116T170000Z",
-        "DTEND:20270116T220000Z",
-        "STATUS:CONFIRMED",
-        "BEGIN:VALARM",
-        "TRIGGER:-P1D",
-        "ACTION:DISPLAY",
-        "DESCRIPTION:تذكير: غداً حفل زفاف محمد & رغدة الساعة 7:00 مساءً بقاعة قصر الشوق 💍",
-        "END:VALARM",
-        "BEGIN:VALARM",
-        "TRIGGER:-PT3H",
-        "ACTION:DISPLAY",
-        "DESCRIPTION:تذكير: اليوم حفل زفاف محمد & رغدة الساعة 7:00 مساءً بقاعة قصر الشوق - دار الاسلحة و الذخيرة 🎉",
-        "END:VALARM",
-        "END:VEVENT",
-        "END:VCALENDAR"
-      ].join("\r\n");
-
-      const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "wedding-mohamed-raghda.ics";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      setTimeout(() => URL.revokeObjectURL(url), 2000);
-      showToast("جاري فتح تقويم الهاتف لضبط التذكير والمنبه ⏰");
     }
 
     function shareVenuePinWhatsApp() {
