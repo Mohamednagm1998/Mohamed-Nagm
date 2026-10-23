@@ -35,6 +35,18 @@
       --text-muted: #70685E;
       --envelope-shade: #F2E5CD;
       --envelope-deep: #E2D0AE;
+      --bg-gradient: radial-gradient(circle at 50% 18%, #FFFDF9 0%, #F7EFE0 55%, #E6D4B5 100%);
+    }
+
+    /* الوضع الداكن الماسي التلقائي بالليل أو الإضاءة الهادئة */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --cream-paper: #1A1612;
+        --card-white: #221C16;
+        --text-dark: #F7EFE0;
+        --text-muted: #B8AF9F;
+        --bg-gradient: radial-gradient(circle at 50% 18%, #241E17 0%, #17130F 55%, #0D0B09 100%);
+      }
     }
 
     * {
@@ -51,7 +63,7 @@
 
     body {
       font-family: 'Cairo', sans-serif;
-      background: radial-gradient(circle at 50% 18%, #FFFDF9 0%, #F7EFE0 55%, #E6D4B5 100%);
+      background: var(--bg-gradient);
       color: var(--text-dark);
       min-height: 100vh;
       display: flex;
@@ -92,7 +104,7 @@
 
     .floating-music-pill {
       pointer-events: auto;
-      background: #FFFDF9;
+      background: var(--card-white);
       border: 1.5px solid var(--gold-primary);
       border-radius: 40px;
       padding: 5px 14px 5px 6px;
@@ -172,7 +184,7 @@
     }
 
     .btn-float-mini {
-      background: #FFFDF9;
+      background: var(--card-white);
       border: 1.2px solid rgba(197, 160, 89, 0.55);
       color: var(--gold-dark);
       padding: 7px 11px;
@@ -185,7 +197,7 @@
     }
 
     /* ========================================================
-       شاشة المظروف الافتتاحية + أنيميشن بطيء وفائق السلاسة (Zero-Lag GPU)
+       شاشة المظروف الافتتاحية (Zero-Lag GPU)
        ======================================================== */
     #envelope-screen {
       position: fixed;
@@ -335,7 +347,6 @@
       .envelope-box { width: 390px; height: 255px; }
     }
 
-    /* 1. ظهر الظرف الخلفي */
     .envelope-back {
       position: absolute;
       inset: 0;
@@ -346,7 +357,6 @@
       z-index: 1;
     }
 
-    /* 2. بطاقة الدعوة التي تخرج من داخل الظرف ببطء وسلاسة فائقة */
     .envelope-card-inside {
       position: absolute;
       top: 14px;
@@ -382,7 +392,6 @@
       transform: translate3d(0, -142px, 0) scale3d(1.04, 1.04, 1);
     }
 
-    /* 3. جيب الظرف الأمامي */
     .envelope-pocket-front {
       position: absolute;
       inset: 0;
@@ -417,7 +426,6 @@
       .envelope-fold-bottom { border-width: 0 195px 145px 195px; }
     }
 
-    /* 4. غطاء الظرف العلوي */
     .envelope-fold-top {
       position: absolute;
       top: 0;
@@ -444,7 +452,6 @@
       z-index: 2;
     }
 
-    /* 5. الشريط والختم الشمعي النابض */
     .wax-ribbon-tail {
       position: absolute; top: 50%; width: 14px; height: 48px;
       background: linear-gradient(180deg, #D4AF37 0%, #A87B1C 60%, #6E4E0B 100%);
@@ -587,7 +594,7 @@
     }
 
     .quran-box {
-      background: #FFFFFF;
+      background: var(--card-white);
       border: 1px solid rgba(197, 160, 89, 0.3);
       border-right: 4px solid var(--gold-primary);
       border-left: 4px solid var(--gold-primary);
@@ -789,6 +796,7 @@
     .and-sym {
       font-family: 'Cairo', sans-serif;
       font-size: 1.9rem;
+      color: var(--text-muted);
       margin: 0 8px;
     }
 
@@ -801,10 +809,10 @@
     }
 
     /* ========================================================
-       مكعبات العداد التنازلي المجسمة 3D
+       مكعبات العداد التنازلي المجسمة 3D مع التفاعل المباشر
        ======================================================== */
     .countdown-section {
-      background: #FFFFFF;
+      background: var(--card-white);
       border: 1.5px solid rgba(197, 160, 89, 0.42);
       border-radius: 22px;
       padding: 18px 12px 20px;
@@ -830,7 +838,7 @@
     }
 
     .count-unit {
-      background: linear-gradient(160deg, #FFFFFF 0%, #FAF3E3 100%);
+      background: linear-gradient(160deg, var(--card-white) 0%, #FAF3E3 100%);
       border-radius: 16px;
       padding: 12px 4px;
       border: 1.5px solid rgba(197, 160, 89, 0.4);
@@ -861,7 +869,7 @@
        الخط الزمني المصغر لفقرات الليلة
        ======================================================== */
     .timeline-section {
-      background: #FFFFFF;
+      background: var(--card-white);
       border: 1.5px solid rgba(197, 160, 89, 0.42);
       border-radius: 22px;
       padding: 18px 12px 20px;
@@ -887,7 +895,7 @@
     }
 
     .timeline-step {
-      background: linear-gradient(160deg, #FFFFFF 0%, #FAF3E3 100%);
+      background: linear-gradient(160deg, var(--card-white) 0%, #FAF3E3 100%);
       border: 1.2px solid rgba(197, 160, 89, 0.4);
       border-radius: 16px;
       padding: 12px 6px;
@@ -920,7 +928,7 @@
     }
 
     .detail-card {
-      background: #FFFFFF;
+      background: var(--card-white);
       border: 1.2px solid rgba(197, 160, 89, 0.35);
       border-radius: 16px;
       padding: 14px 16px;
@@ -951,7 +959,7 @@
 
     .venue-direct-card {
       text-decoration: none;
-      background: linear-gradient(145deg, #FFFFFF 0%, #FDF9EE 100%);
+      background: linear-gradient(145deg, var(--card-white) 0%, #FDF9EE 100%);
       border: 2px solid var(--gold-primary);
       border-radius: 18px;
       padding: 16px;
@@ -1015,7 +1023,7 @@
        قسم تطبيقات التوصيل الذكي (Uber • Careem • inDrive • DiDi)
        ======================================================== */
     .ride-apps-section {
-      background: linear-gradient(145deg, #FFFFFF 0%, #FDFBF5 100%);
+      background: linear-gradient(145deg, var(--card-white) 0%, #FDFBF5 100%);
       border: 1.8px solid rgba(197, 160, 89, 0.55);
       border-radius: 22px;
       padding: 18px 14px 20px;
@@ -1082,8 +1090,8 @@
     }
 
     .btn-indrive {
-      background: #FFFFFF;
-      color: #1A1A1A;
+      background: var(--card-white);
+      color: var(--text-dark);
       border: 1.5px solid #96E825;
       box-shadow: 0 3px 0 #7BC416;
     }
@@ -1131,7 +1139,7 @@
 
     .btn-share-pin-only {
       width: 100%;
-      background: #FFFFFF;
+      background: var(--card-white);
       border: 1.2px solid rgba(197, 160, 89, 0.45);
       color: var(--text-dark);
       padding: 9px 12px;
@@ -1151,11 +1159,11 @@
        قسم الرد على الدعوة (تأكيد الحضور / الاعتذار)
        ======================================================== */
     .rsvp-box {
-      background: linear-gradient(145deg, #FFFFFF 0%, #FDFBF5 100%);
+      background: linear-gradient(145deg, var(--card-white) 0%, #FDFBF5 100%);
       border: 1.8px solid rgba(197, 160, 89, 0.55);
       border-radius: 20px;
       padding: 20px 16px;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
       box-shadow: 0 10px 24px rgba(197, 160, 89, 0.12), 0 4px 0 rgba(197, 160, 89, 0.25);
       position: relative;
       overflow: hidden;
@@ -1211,7 +1219,7 @@
     }
 
     .rsvp-input:focus {
-      background: #FFFFFF;
+      background: var(--card-white);
       border-color: var(--gold-dark);
     }
 
@@ -1243,7 +1251,7 @@
     }
 
     .btn-rsvp-apologize {
-      background: linear-gradient(135deg, #FFFDF9 0%, #F7EFE0 100%);
+      background: linear-gradient(135deg, var(--card-white) 0%, #F7EFE0 100%);
       color: #7A581B;
       border: 1.5px solid var(--gold-primary);
       box-shadow: 0 3px 0 #C5A059;
@@ -1252,11 +1260,12 @@
     .utility-btns-row {
       display: flex;
       gap: 10px;
+      margin-top: 4px;
     }
 
     .btn-mini-util {
       flex: 1;
-      background: #FFFFFF;
+      background: var(--card-white);
       border: 1px solid rgba(197, 160, 89, 0.35);
       color: var(--gold-dark);
       padding: 11px 10px;
@@ -1273,7 +1282,7 @@
     }
 
     .signature-card {
-      margin-top: 24px;
+      margin-top: 26px;
       padding-top: 18px;
       border-top: 1px dashed rgba(197, 160, 89, 0.35);
     }
@@ -1445,7 +1454,7 @@
     </div>
   </header>
 
-  <!-- شاشة المظروف الافتتاحية (مع أنيميشن فتح الظرف وخروج الدعوة السلس) -->
+  <!-- شاشة المظروف الافتتاحية -->
   <div id="envelope-screen">
     <div class="envelope-header">
       <div class="badge-invite">✨ دعوة زفاف خاصة ✨</div>
@@ -1454,40 +1463,26 @@
     </div>
 
     <div class="envelope-floral-wrap">
-
       <!-- باقة الورود العلوية (يسار) -->
       <div class="floral-cluster floral-top-left">
         <svg viewBox="0 0 170 170" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <radialGradient id="roseGradTL" cx="42%" cy="38%" r="62%">
-              <stop offset="0%" stop-color="#FFF0F3"/>
-              <stop offset="42%" stop-color="#F8BFCB"/>
-              <stop offset="78%" stop-color="#DE8195"/>
-              <stop offset="100%" stop-color="#AF3D56"/>
+              <stop offset="0%" stop-color="#FFF0F3"/><stop offset="42%" stop-color="#F8BFCB"/><stop offset="78%" stop-color="#DE8195"/><stop offset="100%" stop-color="#AF3D56"/>
             </radialGradient>
             <radialGradient id="roseCoreTL" cx="40%" cy="40%" r="55%">
-              <stop offset="0%" stop-color="#DE8195"/>
-              <stop offset="70%" stop-color="#A52843"/>
-              <stop offset="100%" stop-color="#6E1326"/>
+              <stop offset="0%" stop-color="#DE8195"/><stop offset="70%" stop-color="#A52843"/><stop offset="100%" stop-color="#6E1326"/>
             </radialGradient>
             <linearGradient id="leafGradTL" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#A6BE9D"/>
-              <stop offset="60%" stop-color="#687F5F"/>
-              <stop offset="100%" stop-color="#42553B"/>
+              <stop offset="0%" stop-color="#A6BE9D"/><stop offset="60%" stop-color="#687F5F"/><stop offset="100%" stop-color="#42553B"/>
             </linearGradient>
             <linearGradient id="goldSprigTL" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#FFF5D6"/>
-              <stop offset="40%" stop-color="#D4AF37"/>
-              <stop offset="85%" stop-color="#9C731C"/>
-              <stop offset="100%" stop-color="#614408"/>
+              <stop offset="0%" stop-color="#FFF5D6"/><stop offset="40%" stop-color="#D4AF37"/><stop offset="85%" stop-color="#9C731C"/><stop offset="100%" stop-color="#614408"/>
             </linearGradient>
             <radialGradient id="jasminePetalTL" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#FFFFFF"/>
-              <stop offset="80%" stop-color="#FDFBF7"/>
-              <stop offset="100%" stop-color="#EFE6D5"/>
+              <stop offset="0%" stop-color="#FFFFFF"/><stop offset="80%" stop-color="#FDFBF7"/><stop offset="100%" stop-color="#EFE6D5"/>
             </radialGradient>
           </defs>
-
           <g>
             <path d="M 95 95 Q 60 50 25 35" stroke="url(#goldSprigTL)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
             <circle cx="25" cy="35" r="4.5" fill="url(#goldSprigTL)"/>
@@ -1497,14 +1492,12 @@
             <path d="M 70 85 Q 40 75 16 80" stroke="url(#goldSprigTL)" stroke-width="1.8" fill="none"/>
             <circle cx="16" cy="80" r="3.5" fill="url(#goldSprigTL)"/>
           </g>
-
           <g>
             <path d="M 85 75 C 90 40 120 28 135 24 C 130 50 115 70 85 75 Z" fill="url(#leafGradTL)"/>
             <path d="M 85 75 Q 115 45 135 24" stroke="#C2D8BC" stroke-width="1" fill="none"/>
             <path d="M 75 90 C 45 92 25 110 20 125 C 40 125 65 112 75 90 Z" fill="url(#leafGradTL)"/>
             <path d="M 80 80 C 60 55 45 35 50 15 C 70 25 80 50 80 80 Z" fill="url(#leafGradTL)"/>
           </g>
-
           <g transform="translate(100, 100)">
             <path d="M -36 -12 C -46 -30 -15 -48 10 -42 C 32 -36 45 -18 42 5 C 40 26 15 44 -12 42 C -34 40 -48 20 -44 -4 Z" fill="url(#roseGradTL)" opacity="0.95"/>
             <path d="M -28 -20 C -15 -38 18 -38 30 -22 C 40 -8 38 15 22 28 C 6 40 -20 35 -30 18 C -38 2 -36 -12 -28 -20 Z" fill="url(#roseGradTL)"/>
@@ -1514,7 +1507,6 @@
             <path d="M -8 -4 C -4 -11 6 -11 9 -4 C 11 3 4 8 -2 8 C -8 7 -10 1 -8 -4 Z" fill="#8C1B33"/>
             <circle cx="0.5" cy="0.5" r="3.2" fill="#FFE3E8"/>
           </g>
-
           <g transform="translate(136, 50)">
             <g fill="url(#jasminePetalTL)" stroke="rgba(212,175,55,0.4)" stroke-width="0.6">
               <path d="M 0 0 C -4 -13 4 -13 0 -19 C -4 -13 4 -13 0 0" transform="rotate(0)"/>
@@ -1534,29 +1526,18 @@
         <svg viewBox="0 0 170 170" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <radialGradient id="roseGradBR" cx="58%" cy="58%" r="62%">
-              <stop offset="0%" stop-color="#FFF0F3"/>
-              <stop offset="42%" stop-color="#F8BFCB"/>
-              <stop offset="78%" stop-color="#DE8195"/>
-              <stop offset="100%" stop-color="#AF3D56"/>
+              <stop offset="0%" stop-color="#FFF0F3"/><stop offset="42%" stop-color="#F8BFCB"/><stop offset="78%" stop-color="#DE8195"/><stop offset="100%" stop-color="#AF3D56"/>
             </radialGradient>
             <radialGradient id="roseCoreBR" cx="50%" cy="50%" r="55%">
-              <stop offset="0%" stop-color="#DE8195"/>
-              <stop offset="70%" stop-color="#A52843"/>
-              <stop offset="100%" stop-color="#6E1326"/>
+              <stop offset="0%" stop-color="#DE8195"/><stop offset="70%" stop-color="#A52843"/><stop offset="100%" stop-color="#6E1326"/>
             </radialGradient>
             <linearGradient id="leafGradBR" x1="100%" y1="100%" x2="0%" y2="0%">
-              <stop offset="0%" stop-color="#A6BE9D"/>
-              <stop offset="60%" stop-color="#687F5F"/>
-              <stop offset="100%" stop-color="#42553B"/>
+              <stop offset="0%" stop-color="#A6BE9D"/><stop offset="60%" stop-color="#687F5F"/><stop offset="100%" stop-color="#42553B"/>
             </linearGradient>
             <linearGradient id="goldSprigBR" x1="100%" y1="100%" x2="0%" y2="0%">
-              <stop offset="0%" stop-color="#FFF5D6"/>
-              <stop offset="40%" stop-color="#D4AF37"/>
-              <stop offset="85%" stop-color="#9C731C"/>
-              <stop offset="100%" stop-color="#614408"/>
+              <stop offset="0%" stop-color="#FFF5D6"/><stop offset="40%" stop-color="#D4AF37"/><stop offset="85%" stop-color="#9C731C"/><stop offset="100%" stop-color="#614408"/>
             </linearGradient>
           </defs>
-
           <g>
             <path d="M 75 75 Q 110 120 145 135" stroke="url(#goldSprigBR)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
             <circle cx="145" cy="135" r="4.5" fill="url(#goldSprigBR)"/>
@@ -1565,13 +1546,11 @@
             <path d="M 100 85 Q 130 95 154 90" stroke="url(#goldSprigBR)" stroke-width="1.8" fill="none"/>
             <circle cx="154" cy="90" r="3.5" fill="url(#goldSprigBR)"/>
           </g>
-
           <g>
             <path d="M 85 95 C 80 130 50 142 35 146 C 40 120 55 100 85 95 Z" fill="url(#leafGradBR)"/>
             <path d="M 85 95 Q 55 125 35 146" stroke="#C2D8BC" stroke-width="1" fill="none"/>
             <path d="M 95 80 C 125 78 145 60 150 45 C 130 45 105 58 95 80 Z" fill="url(#leafGradBR)"/>
           </g>
-
           <g transform="translate(70, 70)">
             <path d="M 36 12 C 46 30 15 48 -10 42 C -32 36 -45 18 -42 -5 C -40 -26 -15 -44 12 -42 C 34 -40 48 -20 44 4 Z" fill="url(#roseGradBR)" opacity="0.95"/>
             <path d="M 28 20 C 15 38 -18 38 -30 22 C -40 8 -38 -15 -22 -28 C -6 -40 20 -35 30 -18 C 38 -2 36 12 28 20 Z" fill="url(#roseGradBR)"/>
@@ -1580,7 +1559,6 @@
             <path d="M 8 4 C 4 11 -6 11 -9 4 C -11 -3 -4 -8 2 -8 C 8 -7 10 -1 8 4 Z" fill="#8C1B33"/>
             <circle cx="-0.5" cy="-0.5" r="3.2" fill="#FFE3E8"/>
           </g>
-
           <g transform="translate(34, 118)">
             <g fill="url(#jasminePetalTL)" stroke="rgba(212,175,55,0.4)" stroke-width="0.6">
               <path d="M 0 0 C -4 -13 4 -13 0 -19 C -4 -13 4 -13 0 0" transform="rotate(35)"/>
@@ -1809,7 +1787,7 @@
         </div>
       </section>
 
-      <!-- تفاصيل الموعد والمكان (بطاقة اللوكيشن الموحدة) + كارت دخول البوابة -->
+      <!-- تفاصيل الموعد والمكان (تمت إزالة التكرار لتخفيف الصفحة) + كارت دخول البوابة -->
       <section class="details-group scroll-reveal">
         <div class="detail-card">
           <div class="detail-icon-wrap">🗓</div>
@@ -1918,7 +1896,6 @@
         </div>
       </section>
 
-      <!-- أزرار نسخ ومشاركة الدعوة (تمت إزالة زر المنبه) -->
       <div class="utility-btns-row scroll-reveal">
         <button type="button" class="btn-mini-util" onclick="copyInviteLink()">
           <span>📋 نسخ رابط الدعوة</span>
@@ -1973,7 +1950,7 @@
     const BASE_INVITE_URL = "https://mohamednagm1998.github.io/Mohamed-Nagm/";
     const GOOGLE_MAPS_LINK = "https://maps.app.goo.gl/geGT5azkam9drc3X9?g_st=ac";
 
-    // الإحداثيات والنص المطلوب نسخه بالضبط لتطبيقات التوصيل
+    // الإحداثيات والنص المطلوب نسخه بالضبط لتطبيقات التوصيل (بالذخيرة بحرف الذال)
     const VENUE_LAT = 30.0755;
     const VENUE_LNG = 31.3088;
     const VENUE_COPY_TEXT = "دار الاسلحة و الذخيرة";
