@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>دعوة زفاف محمد & رغدة</title>
 
+  <!-- تلوين شريط المتصفح العلوي في الموبايل ديناميكياً حسب الوضع الليلي/النهاري -->
+  <meta name="theme-color" id="metaThemeColor" content="#FFFDF9">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
   <!-- إعدادات معاينة الرابط على واتساب ومنصات التواصل (Open Graph) -->
   <meta property="og:title" content="دعوة زفاف محمد & رغدة 💍✨">
   <meta property="og:description" content="نتشرف بدعوتكم لحضور حفل زفافنا | السبت 16 يناير 2027 - قاعة قصر الشوق - دار الاسلحة و الذخيرة">
@@ -2024,6 +2029,7 @@
     let envelopeOpened = false;
     let screenWakeLock = null;
     let hideEnvelopeTimeout = null;
+    let audioFadeInterval = null;
 
     const GROOM_WHATSAPP_NUMBER = "201098303210";
     const BASE_INVITE_URL = "https://mohamednagm1998.github.io/Mohamed-Nagm/";
@@ -2034,20 +2040,28 @@
     const VENUE_COPY_TEXT = "دار الاسلحة و الذخيرة";
 
     // ====================================================================
-    // 1. تفعيل الوضع الداكن تلقائياً حسب الميعاد (من 6 مساءً حتى 6 صباحاً)
+    // 1. تفعيل الوضع الداكن تلقائياً حسب الميعاد + تلوين شريط المتصفح العلوي
     // ====================================================================
+    function updateBrowserThemeColor(isDark) {
+      const metaTheme = document.getElementById('metaThemeColor');
+      if (metaTheme) {
+        metaTheme.setAttribute('content', isDark ? '#14100C' : '#FFFDF9');
+      }
+    }
+
     function applyTimeBasedTheme() {
       const currentHour = new Date().getHours();
-      // المساء والليل: من الساعة 18 (6 مساءً) حتى الساعة 6 صباحاً
       const isNightTime = (currentHour >= 18 || currentHour < 6);
       const themeBtn = document.getElementById('themeToggleBtn');
 
       if (isNightTime) {
         document.body.classList.add('dark-mode');
         if (themeBtn) themeBtn.innerText = '☀️';
+        updateBrowserThemeColor(true);
       } else {
         document.body.classList.remove('dark-mode');
         if (themeBtn) themeBtn.innerText = '🌙';
+        updateBrowserThemeColor(false);
       }
     }
 
@@ -2056,10 +2070,10 @@
       const isDark = document.body.classList.contains('dark-mode');
       const themeBtn = document.getElementById('themeToggleBtn');
       if (themeBtn) themeBtn.innerText = isDark ? '☀️' : '🌙';
+      updateBrowserThemeColor(isDark);
       showToast(isDark ? 'تم تفعيل الوضع الليلي الملكي 🌙' : 'تم تفعيل الوضع النهاري المضيء ☀️');
     }
 
-    // تشغيل الفحص التلقائي للميعاد فور فتح الدعوة + فحص كل 5 دقائق
     applyTimeBasedTheme();
     setInterval(applyTimeBasedTheme, 300000);
 
@@ -2128,38 +2142,97 @@
       }
     })();
 
+    // ====================================================================
+    // 3. تدرج الصوت السينمائي الناعم (Audio Fade-In & Fade-Out)
+    // ====================================================================
     weddingAudio.addEventListener('playing', () => { isPlaying = true; updateAudioUI(true); });
     weddingAudio.addEventListener('pause', () => { isPlaying = false; updateAudioUI(false); });
 
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
-        if (weddingAudio && !weddingAudio.paused) { wasPlayingBeforeHide = true; weddingAudio.pause(); }
+        if (weddingAudio && !weddingAudio.paused) {
+          wasPlayingBeforeHide = true;
+          if (audioFadeInterval) clearInterval(audioFadeInterval);
+          weddingAudio.pause();
+        }
       } else {
         requestKeepScreenAwake();
-        if (wasPlayingBeforeHide && envelopeOpened) { wasPlayingBeforeHide = false; playAudioInstant(); }
+        if (wasPlayingBeforeHide && envelopeOpened) {
+          wasPlayingBeforeHide = false;
+          playAudioInstant(true);
+        }
       }
     });
 
-    function playAudioInstant() {
+    function playAudioInstant(useFadeIn = true) {
       if (!weddingAudio) return;
+      if (audioFadeInterval) clearInterval(audioFadeInterval);
+
       weddingAudio.muted = false;
-      weddingAudio.volume = 1.0;
+      let currentVol = useFadeIn ? 0.08 : 1.0;
+
+      try { weddingAudio.volume = currentVol; } catch (e) {}
+
       const playPromise = weddingAudio.play();
       if (playPromise !== undefined) {
-        playPromise.then(() => { isPlaying = true; updateAudioUI(true); }).catch(() => {});
+        playPromise.then(() => {
+          isPlaying = true;
+          updateAudioUI(true);
+
+          if (useFadeIn) {
+            audioFadeInterval = setInterval(() => {
+              currentVol = Math.min(1.0, currentVol + 0.06);
+              try { weddingAudio.volume = currentVol; } catch (e) {}
+              if (currentVol >= 1.0) {
+                clearInterval(audioFadeInterval);
+                audioFadeInterval = null;
+              }
+            }, 65);
+          }
+        }).catch(() => {});
       }
     }
 
-    function pauseAudioDirectly() {
+    function pauseAudioDirectly(useFadeOut = true) {
       wasPlayingBeforeHide = false;
-      if (weddingAudio) { weddingAudio.pause(); }
-      isPlaying = false;
-      updateAudioUI(false);
+      if (!weddingAudio) return;
+      if (audioFadeInterval) clearInterval(audioFadeInterval);
+
+      if (!useFadeOut) {
+        weddingAudio.pause();
+        isPlaying = false;
+        updateAudioUI(false);
+        return;
+      }
+
+      let currentVol = 1.0;
+      try { currentVol = weddingAudio.volume; } catch (e) {}
+      let steps = 0;
+
+      audioFadeInterval = setInterval(() => {
+        steps++;
+        currentVol = Math.max(0.05, currentVol - 0.14);
+        try { weddingAudio.volume = currentVol; } catch (e) {}
+
+        if (currentVol <= 0.08 || steps >= 6) {
+          clearInterval(audioFadeInterval);
+          audioFadeInterval = null;
+          weddingAudio.pause();
+          try { weddingAudio.volume = 1.0; } catch (e) {}
+          isPlaying = false;
+          updateAudioUI(false);
+        }
+      }, 45);
     }
 
     function toggleAudioPlayback() {
-      if (!weddingAudio.paused) { pauseAudioDirectly(); showToast('تم إيقاف الصوت مؤقتاً 🔇'); }
-      else { playAudioInstant(); showToast('جاري تشغيل الموسيقى 🎵'); }
+      if (!weddingAudio.paused) {
+        pauseAudioDirectly(true);
+        showToast('تم إيقاف الصوت مؤقتاً 🔇');
+      } else {
+        playAudioInstant(true);
+        showToast('جاري تشغيل الموسيقى 🎵');
+      }
     }
 
     function updateAudioUI(playing) {
@@ -2314,7 +2387,7 @@
       requestKeepScreenAwake();
 
       if (weddingAudio && weddingAudio.paused) {
-        playAudioInstant();
+        playAudioInstant(true);
       }
 
       const sealEl = document.getElementById('waxSealEl');
@@ -2502,7 +2575,7 @@
         if (countdownEl) {
           countdownEl.innerHTML = `
             <div style="color: var(--gold-dark); font-weight: 800; font-size: 1.15rem; padding: 10px;">
-              🎉 الليلة الكبيره بدأت.. ننتظركم بحب في قاعة قصر الشوق الساعة 07:00 مساءً! 🎉
+              🎉 الليلة الكبيرة بدأت.. ننتظركم بحب في قاعة قصر الشوق الساعة 07:00 مساءً! 🎉
             </div>
           `;
         }
