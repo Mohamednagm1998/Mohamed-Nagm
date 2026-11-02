@@ -42,10 +42,14 @@
       --copy-bar-bg: #FAF5E8;
       --text-dark: #272019;
       --text-muted: #655C52;
-      --envelope-back-bg: radial-gradient(circle at 50% 30%, #FDF8EE 0%, #EFE1C5 100%);
-      --envelope-shade: #F2E5CD;
-      --envelope-deep: #E2D0AE;
-      --envelope-flap: #EADBC0;
+      --envelope-back-bg: radial-gradient(circle at 50% 30%, #FAF1E0 0%, #E5D2B0 100%);
+      --env-side-1: #F3E6CE;
+      --env-side-2: #EBDAC0;
+      --env-bottom-1: #FDF7EC;
+      --env-bottom-2: #E6D2B2;
+      --env-top-1: #FFFDF8;
+      --env-top-2: #EAD9BC;
+      --env-ornament-text: #7A5612;
       --photo-frame-bg: linear-gradient(145deg, #FFFDF8 0%, #F4E9D2 100%);
       --smart-banner-bg: linear-gradient(135deg, #FFFDF5 0%, #FAF0D7 100%);
     }
@@ -72,10 +76,14 @@
       --copy-bar-bg: rgba(212, 175, 55, 0.16);
       --text-dark: #FFFFFF;
       --text-muted: #E6DDD0;
-      --envelope-back-bg: radial-gradient(circle at 50% 30%, #33291E 0%, #1C1610 100%);
-      --envelope-shade: #2B2219;
-      --envelope-deep: #211A13;
-      --envelope-flap: #382D21;
+      --envelope-back-bg: radial-gradient(circle at 50% 30%, #2E241A 0%, #17120C 100%);
+      --env-side-1: #2C2219;
+      --env-side-2: #241C14;
+      --env-bottom-1: #33281E;
+      --env-bottom-2: #1E1711;
+      --env-top-1: #3B2F23;
+      --env-top-2: #251D15;
+      --env-ornament-text: #FFEAB6;
       --photo-frame-bg: linear-gradient(145deg, #2E251B 0%, #1B150F 100%);
       --smart-banner-bg: linear-gradient(135deg, #2D241B 0%, #1E1812 100%);
     }
@@ -102,70 +110,171 @@
     .floating-quick-actions { pointer-events: auto; display: flex; gap: 5px; }
     .btn-float-mini { background: var(--card-white); border: 1.2px solid var(--gold-primary); color: var(--gold-dark); padding: 6px 9px; border-radius: 30px; font-family: 'Cairo', sans-serif; font-size: 0.72rem; font-weight: 700; cursor: pointer; box-shadow: 0 3px 10px rgba(0,0,0,0.14), 0 2px 0 rgba(197,160,89,0.3); }
 
-    /* شاشة المظروف الافتتاحية الكاملة */
+    /* ========================================================
+       شاشة المظروف الافتتاحية المطورة بتفاصيل ملكية بارزة
+       ======================================================== */
     #envelope-screen { position: fixed; inset: 0; width: 100%; height: 100%; background: var(--bg-gradient); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1); padding: 20px 10px; overflow: hidden; will-change: opacity; backface-visibility: hidden; }
     #envelope-screen.opened { opacity: 0; pointer-events: none; }
     #envelope-screen.hidden-completely { display: none !important; }
-    .envelope-header { position: relative; text-align: center; margin-bottom: 38px; z-index: 10; animation: gentleHoverGPU 3.8s infinite ease-in-out; transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1); will-change: transform, opacity; }
+
+    .envelope-header { position: relative; text-align: center; margin-bottom: 34px; z-index: 10; animation: gentleHoverGPU 3.8s infinite ease-in-out; transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1); will-change: transform, opacity; }
     @keyframes gentleHoverGPU { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -5px, 0); } }
     #envelope-screen.opening-active .envelope-header { animation: none; opacity: 0; transform: translate3d(0, -24px, 0); }
-    .badge-invite { display: inline-flex; align-items: center; gap: 6px; background: rgba(212, 175, 55, 0.18); border: 1.5px solid var(--gold-primary); color: var(--gold-dark); padding: 6px 18px; border-radius: 40px; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; }
-    .envelope-title { font-family: 'Amiri', serif; font-size: 2.95rem; font-weight: 700; background: var(--gold-foil-text); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: goldFoilShine 6s linear infinite; line-height: 1.3; }
+
+    .badge-invite { display: inline-flex; align-items: center; gap: 6px; background: rgba(212, 175, 55, 0.18); border: 1.5px solid var(--gold-primary); color: var(--gold-dark); padding: 6px 18px; border-radius: 40px; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; box-shadow: 0 4px 12px rgba(197, 160, 89, 0.15); }
+    .envelope-title { font-family: 'Amiri', serif; font-size: 3.1rem; font-weight: 700; background: var(--gold-foil-text); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: goldFoilShine 6s linear infinite; line-height: 1.28; }
     @keyframes goldFoilShine { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
-    .envelope-sub { color: var(--text-muted); font-size: 0.95rem; font-weight: 600; margin-top: 6px; }
+    .envelope-sub { color: var(--text-muted); font-size: 0.94rem; font-weight: 600; margin-top: 6px; }
 
     .envelope-floral-wrap { position: relative; display: flex; justify-content: center; align-items: center; margin: 10px auto; z-index: 10; transform: translate3d(0, 0, 0); transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1); will-change: transform; }
     #envelope-screen.opening-active .envelope-floral-wrap { transform: translate3d(0, 68px, 0); }
 
     /* الباقات الزهرية الأربعة حول الظرف */
     .floral-cluster { position: absolute; pointer-events: none; z-index: 15; transform: translateZ(0); }
-    .floral-top-left { top: -46px; left: -46px; width: 148px; height: 148px; animation: floralSwayGPU 5.5s infinite ease-in-out alternate; }
-    .floral-bottom-right { bottom: -46px; right: -46px; width: 152px; height: 152px; animation: floralSwayGPU 6.5s infinite ease-in-out alternate-reverse; }
-    .floral-top-right { top: -36px; right: -34px; width: 108px; height: 108px; }
-    .floral-bottom-left { bottom: -34px; left: -34px; width: 108px; height: 108px; }
-    @keyframes floralSwayGPU { 0% { transform: rotate3d(0, 0, 1, -2deg); } 100% { transform: rotate3d(0, 0, 1, 2deg); } }
+    .floral-top-left { top: -48px; left: -48px; width: 152px; height: 152px; animation: floralSwayGPU 5.5s infinite ease-in-out alternate; }
+    .floral-bottom-right { bottom: -48px; right: -48px; width: 155px; height: 155px; animation: floralSwayGPU 6.5s infinite ease-in-out alternate-reverse; }
+    .floral-top-right { top: -38px; right: -36px; width: 112px; height: 112px; }
+    .floral-bottom-left { bottom: -36px; left: -36px; width: 112px; height: 112px; }
+    @keyframes floralSwayGPU { 0% { transform: rotate3d(0, 0, 1, -2.5deg); } 100% { transform: rotate3d(0, 0, 1, 2.5deg); } }
     @media (max-width: 480px) {
-      .floral-top-left { top: -32px; left: -26px; width: 112px; height: 112px; }
-      .floral-bottom-right { bottom: -32px; right: -26px; width: 116px; height: 116px; }
-      .floral-top-right { top: -24px; right: -20px; width: 85px; height: 85px; }
-      .floral-bottom-left { bottom: -24px; left: -20px; width: 85px; height: 85px; }
+      .floral-top-left { top: -34px; left: -28px; width: 118px; height: 118px; }
+      .floral-bottom-right { bottom: -34px; right: -28px; width: 120px; height: 120px; }
+      .floral-top-right { top: -26px; right: -22px; width: 88px; height: 88px; }
+      .floral-bottom-left { bottom: -26px; left: -22px; width: 88px; height: 88px; }
     }
 
-    .envelope-box { position: relative; width: 320px; height: 220px; cursor: pointer; perspective: 1200px; z-index: 10; touch-action: manipulation; user-select: none; transform: translateZ(0); }
-    @media (min-width: 480px) { .envelope-box { width: 390px; height: 255px; } }
-    .envelope-back { position: absolute; inset: 0; background: var(--envelope-back-bg); border-radius: 16px; box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28), 0 5px 0 #C5A059; border: 2px solid var(--gold-primary); z-index: 1; }
-    .envelope-card-inside { position: absolute; top: 14px; left: 16px; right: 16px; bottom: 14px; background: var(--card-white); border-radius: 14px; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 14px 12px; border: 2px solid var(--gold-primary); box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22); transform: translate3d(0, 0, 0) scale3d(0.96, 0.96, 1); transition: transform 1.65s cubic-bezier(0.22, 1, 0.36, 1) 0.55s; will-change: transform; backface-visibility: hidden; }
+    .envelope-box { position: relative; width: 334px; height: 232px; cursor: pointer; perspective: 1300px; z-index: 10; touch-action: manipulation; user-select: none; transform: translateZ(0); }
+    @media (min-width: 480px) { .envelope-box { width: 396px; height: 262px; } }
+
+    /* 1. ظهر الظرف الخلفي مع إطار ذهبي مضاعف وظل عميق */
+    .envelope-back {
+      position: absolute; inset: 0; background: var(--envelope-back-bg); border-radius: 16px;
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.34), 0 6px 0 #B38728, inset 0 0 22px rgba(197, 160, 89, 0.25);
+      border: 2.2px solid var(--gold-primary); z-index: 1;
+    }
+    .envelope-back::after {
+      content: ""; position: absolute; inset: 6px; border: 1px dashed rgba(212, 175, 55, 0.45);
+      border-radius: 11px; pointer-events: none;
+    }
+
+    /* 2. بطاقة الدعوة التي تخرج من داخل الظرف (تظهر حافتها الذهبية العلوية داخل الجيب) */
+    .envelope-card-inside {
+      position: absolute; top: 8px; left: 15px; right: 15px; bottom: 14px;
+      background: var(--card-white); border-radius: 14px; z-index: 3;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 14px 12px; border: 2px solid var(--gold-primary);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+      transform: translate3d(0, 0, 0) scale3d(0.96, 0.96, 1);
+      transition: transform 1.65s cubic-bezier(0.22, 1, 0.36, 1) 0.55s;
+      will-change: transform; backface-visibility: hidden;
+    }
     .envelope-card-inside::before { content: ""; position: absolute; inset: 5px; border: 1px dashed rgba(212, 175, 55, 0.55); border-radius: 10px; pointer-events: none; }
     .env-card-bismillah { font-family: 'Amiri', serif; font-size: 0.92rem; color: var(--gold-dark); margin-bottom: 2px; }
     .env-card-sub { font-size: 0.74rem; color: var(--text-muted); font-weight: 700; }
-    .env-card-names { font-family: 'Amiri', serif; font-size: 1.72rem; font-weight: 700; color: var(--gold-dark); line-height: 1.2; margin: 2px 0; }
+    .env-card-names { font-family: 'Amiri', serif; font-size: 1.75rem; font-weight: 700; color: var(--gold-dark); line-height: 1.2; margin: 2px 0; }
     .env-card-date { font-size: 0.82rem; color: var(--text-dark); font-weight: 700; margin-top: 2px; }
     .env-card-venue { font-size: 0.75rem; color: var(--gold-dark); font-weight: 700; margin-top: 3px; }
-    .envelope-box.is-opening .envelope-card-inside { transform: translate3d(0, -142px, 0) scale3d(1.04, 1.04, 1); }
+    .envelope-box.is-opening .envelope-card-inside { transform: translate3d(0, -146px, 0) scale3d(1.04, 1.04, 1); }
 
-    .envelope-pocket-front { position: absolute; inset: 0; border-radius: 16px; overflow: hidden; z-index: 6; pointer-events: none; transform: translateZ(0); }
-    .envelope-fold-left { position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-style: solid; border-width: 110px 0 110px 160px; border-color: transparent transparent transparent var(--envelope-shade); }
-    .envelope-fold-right { position: absolute; bottom: 0; right: 0; width: 0; height: 0; border-style: solid; border-width: 110px 160px 110px 0; border-color: transparent var(--envelope-shade) transparent transparent; }
-    .envelope-fold-bottom { position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-style: solid; border-width: 0 160px 122px 160px; border-color: transparent transparent var(--envelope-deep) transparent; }
-    .envelope-fold-top { position: absolute; top: 0; left: 0; width: 0; height: 0; border-style: solid; border-width: 125px 160px 0 160px; border-color: var(--envelope-flap) transparent transparent transparent; transform-origin: top center; transform: rotateX(0deg); transition: transform 0.95s cubic-bezier(0.33, 1, 0.68, 1) 0.12s, z-index 0s 0.52s; z-index: 8; will-change: transform; backface-visibility: hidden; }
-    @media (min-width: 480px) {
-      .envelope-fold-left { border-width: 128px 0 128px 195px; }
-      .envelope-fold-right { border-width: 128px 195px 128px 0; }
-      .envelope-fold-bottom { border-width: 0 195px 145px 195px; }
-      .envelope-fold-top { border-width: 145px 195px 0 195px; }
+    /* 3. جيب الظرف الأمامي المزخرف بخطوط الذهب والظلال (SVG) */
+    .envelope-pocket-front {
+      position: absolute; inset: 0; border-radius: 16px; overflow: hidden;
+      z-index: 6; pointer-events: none; transform: translateZ(0);
     }
+    .envelope-pocket-svg { width: 100%; height: 100%; display: block; }
+
+    /* النقش الملكي الخارجي أسفل جيب الظرف */
+    .envelope-exterior-footer {
+      position: absolute; bottom: 11px; left: 0; right: 0; text-align: center;
+      z-index: 7; pointer-events: none; display: flex; flex-direction: column; align-items: center; gap: 2px;
+    }
+    .env-ext-ornament { font-size: 0.68rem; color: var(--gold-primary); letter-spacing: 2px; line-height: 1; }
+    .env-ext-text {
+      font-family: 'Amiri', serif; font-size: 0.85rem; font-weight: 700;
+      color: var(--env-ornament-text); letter-spacing: 0.3px;
+      background: rgba(212, 175, 55, 0.14); padding: 2px 14px; border-radius: 20px;
+      border: 1px solid rgba(212, 175, 55, 0.45);
+    }
+
+    /* 4. غطاء الظرف العلوي المزخرف بإطار الذهب المزدوج (يفتح 180 درجة بنعومة) */
+    .envelope-fold-top {
+      position: absolute; top: 0; left: 0; width: 100%; height: 58%;
+      transform-origin: top center; transform: rotateX(0deg);
+      transition: transform 0.95s cubic-bezier(0.33, 1, 0.68, 1) 0.12s, z-index 0s 0.52s;
+      z-index: 8; will-change: transform; backface-visibility: hidden; pointer-events: none;
+    }
+    .envelope-flap-svg { width: 100%; height: 100%; display: block; overflow: visible; }
     .envelope-box.is-opening .envelope-fold-top { transform: rotateX(180deg); z-index: 2; }
 
-    .wax-ribbon-tail { position: absolute; top: 50%; width: 14px; height: 48px; background: linear-gradient(180deg, #D4AF37 0%, #A87B1C 60%, #6E4E0B 100%); z-index: 9; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%); transition: opacity 0.4s ease, transform 0.4s ease; will-change: transform, opacity; }
-    .wax-ribbon-left { left: calc(50% - 10px); transform: rotate(18deg); transform-origin: top center; }
-    .wax-ribbon-right { right: calc(50% - 10px); transform: rotate(-18deg); transform-origin: top center; }
+    /* 5. الشريط الحريري والختم الشمعي الملكي بهالته النابضة */
+    .wax-ribbon-tail {
+      position: absolute; top: 50%; width: 15px; height: 54px;
+      background: linear-gradient(180deg, #F5D77F 0%, #D4AF37 35%, #9A6F18 75%, #5E4208 100%);
+      z-index: 9; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);
+      border-left: 1px solid rgba(255, 248, 214, 0.6); border-right: 1px solid rgba(255, 248, 214, 0.6);
+      transition: opacity 0.4s ease, transform 0.4s ease; will-change: transform, opacity;
+    }
+    .wax-ribbon-left { left: calc(50% - 12px); transform: rotate(20deg); transform-origin: top center; }
+    .wax-ribbon-right { right: calc(50% - 12px); transform: rotate(-20deg); transform-origin: top center; }
     .envelope-box.is-opening .wax-ribbon-tail { opacity: 0; transform: scale3d(0.3, 0.3, 1); }
 
-    .wax-seal { position: absolute; top: 48%; left: 50%; width: 84px; height: 84px; background: radial-gradient(circle at 35% 35%, #F7D785 0%, #D4AF37 45%, #996D12 85%, #594008 100%); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #FFF9E8; font-family: 'Amiri', serif; box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45), inset 0 2px 5px rgba(255, 255, 255, 0.8); border: 2px dashed rgba(255, 245, 206, 0.85); z-index: 10; cursor: pointer; animation: sealPulseGPU 2s infinite ease-in-out alternate; transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease; will-change: transform, opacity; }
-    @keyframes sealPulseGPU { 0% { transform: translate3d(-50%, -50%, 0) scale3d(1, 1, 1); } 100% { transform: translate3d(-50%, -50%, 0) scale3d(1.06, 1.06, 1); } }
+    .wax-seal-halo {
+      position: absolute; top: 50%; left: 50%; width: 104px; height: 104px;
+      border-radius: 50%; border: 1.5px dashed var(--gold-primary);
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.22) 0%, transparent 72%);
+      z-index: 9; pointer-events: none;
+      animation: haloPulseGPU 2.2s infinite ease-in-out alternate;
+      transition: opacity 0.35s ease; will-change: transform, opacity;
+    }
+    @keyframes haloPulseGPU {
+      0% { transform: translate3d(-50%, -50%, 0) scale3d(0.92, 0.92, 1); opacity: 0.65; }
+      100% { transform: translate3d(-50%, -50%, 0) scale3d(1.12, 1.12, 1); opacity: 1; }
+    }
+    .envelope-box.is-opening .wax-seal-halo { opacity: 0; animation: none; }
+
+    .wax-seal {
+      position: absolute; top: 50%; left: 50%; width: 88px; height: 88px;
+      background: radial-gradient(circle at 32% 30%, #FFF2B2 0%, #E6C15A 28%, #C59628 62%, #8A6210 88%, #523905 100%);
+      border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: #FFFDF5; font-family: 'Amiri', serif;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.48), inset 0 2px 6px rgba(255, 255, 255, 0.85), inset 0 -3px 8px rgba(66, 45, 4, 0.7);
+      border: 2.5px dashed rgba(255, 248, 214, 0.9);
+      z-index: 10; cursor: pointer;
+      animation: sealPulseGPU 2s infinite ease-in-out alternate;
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+      will-change: transform, opacity;
+    }
+    .wax-seal::before {
+      content: ""; position: absolute; inset: 5px; border-radius: 50%;
+      border: 1.2px solid rgba(255, 245, 200, 0.65); pointer-events: none;
+    }
+    @keyframes sealPulseGPU {
+      0% { transform: translate3d(-50%, -50%, 0) scale3d(1, 1, 1); }
+      100% { transform: translate3d(-50%, -50%, 0) scale3d(1.06, 1.06, 1); }
+    }
     .envelope-box.is-opening .wax-seal { animation: none; opacity: 0; transform: translate3d(-50%, -50%, 0) scale3d(0.25, 0.25, 1); }
 
-    /* بطاقة الدعوة الرئيسية بكامل زخارفها */
+    /* سطر زخرفي رقيق أسفل الظرف بدلاً من الزر الضخم */
+    .envelope-bottom-caption {
+      margin-top: 26px; text-align: center; z-index: 10;
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    #envelope-screen.opening-active .envelope-bottom-caption {
+      opacity: 0; transform: translate3d(0, 18px, 0); pointer-events: none;
+    }
+    .caption-touch-hint {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--gold-dark); font-size: 0.86rem; font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+    .caption-venue-line {
+      font-size: 0.78rem; color: var(--text-muted); font-weight: 600;
+    }
+
+    /* ========================================================
+       بطاقة الدعوة الرئيسية بكامل زخارفها
+       ======================================================== */
     .card-container { width: 100%; max-width: 540px; z-index: 20; position: relative; }
     .wedding-card { background: var(--cream-paper); border-radius: 30px; padding: 36px 22px 32px; text-align: center; position: relative; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), 0 5px 0 #C5A059; border: 2px solid var(--gold-primary); overflow: hidden; transform: translate3d(0, 18px, 0) scale3d(0.96, 0.96, 1); opacity: 0; transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease; will-change: transform, opacity; }
     .wedding-card.card-ready { transform: translate3d(0, 0, 0) scale3d(1, 1, 1); opacity: 1; }
@@ -296,7 +405,7 @@
 </head>
 <body>
 
-  <!-- تعريف باقات الورود والياسمين والأغصان الذهبية الكاملة بجميع تفاصيلها -->
+  <!-- تعريف باقات الورود والياسمين وتدرجات الذهب الملكية الكاملة -->
   <svg style="display:none;" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <radialGradient id="roseGradTL" cx="42%" cy="38%" r="62%">
@@ -309,13 +418,27 @@
         <stop offset="0%" stop-color="#A6BE9D"/><stop offset="60%" stop-color="#687F5F"/><stop offset="100%" stop-color="#42553B"/>
       </linearGradient>
       <linearGradient id="goldSprigTL" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#FFF5D6"/><stop offset="40%" stop-color="#D4AF37"/><stop offset="85%" stop-color="#9C731C"/><stop offset="100%" stop-color="#614408"/>
+        <stop offset="0%" stop-color="#FFF5D6"/><stop offset="35%" stop-color="#E5C158"/><stop offset="70%" stop-color="#C59B27"/><stop offset="100%" stop-color="#6E4E0B"/>
       </linearGradient>
       <radialGradient id="jasminePetalTL" cx="50%" cy="50%" r="50%">
         <stop offset="0%" stop-color="#FFFFFF"/><stop offset="80%" stop-color="#FDFBF7"/><stop offset="100%" stop-color="#EFE6D5"/>
       </radialGradient>
 
-      <!-- باقة الورد الملكية الكاملة (مع الياسمين والأغصان الذهبية والأوراق) -->
+      <!-- تدرجات طيات الظرف الذكية (تتغير تلقائياً مع الوضع النهاري والليلي) -->
+      <linearGradient id="envSideGradLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="var(--env-side-1)"/><stop offset="100%" stop-color="var(--env-side-2)"/>
+      </linearGradient>
+      <linearGradient id="envSideGradRight" x1="100%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="var(--env-side-1)"/><stop offset="100%" stop-color="var(--env-side-2)"/>
+      </linearGradient>
+      <linearGradient id="envBottomGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+        <stop offset="0%" stop-color="var(--env-bottom-1)"/><stop offset="100%" stop-color="var(--env-bottom-2)"/>
+      </linearGradient>
+      <linearGradient id="envTopFlapGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+        <stop offset="0%" stop-color="var(--env-top-1)"/><stop offset="100%" stop-color="var(--env-top-2)"/>
+      </linearGradient>
+
+      <!-- باقة الورد الجوري والياسمين الكاملة -->
       <g id="full-rose-bouquet">
         <path d="M 95 95 Q 60 50 25 35" stroke="url(#goldSprigTL)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
         <circle cx="25" cy="35" r="4.5" fill="url(#goldSprigTL)"/>
@@ -350,10 +473,12 @@
         </g>
       </g>
 
-      <!-- باقة الياسمين الجانبية الكاملة -->
+      <!-- باقة الياسمين والأغصان الذهبية للزوايا الأخرى -->
       <g id="full-jasmine-sprig">
         <path d="M 20 100 Q 50 60 95 30" stroke="url(#goldSprigTL)" stroke-width="1.8" fill="none"/>
         <circle cx="95" cy="30" r="3.5" fill="url(#goldSprigTL)"/>
+        <path d="M 32 88 Q 52 80 68 85" stroke="url(#goldSprigTL)" stroke-width="1.3" fill="none"/>
+        <circle cx="68" cy="85" r="2.5" fill="url(#goldSprigTL)"/>
         <path d="M 40 80 C 65 65 85 40 80 20 C 65 35 50 60 40 80 Z" fill="url(#leafGradTL)"/>
         <g transform="translate(68, 52)">
           <g fill="url(#jasminePetalTL)" stroke="rgba(212,175,55,0.4)" stroke-width="0.5">
@@ -393,24 +518,27 @@
     </div>
   </header>
 
-  <!-- شاشة المظروف الافتتاحية (بالـ 4 باقات زهور الكاملة) -->
+  <!-- شاشة المظروف الافتتاحية الفخمة بكامل تفاصيلها الخارجية -->
   <div id="envelope-screen">
     <div class="envelope-header">
-      <div class="badge-invite">✨ دعوة زفاف خاصة ✨</div>
+      <div class="badge-invite">✨ دعوة زفاف ملكية خاصة ✨</div>
       <h1 class="envelope-title">محمد & رغدة</h1>
       <p class="envelope-sub">المس الختم الشمعي لفتح الظرف وخروج الدعوة 🎵💌</p>
     </div>
 
     <div class="envelope-floral-wrap">
-      <!-- الباقات الأربعة الكاملة حول الظرف -->
+      <!-- باقات الورود والياسمين الأربعة الكاملة حول الظرف -->
       <div class="floral-cluster floral-top-left"><svg viewBox="0 0 170 170" width="100%" height="100%"><use href="#full-rose-bouquet"/></svg></div>
       <div class="floral-cluster floral-bottom-right"><svg viewBox="0 0 170 170" width="100%" height="100%" style="transform: rotate(180deg);"><use href="#full-rose-bouquet"/></svg></div>
       <div class="floral-cluster floral-top-right"><svg viewBox="0 0 120 120" width="100%" height="100%"><use href="#full-jasmine-sprig"/></svg></div>
       <div class="floral-cluster floral-bottom-left"><svg viewBox="0 0 120 120" width="100%" height="100%" style="transform: rotate(180deg);"><use href="#full-jasmine-sprig"/></svg></div>
 
-      <!-- مجسم المظروف ثلاثي الطبقات مع خروج البطاقة منه ببطء وسلاسة -->
+      <!-- مجسم المظروف الملكي المزخرف بخطوط الذهب من الخارج والداخل -->
       <div class="envelope-box" id="envelopeBox" onclick="openEnvelopeAndPlay(event)">
+        <!-- الطبقة 1: ظهر الظرف -->
         <div class="envelope-back"></div>
+
+        <!-- الطبقة 2: بطاقة الدعوة التي تخرج للأعلى من داخل الظرف -->
         <div class="envelope-card-inside">
           <div class="env-card-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
           <div class="env-card-sub">نتشرف بدعوتكم لحضور زفاف</div>
@@ -418,19 +546,75 @@
           <div class="env-card-date">السبت 16 يناير 2027 • 07:00 م</div>
           <div class="env-card-venue">قاعة قصر الشوق - دار الاسلحة و الذخيرة</div>
         </div>
+
+        <!-- الطبقة 3: جيب الظرف الأمامي المرسوم بخطوط ورق الذهب والظلال البارزة -->
         <div class="envelope-pocket-front">
-          <div class="envelope-fold-left"></div>
-          <div class="envelope-fold-right"></div>
-          <div class="envelope-fold-bottom"></div>
+          <svg class="envelope-pocket-svg" viewBox="0 0 390 255" preserveAspectRatio="none">
+            <!-- الطية اليسرى مع حافة ذهبية -->
+            <polygon points="0,0 195,132 0,255" fill="url(#envSideGradLeft)"/>
+            <line x1="0" y1="0" x2="195" y2="132" stroke="url(#goldSprigTL)" stroke-width="1.8" opacity="0.8"/>
+
+            <!-- الطية اليمنى مع حافة ذهبية -->
+            <polygon points="390,0 195,132 390,255" fill="url(#envSideGradRight)"/>
+            <line x1="390" y1="0" x2="195" y2="132" stroke="url(#goldSprigTL)" stroke-width="1.8" opacity="0.8"/>
+
+            <!-- ظل عميق أسفل الجيب السفلي لإبراز الطيات -->
+            <polygon points="0,255 195,112 390,255" fill="rgba(0,0,0,0.16)"/>
+
+            <!-- الجيب السفلي الرئيسي مع إطار ذهبي مزدوج وزخارف الزوايا -->
+            <polygon points="0,255 195,120 390,255" fill="url(#envBottomGrad)" stroke="url(#goldSprigTL)" stroke-width="2.4"/>
+            <polyline points="14,252 195,129 376,252" fill="none" stroke="url(#goldSprigTL)" stroke-width="1" stroke-dasharray="4,3" opacity="0.85"/>
+
+            <!-- زخارف أرابيسك ذهبية في زوايا الظرف السفلية -->
+            <path d="M 12 243 L 12 222 M 12 243 L 35 243" stroke="url(#goldSprigTL)" stroke-width="1.6" stroke-linecap="round"/>
+            <circle cx="12" cy="218" r="2.2" fill="url(#goldSprigTL)"/>
+            <path d="M 378 243 L 378 222 M 378 243 L 355 243" stroke="url(#goldSprigTL)" stroke-width="1.6" stroke-linecap="round"/>
+            <circle cx="378" cy="218" r="2.2" fill="url(#goldSprigTL)"/>
+          </svg>
         </div>
-        <div class="envelope-fold-top"></div>
+
+        <!-- نقش ذهبي بارز على جيب الظرف من الخارج -->
+        <div class="envelope-exterior-footer">
+          <span class="env-ext-ornament">✦ ─── ❖ ─── ✦</span>
+          <span class="env-ext-text">السبت ١٦ يناير ٢٠٢٧ • قاعة قصر الشوق</span>
+        </div>
+
+        <!-- الطبقة 4: الغطاء العلوي المزخرف بإطار ورق الذهب المزدوج -->
+        <div class="envelope-fold-top">
+          <svg class="envelope-flap-svg" viewBox="0 0 390 152" preserveAspectRatio="none">
+            <!-- ظل الغطاء العلوي على جسم الظرف -->
+            <polygon points="0,0 195,150 390,0" fill="rgba(0,0,0,0.2)"/>
+            <!-- جسم الغطاء العلوي المذهب -->
+            <polygon points="0,0 195,142 390,0" fill="url(#envTopFlapGrad)" stroke="url(#goldSprigTL)" stroke-width="2.6"/>
+            <!-- خط ذهبي داخلي منقط على الغطاء -->
+            <polyline points="16,4 195,131 374,4" fill="none" stroke="url(#goldSprigTL)" stroke-width="1.1" stroke-dasharray="5,3" opacity="0.9"/>
+            <!-- حلية ذهبية في أعلى الغطاء -->
+            <path d="M 155 22 Q 195 38 235 22" fill="none" stroke="url(#goldSprigTL)" stroke-width="1.3" opacity="0.75"/>
+            <circle cx="195" cy="29" r="2.5" fill="url(#goldSprigTL)"/>
+          </svg>
+        </div>
+
+        <!-- الطبقة 5: الشرائط الحريرية والختم الشمعي الملكي بالتاج -->
         <div class="wax-ribbon-tail wax-ribbon-left"></div>
         <div class="wax-ribbon-tail wax-ribbon-right"></div>
+        <div class="wax-seal-halo"></div>
+
         <div class="wax-seal" id="waxSealEl" title="انقر لفتح الدعوة وسماع الصوت">
-          <span style="font-size: 1.35rem; line-height: 1;">م & ر</span>
-          <span style="font-size: 0.55rem; font-family: 'Cairo', sans-serif; letter-spacing: 0.5px;">2027</span>
+          <span style="font-size: 0.72rem; line-height: 1; margin-bottom: 1px;">👑</span>
+          <span style="font-size: 1.32rem; font-weight: 700; line-height: 1.05;">م & ر</span>
+          <span style="font-size: 0.54rem; font-family: 'Cairo', sans-serif; font-weight: 800; letter-spacing: 0.6px; margin-top: 1px;">16•01•2027</span>
         </div>
       </div>
+    </div>
+
+    <!-- سطر زخرفي أنيق أسفل الظرف بدلاً من الزر الضخم -->
+    <div class="envelope-bottom-caption">
+      <div class="caption-touch-hint">
+        <span>✨</span>
+        <span>اضغط على الختم الشمعي لفتح الدعوة</span>
+        <span>✨</span>
+      </div>
+      <div class="caption-venue-line">قاعة قصر الشوق — دار الاسلحة و الذخيرة</div>
     </div>
   </div>
 
