@@ -401,7 +401,7 @@
       z-index: 1;
     }
 
-    /* الكارت الذي يخرج من داخل الظرف - واضح في الوضعين الفاتح والداكن */
+    /* الكارت الذي يخرج من داخل الظرف */
     .envelope-card-inside {
       position: absolute;
       top: 14px;
@@ -572,7 +572,7 @@
     }
 
     /* ========================================================
-       بطاقة الدعوة الرئيسية (جوا) - واضحة 100% في الفاتح والداكن
+       بطاقة الدعوة الرئيسية (جوا)
        ======================================================== */
     .card-container {
       width: 100%;
@@ -1100,13 +1100,13 @@
     }
 
     /* ========================================================
-       قسم تطبيقات التوصيل الذكي (Uber • Careem • inDrive • DiDi)
+       قسم تطبيقات التوصيل الذكي (Uber • inDrive • DiDi) - تصميم 3 كروت متناسقة
        ======================================================== */
     .ride-apps-section {
       background: var(--card-white);
       border: 1.8px solid var(--gold-primary);
       border-radius: 22px;
-      padding: 18px 14px 20px;
+      padding: 18px 12px 20px;
       margin-bottom: 22px;
       box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16), 0 4px 0 rgba(197, 160, 89, 0.25);
     }
@@ -1127,77 +1127,89 @@
       font-size: 0.78rem;
       color: var(--text-muted);
       font-weight: 600;
-      margin-bottom: 14px;
-      line-height: 1.5;
+      margin-bottom: 15px;
+      line-height: 1.55;
     }
 
     .ride-apps-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
     }
 
     .btn-ride-app {
-      padding: 11px 10px;
-      border-radius: 14px;
+      padding: 13px 6px 11px;
+      border-radius: 16px;
       font-family: 'Cairo', sans-serif;
-      font-size: 0.84rem;
-      font-weight: 800;
       text-decoration: none;
       cursor: pointer;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 7px;
       border: none;
+      position: relative;
+      transition: transform 0.18s ease;
     }
 
     .btn-ride-app:active {
-      transform: translateY(2px);
+      transform: translate3d(0, 3px, 0);
     }
 
+    /* 1. كارت أوبر الفخم */
     .btn-uber {
-      background: #141414;
+      background: linear-gradient(160deg, #1E1E1E 0%, #0D0D0D 100%);
       color: #FFFFFF;
       border: 1.5px solid #C5A059;
-      box-shadow: 0 3px 0 #000000;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.22), 0 4px 0 #000000;
     }
 
-    .btn-careem {
-      background: #00B956;
-      color: #FFFFFF;
-      box-shadow: 0 3px 0 #00823B;
-    }
-
+    /* 2. كارت إن درايف الفخم */
     .btn-indrive {
-      background: var(--subcard-bg);
-      color: var(--text-dark);
+      background: linear-gradient(160deg, #22291A 0%, #151A10 100%);
+      color: #FFFFFF;
       border: 1.5px solid #96E825;
-      box-shadow: 0 3px 0 #669E14;
+      box-shadow: 0 6px 14px rgba(102, 158, 20, 0.18), 0 4px 0 #4E7A0F;
     }
 
+    /* 3. كارت دي دي الفخم */
     .btn-didi {
-      background: #FF6600;
+      background: linear-gradient(160deg, #FF6B0A 0%, #E05200 100%);
       color: #FFFFFF;
-      box-shadow: 0 3px 0 #CC5200;
+      border: 1.5px solid #FFD2B3;
+      box-shadow: 0 6px 14px rgba(255, 102, 0, 0.24), 0 4px 0 #9E3A00;
     }
 
     .ride-badge-pill {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 2px 7px;
-      border-radius: 6px;
-      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 8px;
+      font-size: 0.78rem;
       font-weight: 900;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.4px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+    }
+
+    .ride-app-title {
+      font-size: 0.84rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .ride-app-hint {
+      font-size: 0.64rem;
+      opacity: 0.85;
+      font-weight: 700;
     }
 
     .ride-helper-btns {
       display: flex;
       flex-direction: column;
       gap: 8px;
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     .btn-copy-address-bar {
@@ -1911,35 +1923,33 @@
         </button>
       </section>
 
-      <!-- قسم تطبيقات التوصيل الذكي (Uber • Careem • inDrive • DiDi) -->
+      <!-- قسم تطبيقات التوصيل الذكي (Uber • inDrive • DiDi) بتصميم ثلاثي متناسق -->
       <section class="ride-apps-section scroll-reveal" id="rideAppsSection">
         <h3 class="ride-apps-header">
           <span>🚕</span>
           <span>الوصول للقاعة عبر تطبيقات التوصيل</span>
         </h3>
         <p class="ride-apps-sub">
-          عند الضغط على أي تطبيق، يتم تلقائياً نسخ <strong>(دار الاسلحة و الذخيرة)</strong> ويفتح التطبيق لتلصقه في خانة الوجهة بضغطة واحدة
+          باختيارك لأي تطبيق يتم تلقائياً نسخ <strong>(دار الاسلحة و الذخيرة)</strong> وفتح التطبيق مباشرةً للصق الوجهة بضغطة واحدة
         </p>
 
         <div class="ride-apps-grid">
           <button type="button" class="btn-ride-app btn-uber" onclick="openRideApp('uber')">
-            <span class="ride-badge-pill" style="background:#FFF; color:#000;">Uber</span>
-            <span>تطبيق أوبر</span>
-          </button>
-
-          <button type="button" class="btn-ride-app btn-careem" onclick="openRideApp('careem')">
-            <span class="ride-badge-pill" style="background:#FFF; color:#00B956;">Careem</span>
-            <span>تطبيق كريم</span>
+            <span class="ride-badge-pill" style="background:#FFFFFF; color:#000000;">Uber</span>
+            <span class="ride-app-title">تطبيق أوبر</span>
+            <span class="ride-app-hint" style="color:#E2BC72;">تحديد تلقائي</span>
           </button>
 
           <button type="button" class="btn-ride-app btn-indrive" onclick="openRideApp('indrive')">
             <span class="ride-badge-pill" style="background:#96E825; color:#141414;">inDrive</span>
-            <span>تطبيق إن درايف</span>
+            <span class="ride-app-title">إن درايف</span>
+            <span class="ride-app-hint" style="color:#B9F564;">نسخ وفتح فوري</span>
           </button>
 
           <button type="button" class="btn-ride-app btn-didi" onclick="openRideApp('didi')">
-            <span class="ride-badge-pill" style="background:#FFF; color:#FF6600;">DiDi</span>
-            <span>تطبيق دي دي</span>
+            <span class="ride-badge-pill" style="background:#FFFFFF; color:#FF6600;">DiDi</span>
+            <span class="ride-app-title">تطبيق دي دي</span>
+            <span class="ride-app-hint" style="color:#FFF0E5;">نسخ وفتح فوري</span>
           </button>
         </div>
 
@@ -2291,72 +2301,45 @@
       showToast('تم نسخ (دار الاسلحة و الذخيرة) بنجاح! 🚕');
     }
 
-    function launchNativeApp(androidIntentUrl, iosSchemeUrl, storeFallbackUrl) {
-      const ua = navigator.userAgent || '';
-      const isAndroid = /android/i.test(ua);
-      const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
-
-      if (isAndroid) {
-        window.location.href = androidIntentUrl;
-      } else if (isIOS) {
-        const start = Date.now();
-        window.location.href = iosSchemeUrl;
-        setTimeout(() => {
-          if (!document.hidden && (Date.now() - start < 2200)) {
-            window.location.href = storeFallbackUrl;
-          }
-        }, 1500);
-      } else {
-        window.open(storeFallbackUrl, '_blank');
-      }
-    }
-
+    // ====================================================================
+    // 4. فتح تطبيقات التوصيل (أوبر • إن درايف • دي دي) مباشرةً بدون أي تحويل للمتجر
+    // ====================================================================
     function openRideApp(appType) {
       syncCopyNow(VENUE_COPY_TEXT);
       const encPlace = encodeURIComponent(VENUE_COPY_TEXT);
+      const ua = navigator.userAgent || '';
+      const isAndroid = /android/i.test(ua);
+      // رابط الرجوع الآمن لنفس صفحة الدعوة لمنع المتصفح من التحويل لمتجر Play Store نهائياً
+      const stayOnPageUrl = window.location.href.split('#')[0] + '#rideAppsSection';
 
       if (appType === 'uber') {
         showToast('تم نسخ (دار الاسلحة و الذخيرة) وجاري فتح أوبر 🚕');
-        const uberQuery = `?action=setPickup&pickup=my_location&dropoff[latitude]=${VENUE_LAT}&dropoff[longitude]=${VENUE_LNG}&dropoff[nickname]=${encPlace}&dropoff[formatted_address]=${encPlace}`;
-        const uberUniversal = `https://m.uber.com/ul/${uberQuery}`;
-        const uberDirectScheme = `uber://${uberQuery}`;
+        const uberQuery = `action=setPickup&pickup=my_location&dropoff[latitude]=${VENUE_LAT}&dropoff[longitude]=${VENUE_LNG}&dropoff[nickname]=${encPlace}&dropoff[formatted_address]=${encPlace}`;
 
-        setTimeout(() => {
-          const start = Date.now();
-          window.location.href = uberDirectScheme;
-          setTimeout(() => {
-            if (!document.hidden && (Date.now() - start < 2200)) {
-              window.location.href = uberUniversal;
-            }
-          }, 1400);
-        }, 120);
-      }
-      else if (appType === 'careem') {
-        showToast('تم نسخ (دار الاسلحة و الذخيرة)! الصقها في خانة الوجهة داخل كريم 🚕');
-        const careemFallback = 'https://play.google.com/store/apps/details?id=com.careem.acma';
-        const careemIosStore = 'https://apps.apple.com/eg/app/careem-rides-food-more/id592978487';
-        const careemAndroidIntent = `intent://open#Intent;scheme=careem;package=com.careem.acma;S.browser_fallback_url=${encodeURIComponent(careemFallback)};end`;
-        setTimeout(() => {
-          launchNativeApp(careemAndroidIntent, 'careem://', careemIosStore);
-        }, 180);
+        if (isAndroid) {
+          window.location.href = `intent://?${uberQuery}#Intent;scheme=uber;package=com.ubercab;S.browser_fallback_url=${encodeURIComponent(stayOnPageUrl)};end`;
+        } else {
+          window.location.href = `uber://?${uberQuery}`;
+        }
       }
       else if (appType === 'indrive') {
         showToast('تم نسخ (دار الاسلحة و الذخيرة)! الصقها في خانة الوجهة داخل إن درايف 🚕');
-        const indriveFallback = 'https://play.google.com/store/apps/details?id=sinet.startup.inDriver';
-        const indriveIosStore = 'https://apps.apple.com/eg/app/indrive-save-on-city-rides/id780125801';
-        const indriveAndroidIntent = `intent://open#Intent;scheme=indriver;package=sinet.startup.inDriver;S.browser_fallback_url=${encodeURIComponent(indriveFallback)};end`;
-        setTimeout(() => {
-          launchNativeApp(indriveAndroidIntent, 'indriver://', indriveIosStore);
-        }, 180);
+        if (isAndroid) {
+          window.location.href = `intent://open#Intent;scheme=indriver;package=sinet.startup.inDriver;S.browser_fallback_url=${encodeURIComponent(stayOnPageUrl)};end`;
+        } else {
+          window.location.href = 'indriver://';
+        }
       }
       else if (appType === 'didi') {
         showToast('تم نسخ (دار الاسلحة و الذخيرة)! الصقها في خانة الوجهة داخل دي دي 🚕');
-        const didiFallback = 'https://play.google.com/store/apps/details?id=com.didiglobal.passenger';
-        const didiIosStore = 'https://apps.apple.com/eg/app/didi-rider-affordable-rides/id1362398401';
-        const didiAndroidIntent = `intent://open#Intent;scheme=didipasnger;package=com.didiglobal.passenger;S.browser_fallback_url=${encodeURIComponent(didiFallback)};end`;
-        setTimeout(() => {
-          launchNativeApp(didiAndroidIntent, 'didipasnger://', didiIosStore);
-        }, 180);
+        // استدعاء بروتوكول DiDi العالمي الرسمي (taxis99OneTravel) مع منع التحويل للمتجر
+        const didiParams = `dropoff_latitude=${VENUE_LAT}&dropoff_longitude=${VENUE_LNG}&dropoff_name=${encPlace}&to_lat=${VENUE_LAT}&to_lng=${VENUE_LNG}&to_name=${encPlace}`;
+
+        if (isAndroid) {
+          window.location.href = `intent://one?${didiParams}#Intent;scheme=taxis99OneTravel;package=com.didiglobal.passenger;S.browser_fallback_url=${encodeURIComponent(stayOnPageUrl)};end`;
+        } else {
+          window.location.href = `taxis99OneTravel://one?${didiParams}`;
+        }
       }
     }
 
