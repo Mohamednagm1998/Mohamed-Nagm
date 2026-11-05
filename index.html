@@ -16,8 +16,8 @@
   <link rel="preload" href="couple.jpg" as="image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- خطوط الكاليجرافي والمونوغرام الملكي (Rakkas, Aref Ruqaa, Cinzel Decorative, Great Vibes, Amiri, Cairo) -->
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;500;600;700;800;900&family=Cinzel+Decorative:wght@700&family=Great+Vibes&family=Rakkas&display=swap" rel="stylesheet">
+  <!-- الخطوط المعتمدة للدعوة ولوجو الحرفين (Vibes & Great Vibes) -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@400;500;600;700;800;900&family=Great+Vibes&family=Vibes&display=swap" rel="stylesheet">
 
   <style>
     /* 1. متغيرات الوضع النهاري الفاتح (من 6 صباحاً حتى 6 مساءً) */
@@ -79,226 +79,25 @@
       --smart-banner-bg: linear-gradient(135deg, #2D241B 0%, #1E1812 100%);
     }
 
-    /* ========================================================
-       الـ 6 تصميمات الاحترافية للوجو العروسين (Designer Monograms)
-       ======================================================== */
-    .monogram-render {
+    /* الفونت المعتمد للحرفين (م & ر) بستايل الخط الحر الأنيق */
+    .mono-style-vibes {
+      font-family: 'Vibes', cursive;
+      font-weight: 400;
+      font-size: 1.85rem;
+      line-height: 0.9;
+      color: #FFFFFF;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.32);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      position: relative;
+      transform: translateY(2px);
       user-select: none;
     }
-
-    /* التصميم 1: التداخل القطري الملكي بالتشكيل (Diagonal Royal Interlock) */
-    .logo-diag {
-      position: relative;
-      width: 62px;
-      height: 46px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .logo-diag .char-m {
-      position: absolute;
-      top: 0px;
-      right: 5px;
-      font-family: 'Rakkas', serif;
-      font-size: 1.75rem;
-      line-height: 1;
-      color: #FFFFFF;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.38);
-    }
-    .logo-diag .char-r {
-      position: absolute;
-      bottom: 1px;
-      left: 5px;
-      font-family: 'Rakkas', serif;
-      font-size: 1.75rem;
-      line-height: 1;
-      color: #FFFFFF;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.38);
-    }
-    .logo-diag .diag-swash {
-      width: 48px;
-      height: 40px;
-      overflow: visible;
-      filter: drop-shadow(0 1px 3px rgba(0,0,0,0.3));
-    }
-    .logo-diag .tashkeel-1 {
-      position: absolute;
-      top: 2px;
-      left: 14px;
-      font-size: 0.62rem;
-      color: #FFEAB6;
-    }
-    .logo-diag .tashkeel-2 {
-      position: absolute;
-      bottom: 4px;
-      right: 12px;
-      font-size: 0.62rem;
-      color: #FFEAB6;
-    }
-
-    /* التصميم 2: مخطوطة الأسماء الكاملة المزخرفة (مُحَمَّد & رَغْدَة) */
-    .logo-fullnames {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      line-height: 1.05;
-      font-family: 'Aref Ruqaa', serif;
-      font-weight: 700;
-      color: #FFFFFF;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.38);
-    }
-    .logo-fullnames .fn-top {
-      font-size: 1.08rem;
-      letter-spacing: 0.3px;
-      transform: translateX(4px);
-    }
-    .logo-fullnames .fn-mid {
-      font-size: 0.58rem;
-      color: #FFEAB6;
-      margin: -1px 0;
-      letter-spacing: 2px;
-    }
-    .logo-fullnames .fn-bot {
-      font-size: 1.08rem;
-      letter-spacing: 0.3px;
-      transform: translateX(-4px);
-    }
-    .couple-monogram-badge .logo-fullnames {
-      flex-direction: row;
-      gap: 6px;
-    }
-    .couple-monogram-badge .logo-fullnames .fn-top,
-    .couple-monogram-badge .logo-fullnames .fn-bot {
-      transform: none;
-      font-size: 1.18rem;
-    }
-
-    /* التصميم 3: التشابك الحر بالكشيدة والطغراء (مـ♡ـر) */
-    .logo-kashida {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-    .logo-kashida .tughra-arc {
-      width: 52px;
-      height: 11px;
-      margin-bottom: -4px;
-    }
-    .logo-kashida .kashida-word {
-      font-family: 'Aref Ruqaa', serif;
-      font-weight: 700;
-      font-size: 1.62rem;
-      color: #FFFFFF;
-      line-height: 1.05;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.38);
-      display: inline-flex;
-      align-items: center;
-    }
-    .logo-kashida .kashida-heart {
-      font-size: 0.82rem;
-      color: #FFEAB6;
-      margin: 0 -2px;
-      transform: translateY(-2px);
-    }
-
-    /* التصميم 4: طغراء الانفنتي الذهبية (م ∞ ر) */
-    .logo-infinity {
-      position: relative;
-      width: 68px;
-      height: 38px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .logo-infinity svg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0.85;
-    }
-    .logo-infinity .inf-letters {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 50px;
-      font-family: 'Rakkas', serif;
-      font-size: 1.48rem;
-      color: #FFFFFF;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.45);
-      transform: translateY(-2px);
-    }
-
-    /* التصميم 5: مونوغرام الكوتور العالمي المزدوج (M&R + م&ر) */
-    .logo-couture {
-      position: relative;
-      width: 66px;
-      height: 44px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .logo-couture .en-bg {
-      position: absolute;
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 1.65rem;
-      font-weight: 700;
-      color: rgba(255, 238, 186, 0.28);
-      letter-spacing: -2px;
-      direction: ltr;
-      white-space: nowrap;
-    }
-    .logo-couture .ar-fg {
-      position: relative;
-      z-index: 2;
-      font-family: 'Aref Ruqaa', serif;
-      font-weight: 700;
-      font-size: 1.5rem;
-      color: #FFFFFF;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.5);
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .logo-couture .ar-fg span {
+    .mono-style-vibes .amp {
       font-family: 'Great Vibes', cursive;
-      font-size: 1.15rem;
-      color: #FFEAB6;
-    }
-
-    /* التصميم 6: الوسام الديواني الكلاسيكي بأغصان الغار */
-    .logo-laurel {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-    }
-    .logo-laurel .laurel-leaf {
-      width: 13px;
-      height: 30px;
-    }
-    .logo-laurel .diwani-chars {
-      font-family: 'Amiri', serif;
-      font-style: italic;
-      font-weight: 700;
-      font-size: 1.52rem;
-      color: #FFFFFF;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.38);
-      line-height: 1;
-    }
-    .logo-laurel .diwani-chars small {
-      font-size: 0.78rem;
-      color: #FFEAB6;
-      margin: 0 1px;
+      font-size: 1.25rem;
+      margin: 0 4px;
+      color: #FFF5CC;
     }
 
     /* ألوان طيات الظرف المصمتة 100% */
@@ -314,25 +113,25 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; -webkit-font-smoothing: antialiased; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Cairo', sans-serif; background: var(--bg-gradient); color: var(--text-dark); min-height: 100vh; display: flex; justify-content: center; align-items: center; position: relative; overflow-x: hidden; padding: 72px 10px 48px; }
+    body { font-family: 'Cairo', sans-serif; background: var(--bg-gradient); color: var(--text-dark); min-height: 100vh; display: flex; justify-content: center; align-items: center; position: relative; overflow-x: hidden; padding: 68px 10px 48px; }
     #petals-canvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10001; transform: translateZ(0); }
 
-    /* الشريط العائم العلوي */
-    .floating-top-bar { position: fixed; top: 14px; left: 50%; transform: translate3d(-50%, 0, 0); width: calc(100% - 20px); max-width: 540px; display: flex; justify-content: space-between; align-items: center; z-index: 900; pointer-events: none; }
-    .floating-music-pill { pointer-events: auto; background: var(--card-white); border: 1.5px solid var(--gold-primary); border-radius: 40px; padding: 5px 12px 5px 6px; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.18), 0 2px 0 var(--gold-primary); transition: transform 0.2s ease; }
+    /* الشريط العائم العلوي بتصميم مدمج وأنيق لا يغطي البسملة أبداً */
+    .floating-top-bar { position: fixed; top: 12px; left: 50%; transform: translate3d(-50%, 0, 0); width: calc(100% - 20px); max-width: 540px; display: flex; justify-content: space-between; align-items: center; z-index: 900; pointer-events: none; gap: 6px; }
+    .floating-music-pill { pointer-events: auto; background: var(--card-white); border: 1.5px solid var(--gold-primary); border-radius: 40px; height: 38px; padding: 0 12px 0 5px; display: inline-flex; align-items: center; gap: 7px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.18), 0 2px 0 var(--gold-primary); white-space: nowrap; transition: transform 0.2s ease; }
     .floating-music-pill:active { transform: scale3d(0.96, 0.96, 1); }
-    .floating-disc { width: 32px; height: 32px; border-radius: 50%; background: var(--gold-gradient); color: #FFF; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; animation: spinDisc 8s linear infinite; animation-play-state: paused; will-change: transform; }
+    .floating-disc { width: 28px; height: 28px; min-width: 28px; border-radius: 50%; background: var(--gold-gradient); color: #FFF; display: flex; align-items: center; justify-content: center; font-size: 0.82rem; animation: spinDisc 8s linear infinite; animation-play-state: paused; will-change: transform; }
     .floating-disc.playing { animation-play-state: running; }
     @keyframes spinDisc { 100% { transform: rotate(360deg); } }
-    .floating-music-text { font-size: 0.75rem; font-weight: 800; color: var(--gold-dark); display: flex; align-items: center; gap: 5px; }
-    .sound-equalizer { display: inline-flex; align-items: flex-end; gap: 2px; height: 12px; }
-    .eq-bar { width: 2.5px; background: var(--gold-dark); border-radius: 2px; height: 12px; transform: scaleY(0.25); transform-origin: bottom; }
+    .floating-music-text { font-size: 0.74rem; font-weight: 800; color: var(--gold-dark); display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+    .sound-equalizer { display: inline-flex; align-items: flex-end; gap: 2px; height: 11px; }
+    .eq-bar { width: 2.2px; background: var(--gold-dark); border-radius: 2px; height: 11px; transform: scaleY(0.25); transform-origin: bottom; }
     .playing .eq-bar:nth-child(1) { animation: eqJumpGPU 0.7s infinite ease-in-out alternate; }
     .playing .eq-bar:nth-child(2) { animation: eqJumpGPU 1s infinite ease-in-out alternate 0.2s; }
     .playing .eq-bar:nth-child(3) { animation: eqJumpGPU 0.6s infinite ease-in-out alternate 0.35s; }
     @keyframes eqJumpGPU { 0% { transform: scaleY(0.25); } 100% { transform: scaleY(1); } }
-    .floating-quick-actions { pointer-events: auto; display: flex; gap: 4px; }
-    .btn-float-mini { background: var(--card-white); border: 1.2px solid var(--gold-primary); color: var(--gold-dark); padding: 6px 8px; border-radius: 30px; font-family: 'Cairo', sans-serif; font-size: 0.72rem; font-weight: 700; cursor: pointer; box-shadow: 0 3px 10px rgba(0,0,0,0.14), 0 2px 0 rgba(197,160,89,0.3); }
+    .floating-quick-actions { pointer-events: auto; display: flex; align-items: center; gap: 5px; }
+    .btn-float-mini { background: var(--card-white); border: 1.2px solid var(--gold-primary); color: var(--gold-dark); height: 36px; padding: 0 10px; border-radius: 30px; font-family: 'Cairo', sans-serif; font-size: 0.72rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 4px; white-space: nowrap; box-shadow: 0 3px 10px rgba(0,0,0,0.14), 0 2px 0 rgba(197,160,89,0.3); }
 
     /* ========================================================
        شاشة المظروف الافتتاحية المعتمة بالكامل والمزخرفة بالذهب
@@ -443,7 +242,7 @@
     .envelope-box.is-opening .wax-ribbon-tail { opacity: 0; transform: scale3d(0.3, 0.3, 1); }
 
     .wax-seal-halo {
-      position: absolute; top: 50%; left: 50%; width: 108px; height: 108px;
+      position: absolute; top: 50%; left: 50%; width: 104px; height: 104px;
       border-radius: 50%; border: 1.5px dashed var(--gold-primary);
       background: radial-gradient(circle, rgba(212, 175, 55, 0.22) 0%, transparent 72%);
       z-index: 9; pointer-events: none;
@@ -457,26 +256,33 @@
     .envelope-box.is-opening .wax-seal-halo { opacity: 0; animation: none; }
 
     .wax-seal {
-      position: absolute; top: 50%; left: 50%; width: 92px; height: 92px;
-      background: radial-gradient(circle at 32% 30%, #FDE896 0%, #DFB74C 28%, #B8871D 65%, #7D570A 88%, #4A3203 100%);
+      position: absolute; top: 50%; left: 50%; width: 88px; height: 88px;
+      background: radial-gradient(circle at 32% 30%, #FFF2B2 0%, #E6C15A 28%, #C59628 62%, #8A6210 88%, #523905 100%);
       border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center;
       color: #FFFDF5;
-      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.48), inset 0 2px 6px rgba(255, 255, 255, 0.85), inset 0 -4px 9px rgba(54, 36, 3, 0.78);
-      border: 2px dashed rgba(255, 248, 214, 0.88);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.48), inset 0 2px 6px rgba(255, 255, 255, 0.85), inset 0 -3px 8px rgba(66, 45, 4, 0.7);
+      border: 2.2px dashed rgba(255, 248, 214, 0.9);
       z-index: 10; cursor: pointer;
       animation: sealPulseGPU 2s infinite ease-in-out alternate;
       transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
       will-change: transform, opacity;
     }
     .wax-seal::before {
-      content: ""; position: absolute; inset: 6px; border-radius: 50%;
-      border: 1.2px solid rgba(255, 245, 200, 0.55); pointer-events: none;
+      content: ""; position: absolute; inset: 5px; border-radius: 50%;
+      border: 1px solid rgba(255, 245, 200, 0.6); pointer-events: none;
     }
     @keyframes sealPulseGPU {
       0% { transform: translate3d(-50%, -50%, 0) scale3d(1, 1, 1); }
       100% { transform: translate3d(-50%, -50%, 0) scale3d(1.06, 1.06, 1); }
     }
     .envelope-box.is-opening .wax-seal { animation: none; opacity: 0; transform: translate3d(-50%, -50%, 0) scale3d(0.25, 0.25, 1); }
+
+    .seal-mini-crown {
+      width: 22px;
+      height: 11px;
+      margin-bottom: 1px;
+      opacity: 0.92;
+    }
 
     /* ========================================================
        بطاقة الدعوة الرئيسية بكامل زخارفها
@@ -514,12 +320,11 @@
     .couple-photo-img { width: 100%; height: auto; display: block; object-fit: cover; }
     .couple-crown-top { position: absolute; top: -19px; left: 50%; transform: translate3d(-50%, 0, 12px); background: var(--gold-gradient); color: #FFF; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35), 0 2px 0 #664B0B; border: 2px solid #FFF; z-index: 4; }
     .couple-monogram-badge {
-      position: absolute; bottom: -20px; left: 50%; transform: translate3d(-50%, 0, 12px);
-      background: radial-gradient(circle at 35% 30%, #F5D57A 0%, #C89B2B 55%, #7E590C 100%);
-      color: #FFF; padding: 3px 22px; border-radius: 30px;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), 0 3px 0 #593E06; border: 2px solid #FFF;
-      z-index: 4; white-space: nowrap; cursor: pointer; display: flex; align-items: center; justify-content: center;
-      min-width: 112px; min-height: 44px;
+      position: absolute; bottom: -18px; left: 50%; transform: translate3d(-50%, 0, 12px);
+      background: var(--gold-gradient); color: #FFF; padding: 4px 28px; border-radius: 28px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), 0 3px 0 #664B0B; border: 2px solid #FFF;
+      z-index: 4; white-space: nowrap; display: flex; align-items: center; justify-content: center;
+      min-width: 106px; min-height: 38px;
     }
     .frame-3d-flower { position: absolute; width: 38px; height: 38px; z-index: 5; pointer-events: none; }
     .frame-flower-right { bottom: 16px; right: -16px; transform: rotate(12deg); }
@@ -697,7 +502,7 @@
   <img src="https://hits.sh/mohamednagm1998.github.io/Mohamed-Nagm.svg" alt="" style="display:none; width:0; height:0; visibility:hidden; position:absolute;" />
   <audio id="weddingAudio" src="audio.mp3" preload="auto" loop playsinline></audio>
 
-  <!-- الشريط العائم السريع للصوت والأدوات (مع زر ✒️ لتجربة الـ 6 تصميمات للوجو) -->
+  <!-- الشريط العائم السريع للصوت والأدوات (مدمج وأنيق في سطر واحد) -->
   <header class="floating-top-bar">
     <div class="floating-music-pill" onclick="toggleAudioPlayback()" title="تشغيل / إيقاف الموسيقى">
       <div class="floating-disc" id="discIcon">🎵</div>
@@ -710,7 +515,6 @@
     </div>
 
     <div class="floating-quick-actions">
-      <button type="button" class="btn-float-mini" onclick="cycleMonogramStyle()" title="تغيير تصميم اللوجو">✒️ اللوجو</button>
       <button type="button" class="btn-float-mini" id="themeToggleBtn" onclick="toggleDarkMode()" title="تغيير المظهر">🌙</button>
       <button type="button" class="btn-float-mini" onclick="openGatePassModal()">🪪 البوابة</button>
       <button type="button" class="btn-float-mini" id="petalsToggleBtn" onclick="togglePetals()">🌸</button>
@@ -785,13 +589,20 @@
           </svg>
         </div>
 
-        <!-- الطبقة 5: الشرائط الحريرية والختم الشمعي الملكي المخصص للوجو العروسين -->
+        <!-- الطبقة 5: الشرائط الحريرية والختم الشمعي الملكي بالفونت المعتمد -->
         <div class="wax-ribbon-tail wax-ribbon-left"></div>
         <div class="wax-ribbon-tail wax-ribbon-right"></div>
         <div class="wax-seal-halo"></div>
 
         <div class="wax-seal" id="waxSealEl" title="انقر لفتح الدعوة وسماع الصوت">
-          <div class="monogram-render" id="sealMonogramTarget"></div>
+          <svg class="seal-mini-crown" viewBox="0 0 36 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 15L6 5L13 11L18 3L23 11L30 5L33 15H3Z" stroke="#FFF6D6" stroke-width="1.8" stroke-linejoin="round"/>
+            <circle cx="18" cy="2" r="1.5" fill="#FFF6D6"/>
+            <circle cx="5" cy="3.5" r="1.2" fill="#FFF6D6"/>
+            <circle cx="31" cy="3.5" r="1.2" fill="#FFF6D6"/>
+          </svg>
+          <span class="mono-style-vibes">م<span class="amp">&amp;</span>ر</span>
+          <span style="font-size: 0.54rem; font-family: 'Cairo', sans-serif; font-weight: 700; letter-spacing: 1.5px; opacity: 0.9; margin-top: 2px;">2027</span>
         </div>
       </div>
     </div>
@@ -819,7 +630,7 @@
         <span class="quran-surah">[سورة الروم: الآية 21]</span>
       </div>
 
-      <!-- إطار صورة العروسين ثلاثي الأبعاد مع الورود الجانبية ومخطوطة اللوجو -->
+      <!-- إطار صورة العروسين ثلاثي الأبعاد مع الورود الجانبية وفونت (م & ر) المعتمد -->
       <div class="couple-frame-container scroll-reveal" id="couple3DStage">
         <div class="couple-photo-card" id="couple3DCard">
           <div class="couple-3d-halo"></div>
@@ -841,8 +652,8 @@
             <img id="couplePhotoImg" src="couple.jpg" onerror="handleImageFallback(this)" alt="محمد ورغدة" class="couple-photo-img">
           </div>
 
-          <div class="couple-monogram-badge" onclick="cycleMonogramStyle()" title="اضغط لتجربة تصميم لوجو آخر">
-            <div class="monogram-render" id="badgeMonogramTarget"></div>
+          <div class="couple-monogram-badge">
+            <span class="mono-style-vibes">م<span class="amp">&amp;</span>ر</span>
           </div>
         </div>
       </div>
@@ -1024,107 +835,6 @@
     const VENUE_LAT = 30.0755;
     const VENUE_LNG = 31.3088;
     const VENUE_COPY_TEXT = "دار الاسلحة و الذخيرة";
-
-    // ====================================================================
-    // 0. الـ 6 تصميمات الاحترافية للوجو العروسين (Designer Monogram Logos)
-    // ====================================================================
-    const MONOGRAM_STYLES = [
-      {
-        name: "1. التداخل القطري الملكي بالتشكيل (م ✦ ر)",
-        html: `
-          <div class="logo-diag">
-            <span class="char-m">م</span>
-            <span class="tashkeel-1">ٓ</span>
-            <svg class="diag-swash" viewBox="0 0 50 42">
-              <path d="M 10 35 Q 25 21 40 7" stroke="#FFEAB6" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-              <polygon points="25,16 28,21 25,26 22,21" fill="#FFFDF5"/>
-              <circle cx="10" cy="35" r="1.8" fill="#FFEAB6"/>
-              <circle cx="40" cy="7" r="1.8" fill="#FFEAB6"/>
-            </svg>
-            <span class="tashkeel-2">✧</span>
-            <span class="char-r">ر</span>
-          </div>`
-      },
-      {
-        name: "2. مخطوطة الأسماء المزخرفة (مُحَمَّد & رَغْدَة)",
-        html: `
-          <div class="logo-fullnames">
-            <span class="fn-top">مُحَمَّد</span>
-            <span class="fn-mid">✦ 🤍 ✦</span>
-            <span class="fn-bot">رَغْدَة</span>
-          </div>`
-      },
-      {
-        name: "3. التشابك الحر بالكشيدة والطغراء (مـ♡ـر)",
-        html: `
-          <div class="logo-kashida">
-            <svg class="tughra-arc" viewBox="0 0 60 14">
-              <path d="M 6 12 Q 30 0 54 12" stroke="#FFEAB6" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-              <circle cx="30" cy="3.5" r="2" fill="#FFFDF5"/>
-            </svg>
-            <div class="kashida-word">مـ<span class="kashida-heart">♡</span>ـر</div>
-          </div>`
-      },
-      {
-        name: "4. طغراء الانفنتي الذهبية (م ∞ ر)",
-        html: `
-          <div class="logo-infinity">
-            <svg viewBox="0 0 80 42" fill="none">
-              <path d="M22 10 C8 10, 8 32, 22 32 C33 32, 47 10, 58 10 C72 10, 72 32, 58 32 C47 32, 33 10, 22 10 Z" stroke="#FFEAB6" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            <div class="inf-letters"><span>م</span><span>ر</span></div>
-          </div>`
-      },
-      {
-        name: "5. مونوغرام الكوتور المزدوج (M&R + م&ر)",
-        html: `
-          <div class="logo-couture">
-            <span class="en-bg">M&amp;R</span>
-            <span class="ar-fg">م <span>&amp;</span> ر</span>
-          </div>`
-      },
-      {
-        name: "6. الوسام الديواني بأغصان الغار الذهبية",
-        html: `
-          <div class="logo-laurel">
-            <svg class="laurel-leaf" viewBox="0 0 18 36" fill="none">
-              <path d="M14 33 C5 24, 5 12, 14 3" stroke="#FFEAB6" stroke-width="1.5" stroke-linecap="round"/>
-              <circle cx="7" cy="18" r="1.6" fill="#FFEAB6"/>
-              <circle cx="9" cy="10" r="1.4" fill="#FFEAB6"/>
-              <circle cx="9" cy="26" r="1.4" fill="#FFEAB6"/>
-            </svg>
-            <span class="diwani-chars">مُ<small>✧</small>رَ</span>
-            <svg class="laurel-leaf" viewBox="0 0 18 36" fill="none" style="transform: scaleX(-1);">
-              <path d="M14 33 C5 24, 5 12, 14 3" stroke="#FFEAB6" stroke-width="1.5" stroke-linecap="round"/>
-              <circle cx="7" cy="18" r="1.6" fill="#FFEAB6"/>
-              <circle cx="9" cy="10" r="1.4" fill="#FFEAB6"/>
-              <circle cx="9" cy="26" r="1.4" fill="#FFEAB6"/>
-            </svg>
-          </div>`
-      }
-    ];
-
-    let currentMonogramIndex = parseInt(localStorage.getItem('wedding_logo_v2') || "0", 10);
-    if (isNaN(currentMonogramIndex) || currentMonogramIndex >= MONOGRAM_STYLES.length) {
-      currentMonogramIndex = 0;
-    }
-
-    function renderMonogramEverywhere() {
-      const styleObj = MONOGRAM_STYLES[currentMonogramIndex];
-      const sealTarget = document.getElementById('sealMonogramTarget');
-      const badgeTarget = document.getElementById('badgeMonogramTarget');
-      if (sealTarget) sealTarget.innerHTML = styleObj.html;
-      if (badgeTarget) badgeTarget.innerHTML = styleObj.html;
-    }
-
-    function cycleMonogramStyle() {
-      currentMonogramIndex = (currentMonogramIndex + 1) % MONOGRAM_STYLES.length;
-      localStorage.setItem('wedding_logo_v2', String(currentMonogramIndex));
-      renderMonogramEverywhere();
-      showToast(`✒️ ${MONOGRAM_STYLES[currentMonogramIndex].name}`);
-    }
-
-    renderMonogramEverywhere();
 
     // 1. الوضع الليلي والنهاري التلقائي حسب الميعاد + تلوين شريط المتصفح
     function updateBrowserThemeColor(isDark) {
